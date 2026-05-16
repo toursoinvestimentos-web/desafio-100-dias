@@ -8,7 +8,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <link rel="manifest" id="manifest-link">
-<title>100 DIAS</title>
+<title>100 DIAS v1.1</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600;700&display=swap');
 
@@ -61,6 +61,7 @@ body{
   color:var(--azul);letter-spacing:2px;line-height:1;
 }
 .logo span{color:var(--branco);}
+.logo-ver{font-size:0.35em;color:var(--cinza);margin-left:6px;letter-spacing:0.05em;}
 .btn-perfil{
   width:38px;height:38px;border-radius:50%;
   background:var(--azul-dim);border:1.5px solid var(--azul);
@@ -92,7 +93,7 @@ body{
 /* ── CARDS ── */
 .card{
   background:var(--card);border-radius:var(--radius);
-  padding:20px;margin-bottom:16px;
+  padding:16px 20px;margin-bottom:12px;
   box-shadow:var(--shadow);border:1px solid var(--card2);
   border-left:4px solid var(--azul);
 }
@@ -102,54 +103,127 @@ body{
 .card.borda-cinza{border-left-color:var(--cinza2);}
 .card-header{
   font-size:0.65em;font-weight:700;text-transform:uppercase;
-  letter-spacing:0.12em;color:var(--cinza);margin-bottom:12px;
+  letter-spacing:0.12em;color:var(--cinza);margin-bottom:10px;
 }
 .card-titulo{
   font-size:0.7em;font-weight:600;text-transform:uppercase;
   letter-spacing:0.1em;color:var(--cinza);margin-bottom:8px;
 }
 
-/* ── HERO 100 DIAS ── */
+/* ── HERO 100 DIAS — mais fino ── */
 .hero-100{
   background:linear-gradient(135deg,var(--card) 0%,var(--card2) 100%);
-  border-radius:var(--radius);padding:20px;
-  margin-bottom:16px;border:1px solid rgba(59,130,246,0.25);
+  border-radius:var(--radius);padding:14px 18px;
+  margin-bottom:10px;border:1px solid rgba(59,130,246,0.25);
   border-left:4px solid var(--azul);position:relative;overflow:hidden;
 }
 .hero-100::before{
-  content:'';position:absolute;top:-30px;right:-30px;
-  width:120px;height:120px;
+  content:'';position:absolute;top:-20px;right:-20px;
+  width:80px;height:80px;
   background:radial-gradient(circle,rgba(59,130,246,0.15) 0%,transparent 70%);
   border-radius:50%;
 }
+.hero-inner{display:flex;align-items:center;gap:16px;}
 .hero-dia-label{
-  font-size:0.62em;font-weight:700;text-transform:uppercase;
-  letter-spacing:0.15em;color:var(--cinza);margin-bottom:4px;
+  font-size:0.58em;font-weight:700;text-transform:uppercase;
+  letter-spacing:0.15em;color:var(--cinza);margin-bottom:2px;
 }
 .hero-dia-num{
-  font-family:var(--fonte-display);font-size:4.5em;
+  font-family:var(--fonte-display);font-size:3.2em;
   color:var(--azul);line-height:0.9;letter-spacing:2px;
 }
-.hero-dia-de100{font-size:0.82em;color:var(--cinza);margin-top:4px;}
+.hero-dia-de100{font-size:0.72em;color:var(--cinza);margin-top:2px;}
 .hero-dia-de100 span{color:var(--branco);font-weight:600;}
-.hero-stats{
-  display:flex;gap:20px;margin-top:14px;
-}
-.hero-stat{text-align:center;}
-.hero-stat-val{
-  font-family:var(--fonte-display);font-size:1.4em;
-  color:var(--branco);letter-spacing:1px;
-}
-.hero-stat-lbl{font-size:0.6em;color:var(--cinza);text-transform:uppercase;letter-spacing:0.08em;}
+.hero-right{flex:1;}
+.hero-streak-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;}
+.hero-streak-val{font-size:0.78em;font-weight:700;color:var(--branco);}
+.hero-pct{font-size:0.68em;color:var(--azul);font-weight:700;}
 .barra-100{
-  margin-top:12px;background:var(--bg);
-  border-radius:8px;height:7px;overflow:hidden;
+  background:var(--bg);
+  border-radius:8px;height:6px;overflow:hidden;
 }
 .barra-100-fill{
   height:100%;
   background:linear-gradient(90deg,var(--azul3),var(--azul));
   border-radius:8px;transition:width 0.8s cubic-bezier(0.4,0,0.2,1);
 }
+
+/* ── CARD CALORIAS COMPACTO ── */
+.cal-compact{
+  background:var(--card);border-radius:var(--radius);
+  padding:14px 18px;margin-bottom:10px;
+  border:1px solid var(--card2);border-left:4px solid var(--verde);
+}
+.cal-compact-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;}
+.cal-compact-label{font-size:0.6em;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;color:var(--cinza);}
+.cal-compact-nums{display:flex;align-items:baseline;gap:6px;}
+.cal-compact-val{font-family:var(--fonte-display);font-size:2em;color:var(--azul);letter-spacing:1px;}
+.cal-compact-meta{font-size:0.7em;color:var(--cinza);}
+.cal-compact-badge{font-size:0.7em;font-weight:700;padding:3px 10px;border-radius:20px;}
+.barra-cal-compact{background:var(--bg);border-radius:6px;height:7px;overflow:hidden;margin-bottom:6px;}
+.barra-cal-compact-fill{height:100%;border-radius:6px;transition:width 0.6s,background 0.4s;}
+.cal-compact-refs{display:flex;gap:10px;flex-wrap:wrap;}
+.cal-compact-ref{font-size:0.68em;color:var(--cinza);}
+.cal-compact-ref span{color:var(--branco);font-weight:600;}
+.cal-compact-btns{display:flex;gap:6px;margin-top:10px;}
+
+/* ── CARD TREINO COMPACTO ── */
+.treino-compact{
+  background:var(--card);border-radius:var(--radius);
+  padding:14px 18px;margin-bottom:10px;
+  border:1px solid var(--card2);border-left:4px solid var(--azul);
+}
+.treino-compact-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;}
+.treino-compact-label{font-size:0.6em;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;color:var(--cinza);}
+.treino-compact-status{font-size:0.72em;color:var(--cinza);}
+.treino-mods-row{display:flex;gap:8px;}
+.treino-mod-btn{
+  flex:1;background:var(--card2);border:1px solid var(--cinza2);
+  border-radius:10px;padding:10px 6px;
+  text-align:center;cursor:pointer;transition:all 0.18s;
+}
+.treino-mod-btn:active{transform:scale(0.96);}
+.treino-mod-btn.concluido{background:rgba(52,211,153,0.12);border-color:rgba(52,211,153,0.3);}
+.treino-mod-btn.bloqueado{opacity:0.35;cursor:not-allowed;}
+.treino-mod-icon{font-size:1.3em;display:block;margin-bottom:3px;}
+.treino-mod-nome{font-size:0.62em;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:var(--cinza);}
+.treino-mod-btn.concluido .treino-mod-nome{color:var(--verde);}
+
+/* Semana grid */
+.treino-semana-row{
+  margin-top:10px;padding-top:10px;border-top:1px solid var(--card2);
+  display:flex;align-items:center;gap:6px;
+}
+.treino-dia-chip{
+  flex:1;text-align:center;padding:5px 2px;
+  border-radius:8px;background:var(--card2);
+  border:1px solid var(--cinza2);
+  font-size:0.56em;font-weight:600;text-transform:uppercase;
+  color:var(--cinza);letter-spacing:0.04em;
+}
+.treino-dia-chip.ok{background:rgba(52,211,153,0.15);border-color:rgba(52,211,153,0.3);color:var(--verde);}
+.semana-meta-txt{font-size:0.65em;color:var(--cinza);margin-left:4px;white-space:nowrap;}
+
+/* ── LINHA PESO/SONO/ÁGUA ── */
+.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:10px;}
+.mini-card{
+  background:var(--card);border-radius:12px;padding:12px 14px;
+  border:1px solid var(--card2);border-left:3px solid var(--azul);
+  cursor:pointer;
+}
+.mini-card.borda-verde{border-left-color:var(--verde);}
+.mini-card.borda-amarela{border-left-color:var(--amarelo);}
+.mini-card.borda-vermelha{border-left-color:var(--vermelho);}
+.mini-card.borda-cinza{border-left-color:var(--cinza);}
+.mini-card-label{
+  font-size:0.58em;text-transform:uppercase;letter-spacing:0.1em;
+  color:var(--cinza);margin-bottom:4px;font-weight:600;
+}
+.mini-card-val{
+  font-family:var(--fonte-display);font-size:1.6em;
+  color:var(--azul);line-height:1;letter-spacing:1px;
+}
+.mini-card-sub{font-size:0.6em;color:var(--cinza);margin-top:2px;}
 
 /* ── BOTÕES ── */
 .btn{
@@ -164,104 +238,10 @@ body{
 .btn-ghost{background:var(--card2);color:var(--branco);border:1px solid var(--card2);}
 .btn-danger{background:rgba(248,113,113,0.15);color:var(--vermelho);border:1px solid rgba(248,113,113,0.3);}
 .btn-verde{background:var(--verde);color:#0a1a12;}
-.btn-sm{padding:9px 14px;font-size:0.78em;border-radius:8px;width:auto;}
+.btn-sm{padding:8px 12px;font-size:0.76em;border-radius:8px;width:auto;}
 
-/* ── GRID ── */
+/* ── GRID 2 ── */
 .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px;}
-.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:16px;}
-
-/* ── MINI CARDS ── */
-.mini-card{
-  background:var(--card);border-radius:14px;padding:16px;
-  border:1px solid var(--card2);border-left:3px solid var(--azul);
-  cursor:pointer;
-}
-.mini-card.borda-verde{border-left-color:var(--verde);}
-.mini-card.borda-amarela{border-left-color:var(--amarelo);}
-.mini-card.borda-vermelha{border-left-color:var(--vermelho);}
-.mini-card.borda-cinza{border-left-color:var(--cinza);}
-.mini-card-label{
-  font-size:0.6em;text-transform:uppercase;letter-spacing:0.1em;
-  color:var(--cinza);margin-bottom:6px;font-weight:600;
-}
-.mini-card-val{
-  font-family:var(--fonte-display);font-size:1.9em;
-  color:var(--azul);line-height:1;letter-spacing:1px;
-}
-.mini-card-sub{font-size:0.68em;color:var(--cinza);margin-top:3px;}
-
-/* ── CARD TREINO SEMANAL ── */
-.treino-semanal-grid{
-  display:flex;gap:8px;margin-top:10px;
-}
-.treino-dia-chip{
-  flex:1;text-align:center;padding:8px 4px;
-  border-radius:10px;background:var(--card2);
-  border:1px solid var(--cinza2);
-  font-size:0.62em;font-weight:600;text-transform:uppercase;
-  color:var(--cinza);letter-spacing:0.04em;
-}
-.treino-dia-chip.ok{background:rgba(52,211,153,0.15);border-color:rgba(52,211,153,0.3);color:var(--verde);}
-.treino-dia-chip.aviso{background:rgba(251,191,36,0.12);border-color:rgba(251,191,36,0.3);color:var(--amarelo);}
-.treino-dia-chip span{display:block;font-size:1.6em;margin-bottom:2px;}
-
-/* ── BLOCO CALORIAS ── */
-.cal-bloco{
-  background:var(--card);border-radius:var(--radius);
-  padding:20px;margin-bottom:16px;
-  border:1px solid var(--card2);border-left:4px solid var(--azul);
-}
-.cal-topo{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:14px;}
-.cal-valor-grande{font-family:var(--fonte-display);font-size:2.8em;line-height:1;letter-spacing:1px;}
-.cal-meta-info{font-size:0.68em;color:var(--cinza);text-align:right;}
-.cal-meta-info strong{color:var(--branco);display:block;font-size:1.3em;}
-.barra-cal{background:var(--bg);border-radius:8px;height:10px;margin:8px 0;overflow:hidden;}
-.barra-cal-fill{height:100%;border-radius:8px;transition:width 0.6s,background 0.4s;}
-.cal-refeicoes{margin-top:14px;}
-.refeicao-linha{
-  display:flex;justify-content:space-between;align-items:center;
-  padding:8px 0;border-bottom:1px solid var(--card2);font-size:0.82em;
-}
-.refeicao-linha:last-child{border-bottom:none;}
-.refeicao-nome{color:var(--cinza);}
-.refeicao-kcal{color:var(--branco);font-weight:600;}
-.refeicao-add{color:var(--azul);font-size:0.9em;cursor:pointer;}
-.deficit-badge{
-  display:inline-flex;align-items:center;gap:5px;
-  padding:6px 12px;border-radius:20px;
-  font-size:0.75em;font-weight:700;letter-spacing:0.05em;
-}
-.deficit-pos{background:rgba(52,211,153,0.15);color:var(--verde);border:1px solid rgba(52,211,153,0.3);}
-.deficit-neg{background:rgba(248,113,113,0.12);color:var(--vermelho);border:1px solid rgba(248,113,113,0.25);}
-
-/* ── CARD TREINO HOJE ── */
-.treino-hoje-modalidades{
-  display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-top:14px;
-}
-.treino-mod-btn{
-  background:var(--card2);border:1px solid var(--cinza2);
-  border-radius:12px;padding:14px 8px;
-  text-align:center;cursor:pointer;transition:all 0.18s;
-}
-.treino-mod-btn:active{transform:scale(0.96);}
-.treino-mod-btn.concluido{
-  background:rgba(52,211,153,0.12);border-color:rgba(52,211,153,0.3);
-}
-.treino-mod-icon{font-size:1.6em;display:block;margin-bottom:4px;}
-.treino-mod-nome{font-size:0.68em;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:var(--cinza);}
-.treino-mod-btn.concluido .treino-mod-nome{color:var(--verde);}
-
-/* ── SONO MINI ── */
-.sono-mini-menu{
-  display:flex;gap:8px;margin-top:8px;align-items:center;
-  font-size:0.72em;color:var(--cinza);
-}
-.sono-mini-btn{
-  background:none;border:none;color:var(--azul);
-  font-size:0.85em;cursor:pointer;font-family:var(--fonte);
-  font-weight:600;padding:4px 8px;border-radius:6px;
-  background:var(--azul-dim);
-}
 
 /* ── CALENDÁRIO ── */
 .cal-grid-mes{
@@ -294,11 +274,6 @@ body{
 
 /* ── GRÁFICOS ── */
 .chart-container{position:relative;height:200px;margin-top:10px;}
-
-/* ── IMC ── */
-.imc-faixa{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px;}
-.imc-tag{font-size:0.62em;font-weight:700;text-transform:uppercase;padding:4px 8px;border-radius:6px;letter-spacing:0.05em;}
-.imc-atual{font-family:var(--fonte-display);font-size:3.5em;line-height:1;letter-spacing:2px;}
 
 /* ── MODAIS ── */
 .modal-overlay{
@@ -417,22 +392,6 @@ body{
 .delta-pos{color:var(--vermelho);}
 .delta-neg{color:var(--verde);}
 
-/* ── TREINO BIBLIOTECA ── */
-.treino-bibl-item{
-  display:flex;align-items:center;gap:12px;padding:12px;
-  background:var(--bg);border-radius:10px;margin-bottom:8px;
-  border:1px solid transparent;
-}
-.treino-bibl-icon{font-size:1.4em;}
-.treino-bibl-info{flex:1;}
-.treino-bibl-nome{font-size:0.88em;font-weight:600;color:var(--branco);}
-.treino-bibl-desc{font-size:0.7em;color:var(--cinza);margin-top:2px;}
-.treino-bibl-link{
-  font-size:0.7em;color:var(--azul);text-decoration:none;
-  padding:4px 10px;border-radius:6px;background:var(--azul-dim);
-  font-weight:600;
-}
-
 /* ── MUSCULAÇÃO SCREEN ── */
 .screen-musculacao{
   display:none;position:fixed;inset:0;background:var(--bg);
@@ -456,7 +415,6 @@ body{
 .musc-title{font-family:var(--fonte-display);font-size:1.4em;color:var(--branco);letter-spacing:1px;}
 .musc-sub{font-size:0.72em;color:var(--cinza);}
 
-/* Telas dentro do musculação */
 .musc-screen{display:none;padding:20px;}
 .musc-screen.ativo{display:block;}
 
@@ -467,8 +425,8 @@ body{
   border-radius:var(--radius);padding:20px;cursor:pointer;
   transition:all 0.2s;border-left:4px solid var(--cinza2);
 }
-.ab-card.ativo-card{border-left-color:var(--azul);background:var(--azul-dim2);}
-.ab-card.desabilitado{opacity:0.35;cursor:not-allowed;}
+.ab-card.proximo{border-left-color:var(--azul);background:var(--azul-dim2);}
+.ab-card.bloqueado{opacity:0.35;cursor:not-allowed;pointer-events:none;}
 .ab-card-titulo{font-family:var(--fonte-display);font-size:1.8em;color:var(--branco);margin-bottom:4px;}
 .ab-card-sub{font-size:0.75em;color:var(--cinza);}
 .ab-card-badge{
@@ -477,21 +435,21 @@ body{
   padding:4px 10px;border-radius:20px;letter-spacing:0.08em;
 }
 .badge-proximo{background:rgba(59,130,246,0.15);color:var(--azul);border:1px solid rgba(59,130,246,0.3);}
-.badge-feito{background:rgba(52,211,153,0.12);color:var(--verde);border:1px solid rgba(52,211,153,0.25);}
+.badge-bloq{background:rgba(90,100,120,0.2);color:var(--cinza);border:1px solid rgba(90,100,120,0.3);}
 
 /* Exercício */
-.ex-header{display:flex;align-items:center;gap:12px;margin-bottom:16px;}
+.ex-header{display:flex;align-items:center;gap:12px;margin-bottom:14px;}
 .ex-grupo{font-size:0.65em;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;color:var(--azul);}
 .ex-nome{font-family:var(--fonte-display);font-size:1.8em;color:var(--branco);letter-spacing:1px;margin-top:2px;}
 .ex-reps{font-size:0.78em;color:var(--cinza);margin-top:4px;}
 .gif-wrap{
   border-radius:14px;overflow:hidden;background:var(--card2);
-  height:200px;display:flex;align-items:center;justify-content:center;
-  margin-bottom:16px;
+  height:180px;display:flex;align-items:center;justify-content:center;
+  margin-bottom:14px;
 }
 .gif-wrap img{width:100%;height:100%;object-fit:contain;}
 .gif-loading{display:flex;align-items:center;justify-content:center;gap:8px;color:var(--cinza);font-size:0.82em;}
-.progress-dots{display:flex;gap:6px;margin-bottom:16px;}
+.progress-dots{display:flex;gap:6px;margin-bottom:14px;}
 .pdot{
   width:8px;height:8px;border-radius:50%;
   background:var(--card2);border:1px solid var(--cinza2);
@@ -499,36 +457,37 @@ body{
 .pdot.done{background:var(--verde);border-color:var(--verde);}
 .pdot.cur{background:var(--azul);border-color:var(--azul);}
 
-/* Series */
-.series-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px;}
+/* Series + peso */
+.ex-peso-row{
+  display:flex;align-items:center;gap:10px;margin-bottom:14px;
+  background:var(--card2);border-radius:10px;padding:10px 14px;
+}
+.ex-peso-label{font-size:0.65em;text-transform:uppercase;letter-spacing:0.1em;color:var(--cinza);font-weight:700;}
+.ex-peso-input{
+  background:transparent;border:none;
+  font-family:var(--fonte-display);font-size:1.5em;
+  color:var(--azul);width:80px;outline:none;text-align:right;
+}
+.ex-peso-unit{font-size:0.75em;color:var(--cinza);margin-left:2px;}
+
+.series-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px;}
 .s-item{text-align:center;display:flex;flex-direction:column;align-items:center;gap:4px;}
+/* Anilha SVG — peso lateral claro */
 .s-anilha{width:68px;cursor:default;opacity:0.35;transition:all 0.2s;}
 .s-anilha.clickable{opacity:1;cursor:pointer;}
-.s-anilha.done-s svg rect{fill:#0d2a1e!important;}
-.s-anilha.done-s{filter:hue-rotate(120deg) brightness(1.2);}
+.s-anilha.done-s .bar-centro rect{fill:#0d2a1e!important;stroke:#34d399!important;}
+.s-anilha.done-s .lateral-pesos rect{fill:#1a3a2a!important;stroke:#34d399!important;}
 .s-timer{font-size:0.7em;font-weight:700;color:var(--cinza);height:16px;}
 .s-label{font-size:0.6em;color:var(--cinza);text-transform:uppercase;}
 
 /* Done screen */
-.done-screen{
-  text-align:center;padding:40px 20px;
-}
+.done-screen{text-align:center;padding:40px 20px;}
 .done-icon{font-size:4em;margin-bottom:12px;}
 .done-titulo{font-family:var(--fonte-display);font-size:3em;color:var(--azul);letter-spacing:2px;margin-bottom:8px;}
 .done-sub{font-size:0.88em;color:var(--cinza);margin-bottom:24px;}
-.done-stats{
-  display:flex;gap:20px;justify-content:center;margin-bottom:28px;
-}
+.done-stats{display:flex;gap:20px;justify-content:center;margin-bottom:28px;}
 
 /* ── NATAÇÃO SCREEN ── */
-.nat-timer-display{
-  text-align:center;padding:30px 20px;
-}
-.nat-timer-num{
-  font-family:var(--fonte-display);font-size:5em;
-  color:var(--azul);letter-spacing:4px;line-height:1;
-}
-.nat-timer-lbl{font-size:0.78em;color:var(--cinza);margin-top:8px;}
 .nat-campos{display:flex;flex-direction:column;gap:12px;margin-top:20px;}
 .nat-campo-row{
   display:flex;align-items:center;gap:12px;
@@ -546,9 +505,7 @@ body{
 }
 
 /* ── CARDIO SCREEN ── */
-.cardio-tipo-grid{
-  display:flex;gap:10px;margin-bottom:20px;
-}
+.cardio-tipo-grid{display:flex;gap:10px;margin-bottom:20px;}
 .cardio-tipo-btn{
   flex:1;text-align:center;padding:16px 8px;
   background:var(--card2);border:1.5px solid var(--cinza2);
@@ -558,6 +515,40 @@ body{
 .cardio-tipo-btn span{display:block;font-size:1.8em;margin-bottom:4px;}
 .cardio-tipo-btn div{font-size:0.72em;font-weight:700;text-transform:uppercase;color:var(--cinza);letter-spacing:0.06em;}
 .cardio-tipo-btn.ativo div{color:var(--azul);}
+
+.nat-timer-display{text-align:center;padding:24px 20px;}
+.nat-timer-num{font-family:var(--fonte-display);font-size:5em;color:var(--azul);letter-spacing:4px;line-height:1;}
+.nat-timer-lbl{font-size:0.78em;color:var(--cinza);margin-top:8px;}
+
+/* ── IMC ── */
+.imc-faixa{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px;}
+.imc-tag{font-size:0.62em;font-weight:700;text-transform:uppercase;padding:4px 8px;border-radius:6px;letter-spacing:0.05em;}
+
+/* ── TREINO BIBLIOTECA ── */
+.treino-bibl-item{
+  display:flex;align-items:center;gap:12px;padding:12px;
+  background:var(--bg);border-radius:10px;margin-bottom:8px;
+  border:1px solid transparent;
+}
+.treino-bibl-icon{font-size:1.4em;}
+.treino-bibl-info{flex:1;}
+.treino-bibl-nome{font-size:0.88em;font-weight:600;color:var(--branco);}
+.treino-bibl-desc{font-size:0.7em;color:var(--cinza);margin-top:2px;}
+.treino-bibl-link{
+  font-size:0.7em;color:var(--azul);text-decoration:none;
+  padding:4px 10px;border-radius:6px;background:var(--azul-dim);
+  font-weight:600;
+}
+
+/* Sub-abas treino A/B */
+.ab-toggle{display:flex;gap:6px;margin-bottom:16px;}
+.ab-toggle-btn{
+  flex:1;padding:10px;border:1.5px solid var(--card2);border-radius:10px;
+  background:var(--card2);color:var(--cinza);font-family:var(--fonte);
+  font-size:0.82em;font-weight:700;cursor:pointer;transition:all 0.18s;
+  text-align:center;
+}
+.ab-toggle-btn.ativo{border-color:var(--azul);background:var(--azul-dim);color:var(--azul);}
 
 /* ── TOAST ── */
 .toast{
@@ -571,7 +562,7 @@ body{
 }
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
 
-/* ── SEPARADOR ── */
+/* ── SEP ── */
 .sep{height:1px;background:var(--card2);margin:16px 0;}
 
 /* ── EMPTY ── */
@@ -603,7 +594,7 @@ body{
 <!-- ══ HEADER ══ -->
 <div class="header">
   <div class="header-top">
-    <div class="logo">100<span>DIAS</span></div>
+    <div class="logo">100<span>DIAS</span><span class="logo-ver">v1.1</span></div>
     <button class="btn-perfil" onclick="irPara('tela-perfil')">⚙</button>
   </div>
   <div class="nav-abas">
@@ -619,69 +610,56 @@ body{
 <!-- ══════════ TELA: HOJE ══════════ -->
 <div id="tela-hoje" class="tela ativa">
 
-  <!-- Hero -->
+  <!-- Hero compacto -->
   <div class="hero-100" id="hero-100">
-    <div class="hero-dia-label">Desafio em andamento</div>
-    <div class="hero-dia-num" id="hero-num">—</div>
-    <div class="hero-dia-de100">de <span>100</span> dias &nbsp;·&nbsp; <span id="hero-streak">0 🔥 dias seguidos</span></div>
-    <div class="barra-100"><div class="barra-100-fill" id="barra-progress" style="width:0%"></div></div>
-  </div>
-
-  <!-- Mini cards Peso + Sono + Água -->
-  <div class="grid-3" style="margin-bottom:16px">
-    <div class="mini-card borda-cinza" id="mc-peso" onclick="abrirModalPeso()" style="cursor:pointer">
-      <div class="mini-card-label">⚖️ Peso</div>
-      <div class="mini-card-val" id="mini-peso" style="color:var(--branco)">—</div>
-      <div class="mini-card-sub" id="mini-imc-sub">kg</div>
-    </div>
-    <div class="mini-card" id="mc-sono" onclick="abrirModalSono()" style="cursor:pointer">
-      <div class="mini-card-label">😴 Sono</div>
-      <div class="mini-card-val" id="mini-sono" style="font-size:1.4em">—</div>
-      <div class="mini-card-sub" id="mini-sono-sub">toque registrar</div>
-    </div>
-    <div class="mini-card" id="mc-agua" onclick="abrirModalAgua()" style="cursor:pointer">
-      <div class="mini-card-label">💧 Água</div>
-      <div class="mini-card-val" id="mini-agua" style="font-size:1.4em">—</div>
-      <div class="mini-card-sub" id="mini-agua-sub">toque registrar</div>
-    </div>
-  </div>
-
-  <!-- Calorias hoje -->
-  <div class="cal-bloco" id="cal-bloco">
-    <div class="cal-topo">
+    <div class="hero-inner">
       <div>
-        <div class="card-titulo">🔥 Calorias hoje</div>
-        <div class="cal-valor-grande" id="cal-ingeridas-hoje" style="color:var(--azul)">0</div>
-        <div style="font-size:0.72em;color:var(--cinza);margin-top:4px">kcal ingeridas</div>
+        <div class="hero-dia-label">Desafio</div>
+        <div class="hero-dia-num" id="hero-num">—</div>
+        <div class="hero-dia-de100">de <span>100</span> dias</div>
       </div>
-      <div class="cal-meta-info">
-        <div>Meta diária</div>
-        <strong id="cal-meta-display">—</strong>
-        <div style="margin-top:8px">
-          <span class="deficit-badge deficit-pos" id="deficit-badge-hoje">— kcal</span>
+      <div class="hero-right">
+        <div class="hero-streak-row">
+          <div class="hero-streak-val" id="hero-streak">0 🔥</div>
+          <div class="hero-pct" id="hero-pct">0%</div>
+        </div>
+        <div class="barra-100"><div class="barra-100-fill" id="barra-progress" style="width:0%"></div></div>
+        <div style="font-size:0.62em;color:var(--cinza);margin-top:4px" id="hero-meta-cal-mini"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Card calorias compacto -->
+  <div class="cal-compact" id="cal-compact">
+    <div class="cal-compact-top">
+      <div>
+        <div class="cal-compact-label">🔥 Calorias hoje</div>
+        <div class="cal-compact-nums">
+          <div class="cal-compact-val" id="cal-ingeridas-hoje">0</div>
+          <div class="cal-compact-meta">/ <span id="cal-meta-display">—</span> kcal</div>
         </div>
       </div>
+      <div id="deficit-badge-hoje" class="cal-compact-badge"></div>
     </div>
-    <div class="barra-cal">
-      <div class="barra-cal-fill" id="barra-cal-hoje" style="width:0%;background:var(--verde)"></div>
+    <div class="barra-cal-compact">
+      <div class="barra-cal-compact-fill" id="barra-cal-hoje" style="width:0%;background:var(--verde)"></div>
     </div>
-    <div style="display:flex;justify-content:space-between;font-size:0.65em;color:var(--cinza);margin-top:4px">
-      <span>0</span><span id="cal-meta-barra-label">meta</span>
+    <div class="cal-compact-refs" id="cal-refs-row"></div>
+    <div class="cal-compact-btns">
+      <button class="btn btn-outline btn-sm" onclick="abrirModalRefeicao('manhã')">☀️</button>
+      <button class="btn btn-outline btn-sm" onclick="abrirModalRefeicao('almoço')">🌤</button>
+      <button class="btn btn-outline btn-sm" onclick="abrirModalRefeicao('jantar')">🌙</button>
+      <button class="btn btn-ghost btn-sm" style="flex:1" onclick="abrirModalRefeicao('extra')">+ Extra</button>
     </div>
-    <div class="cal-refeicoes" id="refeicoes-hoje-lista"></div>
-    <div style="display:flex;gap:8px;margin-top:14px">
-      <button class="btn btn-outline btn-sm" onclick="abrirModalRefeicao('manhã')">☀️ Manhã</button>
-      <button class="btn btn-outline btn-sm" onclick="abrirModalRefeicao('almoço')">🌤 Almoço</button>
-      <button class="btn btn-outline btn-sm" onclick="abrirModalRefeicao('jantar')">🌙 Jantar</button>
-    </div>
-    <button class="btn btn-ghost btn-sm" style="width:100%;margin-top:8px" onclick="abrirModalRefeicao('extra')">+ Extra / Lanche</button>
   </div>
 
-  <!-- Treino hoje -->
-  <div class="card" id="card-treino-hoje">
-    <div class="card-header">🏋️ Treino de hoje</div>
-    <div id="treino-hoje-resumo" style="font-size:0.82em;color:var(--cinza);margin-bottom:10px"></div>
-    <div class="treino-hoje-modalidades">
+  <!-- Card treino compacto -->
+  <div class="treino-compact" id="card-treino-hoje">
+    <div class="treino-compact-top">
+      <div class="treino-compact-label">🏋️ Treino de hoje</div>
+      <div class="treino-compact-status" id="treino-hoje-resumo"></div>
+    </div>
+    <div class="treino-mods-row">
       <div class="treino-mod-btn" id="mod-musc" onclick="abrirMusculacao()">
         <span class="treino-mod-icon">🏋️</span>
         <div class="treino-mod-nome">Musculação</div>
@@ -695,11 +673,28 @@ body{
         <div class="treino-mod-nome">Cardio</div>
       </div>
     </div>
-    <!-- Meta semanal de treinos -->
-    <div style="margin-top:16px;padding-top:14px;border-top:1px solid var(--card2)">
-      <div style="font-size:0.63em;text-transform:uppercase;letter-spacing:0.12em;color:var(--cinza);font-weight:700;margin-bottom:10px">📅 Semana atual</div>
-      <div id="semana-treinos-grid" class="treino-semanal-grid"></div>
-      <div id="meta-semanal-status" style="font-size:0.72em;color:var(--cinza);margin-top:8px;text-align:center"></div>
+    <div class="treino-semana-row">
+      <div id="semana-treinos-grid" style="display:flex;gap:5px;flex:1"></div>
+      <div id="meta-semanal-status" class="semana-meta-txt"></div>
+    </div>
+  </div>
+
+  <!-- Linha: Sono · Água · Peso -->
+  <div class="grid-3">
+    <div class="mini-card borda-cinza" id="mc-sono" onclick="abrirModalSono()" style="cursor:pointer">
+      <div class="mini-card-label">😴 Sono</div>
+      <div class="mini-card-val" id="mini-sono" style="font-size:1.3em">—</div>
+      <div class="mini-card-sub" id="mini-sono-sub">registrar</div>
+    </div>
+    <div class="mini-card" id="mc-agua" onclick="abrirModalAgua()" style="cursor:pointer">
+      <div class="mini-card-label">💧 Água</div>
+      <div class="mini-card-val" id="mini-agua" style="font-size:1.3em">—</div>
+      <div class="mini-card-sub" id="mini-agua-sub">registrar</div>
+    </div>
+    <div class="mini-card borda-cinza" id="mc-peso" onclick="abrirModalPeso()" style="cursor:pointer">
+      <div class="mini-card-label">⚖️ Peso</div>
+      <div class="mini-card-val" id="mini-peso" style="color:var(--branco)">—</div>
+      <div class="mini-card-sub" id="mini-imc-sub">kg</div>
     </div>
   </div>
 
@@ -817,28 +812,35 @@ body{
 
 <!-- ══════════ TELA: ALIMENTOS ══════════ -->
 <div id="tela-alimentos" class="tela">
-  <!-- Sub-toggle: Alimentos / Treinos -->
   <div class="toggle-abas" style="margin-bottom:16px">
     <button class="toggle-aba ativa" onclick="mudarSubAlimento('alimentos',this)">🥗 Alimentos</button>
-    <button class="toggle-aba" onclick="mudarSubAlimento('treinos-bibl',this)">🏋️ Treinos</button>
+    <button class="toggle-aba" onclick="mudarSubAlimento('treino-a',this)">💪 Treino A</button>
+    <button class="toggle-aba" onclick="mudarSubAlimento('treino-b',this)">💪 Treino B</button>
   </div>
 
   <div id="sub-alimentos">
     <div class="card">
       <div class="card-header">📚 Biblioteca de alimentos</div>
-      <p style="font-size:0.78em;color:var(--cinza);margin-bottom:14px">Cadastre seus alimentos favoritos para usar rapidamente no diário.</p>
+      <p style="font-size:0.78em;color:var(--cinza);margin-bottom:14px">Cadastre seus alimentos favoritos.</p>
       <button class="btn" onclick="abrirModalNovoAlimento()">+ Novo alimento</button>
     </div>
     <div id="biblioteca-lista"></div>
   </div>
 
-  <div id="sub-treinos-bibl" style="display:none">
+  <div id="sub-treino-a" style="display:none">
     <div class="card">
-      <div class="card-header">🏋️ Biblioteca de treinos</div>
-      <p style="font-size:0.78em;color:var(--cinza);margin-bottom:14px">Cadastre seus treinos favoritos. Clique no link para ver o exercício.</p>
-      <button class="btn" onclick="abrirModalNovoTreinoBibl()">+ Novo treino</button>
+      <div class="card-header">💪 Exercícios — Treino A</div>
+      <p style="font-size:0.75em;color:var(--cinza);margin-bottom:6px">Lista de exercícios do Treino A. Para atualizar, edite o array <code style="color:var(--azul)">TREINOS.A</code> no código.</p>
     </div>
-    <div id="treinos-bibl-lista"></div>
+    <div id="treino-a-lista"></div>
+  </div>
+
+  <div id="sub-treino-b" style="display:none">
+    <div class="card">
+      <div class="card-header">💪 Exercícios — Treino B</div>
+      <p style="font-size:0.75em;color:var(--cinza);margin-bottom:6px">Lista de exercícios do Treino B. Para atualizar, edite o array <code style="color:var(--azul)">TREINOS.B</code> no código.</p>
+    </div>
+    <div id="treino-b-lista"></div>
   </div>
 </div>
 
@@ -874,7 +876,7 @@ body{
   </div>
   <div class="card">
     <div class="card-header">💾 Backup de dados</div>
-    <p style="font-size:0.78em;color:var(--cinza);margin-bottom:14px">Exporte um JSON com todos os seus dados. Importe para restaurar.</p>
+    <p style="font-size:0.78em;color:var(--cinza);margin-bottom:14px">Exporte um JSON com todos os seus dados.</p>
     <div style="display:flex;gap:8px">
       <button class="btn btn-ghost btn-sm" style="flex:1" onclick="exportarDados()">⬇ Exportar JSON</button>
       <button class="btn btn-ghost btn-sm" style="flex:1" onclick="importarDados()">⬆ Importar JSON</button>
@@ -883,11 +885,7 @@ body{
   </div>
 </div>
 
-<!-- ══════════════════════════════════════════
-     SCREENS FORA DO APP: MUSCULAÇÃO
-══════════════════════════════════════════ -->
-
-<!-- Screen: Seletor A/B -->
+<!-- ══════════ SCREEN: MUSCULAÇÃO ══════════ -->
 <div id="screen-musculacao" class="screen-musculacao">
   <div class="musc-header">
     <button class="musc-back" onclick="fecharMusculacao()">←</button>
@@ -899,8 +897,6 @@ body{
   <div id="musc-sel" class="musc-screen ativo">
     <div class="ab-grid" id="ab-grid"></div>
   </div>
-
-  <!-- Screen: Exercício -->
   <div id="musc-ex" class="musc-screen">
     <div class="ex-header">
       <div>
@@ -912,13 +908,21 @@ body{
     <div class="progress-dots" id="ex-progress"></div>
     <div class="gif-wrap">
       <div class="gif-loading" id="gif-loading">⏳ Carregando...</div>
-      <img id="exercise-gif" style="display:none" onload="document.getElementById('gif-loading').style.display='none';this.style.display='block'" onerror="document.getElementById('gif-loading').textContent='⚠ GIF não disponível'">
+      <img id="exercise-gif" style="display:none"
+        onload="document.getElementById('gif-loading').style.display='none';this.style.display='block'"
+        onerror="document.getElementById('gif-loading').textContent='⚠ GIF não disponível'">
+    </div>
+    <!-- Campo de peso do exercício -->
+    <div class="ex-peso-row">
+      <div style="flex:1">
+        <div class="ex-peso-label">⚖️ Peso no aparelho</div>
+      </div>
+      <input class="ex-peso-input" type="number" id="ex-peso-input" placeholder="0" min="0" step="0.5" onchange="salvarPesoEx()">
+      <span class="ex-peso-unit">kg</span>
     </div>
     <div class="series-row" id="series-row"></div>
     <button class="btn" id="btn-nxt" onclick="nextEx()" disabled>Próximo exercício →</button>
   </div>
-
-  <!-- Screen: Done -->
   <div id="musc-done" class="musc-screen">
     <div class="done-screen">
       <div class="done-icon">🏆</div>
@@ -940,28 +944,16 @@ body{
     <button class="musc-back" onclick="fecharNatacao()">←</button>
     <div class="musc-title-wrap">
       <div class="musc-title">🏊 NATAÇÃO</div>
-      <div class="musc-sub" id="nat-estado-lbl">Pronto para começar</div>
+      <div class="musc-sub">Registre sua sessão</div>
     </div>
-    <button class="btn btn-sm" id="nat-btn-timer" style="width:auto" onclick="toggleNatTimer()">▶ Iniciar</button>
   </div>
   <div style="padding:0 20px 20px">
-    <div class="nat-timer-display">
-      <div class="nat-timer-num" id="nat-timer-display">00:00:00</div>
-      <div class="nat-timer-lbl">tempo na água</div>
-    </div>
     <div class="nat-campos">
       <div class="nat-campo-row">
-        <div class="nat-campo-icon">🏊</div>
+        <div class="nat-campo-icon">⏱</div>
         <div class="nat-campo-info">
-          <div class="nat-campo-label">Distância (metros)</div>
-          <input class="nat-campo-input" type="number" id="nat-distancia" placeholder="Ex: 800" min="0">
-        </div>
-      </div>
-      <div class="nat-campo-row">
-        <div class="nat-campo-icon">🔁</div>
-        <div class="nat-campo-info">
-          <div class="nat-campo-label">Número de voltas</div>
-          <input class="nat-campo-input" type="number" id="nat-voltas" placeholder="Ex: 16" min="0">
+          <div class="nat-campo-label">Duração (minutos)</div>
+          <input class="nat-campo-input" type="number" id="nat-minutos" placeholder="45" min="1" max="300" value="45">
         </div>
       </div>
       <div class="nat-campo-row">
@@ -976,7 +968,7 @@ body{
         </div>
       </div>
     </div>
-    <button class="btn btn-verde" style="margin-top:20px" onclick="finalizarNatacao()">✅ Registrar natação</button>
+    <button class="btn btn-verde" style="margin-top:24px" onclick="finalizarNatacao()">✅ Registrar natação</button>
     <button class="btn btn-ghost" style="margin-top:10px" onclick="fecharNatacao()">← Cancelar</button>
   </div>
 </div>
@@ -992,7 +984,6 @@ body{
     <button class="btn btn-sm" id="cardio-btn-timer" style="width:auto" onclick="toggleCardioTimer()">▶ Iniciar</button>
   </div>
   <div style="padding:0 20px 20px">
-    <!-- Tipo -->
     <div class="cardio-tipo-grid">
       <div class="cardio-tipo-btn ativo" id="ctb-corrida" onclick="selecionarCardioTipo('corrida')">
         <span>🏃</span><div>Corrida</div>
@@ -1011,13 +1002,6 @@ body{
         <div class="nat-campo-info">
           <div class="nat-campo-label">Distância (km)</div>
           <input class="nat-campo-input" type="number" id="cardio-km" placeholder="Ex: 5.2" min="0" step="0.1">
-        </div>
-      </div>
-      <div class="nat-campo-row">
-        <div class="nat-campo-icon">👟</div>
-        <div class="nat-campo-info">
-          <div class="nat-campo-label">Passos (opcional)</div>
-          <input class="nat-campo-input" type="number" id="cardio-passos" placeholder="Ex: 7500" min="0">
         </div>
       </div>
     </div>
@@ -1099,7 +1083,7 @@ body{
     </div>
     <div class="modal-btns">
       <button class="btn btn-ghost" onclick="fecharModal('modal-sono')">Cancelar</button>
-      <button class="btn" style="background:var(--azul)" onclick="salvarSono()">Salvar sono</button>
+      <button class="btn" onclick="salvarSono()">Salvar sono</button>
     </div>
   </div>
 </div>
@@ -1113,18 +1097,18 @@ body{
       <div style="font-size:0.75em;color:var(--cinza)">total registrado hoje</div>
     </div>
     <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:16px">
-      <button class="btn btn-ghost btn-sm" onclick="addAguaRapido(200)">🥤 200ml<br><span style="font-size:0.7em;color:var(--cinza)">copo</span></button>
-      <button class="btn btn-ghost btn-sm" onclick="addAguaRapido(300)">🥤 300ml<br><span style="font-size:0.7em;color:var(--cinza)">copo g</span></button>
+      <button class="btn btn-ghost btn-sm" onclick="addAguaRapido(100)">🥤 100ml<br><span style="font-size:0.7em;color:var(--cinza)">copo p</span></button>
+      <button class="btn btn-ghost btn-sm" onclick="addAguaRapido(250)">🥤 250ml<br><span style="font-size:0.7em;color:var(--cinza)">copo m</span></button>
       <button class="btn btn-ghost btn-sm" onclick="addAguaRapido(500)">🍶 500ml<br><span style="font-size:0.7em;color:var(--cinza)">garrafa p</span></button>
       <button class="btn btn-ghost btn-sm" onclick="addAguaRapido(750)">🍶 750ml<br><span style="font-size:0.7em;color:var(--cinza)">garrafa m</span></button>
       <button class="btn btn-ghost btn-sm" onclick="addAguaRapido(1000)">🫙 1L<br><span style="font-size:0.7em;color:var(--cinza)">garrafa 1L</span></button>
-      <button class="btn btn-ghost btn-sm" onclick="addAguaRapido(1500)">🫙 1.5L<br><span style="font-size:0.7em;color:var(--cinza)">garrafa g</span></button>
+      <button class="btn btn-ghost btn-sm" onclick="addAguaRapido(2000)">🫙 2L<br><span style="font-size:0.7em;color:var(--cinza)">garrafa 2L</span></button>
     </div>
     <div class="sep"></div>
     <div class="modal-campo" style="margin-top:12px">
       <label>Ou digitar (ml)</label>
       <div style="display:flex;gap:8px">
-        <input type="number" id="agua-manual" placeholder="Ex: 400" min="50" max="3000" style="flex:1;background:var(--bg);border:1.5px solid var(--card2);border-radius:10px;color:var(--branco);padding:12px 14px;font-family:var(--fonte);font-size:0.95em;outline:none">
+        <input type="number" id="agua-manual" placeholder="Ex: 400" min="50" max="5000" style="flex:1;background:var(--bg);border:1.5px solid var(--card2);border-radius:10px;color:var(--branco);padding:12px 14px;font-family:var(--fonte);font-size:0.95em;outline:none">
         <button class="btn btn-sm" style="background:#38bdf8;color:var(--bg);width:auto" onclick="addAguaManual()">+ Add</button>
       </div>
     </div>
@@ -1188,35 +1172,10 @@ body{
   </div>
 </div>
 
-<!-- Modal: Novo Treino Biblioteca -->
-<div class="modal-overlay" id="modal-treino-bibl">
-  <div class="modal-box">
-    <div class="modal-titulo">NOVO TREINO</div>
-    <div class="modal-campo"><label>Nome do treino</label><input type="text" id="tb-nome" placeholder="Ex: Treino A - Peito/Costas"></div>
-    <div class="modal-campo">
-      <label>Tipo</label>
-      <select id="tb-tipo">
-        <option value="musculacao">💪 Musculação</option>
-        <option value="natacao">🏊 Natação</option>
-        <option value="cardio">🏃 Cardio</option>
-      </select>
-    </div>
-    <div class="modal-campo"><label>Séries × Repetições (ex: 3x10)</label><input type="text" id="tb-series" placeholder="Ex: 3x10"></div>
-    <div class="modal-campo"><label>Link do gif / exercício (opcional)</label><input type="url" id="tb-link" placeholder="https://..."></div>
-    <div class="modal-campo"><label>Observações (opcional)</label><input type="text" id="tb-obs" placeholder="Ex: Aumentar carga 2kg"></div>
-    <div class="modal-btns">
-      <button class="btn btn-ghost" onclick="fecharModal('modal-treino-bibl')">Cancelar</button>
-      <button class="btn" onclick="salvarTreinoBibl()">Salvar</button>
-    </div>
-  </div>
-</div>
-
 <!-- Toast -->
 <div class="toast" id="toast"></div>
-<!-- Banner PWA -->
 <div id="banner-install"><span>📲 Instalar app</span><button onclick="instalarPWA()">Instalar</button></div>
 
-<!-- Chart.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 
 <script>
@@ -1226,10 +1185,10 @@ body{
 (function(){
   const svg=`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400"><circle cx="200" cy="200" r="180" fill="#111318" stroke="#3b82f6" stroke-width="12"/><text x="200" y="240" font-family="Arial" font-size="130" font-weight="bold" fill="#3b82f6" text-anchor="middle">100</text></svg>`;
   const icon='data:image/svg+xml;base64,'+btoa(unescape(encodeURIComponent(svg)));
-  const mf={name:"100 Dias v1.0",short_name:"100 Dias",start_url:"./",scope:"./",display:"standalone",background_color:"#111318",theme_color:"#1a1d23",icons:[{src:icon,sizes:"192x192",type:"image/svg+xml",purpose:"any maskable"},{src:icon,sizes:"512x512",type:"image/svg+xml",purpose:"any maskable"}]};
+  const mf={name:"100 Dias v1.1",short_name:"100 Dias",start_url:"./",scope:"./",display:"standalone",background_color:"#111318",theme_color:"#1a1d23",icons:[{src:icon,sizes:"192x192",type:"image/svg+xml",purpose:"any maskable"},{src:icon,sizes:"512x512",type:"image/svg+xml",purpose:"any maskable"}]};
   document.getElementById('manifest-link').href=URL.createObjectURL(new Blob([JSON.stringify(mf)],{type:'application/manifest+json'}));
   if('serviceWorker' in navigator){
-    const sw=`const C='100dias-v1';self.addEventListener('install',e=>{e.waitUntil(caches.open(C).then(c=>c.addAll(['./','/index.html'])));self.skipWaiting();});self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(k=>Promise.all(k.filter(x=>x!==C).map(x=>caches.delete(x)))).then(()=>self.clients.claim()));});self.addEventListener('fetch',e=>{e.respondWith(caches.match(e.request).then(r=>r||fetch(e.request)));});`;
+    const sw=`const C='100dias-v1.1';self.addEventListener('install',e=>{e.waitUntil(caches.open(C).then(c=>c.addAll(['./','/index.html'])));self.skipWaiting();});self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(k=>Promise.all(k.filter(x=>x!==C).map(x=>caches.delete(x)))).then(()=>self.clients.claim()));});self.addEventListener('fetch',e=>{e.respondWith(caches.match(e.request).then(r=>r||fetch(e.request)));});`;
     navigator.serviceWorker.register(URL.createObjectURL(new Blob([sw],{type:'text/javascript'}))).catch(()=>{});
   }
 })();
@@ -1239,20 +1198,18 @@ window.addEventListener('appinstalled',()=>{document.getElementById('banner-inst
 function instalarPWA(){if(!deferredPrompt)return;deferredPrompt.prompt();deferredPrompt.userChoice.then(()=>{deferredPrompt=null;document.getElementById('banner-install').classList.remove('visivel');});}
 
 // ═══════════════════════════════
-// ESTADO GLOBAL
+// TREINOS — EDITE AQUI PARA ATUALIZAR
 // ═══════════════════════════════
-const CHAVE='app100dias_v1';
-let dados=carregarDados();
-let refPeriodo='manhã';
-let refItensTemp=[];
-let mesAtual=new Date();
-let subAbaAtiva='peso';
-let subAlimentoAtiva='alimentos';
-let chartPeso=null,chartCal=null,chartSono=null,chartAgua=null;
-
-// ── Treinos musculação ──
-const TREINOS={
-  A:[
+/* COMO ATUALIZAR OS TREINOS:
+   Edite os arrays abaixo. Cada exercício tem:
+   g = grupo muscular
+   n = nome do exercício
+   s = número de séries
+   r = número de repetições
+   gif = URL do gif animado (do gifdotreino.com ou similar)
+*/
+const TREINOS = {
+  A: [
     {g:'Peito',   n:'Supino Reto',                  s:3,r:10,gif:'https://www.gifdotreino.com/Exercicios/Peitoral/Supino%20Reto.gif'},
     {g:'Peito',   n:'Crucifixo com Halteres',        s:3,r:12,gif:'https://www.gifdotreino.com/Exercicios/Peitoral/Crucifixo%20com%20halteres.gif'},
     {g:'Costas',  n:'Puxada Alta',                   s:3,r:10,gif:'https://www.gifdotreino.com/Exercicios/Costas/Puxada%20Alta.gif'},
@@ -1264,7 +1221,7 @@ const TREINOS={
     {g:'Pernas',  n:'Agachamento Barra',             s:3,r:10,gif:'https://www.gifdotreino.com/Exercicios/Pernas/Agachamento%20Barra.gif'},
     {g:'Pernas',  n:'Cadeira Flexora',               s:3,r:12,gif:'https://www.gifdotreino.com/Exercicios/Pernas/Cadeira%20flexora.gif'},
   ],
-  B:[
+  B: [
     {g:'Peito',   n:'Supino Inclinado com Halteres', s:3,r:10,gif:'https://www.gifdotreino.com/Exercicios/Peitoral/Supino%20Inclinado%20com%20Halteres.gif'},
     {g:'Peito',   n:'Voador na Máquina',             s:3,r:12,gif:'https://www.gifdotreino.com/Exercicios/Peitoral/Voador%20na%20M%C3%A1quina.gif'},
     {g:'Costas',  n:'Remada Sentada com Cabo',       s:3,r:10,gif:'https://www.gifdotreino.com/Exercicios/Costas/Remada%20Sentada%20com%20Cabo.gif'},
@@ -1278,11 +1235,19 @@ const TREINOS={
   ]
 };
 
-let curTreino='A',curExIdx=0,seriesDone=[],timerInterval=null;
-let treinoADone=false;
+// ═══════════════════════════════
+// ESTADO GLOBAL
+// ═══════════════════════════════
+const CHAVE='app100dias_v1.1';
+let dados=carregarDados();
+let refPeriodo='manhã';
+let refItensTemp=[];
+let mesAtual=new Date();
+let subAbaAtiva='peso';
+let subAlimentoAtiva='alimentos';
+let chartPeso=null,chartCal=null,chartSono=null,chartAgua=null;
 
-// Natação / Cardio timers
-let natTimerSec=0,natTimerRunning=false,natTimerRef=null;
+let curTreino='A',curExIdx=0,seriesDone=[],timerInterval=null;
 let cardioTimerSec=0,cardioTimerRunning=false,cardioTimerRef=null;
 let cardioTipoAtual='corrida';
 
@@ -1292,11 +1257,24 @@ let cardioTipoAtual='corrida';
 function carregarDados(){
   try{
     const s=localStorage.getItem(CHAVE);
+    // Tentar migrar de versão anterior
+    if(!s){
+      const old=localStorage.getItem('app100dias_v1');
+      if(old){
+        const d=JSON.parse(old);
+        d.registrosSono=d.registrosSono||{};
+        d.registrosAgua=d.registrosAgua||{};
+        d.pesosExercicios=d.pesosExercicios||{};
+        d.proximoTreino=d.proximoTreino||'A';
+        return d;
+      }
+    }
     if(s){
       const d=JSON.parse(s);
       if(!d.registrosSono) d.registrosSono={};
       if(!d.registrosAgua) d.registrosAgua={};
-      if(!d.bibliotecaTreinos) d.bibliotecaTreinos=[];
+      if(!d.pesosExercicios) d.pesosExercicios={};
+      if(!d.proximoTreino) d.proximoTreino='A';
       return d;
     }
   }catch(e){}
@@ -1306,14 +1284,15 @@ function carregarDados(){
     desafioDias:{},
     diarioAlimentar:{},
     biblioteca:[],
-    bibliotecaTreinos:[],
     conquistas:{},
     registrosSono:{},
-    registrosAgua:{}
+    registrosAgua:{},
+    pesosExercicios:{},  // { "A_Supino Reto": 20, "B_Leg Press": 40 }
+    proximoTreino:'A'    // 'A' ou 'B' — qual é o próximo a ser feito
   };
 }
 function salvarDados(){localStorage.setItem(CHAVE,JSON.stringify(dados));}
-function hoje(){const d=new Date();return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;}
+function hoje(){const d=new Date();return`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;}
 function formatarData(iso){if(!iso)return'—';const[y,m,d]=iso.split('-');return`${d}/${m}/${y}`;}
 
 // ═══════════════════════════════
@@ -1333,10 +1312,8 @@ function calcDiaDesafio(){const ini=dados.perfil.inicio;if(!ini)return 1;const m
 function calcStreak(){let s=0,d=new Date(hoje());while(true){const iso=d.toISOString().slice(0,10);const dia=dados.desafioDias[iso];if(dia&&dia.status==='concluido'){s++;d.setDate(d.getDate()-1);}else break;}return s;}
 function pesoMaisRecente(){if(!dados.medicoesPeso.length)return dados.perfil.peso||0;return dados.medicoesPeso[dados.medicoesPeso.length-1].pesoKg;}
 
-// ── Semana atual de treinos ──
 function getDiasSemanaaaAtual(){
-  const d=new Date();
-  const dow=(d.getDay()+6)%7; // 0=seg
+  const d=new Date();const dow=(d.getDay()+6)%7;
   const seg=new Date(d);seg.setDate(d.getDate()-dow);
   const dias=[];
   for(let i=0;i<7;i++){const x=new Date(seg);x.setDate(seg.getDate()+i);dias.push(x.toISOString().slice(0,10));}
@@ -1348,19 +1325,16 @@ function getMetaSemanal(){
   dias.forEach(iso=>{
     const d=dados.desafioDias[iso];
     if(!d||d.status!=='concluido')return;
-    if(d.tipo==='Musculação')musc++;
-    if(d.tipo==='Natação')nat++;
-    if(d.tipo==='Cardio')cardio++;
+    const t=Array.isArray(d.tipos)?d.tipos:[d.tipo].filter(Boolean);
+    if(t.includes('Musculação'))musc++;
+    if(t.includes('Natação'))nat++;
+    if(t.includes('Cardio'))cardio++;
   });
   return{musc,nat,cardio,dias};
 }
-
-// ─── Cor borda card sono ───
 function corSono(horas){
   if(horas===null||horas===undefined)return'cinza';
-  if(horas>=7)return'verde';
-  if(horas>=5)return'amarela';
-  return'vermelha';
+  if(horas>=7)return'verde';if(horas>=5)return'amarela';return'vermelha';
 }
 
 // ═══════════════════════════════
@@ -1387,37 +1361,71 @@ function irPara(id){
 function renderHoje(){
   const dia=calcDiaDesafio();
   const streak=calcStreak();
+  const pct=(dia/100*100).toFixed(0);
   document.getElementById('hero-num').textContent=dia;
-  document.getElementById('hero-streak').textContent=`${streak} 🔥 dias seguidos`;
-  document.getElementById('barra-progress').style.width=(dia/100*100).toFixed(1)+'%';
+  document.getElementById('hero-streak').textContent=`${streak} 🔥 seguidos`;
+  document.getElementById('hero-pct').textContent=pct+'%';
+  document.getElementById('barra-progress').style.width=pct+'%';
 
   const peso=pesoMaisRecente();
-  document.getElementById('mini-peso').textContent=peso?peso.toFixed(1):'—';
+  const meta=peso?calcMeta(peso):0;
 
-  // IMC sub do card peso
-  if(peso&&dados.perfil.alturaCm){
-    const imc=calcIMC(peso);
-    const cls=classIMC(imc);
-    document.getElementById('mini-imc-sub').textContent=`IMC ${imc} · ${cls.txt.replace(' ✅','').replace(' ⚠','')}`;
-    document.getElementById('mc-peso').className='mini-card borda-'+( imc<18.5?'azul': imc<25?'verde': imc<30?'amarela':'vermelha');
-    document.getElementById('mini-peso').style.color=cls.cor;
+  // Calorias
+  document.getElementById('cal-meta-display').textContent=meta||'—';
+  const diarioHoje=dados.diarioAlimentar[hoje()]||{refeicoes:{}};
+  let totalKcal=0;
+  const ordemRef=['manhã','almoço','jantar','extra'];
+  const nomeRef={'manhã':'☀️','almoço':'🌤','jantar':'🌙','extra':'🍎'};
+  let refsHTML='';
+  ordemRef.forEach(r=>{
+    const itens=diarioHoje.refeicoes[r]||[];
+    if(itens.length){
+      const k=itens.reduce((s,x)=>s+(x.kcal||0),0);
+      totalKcal+=k;
+      refsHTML+=`<div class="cal-compact-ref">${nomeRef[r]} <span>${k}</span></div>`;
+    }
+  });
+  document.getElementById('cal-refs-row').innerHTML=refsHTML;
+  document.getElementById('cal-ingeridas-hoje').textContent=totalKcal;
+
+  const compactCard=document.getElementById('cal-compact');
+  if(meta){
+    const pctCal=Math.min((totalKcal/meta*100),115);
+    const fill=document.getElementById('barra-cal-hoje');
+    fill.style.width=pctCal+'%';
+    fill.style.background=pctCal>100?'var(--vermelho)':pctCal>85?'var(--amarelo)':'var(--verde)';
+    const def=meta-totalKcal;
+    const badge=document.getElementById('deficit-badge-hoje');
+    if(def>=0){
+      badge.style.background='rgba(52,211,153,0.15)';badge.style.color='var(--verde)';
+      badge.textContent='↓ '+def+' kcal';
+      compactCard.style.borderLeftColor='var(--verde)';
+    }else{
+      badge.style.background='rgba(248,113,113,0.12)';badge.style.color='var(--vermelho)';
+      badge.textContent='↑ '+Math.abs(def)+' kcal';
+      compactCard.style.borderLeftColor=pctCal>100?'var(--vermelho)':'var(--amarelo)';
+    }
+    document.getElementById('hero-meta-cal-mini').textContent=`Meta: ${meta} kcal/dia`;
   }
+
+  // Treino
+  renderCardTreinoHoje();
+  renderSemana();
 
   // Sono
   const sonoHoje=dados.registrosSono[hoje()];
   const miniSono=document.getElementById('mini-sono');
   const miniSonoSub=document.getElementById('mini-sono-sub');
   if(sonoHoje&&sonoHoje.horas!==undefined){
-    const h=Math.floor(sonoHoje.horas);
-    const m=Math.round((sonoHoje.horas-h)*60);
+    const h=Math.floor(sonoHoje.horas);const m=Math.round((sonoHoje.horas-h)*60);
     miniSono.textContent=`${h}h${m>0?m+'m':''}`;
     const cor=corSono(sonoHoje.horas);
     miniSono.style.color=cor==='verde'?'var(--verde)':cor==='amarela'?'var(--amarelo)':'var(--vermelho)';
-    miniSonoSub.textContent=sonoHoje.horas>=7?'Boa noite ✓':'Abaixo da meta';
+    miniSonoSub.textContent=sonoHoje.horas>=7?'Boa noite ✓':'Abaixo meta';
     document.getElementById('mc-sono').className='mini-card borda-'+cor;
   }else{
     miniSono.textContent='—';miniSono.style.color='var(--azul)';
-    miniSonoSub.textContent='toque p/ registrar';
+    miniSonoSub.textContent='registrar';
     document.getElementById('mc-sono').className='mini-card borda-cinza';
   }
 
@@ -1427,88 +1435,47 @@ function renderHoje(){
   const miniAguaSub=document.getElementById('mini-agua-sub');
   if(aguaHoje>0){
     miniAgua.textContent=aguaHoje>=1000?(aguaHoje/1000).toFixed(1)+'L':aguaHoje+'ml';
-    const pct=Math.min(100,Math.round(aguaHoje/2500*100));
-    miniAguaSub.textContent=`${pct}% da meta (2,5L)`;
+    const pctA=Math.min(100,Math.round(aguaHoje/2500*100));
+    miniAguaSub.textContent=pctA+'% meta';
     const corA=aguaHoje>=2500?'verde':aguaHoje>=1500?'amarela':'vermelha';
     miniAgua.style.color=corA==='verde'?'var(--verde)':corA==='amarela'?'var(--amarelo)':'var(--vermelho)';
     document.getElementById('mc-agua').className='mini-card borda-'+corA;
   }else{
     miniAgua.textContent='—';miniAgua.style.color='#38bdf8';
-    miniAguaSub.textContent='toque p/ registrar';
+    miniAguaSub.textContent='registrar';
     document.getElementById('mc-agua').className='mini-card';
   }
 
-  // Calorias
-  const meta=peso?calcMeta(peso):0;
-  document.getElementById('cal-meta-display').textContent=meta?meta+' kcal':'—';
-  document.getElementById('cal-meta-barra-label').textContent=meta?meta+' kcal':'meta';
-  const diarioHoje=dados.diarioAlimentar[hoje()]||{refeicoes:{}};
-  let totalKcal=0;
-  const ordemRef=['manhã','almoço','jantar','extra'];
-  const nomeRef={'manhã':'☀️ Manhã','almoço':'🌤 Almoço','jantar':'🌙 Jantar','extra':'🍎 Extra'};
-  let listaHTML='';
-  ordemRef.forEach(r=>{
-    const itens=diarioHoje.refeicoes[r]||[];
-    if(itens.length){
-      const k=itens.reduce((s,x)=>s+(x.kcal||0),0);
-      totalKcal+=k;
-      listaHTML+=`<div class="refeicao-linha">
-        <span class="refeicao-nome">${nomeRef[r]}</span>
-        <span class="refeicao-kcal">${k} kcal</span>
-        <span class="refeicao-add" onclick="abrirModalRefeicao('${r}')">✏</span>
-      </div>`;
-    }
-  });
-  if(!listaHTML)listaHTML='<div style="font-size:0.78em;color:var(--cinza);padding:10px 0">Nenhuma refeição registrada.</div>';
-  document.getElementById('refeicoes-hoje-lista').innerHTML=listaHTML;
-  document.getElementById('cal-ingeridas-hoje').textContent=totalKcal;
-  if(meta){
-    const pct=Math.min((totalKcal/meta*100),115);
-    const fill=document.getElementById('barra-cal-hoje');
-    fill.style.width=pct+'%';
-    fill.style.background=pct>100?'var(--vermelho)':pct>85?'var(--amarelo)':'var(--verde)';
-    const def=meta-totalKcal;
-    const badge=document.getElementById('deficit-badge-hoje');
-    if(def>=0){badge.className='deficit-badge deficit-pos';badge.textContent=`↓ ${def} kcal déficit`;}
-    else{badge.className='deficit-badge deficit-neg';badge.textContent=`↑ ${Math.abs(def)} kcal a mais`;}
-    // Cor borda bloco cal
-    const bloco=document.getElementById('cal-bloco');
-    bloco.style.borderLeftColor=pct>100?'var(--vermelho)':pct>85?'var(--amarelo)':'var(--verde)';
+  // Peso
+  document.getElementById('mini-peso').textContent=peso?peso.toFixed(1):'—';
+  if(peso&&dados.perfil.alturaCm){
+    const imc=calcIMC(peso);const cls=classIMC(imc);
+    document.getElementById('mini-imc-sub').textContent=`IMC ${imc}`;
+    document.getElementById('mc-peso').className='mini-card borda-'+(imc<18.5?'azul':imc<25?'verde':imc<30?'amarela':'vermelha');
+    document.getElementById('mini-peso').style.color=cls.cor;
   }
-
-  // Treino hoje - status por modalidade
-  renderCardTreinoHoje();
-  // Semana
-  renderSemana();
 }
 
 function renderCardTreinoHoje(){
   const hoje_=hoje();
-  const mods=['Musculação','Natação','Cardio'];
-  const ids=['mod-musc','mod-nat','mod-card'];
-  // Verificar treinos do dia
   const treinosDia=dados.desafioDias[hoje_];
   let concluidosHoje=[];
-  if(treinosDia&&Array.isArray(treinosDia.tipos)){
-    concluidosHoje=treinosDia.tipos;
-  }else if(treinosDia&&treinosDia.tipo){
-    concluidosHoje=[treinosDia.tipo];
-  }
+  if(treinosDia&&Array.isArray(treinosDia.tipos))concluidosHoje=treinosDia.tipos;
+  else if(treinosDia&&treinosDia.tipo)concluidosHoje=[treinosDia.tipo];
+  const mods=['Musculação','Natação','Cardio'];
+  const ids=['mod-musc','mod-nat','mod-card'];
   mods.forEach((m,i)=>{
     const el=document.getElementById(ids[i]);
-    if(concluidosHoje.includes(m)){el.classList.add('concluido');}
-    else{el.classList.remove('concluido');}
+    el.classList.toggle('concluido',concluidosHoje.includes(m));
   });
   const resumoEl=document.getElementById('treino-hoje-resumo');
-  if(concluidosHoje.length){
-    resumoEl.innerHTML=`<span style="color:var(--verde)">✅ Hoje: ${concluidosHoje.join(', ')}</span>`;
-  }else{
-    resumoEl.innerHTML='<span style="color:var(--cinza)">Nenhum treino registrado hoje.</span>';
-  }
+  resumoEl.innerHTML=concluidosHoje.length
+    ?`<span style="color:var(--verde);font-size:0.85em">✅ ${concluidosHoje.join(', ')}</span>`
+    :`<span style="font-size:0.78em">Próx: Treino ${dados.proximoTreino||'A'}</span>`;
 }
 
 function renderSemana(){
-  const {musc,nat,cardio,dias}=getMetaSemanal();
+  const{musc,nat,cardio,dias}=getMetaSemanal();
   const nomes=['Seg','Ter','Qua','Qui','Sex','Sáb','Dom'];
   let html='';
   dias.forEach((iso,i)=>{
@@ -1516,27 +1483,15 @@ function renderSemana(){
     let tipos=[];
     if(d&&Array.isArray(d.tipos))tipos=d.tipos;
     else if(d&&d.tipo)tipos=[d.tipo];
-    const isHoje=iso===hoje();
     const isFut=iso>hoje();
     let cls='';let emoji='';
-    if(tipos.length){
-      cls='ok';
-      if(tipos.includes('Musculação'))emoji='🏋️';
-      else if(tipos.includes('Natação'))emoji='🏊';
-      else if(tipos.includes('Cardio'))emoji='🏃';
-    }else if(!isFut&&!isHoje){
-      cls='';emoji='';
-    }
-    html+=`<div class="treino-dia-chip ${cls}"><span>${emoji||nomes[i]}</span>${nomes[i]}</div>`;
+    if(tipos.length){cls='ok';emoji=tipos.includes('Musculação')?'🏋️':tipos.includes('Natação')?'🏊':'🏃';}
+    html+=`<div class="treino-dia-chip ${cls}">${emoji||nomes[i]}</div>`;
   });
   document.getElementById('semana-treinos-grid').innerHTML=html;
-
-  // Status meta
-  const muscOk=musc>=2;
-  const natCardOk=(nat+cardio)>=1;
-  const cor=muscOk&&natCardOk?'var(--verde)':muscOk||natCardOk?'var(--amarelo)':'var(--vermelho)';
-  const txt=muscOk&&natCardOk?'✅ Meta semanal atingida!':
-    `💪 Musc: ${musc}/2  🏊+🏃: ${nat+cardio}/1`;
+  const muscOk=musc>=2,natCardOk=(nat+cardio)>=1;
+  const txt=muscOk&&natCardOk?'✅ Meta!':`M:${musc}/2 A:${nat+cardio}/1`;
+  const cor=muscOk&&natCardOk?'var(--verde)':muscOk||natCardOk?'var(--amarelo)':'var(--cinza)';
   document.getElementById('meta-semanal-status').innerHTML=`<span style="color:${cor};font-weight:700">${txt}</span>`;
 }
 
@@ -1544,12 +1499,10 @@ function renderSemana(){
 // RENDER: CALENDÁRIO
 // ═══════════════════════════════
 function renderCalendario(){
-  const ano=mesAtual.getFullYear();
-  const mes=mesAtual.getMonth();
+  const ano=mesAtual.getFullYear(),mes=mesAtual.getMonth();
   const meses=['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'];
   document.getElementById('cal-mes-titulo').textContent=`${meses[mes]} ${ano}`;
-  const primeiroDia=new Date(ano,mes,1);
-  const ultimoDia=new Date(ano,mes+1,0);
+  const primeiroDia=new Date(ano,mes,1),ultimoDia=new Date(ano,mes+1,0);
   const diaSemanaInicio=(primeiroDia.getDay()+6)%7;
   const hojeStr=hoje();
   let html='';
@@ -1559,15 +1512,12 @@ function renderCalendario(){
   for(let d=1;d<=ultimoDia.getDate();d++){
     const iso=`${ano}-${String(mes+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
     const diaData=dados.desafioDias[iso];
-    const isHoje=iso===hojeStr;
-    const isFuturo=iso>hojeStr;
+    const isHoje=iso===hojeStr,isFuturo=iso>hojeStr;
     let cls=isFuturo?'futuro':'passado';
     if(diaData){
       if(diaData.status==='concluido'){cls='concluido';treinos++;}
       if(diaData.status==='descanso'){cls='descanso';descansos++;}
-    }else if(!isFuturo&&iso<hojeStr){
-      cls='sem-registro';
-    }
+    }else if(!isFuturo&&iso<hojeStr)cls='sem-registro';
     if(isHoje)cls+=' hoje';
     html+=`<div class="cal-dia ${cls}" onclick="verDiaCal('${iso}')">${d}</div>`;
   }
@@ -1577,11 +1527,9 @@ function renderCalendario(){
 }
 function mudarMes(delta){mesAtual.setMonth(mesAtual.getMonth()+delta);renderCalendario();}
 function verDiaCal(iso){
-  const d=dados.desafioDias[iso];
-  if(!d)return;
+  const d=dados.desafioDias[iso];if(!d)return;
   let tipos=[];
-  if(Array.isArray(d.tipos))tipos=d.tipos;
-  else if(d.tipo)tipos=[d.tipo];
+  if(Array.isArray(d.tipos))tipos=d.tipos;else if(d.tipo)tipos=[d.tipo];
   showToast(`${formatarData(iso)}: ${tipos.join(', ')||d.status}`);
 }
 
@@ -1590,7 +1538,7 @@ function verDiaCal(iso){
 // ═══════════════════════════════
 function mudarSubAba(sub,el){
   subAbaAtiva=sub;
-  document.querySelectorAll('.toggle-aba').forEach(a=>a.classList.remove('ativa'));
+  document.querySelectorAll('#tela-progresso .toggle-aba').forEach(a=>a.classList.remove('ativa'));
   el.classList.add('ativa');
   ['peso','calorias','sono','agua','treinos'].forEach(s=>{
     const el2=document.getElementById('sub-'+s);
@@ -1598,18 +1546,15 @@ function mudarSubAba(sub,el){
   });
   renderProgresso();
 }
-
 function renderProgresso(){
   const med=dados.medicoesPeso;
   if(subAbaAtiva==='peso'){
     const labels=med.map(m=>formatarData(m.data));
     const vals=med.map(m=>m.pesoKg);
-    renderLineChart('chart-peso','chartPeso',labels,vals,'Peso (kg)','rgba(59,130,246,0.25)','#3b82f6');
-    // IMC
+    renderLineChart('chart-peso',labels,vals);
     const peso=pesoMaisRecente();
     if(peso&&dados.perfil.alturaCm){
-      const imc=calcIMC(peso);
-      const cls=classIMC(imc);
+      const imc=calcIMC(peso);const cls=classIMC(imc);
       document.getElementById('imc-prog-val').textContent=imc;
       document.getElementById('imc-prog-val').style.color=cls.cor;
       document.getElementById('imc-prog-class').textContent=cls.txt;
@@ -1618,12 +1563,11 @@ function renderProgresso(){
     const rev=[...med].reverse();
     rev.forEach((m,i)=>{
       const prev=rev[i+1];let delta='';
-      if(prev){const d=m.pesoKg-prev.pesoKg;delta=`<span class="hist-delta ${d>0?'delta-pos':'delta-neg'}">${d>0?'+':''}${d.toFixed(1)} kg</span>`;}
-      hist+=`<div class="hist-item"><span class="hist-data">${formatarData(m.data)}</span><span class="hist-val">${m.pesoKg} kg ${delta}</span></div>`;
+      if(prev){const d=m.pesoKg-prev.pesoKg;delta=`<span class="hist-delta ${d>0?'delta-pos':'delta-neg'}">${d>0?'+':''}${d.toFixed(1)}kg</span>`;}
+      hist+=`<div class="hist-item"><span class="hist-data">${formatarData(m.data)}</span><span class="hist-val">${m.pesoKg}kg ${delta}</span></div>`;
     });
     document.getElementById('hist-peso-lista').innerHTML=hist||'<div class="empty"><div class="empty-icon">⚖️</div>Nenhum registro.</div>';
   }
-
   if(subAbaAtiva==='calorias'){
     const dias14=[];for(let i=13;i>=0;i--){const d=new Date();d.setDate(d.getDate()-i);dias14.push(d.toISOString().slice(0,10));}
     const pesoCal=pesoMaisRecente();const metaCal=pesoCal?calcMeta(pesoCal):0;
@@ -1634,12 +1578,10 @@ function renderProgresso(){
     chartCal=new Chart(ctx,{type:'bar',data:{labels,datasets:[{data:calPorDia,backgroundColor:calPorDia.map(v=>v>metaCal?'rgba(248,113,113,0.5)':'rgba(59,130,246,0.45)'),borderColor:calPorDia.map(v=>v>metaCal?'#f87171':'#3b82f6'),borderWidth:1.5,borderRadius:5}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{ticks:{color:'#5a6478',font:{size:9}},grid:{display:false}},y:{ticks:{color:'#5a6478',font:{size:10}},grid:{color:'rgba(255,255,255,0.05)'}}}}});
     const diasComDados=calPorDia.filter(v=>v>0);
     const mediaCal=diasComDados.length?Math.round(diasComDados.reduce((a,b)=>a+b,0)/diasComDados.length):0;
-    const diasOk=calPorDia.filter(v=>v>0&&v<=metaCal).length;
     document.getElementById('stat-media-cal').textContent=mediaCal||'—';
     document.getElementById('stat-media-def').textContent=mediaCal&&metaCal?'+'+(metaCal-mediaCal):'—';
-    document.getElementById('stat-dias-ok').textContent=diasOk;
+    document.getElementById('stat-dias-ok').textContent=calPorDia.filter(v=>v>0&&v<=metaCal).length;
   }
-
   if(subAbaAtiva==='sono'){
     const dias14=[];for(let i=13;i>=0;i--){const d=new Date();d.setDate(d.getDate()-i);dias14.push(d.toISOString().slice(0,10));}
     const sonoPorDia=dias14.map(iso=>{const r=dados.registrosSono[iso];return r?r.horas:null;});
@@ -1653,7 +1595,6 @@ function renderProgresso(){
     document.getElementById('stat-noites-7h').textContent=reg.filter(v=>v>=7).length;
     document.getElementById('stat-noites-reg').textContent=reg.length;
   }
-
   if(subAbaAtiva==='agua'){
     const dias14=[];for(let i=13;i>=0;i--){const d=new Date();d.setDate(d.getDate()-i);dias14.push(d.toISOString().slice(0,10));}
     const aguaPorDia=dias14.map(iso=>dados.registrosAgua[iso]||0);
@@ -1667,35 +1608,24 @@ function renderProgresso(){
     document.getElementById('stat-dias-25l').textContent=comDados.filter(v=>v>=2500).length;
     document.getElementById('stat-dias-agua-reg').textContent=comDados.length;
   }
-
   if(subAbaAtiva==='treinos'){
     const todos=Object.values(dados.desafioDias).filter(d=>d.status==='concluido');
     let tipos={};
-    todos.forEach(d=>{
-      const t=Array.isArray(d.tipos)?d.tipos:[d.tipo].filter(Boolean);
-      t.forEach(x=>{tipos[x]=(tipos[x]||0)+1;});
-    });
+    todos.forEach(d=>{const t=Array.isArray(d.tipos)?d.tipos:[d.tipo].filter(Boolean);t.forEach(x=>{tipos[x]=(tipos[x]||0)+1;});});
     const icones={Musculação:'💪',Natação:'🏊',Cardio:'🏃'};
     let html='';
     if(Object.keys(tipos).length){
       Object.entries(tipos).forEach(([k,v])=>{
-        html+=`<div style="display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--card2);font-size:0.87em">
-          <span>${icones[k]||'🏋'} ${k}</span>
-          <span style="font-family:var(--fonte-display);font-size:1.3em;color:var(--azul)">${v}x</span>
-        </div>`;
+        html+=`<div style="display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--card2);font-size:0.87em"><span>${icones[k]||'🏋'} ${k}</span><span style="font-family:var(--fonte-display);font-size:1.3em;color:var(--azul)">${v}x</span></div>`;
       });
-    }else{
-      html='<div class="empty"><div class="empty-icon">🏋️</div>Nenhum treino registrado ainda.</div>';
-    }
+    }else{html='<div class="empty"><div class="empty-icon">🏋️</div>Nenhum treino registrado ainda.</div>';}
     document.getElementById('treinos-resumo-stats').innerHTML=html;
   }
 }
-
-function renderLineChart(canvasId,ref,labels,data,label,bg,border){
+function renderLineChart(canvasId,labels,data){
   const ctx=document.getElementById(canvasId).getContext('2d');
-  if(ref==='chartPeso'&&chartPeso)chartPeso.destroy();
-  const c=new Chart(ctx,{type:'line',data:{labels:labels.length?labels:['—'],datasets:[{label,data:data.length?data:[0],backgroundColor:bg,borderColor:border,borderWidth:2.5,pointRadius:4,pointBackgroundColor:border,tension:0.4,fill:true}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{ticks:{color:'#5a6478',font:{size:10}},grid:{color:'rgba(255,255,255,0.04)'}},y:{ticks:{color:'#5a6478',font:{size:10}},grid:{color:'rgba(255,255,255,0.06)'}}}}});
-  if(ref==='chartPeso')chartPeso=c;
+  if(chartPeso)chartPeso.destroy();
+  chartPeso=new Chart(ctx,{type:'line',data:{labels:labels.length?labels:['—'],datasets:[{label:'Peso (kg)',data:data.length?data:[0],backgroundColor:'rgba(59,130,246,0.25)',borderColor:'#3b82f6',borderWidth:2.5,pointRadius:4,pointBackgroundColor:'#3b82f6',tension:0.4,fill:true}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{ticks:{color:'#5a6478',font:{size:10}},grid:{color:'rgba(255,255,255,0.04)'}},y:{ticks:{color:'#5a6478',font:{size:10}},grid:{color:'rgba(255,255,255,0.06)'}}}}}); 
 }
 
 // ═══════════════════════════════
@@ -1703,13 +1633,13 @@ function renderLineChart(canvasId,ref,labels,data,label,bg,border){
 // ═══════════════════════════════
 function mudarSubAlimento(sub,el){
   subAlimentoAtiva=sub;
-  document.querySelectorAll('.toggle-aba').forEach(a=>a.classList.remove('ativa'));
+  document.querySelectorAll('#tela-alimentos .toggle-aba').forEach(a=>a.classList.remove('ativa'));
   el.classList.add('ativa');
   document.getElementById('sub-alimentos').style.display=sub==='alimentos'?'block':'none';
-  document.getElementById('sub-treinos-bibl').style.display=sub==='treinos-bibl'?'block':'none';
+  document.getElementById('sub-treino-a').style.display=sub==='treino-a'?'block':'none';
+  document.getElementById('sub-treino-b').style.display=sub==='treino-b'?'block':'none';
   renderBiblioteca();
 }
-
 function renderBiblioteca(){
   if(subAlimentoAtiva==='alimentos'){
     const lista=dados.biblioteca;
@@ -1720,24 +1650,22 @@ function renderBiblioteca(){
         <div class="biblioteca-kcal">${Math.round(a.kcal100*a.porcao/100)}<span style="font-size:0.5em;color:var(--cinza)"> kcal</span></div>
         <button class="btn-del" onclick="deletarAlimento(${i})">✕</button>
       </div>`).join('');
-  }else{
-    const lista=dados.bibliotecaTreinos||[];
-    const icones={musculacao:'💪',natacao:'🏊',cardio:'🏃'};
-    if(!lista.length){document.getElementById('treinos-bibl-lista').innerHTML=`<div class="empty"><div class="empty-icon">🏋️</div>Nenhum treino cadastrado.</div>`;return;}
-    document.getElementById('treinos-bibl-lista').innerHTML=lista.map((t,i)=>`
+  } else {
+    const letra=subAlimentoAtiva==='treino-a'?'A':'B';
+    const lista=TREINOS[letra];
+    const containerId=`treino-${letra.toLowerCase()}-lista`;
+    document.getElementById(containerId).innerHTML=lista.map(ex=>`
       <div class="treino-bibl-item">
-        <div class="treino-bibl-icon">${icones[t.tipo]||'🏋️'}</div>
+        <div class="treino-bibl-icon">💪</div>
         <div class="treino-bibl-info">
-          <div class="treino-bibl-nome">${t.nome}</div>
-          <div class="treino-bibl-desc">${t.series?t.series+' · ':''} ${t.obs||''}</div>
+          <div class="treino-bibl-nome">${ex.n}</div>
+          <div class="treino-bibl-desc">${ex.g} · ${ex.s} séries × ${ex.r} reps</div>
         </div>
-        ${t.link?`<a class="treino-bibl-link" href="${t.link}" target="_blank">Ver</a>`:''}
-        <button class="btn-del" onclick="deletarTreinoBibl(${i})">✕</button>
+        ${ex.gif?`<a class="treino-bibl-link" href="${ex.gif}" target="_blank">Ver GIF</a>`:''}
       </div>`).join('');
   }
 }
 function deletarAlimento(i){dados.biblioteca.splice(i,1);salvarDados();renderBiblioteca();}
-function deletarTreinoBibl(i){dados.bibliotecaTreinos.splice(i,1);salvarDados();renderBiblioteca();}
 
 // ═══════════════════════════════
 // RENDER: CONQUISTAS
@@ -1755,36 +1683,30 @@ const CONQUISTAS_DEF=[
   {id:'peso5',icon:'🏋️',nome:'Menos 5 kg',desc:'Perdeu 5 kg desde o início'},
   {id:'imc_normal',icon:'✅',nome:'IMC Saudável',desc:'Atingiu a faixa de IMC normal'},
   {id:'natacao5',icon:'🏊',nome:'Mergulhador',desc:'5 treinos de natação registrados'},
-  {id:'meta_semanal5',icon:'📅',nome:'5 semanas completas',desc:'Meta semanal de treinos atingida 5x'},
-  {id:'sono7h',icon:'🌙',nome:'Noites reparadoras',desc:'Média de 7h de sono (mín. 7 registros)'},
-  {id:'agua25l',icon:'💧',nome:'Bem hidratado',desc:'Média de 2,5L de água/dia (mín. 7 registros)'},
+  {id:'meta_semanal5',icon:'📅',nome:'5 semanas completas',desc:'Meta semanal atingida 5x'},
+  {id:'sono7h',icon:'🌙',nome:'Noites reparadoras',desc:'Média de 7h de sono'},
+  {id:'agua25l',icon:'💧',nome:'Bem hidratado',desc:'Média de 2,5L de água/dia'},
 ];
-
 function verificarConquistas(){
   const streak=calcStreak();
   const todos=Object.values(dados.desafioDias);
   const diasConcluidos=todos.filter(d=>d.status==='concluido').length;
   let natacoes=0;
-  todos.forEach(d=>{
-    const t=Array.isArray(d.tipos)?d.tipos:[d.tipo].filter(Boolean);
-    if(t.includes('Natação'))natacoes++;
-  });
+  todos.forEach(d=>{const t=Array.isArray(d.tipos)?d.tipos:[d.tipo].filter(Boolean);if(t.includes('Natação'))natacoes++;});
   [3,7,14,21].forEach(n=>{if(streak>=n)dados.conquistas['streak'+n]=true;});
   if(diasConcluidos>=50)dados.conquistas['streak50']=true;
   if(diasConcluidos>=100)dados.conquistas['streak100']=true;
   if(natacoes>=5)dados.conquistas['natacao5']=true;
-  const peso=pesoMaisRecente();
-  const meta=peso?calcMeta(peso):0;
+  const peso=pesoMaisRecente();const meta=peso?calcMeta(peso):0;
   if(meta){
     const diasDeficit=Object.entries(dados.diarioAlimentar).filter(([,d])=>{const t=Object.values(d.refeicoes||{}).flat().reduce((s,x)=>s+(x.kcal||0),0);return t>0&&t<=meta;}).length;
     if(diasDeficit>=7)dados.conquistas['deficit7']=true;
     if(diasDeficit>=21)dados.conquistas['deficit21']=true;
   }
   if(dados.medicoesPeso.length>=2){
-    const pesoInicio=dados.medicoesPeso[0].pesoKg;
-    const pesoAtual=pesoMaisRecente();
-    if(pesoInicio-pesoAtual>=1)dados.conquistas['peso1']=true;
-    if(pesoInicio-pesoAtual>=5)dados.conquistas['peso5']=true;
+    const pInicio=dados.medicoesPeso[0].pesoKg;const pAtual=pesoMaisRecente();
+    if(pInicio-pAtual>=1)dados.conquistas['peso1']=true;
+    if(pInicio-pAtual>=5)dados.conquistas['peso5']=true;
   }
   if(peso&&dados.perfil.alturaCm){const imc=calcIMC(peso);if(imc>=18.5&&imc<25)dados.conquistas['imc_normal']=true;}
   const regSono=Object.values(dados.registrosSono||{});
@@ -1793,7 +1715,6 @@ function verificarConquistas(){
   if(regAgua.length>=7){const m=regAgua.reduce((s,v)=>s+v,0)/regAgua.length;if(m>=2500)dados.conquistas['agua25l']=true;}
   salvarDados();
 }
-
 function renderConquistas(){
   verificarConquistas();
   const total=Object.values(dados.conquistas).filter(Boolean).length;
@@ -1801,10 +1722,7 @@ function renderConquistas(){
   document.getElementById('conquistas-lista').innerHTML=CONQUISTAS_DEF.map(c=>`
     <div class="conquista-item ${dados.conquistas[c.id]?'desbloqueada':''}">
       <div class="conquista-icon">${c.icon}</div>
-      <div class="conquista-info">
-        <div class="conquista-nome">${c.nome}</div>
-        <div class="conquista-desc">${c.desc}</div>
-      </div>
+      <div class="conquista-info"><div class="conquista-nome">${c.nome}</div><div class="conquista-desc">${c.desc}</div></div>
       ${dados.conquistas[c.id]?'<span style="font-size:0.7em;color:var(--azul);font-weight:700">✓</span>':'<span style="font-size:0.7em;color:var(--cinza)">🔒</span>'}
     </div>`).join('');
 }
@@ -1813,11 +1731,8 @@ function renderConquistas(){
 // RENDER: PERFIL
 // ═══════════════════════════════
 function renderPerfil(){
-  const p=dados.perfil;
-  const peso=pesoMaisRecente();
-  const tmb=Math.round(calcTMB(peso));
-  const get=calcGET(peso);
-  const meta=calcMeta(peso);
+  const p=dados.perfil;const peso=pesoMaisRecente();
+  const tmb=Math.round(calcTMB(peso));const get=calcGET(peso);const meta=calcMeta(peso);
   document.getElementById('perfil-resumo').innerHTML=`
     <div class="perfil-row"><span class="perfil-label">Idade</span><span class="perfil-val">${p.idade||'—'} anos</span></div>
     <div class="perfil-row"><span class="perfil-label">Altura</span><span class="perfil-val">${p.alturaCm||'—'} cm</span></div>
@@ -1861,15 +1776,13 @@ function salvarPerfil(){
   dados.perfil.fatorAtividade=document.getElementById('p-atividade').value;
   dados.perfil.deficit=parseInt(document.getElementById('p-deficit').value)||500;
   dados.perfil.inicio=document.getElementById('p-inicio').value||hoje();
-  if(!dados.medicoesPeso.length){dados.medicoesPeso.push({data:dados.perfil.inicio,pesoKg:peso,imc:calcIMC(peso)});}
+  if(!dados.medicoesPeso.length)dados.medicoesPeso.push({data:dados.perfil.inicio,pesoKg:peso,imc:calcIMC(peso)});
   salvarDados();fecharModal('modal-perfil');showToast('Perfil salvo! ✅');renderHoje();
 }
 
 function abrirModalPeso(){
-  document.getElementById('m-peso').value='';
-  document.getElementById('m-data').value=hoje();
-  document.getElementById('imc-modal-val').textContent='—';
-  document.getElementById('imc-modal-class').textContent='—';
+  document.getElementById('m-peso').value='';document.getElementById('m-data').value=hoje();
+  document.getElementById('imc-modal-val').textContent='—';document.getElementById('imc-modal-class').textContent='—';
   abrirModal('modal-peso');
 }
 function calcularImcModal(){
@@ -1913,19 +1826,12 @@ function atualizarPreviewSono(){
   const h=Math.floor(horas);const m=Math.round((horas-h)*60);
   document.getElementById('sono-duracao-preview').textContent=`${h}h ${m}min`;
   const cor=corSono(horas);
-  const stEl=document.getElementById('sono-duracao-preview');
-  stEl.style.color=cor==='verde'?'var(--verde)':cor==='amarela'?'var(--amarelo)':'var(--vermelho)';
-  let qual='';
-  if(horas<5)qual='😰 Muito pouco sono';
-  else if(horas<6)qual='😕 Insuficiente';
-  else if(horas<7)qual='😐 Razoável — tente chegar a 7h';
-  else if(horas<=9)qual='😊 Ótimo!';
-  else qual='😴 Dormiu bastante';
+  document.getElementById('sono-duracao-preview').style.color=cor==='verde'?'var(--verde)':cor==='amarela'?'var(--amarelo)':'var(--vermelho)';
+  const qual=horas<5?'😰 Muito pouco sono':horas<6?'😕 Insuficiente':horas<7?'😐 Tente chegar a 7h':horas<=9?'😊 Ótimo!':'😴 Dormiu bastante';
   document.getElementById('sono-qualidade-preview').textContent=qual;
 }
 function salvarSono(){
-  const ini=document.getElementById('sono-inicio').value;
-  const fim=document.getElementById('sono-fim').value;
+  const ini=document.getElementById('sono-inicio').value;const fim=document.getElementById('sono-fim').value;
   if(!ini||!fim){showToast('Informe os dois horários!');return;}
   const horas=calcHorasSono(ini,fim);
   if(horas<=0||horas>16){showToast('Horários inválidos!');return;}
@@ -1944,7 +1850,7 @@ function atualizarModalAgua(){
 function addAguaRapido(ml){
   if(!dados.registrosAgua[hoje()])dados.registrosAgua[hoje()]=0;
   dados.registrosAgua[hoje()]+=ml;
-  salvarDados();atualizarModalAgua();renderHoje();verificarConquistas();showToast(`💧 +${ml}ml!`);
+  salvarDados();atualizarModalAgua();renderHoje();verificarConquistas();showToast(`💧 +${ml>=1000?(ml/1000)+'L':ml+'ml'}!`);
 }
 function addAguaManual(){
   const val=parseInt(document.getElementById('agua-manual').value);
@@ -1955,11 +1861,10 @@ function zerarAgua(){if(confirm('Zerar água de hoje?')){dados.registrosAgua[hoj
 
 function abrirModalRefeicao(periodo){
   refPeriodo=periodo;refItensTemp=[];
-  document.getElementById('modal-ref-titulo').textContent={'manhã':'☀️ MANHÃ','almoço':'🌤 ALMOÇO','jantar':'🌙 JANTAR','extra':'🍎 EXTRA'}[periodo]||periodo.toUpperCase();
-  document.getElementById('ref-busca').value='';
-  document.getElementById('ref-nome').value='';
-  document.getElementById('ref-porcao').value='';
-  document.getElementById('ref-kcal').value='';
+  const nomes={'manhã':'☀️ MANHÃ','almoço':'🌤 ALMOÇO','jantar':'🌙 JANTAR','extra':'🍎 EXTRA'};
+  document.getElementById('modal-ref-titulo').textContent=nomes[periodo]||periodo.toUpperCase();
+  document.getElementById('ref-busca').value='';document.getElementById('ref-nome').value='';
+  document.getElementById('ref-porcao').value='';document.getElementById('ref-kcal').value='';
   const d=dados.diarioAlimentar[hoje()];
   if(d&&d.refeicoes&&d.refeicoes[periodo])refItensTemp=[...d.refeicoes[periodo]];
   filtrarBiblioteca();renderItensRef();abrirModal('modal-refeicao');
@@ -2004,7 +1909,6 @@ function salvarRefeicao(){
   salvarDados();fecharModal('modal-refeicao');
   showToast(`${refItensTemp.reduce((s,x)=>s+x.kcal,0)} kcal registradas! 🥗`);renderHoje();
 }
-
 function abrirModalNovoAlimento(){
   document.getElementById('al-nome').value='';document.getElementById('al-kcal100').value='';
   document.getElementById('al-porcao').value='';document.getElementById('al-prot').value='';
@@ -2020,27 +1924,8 @@ function salvarAlimento(){
   salvarDados();fecharModal('modal-alimento');showToast(`${nome} adicionado! ✅`);renderBiblioteca();
 }
 
-function abrirModalNovoTreinoBibl(){
-  document.getElementById('tb-nome').value='';document.getElementById('tb-series').value='';
-  document.getElementById('tb-link').value='';document.getElementById('tb-obs').value='';
-  abrirModal('modal-treino-bibl');
-}
-function salvarTreinoBibl(){
-  const nome=document.getElementById('tb-nome').value.trim();
-  if(!nome){showToast('Informe o nome do treino!');return;}
-  if(!dados.bibliotecaTreinos)dados.bibliotecaTreinos=[];
-  dados.bibliotecaTreinos.push({
-    nome,
-    tipo:document.getElementById('tb-tipo').value,
-    series:document.getElementById('tb-series').value.trim(),
-    link:document.getElementById('tb-link').value.trim(),
-    obs:document.getElementById('tb-obs').value.trim()
-  });
-  salvarDados();fecharModal('modal-treino-bibl');showToast(`${nome} adicionado! ✅`);renderBiblioteca();
-}
-
 // ═══════════════════════════════
-// MUSCULAÇÃO
+// MUSCULAÇÃO — Lógica A/B bloqueante
 // ═══════════════════════════════
 function abrirMusculacao(){
   atualizarABCards();
@@ -2055,30 +1940,14 @@ function mostrarMuscScreen(id){
 }
 
 function atualizarABCards(){
-  const h=hoje();
-  const diaH=dados.desafioDias[h];
-  let tiposHoje=[];
-  if(diaH&&Array.isArray(diaH.tipos))tiposHoje=diaH.tipos;
-  else if(diaH&&diaH.tipo)tiposHoje=[diaH.tipo];
-  // Determinar próximo treino
-  const feitos=Object.entries(dados.desafioDias)
-    .filter(([,d])=>{const t=Array.isArray(d.tipos)?d.tipos:[d.tipo].filter(Boolean);return t.includes('Musculação');})
-    .map(([k])=>k).sort();
-  // Qual foi o último (A ou B)
-  let ultimoTreino='B'; // se nenhum, o próximo é A
-  if(feitos.length){
-    const ult=dados.desafioDias[feitos[feitos.length-1]];
-    ultimoTreino=ult.treinoLetra||'A';
-  }
-  const proximo=ultimoTreino==='A'?'B':'A';
-  treinoADone=(ultimoTreino==='A');
-
+  const proximo=dados.proximoTreino||'A';
   document.getElementById('ab-grid').innerHTML=['A','B'].map(letra=>{
-    const eh_proximo=letra===proximo;
-    return`<div class="ab-card ${eh_proximo?'ativo-card':''}" onclick="startTreino('${letra}')">
+    const ehProximo=letra===proximo;
+    const ehBloqueado=!ehProximo;
+    return`<div class="ab-card ${ehProximo?'proximo':''} ${ehBloqueado?'bloqueado':''}" onclick="${ehBloqueado?'':'startTreino(\''+letra+'\')'}">
       <div class="ab-card-titulo">TREINO ${letra}</div>
       <div class="ab-card-sub">${TREINOS[letra].map(e=>e.g).filter((v,i,a)=>a.indexOf(v)===i).join(' · ')}</div>
-      <div class="ab-card-badge ${eh_proximo?'badge-proximo':'badge-feito'}">${eh_proximo?'▶ Próximo':'↩ Repetir'}</div>
+      <div class="ab-card-badge ${ehProximo?'badge-proximo':'badge-bloq'}">${ehProximo?'▶ Próximo':'🔒 Aguardando'}</div>
     </div>`;
   }).join('');
 }
@@ -2086,66 +1955,106 @@ function atualizarABCards(){
 function startTreino(letra){
   curTreino=letra;curExIdx=0;loadEx();mostrarMuscScreen('musc-ex');
 }
+
 function loadEx(){
   clearTimerMusc();
   const ex=TREINOS[curTreino][curExIdx];
   seriesDone=new Array(ex.s).fill(false);
   const img=document.getElementById('exercise-gif');
   const loading=document.getElementById('gif-loading');
-  img.style.display='none';loading.style.display='flex';img.src='';
+  img.style.display='none';loading.style.display='flex';loading.textContent='⏳ Carregando...';img.src='';
   setTimeout(()=>{img.src=ex.gif+'?t='+Date.now();},50);
   document.getElementById('ex-grp').textContent=ex.g;
   document.getElementById('ex-nm').textContent=ex.n;
   document.getElementById('ex-reps').textContent=ex.s+' séries · '+ex.r+' repetições';
+  // Peso salvo do exercício
+  const chave=curTreino+'_'+ex.n;
+  const pesoSalvo=dados.pesosExercicios[chave]||'';
+  document.getElementById('ex-peso-input').value=pesoSalvo;
   buildProgress();buildSeries(ex.s,ex.r);
   document.getElementById('btn-nxt').disabled=true;
 }
+
+function salvarPesoEx(){
+  const ex=TREINOS[curTreino][curExIdx];
+  const chave=curTreino+'_'+ex.n;
+  const val=parseFloat(document.getElementById('ex-peso-input').value)||0;
+  if(val>0)dados.pesosExercicios[chave]=val;
+  salvarDados();
+}
+
 function buildProgress(){
   const el=document.getElementById('ex-progress');
   const total=TREINOS[curTreino].length;el.innerHTML='';
   for(let i=0;i<total;i++){const d=document.createElement('div');d.className='pdot'+(i<curExIdx?' done':i===curExIdx?' cur':'');el.appendChild(d);}
 }
+
 function buildSeries(num,reps){
   const area=document.getElementById('series-row');area.innerHTML='';
   for(let i=0;i<num;i++){
+    const isLast=(i===num-1);
     const item=document.createElement('div');item.className='s-item';
     const anilha=document.createElement('div');
-    anilha.className='s-anilha'+(i===0?' clickable':'');anilha.id='sa-'+i;anilha.onclick=()=>clickSerie(i);
-    anilha.innerHTML=`<svg viewBox="0 0 68 46" xmlns="http://www.w3.org/2000/svg">
-      <rect x="3" y="18" width="62" height="10" rx="3" fill="#1a1d23" stroke="#252c36" stroke-width="1"/>
-      <rect x="3" y="10" width="7" height="26" rx="3" fill="#111" stroke="#2a2a3a" stroke-width="1"/>
-      <rect x="9" y="7" width="5" height="32" rx="2" fill="#181828" stroke="#252c36" stroke-width="1"/>
-      <rect x="57" y="10" width="7" height="26" rx="3" fill="#111" stroke="#2a2a3a" stroke-width="1"/>
-      <rect x="54" y="7" width="5" height="32" rx="2" fill="#181828" stroke="#252c36" stroke-width="1"/>
-      <rect x="14" y="17" width="40" height="12" rx="3" fill="#1e2229" stroke="#3b82f6" stroke-width="1"/>
-      <rect x="10" y="16" width="4" height="14" rx="2" fill="#1a2a4a" stroke="#3b82f6" stroke-width="1"/>
-      <rect x="54" y="16" width="4" height="14" rx="2" fill="#1a2a4a" stroke="#3b82f6" stroke-width="1"/>
-    </svg><div class="srep" style="font-size:0.8em;color:var(--cinza);margin-top:2px">${reps}</div>`;
+    anilha.className='s-anilha'+(i===0?' clickable':'');
+    anilha.id='sa-'+i;
+    anilha.onclick=()=>clickSerie(i,num);
+    // SVG anilha: lateral (pesos) em azul claro visível, barra central também
+    anilha.innerHTML=`<svg viewBox="0 0 68 46" xmlns="http://www.w3.org/2000/svg" width="68" height="46">
+      <!-- Barra central -->
+      <rect class="bar-centro" x="14" y="20" width="40" height="6" rx="2" fill="#1a2a4a" stroke="#3b82f6" stroke-width="1.2"/>
+      <!-- Peso esquerdo externo -->
+      <g class="lateral-pesos">
+        <rect x="2" y="11" width="7" height="24" rx="3" fill="#1e3050" stroke="#60a5fa" stroke-width="1.4"/>
+        <rect x="8" y="8" width="6" height="30" rx="2.5" fill="#1a2844" stroke="#60a5fa" stroke-width="1.3"/>
+        <!-- Peso direito externo -->
+        <rect x="59" y="11" width="7" height="24" rx="3" fill="#1e3050" stroke="#60a5fa" stroke-width="1.4"/>
+        <rect x="54" y="8" width="6" height="30" rx="2.5" fill="#1a2844" stroke="#60a5fa" stroke-width="1.3"/>
+        <!-- Pegada central -->
+        <rect x="10" y="18" width="4" height="10" rx="2" fill="#1a3060" stroke="#3b82f6" stroke-width="1.2"/>
+        <rect x="54" y="18" width="4" height="10" rx="2" fill="#1a3060" stroke="#3b82f6" stroke-width="1.2"/>
+      </g>
+    </svg>
+    <div class="srep" style="font-size:0.75em;color:var(--cinza);margin-top:1px">${reps}×</div>`;
     const timer=document.createElement('div');timer.className='s-timer';timer.id='st-'+i;
     const label=document.createElement('div');label.className='s-label';label.textContent='Série '+(i+1);
-    item.appendChild(anilha);item.appendChild(timer);item.appendChild(label);area.appendChild(item);
+    item.appendChild(anilha);item.appendChild(timer);item.appendChild(label);
+    area.appendChild(item);
   }
 }
-function clickSerie(idx){
+
+function clickSerie(idx,totalSeries){
   const anilha=document.getElementById('sa-'+idx);
   if(!anilha.classList.contains('clickable')||seriesDone[idx])return;
-  seriesDone[idx]=true;anilha.classList.remove('clickable');anilha.classList.add('done-s');
+  seriesDone[idx]=true;
+  anilha.classList.remove('clickable');anilha.classList.add('done-s');
   if(navigator.vibrate)navigator.vibrate(40);
-  const isLast=idx===seriesDone.length-1;
-  if(isLast){document.getElementById('btn-nxt').disabled=false;return;}
+  const isLast=(idx===seriesDone.length-1);
+  if(isLast){
+    // Última série: marca como concluída direto, sem timer
+    const timerEl=document.getElementById('st-'+idx);
+    timerEl.textContent='✓';timerEl.style.color='var(--verde)';
+    document.getElementById('btn-nxt').disabled=false;
+    return;
+  }
+  // Não é última: conta 60s de descanso
   let secs=60;
-  const timerEl=document.getElementById('st-'+idx);timerEl.textContent=secs+'s';timerEl.style.color='var(--verde)';
+  const timerEl=document.getElementById('st-'+idx);
+  timerEl.textContent=secs+'s';timerEl.style.color='var(--verde)';
+  clearTimerMusc();
   timerInterval=setInterval(()=>{
     secs--;timerEl.textContent=secs+'s';
     if(secs<=10)timerEl.style.color='var(--vermelho)';
     if(secs<=0){
-      clearInterval(timerInterval);timerInterval=null;timerEl.textContent='✓';timerEl.style.color='var(--azul)';
+      clearInterval(timerInterval);timerInterval=null;
+      timerEl.textContent='✓';timerEl.style.color='var(--azul)';
       if(navigator.vibrate)navigator.vibrate([30,50,30]);
       const next=document.getElementById('sa-'+(idx+1));if(next)next.classList.add('clickable');
     }
   },1000);
 }
+
 function clearTimerMusc(){if(timerInterval){clearInterval(timerInterval);timerInterval=null;}}
+
 function nextEx(){
   curExIdx++;
   if(curExIdx>=TREINOS[curTreino].length){
@@ -2158,46 +2067,30 @@ function nextEx(){
     mostrarMuscScreen('musc-done');
   }else{loadEx();}
 }
+
 function finalizarMusculacao(){
+  // Alterna para o próximo treino
+  const proximo=curTreino==='A'?'B':'A';
+  dados.proximoTreino=proximo;
   registrarTreino('Musculação',{treinoLetra:curTreino});
-  fecharMusculacao();showToast(`💪 Treino ${curTreino} registrado!`);
+  fecharMusculacao();showToast(`💪 Treino ${curTreino} registrado! Próximo: ${proximo}`);
 }
 
 // ═══════════════════════════════
-// NATAÇÃO
+// NATAÇÃO — Simplificada
 // ═══════════════════════════════
 function abrirNatacao(){
-  natTimerSec=0;natTimerRunning=false;clearInterval(natTimerRef);
-  document.getElementById('nat-timer-display').textContent='00:00:00';
-  document.getElementById('nat-btn-timer').textContent='▶ Iniciar';
-  document.getElementById('nat-estado-lbl').textContent='Pronto para começar';
-  document.getElementById('nat-distancia').value='';
-  document.getElementById('nat-voltas').value='';
+  document.getElementById('nat-minutos').value='45';
+  document.getElementById('nat-intensidade').value='moderada';
   document.getElementById('screen-natacao').classList.add('ativo');
 }
-function fecharNatacao(){
-  clearInterval(natTimerRef);natTimerRunning=false;
-  document.getElementById('screen-natacao').classList.remove('ativo');
-}
-function toggleNatTimer(){
-  if(natTimerRunning){
-    natTimerRunning=false;clearInterval(natTimerRef);
-    document.getElementById('nat-btn-timer').textContent='▶ Continuar';
-    document.getElementById('nat-estado-lbl').textContent='⏸ Pausado';
-  }else{
-    natTimerRunning=true;
-    const btn=document.getElementById('nat-btn-timer');btn.textContent='⏸ Pausar';
-    document.getElementById('nat-estado-lbl').textContent='🏊 Na água...';
-    natTimerRef=setInterval(()=>{natTimerSec++;document.getElementById('nat-timer-display').textContent=formatTimer(natTimerSec);},1000);
-  }
-}
+function fecharNatacao(){document.getElementById('screen-natacao').classList.remove('ativo');}
 function finalizarNatacao(){
-  const dist=parseInt(document.getElementById('nat-distancia').value)||0;
-  const voltas=parseInt(document.getElementById('nat-voltas').value)||0;
+  const min=parseInt(document.getElementById('nat-minutos').value)||45;
   const intens=document.getElementById('nat-intensidade').value;
-  registrarTreino('Natação',{duracao:Math.floor(natTimerSec/60),distanciaM:dist,voltas,intensidade:intens});
+  registrarTreino('Natação',{duracao:min,intensidade:intens});
   fecharNatacao();
-  showToast(`🏊 Natação registrada!${dist?` ${dist}m`:''}${natTimerSec>0?` · ${formatTimer(natTimerSec)}`:''}` );
+  showToast(`🏊 Natação registrada! ${min}min · ${intens}`);
 }
 
 // ═══════════════════════════════
@@ -2209,7 +2102,6 @@ function abrirCardio(){
   document.getElementById('cardio-btn-timer').textContent='▶ Iniciar';
   document.getElementById('cardio-estado-lbl').textContent='Pronto para começar';
   document.getElementById('cardio-km').value='';
-  document.getElementById('cardio-passos').value='';
   cardioTipoAtual='corrida';
   document.querySelectorAll('.cardio-tipo-btn').forEach(b=>b.classList.remove('ativo'));
   document.getElementById('ctb-corrida').classList.add('ativo');
@@ -2235,13 +2127,12 @@ function selecionarCardioTipo(tipo){
 }
 function finalizarCardio(){
   const km=parseFloat(document.getElementById('cardio-km').value)||0;
-  const passos=parseInt(document.getElementById('cardio-passos').value)||0;
-  registrarTreino('Cardio',{duracao:Math.floor(cardioTimerSec/60),tipoCardio:cardioTipoAtual,km,passos});
+  registrarTreino('Cardio',{duracao:Math.floor(cardioTimerSec/60),tipoCardio:cardioTipoAtual,km});
   fecharCardio();
-  showToast(`🏃 Cardio registrado!${km?` ${km}km`:''}${passos?` · ${passos} passos`:''}`);
+  showToast(`🏃 Cardio registrado!${km?' '+km+'km':''}${cardioTimerSec>0?' · '+formatTimer(cardioTimerSec):''}`);
 }
 
-// ── Helper: registrar treino no dia ──
+// ── Helper ──
 function registrarTreino(tipo,extras){
   const d=dados.desafioDias[hoje()]||{status:'concluido',tipos:[]};
   if(!Array.isArray(d.tipos))d.tipos=d.tipo?[d.tipo]:[];
@@ -2251,7 +2142,6 @@ function registrarTreino(tipo,extras){
   dados.desafioDias[hoje()]=d;
   salvarDados();renderHoje();verificarConquistas();
 }
-
 function formatTimer(secs){
   const h=Math.floor(secs/3600);const m=Math.floor((secs%3600)/60);const s=secs%60;
   return`${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
@@ -2289,6 +2179,7 @@ function showToast(msg,dur=2800){
 // INIT
 // ═══════════════════════════════
 (function init(){
+  if(!dados.proximoTreino)dados.proximoTreino='A';
   if(!dados.perfil.alturaCm||!dados.perfil.idade){
     setTimeout(()=>abrirModalConfigurar(),500);
   }
