@@ -8,7 +8,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <link rel="manifest" id="manifest-link">
-<title>100 DIAS v1.2</title>
+<title>100 DIAS v1.3</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600;700&display=swap');
 
@@ -135,6 +135,7 @@ body{
 .hero-dia-de100{font-size:0.72em;color:var(--cinza);margin-top:2px;}
 .hero-dia-de100 span{color:var(--branco);font-weight:600;}
 .hero-right{flex:1;}
+.hero-streak-lbl{font-size:0.58em;color:var(--cinza);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:3px;}
 .hero-streak-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;}
 .hero-streak-val{font-size:0.78em;font-weight:700;color:var(--branco);}
 .hero-pct{font-size:0.68em;color:var(--azul);font-weight:700;}
@@ -146,7 +147,7 @@ body{
 }
 
 /* ═══════════════════════════════
-   CARD CALORIAS v1.2
+   CARD CALORIAS v1.3
 ═══════════════════════════════ */
 .cal-compact{
   background:var(--card);border-radius:var(--radius);
@@ -161,14 +162,11 @@ body{
 .cal-compact-val{font-family:var(--fonte-display);font-size:2em;color:var(--azul);letter-spacing:1px;}
 .cal-compact-meta{font-size:0.7em;color:var(--cinza);}
 .cal-compact-badge{font-size:0.7em;font-weight:700;padding:3px 10px;border-radius:20px;}
-.barra-cal-compact{background:var(--bg);border-radius:6px;height:7px;overflow:hidden;margin-bottom:8px;}
+/* Barra de calorias mais grossa — v1.3 */
+.barra-cal-compact{background:var(--bg);border-radius:6px;height:10px;overflow:hidden;margin-bottom:10px;}
 .barra-cal-compact-fill{height:100%;border-radius:6px;transition:width 0.6s,background 0.4s;}
-/* Refs row compacta */
-.cal-compact-refs{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:10px;}
-.cal-compact-ref{font-size:0.68em;color:var(--cinza);}
-.cal-compact-ref span{color:var(--branco);font-weight:600;}
 
-/* Botões de refeição v1.2 — 4 em linha, ícone + label */
+/* Botões de refeição v1.3 — 4 em linha, ícone + label */
 .ref-btns-row{
   display:grid;grid-template-columns:repeat(4,1fr);gap:8px;
 }
@@ -186,7 +184,7 @@ body{
 .ref-btn-kcal{font-size:0.62em;color:var(--azul);font-weight:700;min-height:12px;}
 
 /* ═══════════════════════════════
-   CARD TREINO SEMANAL v1.2
+   CARD TREINO SEMANAL v1.3
 ═══════════════════════════════ */
 .treino-compact{
   background:var(--card);border-radius:var(--radius);
@@ -208,32 +206,33 @@ body{
 .treino-mod-btn:active{transform:scale(0.96);}
 .treino-mod-fill{
   position:absolute;bottom:0;left:0;right:0;
-  background:rgba(52,211,153,0.18);
   transition:height 0.4s cubic-bezier(0.4,0,0.2,1);
   height:0%;
 }
-.treino-mod-btn.prog-50 .treino-mod-fill{height:50%;}
+.treino-mod-btn.prog-50 .treino-mod-fill{height:50%;background:rgba(251,191,36,0.18);}
 .treino-mod-btn.prog-100 .treino-mod-fill{height:100%;background:rgba(52,211,153,0.22);}
+.treino-mod-btn.prog-acima .treino-mod-fill{height:100%;background:rgba(59,130,246,0.22);}
+/* Cores de borda por estado */
 .treino-mod-btn.prog-100{border-color:rgba(52,211,153,0.45);}
 .treino-mod-btn.prog-50{border-color:rgba(251,191,36,0.45);}
+.treino-mod-btn.prog-acima{border-color:rgba(59,130,246,0.55);}
+/* Ícone e nomes */
 .treino-mod-icon{font-size:1.4em;display:block;margin-bottom:4px;position:relative;z-index:1;}
 .treino-mod-nome{font-size:0.62em;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:var(--cinza);position:relative;z-index:1;}
 .treino-mod-btn.prog-100 .treino-mod-nome{color:var(--verde);}
 .treino-mod-btn.prog-50 .treino-mod-nome{color:var(--amarelo);}
+.treino-mod-btn.prog-acima .treino-mod-nome{color:var(--azul);}
 .treino-mod-contagem{
   font-size:0.58em;font-weight:800;margin-top:3px;
   color:var(--cinza);position:relative;z-index:1;
 }
 .treino-mod-btn.prog-100 .treino-mod-contagem{color:var(--verde);}
 .treino-mod-btn.prog-50 .treino-mod-contagem{color:var(--amarelo);}
+.treino-mod-btn.prog-acima .treino-mod-contagem{color:var(--azul);}
 
-/* Dias da semana maiores */
-.treino-semana-row{
-  border-top:1px solid var(--card2);padding-top:12px;
-}
-.semana-dias-grid{
-  display:grid;grid-template-columns:repeat(7,1fr);gap:5px;
-}
+/* Dias da semana */
+.treino-semana-row{border-top:1px solid var(--card2);padding-top:12px;}
+.semana-dias-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:5px;}
 .treino-dia-chip{
   text-align:center;padding:8px 2px;
   border-radius:10px;background:var(--card2);
@@ -247,7 +246,7 @@ body{
 .treino-dia-chip.hoje-chip{border-color:var(--azul);}
 .treino-dia-chip.hoje-chip .treino-dia-chip-nome{color:var(--azul);}
 
-/* ── LINHA SONO + ÁGUA (sem peso) ── */
+/* ── LINHA SONO + ÁGUA ── */
 .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px;}
 .mini-card{
   background:var(--card);border-radius:12px;padding:14px 16px;
@@ -260,16 +259,20 @@ body{
 .mini-card.borda-cinza{border-left-color:var(--cinza);}
 .mini-card-label{
   font-size:0.58em;text-transform:uppercase;letter-spacing:0.1em;
-  color:var(--cinza);margin-bottom:6px;font-weight:600;
+  color:var(--cinza);margin-bottom:8px;font-weight:600;
 }
+/* Layout interno com emoji à direita */
+.mini-card-body{display:flex;align-items:center;gap:6px;}
+.mini-card-left{flex:1;min-width:0;}
 .mini-card-val{
-  font-family:var(--fonte-display);font-size:1.8em;
+  font-family:var(--fonte-display);font-size:1.6em;
   color:var(--azul);line-height:1;letter-spacing:1px;margin-bottom:2px;
 }
-.mini-card-sub{font-size:0.6em;color:var(--cinza);margin-bottom:6px;}
+.mini-card-sub{font-size:0.6em;color:var(--cinza);}
+.mini-card-emoji{font-size:2.0em;line-height:1;flex-shrink:0;}
 .mini-card-media{
   font-size:0.62em;color:var(--cinza);
-  border-top:1px solid var(--card2);padding-top:5px;margin-top:4px;
+  border-top:1px solid var(--card2);padding-top:5px;margin-top:8px;
 }
 .mini-card-media span{color:var(--branco);font-weight:600;}
 
@@ -282,6 +285,7 @@ body{
   transition:all 0.15s;display:flex;align-items:center;justify-content:center;gap:8px;
 }
 .btn:active{transform:scale(0.97);}
+.btn:disabled{opacity:0.32;cursor:not-allowed;transform:none;}
 .btn-outline{background:transparent;border:1.5px solid var(--azul);color:var(--azul);}
 .btn-ghost{background:var(--card2);color:var(--branco);border:1px solid var(--card2);}
 .btn-danger{background:rgba(248,113,113,0.15);color:var(--vermelho);border:1px solid rgba(248,113,113,0.3);}
@@ -306,7 +310,6 @@ body{
 .cal-dia.futuro{background:var(--card2);color:var(--cinza2);cursor:default;}
 .cal-dia.hoje{border-color:var(--azul)!important;color:var(--azul)!important;}
 .cal-dia.concluido{background:rgba(52,211,153,0.15);color:var(--verde);border-color:rgba(52,211,153,0.3);}
-.cal-dia.descanso{background:rgba(59,130,246,0.12);color:var(--azul);border-color:rgba(59,130,246,0.25);}
 .cal-dia.sem-registro{background:rgba(251,191,36,0.08);color:var(--amarelo);border-color:rgba(251,191,36,0.2);}
 .cal-dia.passado{background:var(--card2);color:var(--cinza);}
 .cal-nav{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;}
@@ -319,6 +322,15 @@ body{
 
 /* ── GRÁFICOS ── */
 .chart-container{position:relative;height:200px;margin-top:10px;}
+
+/* ── DICA SAÚDE ── */
+.dica-saude{
+  background:linear-gradient(135deg,rgba(59,130,246,0.06),rgba(59,130,246,0.02));
+  border:1px solid rgba(59,130,246,0.15);border-radius:12px;
+  padding:12px 14px;margin-top:10px;
+  font-size:0.74em;color:var(--cinza);line-height:1.6;
+}
+.dica-saude strong{color:var(--azul);}
 
 /* ── MODAIS ── */
 .modal-overlay{
@@ -437,7 +449,11 @@ body{
 .delta-pos{color:var(--vermelho);}
 .delta-neg{color:var(--verde);}
 
-/* ── SCREEN MUSCULAÇÃO v1.2 ── */
+/* ── IMC ── */
+.imc-faixa{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px;}
+.imc-tag{font-size:0.62em;font-weight:700;text-transform:uppercase;padding:4px 8px;border-radius:6px;letter-spacing:0.05em;}
+
+/* ── SCREEN MUSCULAÇÃO v1.3 ── */
 .screen-musculacao{
   display:none;position:fixed;inset:0;background:var(--bg);
   z-index:300;overflow-y:auto;
@@ -463,7 +479,7 @@ body{
 .musc-screen{display:none;padding:20px;}
 .musc-screen.ativo{display:block;}
 
-/* Selector AB */
+/* AB Selector */
 .ab-grid{display:flex;flex-direction:column;gap:12px;margin-top:16px;}
 .ab-card{
   background:var(--card);border:1px solid var(--card2);
@@ -482,16 +498,16 @@ body{
 .badge-proximo{background:rgba(59,130,246,0.15);color:var(--azul);border:1px solid rgba(59,130,246,0.3);}
 .badge-bloq{background:rgba(90,100,120,0.2);color:var(--cinza);border:1px solid rgba(90,100,120,0.3);}
 
-/* Exercício v1.2 — GIF maior, fundo branco */
+/* Exercício v1.3 */
 .ex-header{margin-bottom:12px;}
 .ex-grupo{font-size:0.65em;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;color:var(--azul);}
 .ex-nome{font-family:var(--fonte-display);font-size:1.6em;color:var(--branco);letter-spacing:1px;margin-top:2px;}
 .ex-reps{font-size:0.75em;color:var(--cinza);margin-top:2px;}
 
-/* GIF maior com fundo branco */
+/* GIF com fundo branco */
 .gif-wrap{
   border-radius:14px;overflow:hidden;
-  background:#ffffff; /* fundo branco */
+  background:#ffffff;
   height:240px;display:flex;align-items:center;justify-content:center;
   margin-bottom:12px;
 }
@@ -507,28 +523,43 @@ body{
   width:8px;height:8px;border-radius:50%;
   background:var(--card2);border:1px solid var(--cinza2);
 }
-.pdot.done{background:var(--verde);border-color:var(--verde);}
+.pdot.done{background:var(--azul);border-color:var(--azul);}
 .pdot.cur{background:var(--azul);border-color:var(--azul);}
 
-/* Series + peso */
-.ex-peso-row{
-  display:flex;align-items:center;gap:10px;margin-bottom:12px;
-  background:var(--card2);border-radius:10px;padding:10px 14px;
+/* Carga v1.3 — dois painéis */
+.ex-carga-row{
+  display:flex;align-items:stretch;gap:0;
+  background:var(--card2);border-radius:12px;
+  overflow:hidden;margin-bottom:8px;
 }
-.ex-peso-label{font-size:0.65em;text-transform:uppercase;letter-spacing:0.1em;color:var(--cinza);font-weight:700;}
+.ex-carga-painel{
+  flex:1;padding:12px 14px;
+}
+.ex-carga-painel-dir{
+  border-left:1px solid var(--bg);
+}
+.ex-peso-label{font-size:0.62em;text-transform:uppercase;letter-spacing:0.1em;color:var(--cinza);font-weight:700;margin-bottom:4px;}
+.ex-carga-val{font-family:var(--fonte-display);font-size:1.6em;color:var(--branco);line-height:1;}
 .ex-peso-input{
   background:transparent;border:none;
   font-family:var(--fonte-display);font-size:1.5em;
-  color:var(--azul);width:80px;outline:none;text-align:right;
+  color:var(--azul);width:70px;outline:none;text-align:left;
 }
 .ex-peso-unit{font-size:0.75em;color:var(--cinza);margin-left:2px;}
+.ex-carga-nova-row{display:flex;align-items:center;}
+.ex-carga-evolucao{
+  text-align:center;font-size:0.72em;min-height:20px;
+  margin-bottom:10px;display:flex;align-items:center;justify-content:center;gap:6px;
+}
 
+/* Series */
 .series-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px;}
 .s-item{text-align:center;display:flex;flex-direction:column;align-items:center;gap:4px;}
 .s-anilha{width:68px;cursor:default;opacity:0.35;transition:all 0.2s;}
 .s-anilha.clickable{opacity:1;cursor:pointer;}
-.s-anilha.done-s .bar-centro rect{fill:#0d2a1e!important;stroke:#34d399!important;}
-.s-anilha.done-s .lateral-pesos rect{fill:#1a3a2a!important;stroke:#34d399!important;}
+/* v1.3: todas séries concluídas = azul */
+.s-anilha.done-s .bar-centro rect{fill:#0a1830!important;stroke:#3b82f6!important;}
+.s-anilha.done-s .lateral-pesos rect{fill:#0d1e38!important;stroke:#3b82f6!important;}
 .s-timer{font-size:0.7em;font-weight:700;color:var(--cinza);height:16px;}
 .s-label{font-size:0.6em;color:var(--cinza);text-transform:uppercase;}
 
@@ -539,7 +570,7 @@ body{
 .done-sub{font-size:0.88em;color:var(--cinza);margin-bottom:24px;}
 .done-stats{display:flex;gap:20px;justify-content:center;margin-bottom:28px;}
 
-/* ── NATAÇÃO / CARDIO SCREENS ── */
+/* ── NATAÇÃO / CARDIO (simplificado) ── */
 .nat-campos{display:flex;flex-direction:column;gap:12px;margin-top:20px;}
 .nat-campo-row{
   display:flex;align-items:center;gap:12px;
@@ -552,28 +583,9 @@ body{
 .nat-campo-input{
   background:transparent;border:none;
   font-family:var(--fonte-display);font-size:1.4em;
-  color:var(--azul);width:80px;outline:none;
+  color:var(--azul);width:90px;outline:none;
   text-align:right;
 }
-
-.cardio-tipo-grid{display:flex;gap:10px;margin-bottom:20px;}
-.cardio-tipo-btn{
-  flex:1;text-align:center;padding:16px 8px;
-  background:var(--card2);border:1.5px solid var(--cinza2);
-  border-radius:12px;cursor:pointer;transition:all 0.18s;
-}
-.cardio-tipo-btn.ativo{border-color:var(--azul);background:var(--azul-dim);}
-.cardio-tipo-btn span{display:block;font-size:1.8em;margin-bottom:4px;}
-.cardio-tipo-btn div{font-size:0.72em;font-weight:700;text-transform:uppercase;color:var(--cinza);letter-spacing:0.06em;}
-.cardio-tipo-btn.ativo div{color:var(--azul);}
-
-.nat-timer-display{text-align:center;padding:24px 20px;}
-.nat-timer-num{font-family:var(--fonte-display);font-size:5em;color:var(--azul);letter-spacing:4px;line-height:1;}
-.nat-timer-lbl{font-size:0.78em;color:var(--cinza);margin-top:8px;}
-
-/* ── IMC ── */
-.imc-faixa{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px;}
-.imc-tag{font-size:0.62em;font-weight:700;text-transform:uppercase;padding:4px 8px;border-radius:6px;letter-spacing:0.05em;}
 
 /* ── TREINO BIBLIOTECA ── */
 .treino-bibl-item{
@@ -590,23 +602,6 @@ body{
   padding:4px 10px;border-radius:6px;background:var(--azul-dim);
   font-weight:600;
 }
-
-/* ═══════════════════════════════
-   PROGRESSO TREINOS v1.2
-   Barras semanais com pontos
-═══════════════════════════════ */
-.semanas-treino-lista{}
-.semana-treino-item{
-  margin-bottom:14px;
-  padding-bottom:14px;
-  border-bottom:1px solid var(--card2);
-}
-.semana-treino-item:last-child{border-bottom:none;}
-.semana-treino-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;}
-.semana-treino-label{font-size:0.68em;color:var(--cinza);font-weight:600;}
-.semana-treino-pts{font-family:var(--fonte-display);font-size:1.1em;}
-.semana-treino-barra{background:var(--bg);border-radius:6px;height:10px;overflow:hidden;}
-.semana-treino-fill{height:100%;border-radius:6px;transition:width 0.6s;}
 
 /* ── TOAST ── */
 .toast{
@@ -652,7 +647,7 @@ body{
 <!-- ══ HEADER ══ -->
 <div class="header">
   <div class="header-top">
-    <div class="logo">100<span>DIAS</span><span class="logo-ver">v1.2</span></div>
+    <div class="logo">100<span>DIAS</span><span class="logo-ver">v1.3</span></div>
     <button class="btn-perfil" onclick="irPara('tela-perfil')">⚙</button>
   </div>
   <div class="nav-abas">
@@ -669,7 +664,7 @@ body{
 <!-- ══════════ TELA: HOJE ══════════ -->
 <div id="tela-hoje" class="tela ativa">
 
-  <!-- Hero -->
+  <!-- Hero v1.3: sem meta-cal-mini, streak semanal -->
   <div class="hero-100" id="hero-100">
     <div class="hero-inner">
       <div>
@@ -678,17 +673,17 @@ body{
         <div class="hero-dia-de100">de <span>100</span> dias</div>
       </div>
       <div class="hero-right">
+        <div class="hero-streak-lbl">Metas seguidas</div>
         <div class="hero-streak-row">
           <div class="hero-streak-val" id="hero-streak">0 🔥</div>
           <div class="hero-pct" id="hero-pct">0%</div>
         </div>
         <div class="barra-100"><div class="barra-100-fill" id="barra-progress" style="width:0%"></div></div>
-        <div style="font-size:0.62em;color:var(--cinza);margin-top:4px" id="hero-meta-cal-mini"></div>
       </div>
     </div>
   </div>
 
-  <!-- Card calorias v1.2 -->
+  <!-- Card calorias v1.3: sem refs row abaixo da barra -->
   <div class="cal-compact" id="cal-compact">
     <div class="cal-compact-top">
       <div>
@@ -703,8 +698,7 @@ body{
     <div class="barra-cal-compact">
       <div class="barra-cal-compact-fill" id="barra-cal-hoje" style="width:0%;background:var(--verde)"></div>
     </div>
-    <div class="cal-compact-refs" id="cal-refs-row"></div>
-    <!-- 4 botões de refeição com ícone + nome -->
+    <!-- 4 botões de refeição: janta com 🥗 (v1.3) -->
     <div class="ref-btns-row">
       <div class="ref-btn" id="ref-btn-manha" onclick="abrirModalRefeicao('manhã')">
         <div class="ref-btn-icon">☕</div>
@@ -717,7 +711,7 @@ body{
         <div class="ref-btn-kcal" id="ref-kcal-almoco"></div>
       </div>
       <div class="ref-btn" id="ref-btn-jantar" onclick="abrirModalRefeicao('jantar')">
-        <div class="ref-btn-icon">🌙</div>
+        <div class="ref-btn-icon">🥗</div>
         <div class="ref-btn-nome">Janta</div>
         <div class="ref-btn-kcal" id="ref-kcal-jantar"></div>
       </div>
@@ -729,7 +723,7 @@ body{
     </div>
   </div>
 
-  <!-- Card treino semanal v1.2 -->
+  <!-- Card treino semanal -->
   <div class="treino-compact" id="card-treino-hoje">
     <div class="treino-compact-top">
       <div class="treino-compact-label">🏋️ Treino semanal</div>
@@ -755,31 +749,40 @@ body{
         <div class="treino-mod-contagem" id="mod-card-cnt"></div>
       </div>
     </div>
-    <!-- Dias da semana maiores -->
     <div class="treino-semana-row">
       <div class="semana-dias-grid" id="semana-treinos-grid"></div>
     </div>
   </div>
 
-  <!-- Sono + Água (sem peso) -->
+  <!-- Sono + Água com emoji (v1.3) -->
   <div class="grid-2">
     <div class="mini-card borda-cinza" id="mc-sono" onclick="abrirModalSono()">
       <div class="mini-card-label">😴 Sono</div>
-      <div class="mini-card-val" id="mini-sono" style="font-size:1.5em">—</div>
-      <div class="mini-card-sub" id="mini-sono-sub">registrar</div>
+      <div class="mini-card-body">
+        <div class="mini-card-left">
+          <div class="mini-card-val" id="mini-sono">—</div>
+          <div class="mini-card-sub" id="mini-sono-sub">registrar</div>
+        </div>
+        <div class="mini-card-emoji" id="mini-sono-emoji">😴</div>
+      </div>
       <div class="mini-card-media" id="mini-sono-media"></div>
     </div>
     <div class="mini-card" id="mc-agua" onclick="abrirModalAgua()">
       <div class="mini-card-label">💧 Água</div>
-      <div class="mini-card-val" id="mini-agua" style="font-size:1.5em">—</div>
-      <div class="mini-card-sub" id="mini-agua-sub">registrar</div>
+      <div class="mini-card-body">
+        <div class="mini-card-left">
+          <div class="mini-card-val" id="mini-agua">—</div>
+          <div class="mini-card-sub" id="mini-agua-sub">registrar</div>
+        </div>
+        <div class="mini-card-emoji" id="mini-agua-emoji">🏜️</div>
+      </div>
       <div class="mini-card-media" id="mini-agua-media"></div>
     </div>
   </div>
 
 </div>
 
-<!-- ══════════ TELA: CALENDÁRIO ══════════ -->
+<!-- ══════════ TELA: CALENDÁRIO (simplificado) ══════════ -->
 <div id="tela-calendario" class="tela">
   <div class="card">
     <div class="cal-nav">
@@ -789,28 +792,105 @@ body{
     </div>
     <div class="cal-grid-mes" id="cal-grid-dias"></div>
   </div>
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px">
-    <div class="mini-card"><div class="mini-card-label">✅ Treinos</div><div class="mini-card-val" id="cal-stat-treinos">0</div><div class="mini-card-sub">concluídos</div></div>
-    <div class="mini-card"><div class="mini-card-label">⏸ Descanso</div><div class="mini-card-val" id="cal-stat-descanso">0</div><div class="mini-card-sub">dias</div></div>
+  <div style="margin-bottom:12px">
+    <div class="mini-card"><div class="mini-card-label">✅ Treinos</div><div class="mini-card-val" id="cal-stat-treinos">0</div><div class="mini-card-sub">registrados no mês</div></div>
   </div>
   <div class="card" style="font-size:0.78em;line-height:2">
-    <div><span style="display:inline-block;width:12px;height:12px;border-radius:3px;background:rgba(52,211,153,0.15);border:1px solid rgba(52,211,153,0.3);margin-right:8px;vertical-align:middle"></span>Treino concluído</div>
-    <div><span style="display:inline-block;width:12px;height:12px;border-radius:3px;background:rgba(59,130,246,0.12);border:1px solid rgba(59,130,246,0.25);margin-right:8px;vertical-align:middle"></span>Descanso</div>
+    <div><span style="display:inline-block;width:12px;height:12px;border-radius:3px;background:rgba(52,211,153,0.15);border:1px solid rgba(52,211,153,0.3);margin-right:8px;vertical-align:middle"></span>Treino registrado</div>
     <div><span style="display:inline-block;width:12px;height:12px;border-radius:3px;background:rgba(251,191,36,0.08);border:1px solid rgba(251,191,36,0.2);margin-right:8px;vertical-align:middle"></span>Sem registro</div>
   </div>
 </div>
 
-<!-- ══════════ TELA: PROGRESSO ══════════ -->
+<!-- ══════════ TELA: PROGRESSO (ordem: treinos, sono, cal, água, peso) ══════════ -->
 <div id="tela-progresso" class="tela">
   <div class="toggle-abas" style="flex-wrap:wrap">
-    <button class="toggle-aba ativa" onclick="mudarSubAba('peso',this)" style="flex:0 0 auto">⚖️ Peso</button>
-    <button class="toggle-aba" onclick="mudarSubAba('calorias',this)" style="flex:0 0 auto">🔥 Cal</button>
+    <button class="toggle-aba ativa" onclick="mudarSubAba('treinos',this)" style="flex:0 0 auto">🏋️ Treinos</button>
     <button class="toggle-aba" onclick="mudarSubAba('sono',this)" style="flex:0 0 auto">😴 Sono</button>
+    <button class="toggle-aba" onclick="mudarSubAba('calorias',this)" style="flex:0 0 auto">🔥 Cal</button>
     <button class="toggle-aba" onclick="mudarSubAba('agua',this)" style="flex:0 0 auto">💧 Água</button>
-    <button class="toggle-aba" onclick="mudarSubAba('treinos',this)" style="flex:0 0 auto">🏋️ Treinos</button>
+    <button class="toggle-aba" onclick="mudarSubAba('peso',this)" style="flex:0 0 auto">⚖️ Peso</button>
   </div>
 
-  <div id="sub-peso">
+  <!-- TREINOS — v1.3: chart como água, sem total por modalidade -->
+  <div id="sub-treinos">
+    <div class="card">
+      <div class="card-header">Pontos por semana (12 semanas)</div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;font-size:0.72em;margin-bottom:8px">
+        <span style="padding:3px 8px;border-radius:10px;background:rgba(59,130,246,0.15);color:var(--azul);font-weight:700">Acima 🔥</span>
+        <span style="padding:3px 8px;border-radius:10px;background:rgba(52,211,153,0.12);color:var(--verde);font-weight:700">Meta ✓</span>
+        <span style="padding:3px 8px;border-radius:10px;background:rgba(251,191,36,0.12);color:var(--amarelo);font-weight:700">Parcial</span>
+        <span style="padding:3px 8px;border-radius:10px;background:rgba(248,113,113,0.1);color:var(--vermelho);font-weight:700">Abaixo</span>
+      </div>
+      <div class="chart-container"><canvas id="chart-treinos"></canvas></div>
+    </div>
+    <div class="card">
+      <div class="stats-row">
+        <div class="stat-item"><div class="stat-val" id="stat-semanas-meta">0</div><div class="stat-label">semanas meta</div></div>
+        <div class="stat-item"><div class="stat-val" id="stat-media-pts">—</div><div class="stat-label">pts/semana</div></div>
+        <div class="stat-item"><div class="stat-val" id="stat-streak-treino" style="color:var(--verde)">0</div><div class="stat-label">semanas seguidas</div></div>
+      </div>
+    </div>
+    <div class="dica-saude">
+      💡 <strong>OMS:</strong> Adultos devem praticar ao menos 150 min de atividade moderada por semana. Combinar musculação com cardio maximiza a perda de gordura e preserva a massa muscular — o combo ideal para o desafio.
+    </div>
+  </div>
+
+  <!-- SONO -->
+  <div id="sub-sono" style="display:none">
+    <div class="card">
+      <div class="card-header">Sono por noite (14 dias)</div>
+      <div class="chart-container"><canvas id="chart-sono"></canvas></div>
+    </div>
+    <div class="card">
+      <div class="stats-row">
+        <div class="stat-item"><div class="stat-val" id="stat-media-sono" style="color:var(--azul)">—</div><div class="stat-label">horas/noite</div></div>
+        <div class="stat-item"><div class="stat-val" id="stat-noites-7h">—</div><div class="stat-label">noites ≥ 7h</div></div>
+        <div class="stat-item"><div class="stat-val" id="stat-noites-reg">—</div><div class="stat-label">registradas</div></div>
+      </div>
+    </div>
+    <div class="dica-saude">
+      💡 <strong>OMS:</strong> Adultos precisam de 7 a 9 horas de sono por noite. Durante o sono profundo o organismo libera GH, repara tecido muscular e consolida memória. Dormir menos de 6h prejudica a perda de peso e a recuperação dos treinos.
+    </div>
+  </div>
+
+  <!-- CALORIAS -->
+  <div id="sub-calorias" style="display:none">
+    <div class="card">
+      <div class="card-header">Calorias vs Meta (14 dias)</div>
+      <div class="chart-container"><canvas id="chart-cal"></canvas></div>
+    </div>
+    <div class="card">
+      <div class="stats-row">
+        <div class="stat-item"><div class="stat-val" id="stat-media-cal">—</div><div class="stat-label">kcal/dia</div></div>
+        <div class="stat-item"><div class="stat-val" id="stat-media-def" style="color:var(--verde)">—</div><div class="stat-label">déficit méd</div></div>
+        <div class="stat-item"><div class="stat-val" id="stat-dias-ok">—</div><div class="stat-label">dias em déficit</div></div>
+      </div>
+    </div>
+    <div class="dica-saude">
+      💡 <strong>OMS/EFSA:</strong> Um déficit de 500 kcal/dia gera ~0,5 kg de perda semanal — ritmo seguro e sustentável. Manter ingestão proteica alta (1,6–2 g/kg) é essencial para preservar a massa muscular durante o déficit.
+    </div>
+  </div>
+
+  <!-- ÁGUA -->
+  <div id="sub-agua" style="display:none">
+    <div class="card">
+      <div class="card-header">Água diária (14 dias)</div>
+      <div class="chart-container"><canvas id="chart-agua"></canvas></div>
+    </div>
+    <div class="card">
+      <div class="stats-row">
+        <div class="stat-item"><div class="stat-val" id="stat-media-agua" style="color:#38bdf8">—</div><div class="stat-label">litros/dia</div></div>
+        <div class="stat-item"><div class="stat-val" id="stat-dias-meta-agua">—</div><div class="stat-label">dias ≥ meta</div></div>
+        <div class="stat-item"><div class="stat-val" id="stat-dias-agua-reg">—</div><div class="stat-label">dias registrados</div></div>
+      </div>
+    </div>
+    <div class="dica-saude">
+      💡 <strong>EFSA:</strong> A recomendação é ~35 ml por kg de peso. Sua meta foi calculada com base no seu peso atual. Hidratação adequada melhora o desempenho nos treinos, acelera a recuperação muscular e otimiza o metabolismo.
+    </div>
+  </div>
+
+  <!-- PESO -->
+  <div id="sub-peso" style="display:none">
     <div class="card">
       <div class="card-header">Evolução do Peso (kg)</div>
       <div class="chart-container"><canvas id="chart-peso"></canvas></div>
@@ -826,74 +906,12 @@ body{
         <span class="imc-tag" style="background:rgba(248,113,113,0.1);color:var(--vermelho)">Obesidade ≥30</span>
       </div>
     </div>
-    <!-- Botão adicionar peso fica aqui -->
-    <button class="btn btn-outline" onclick="abrirModalPeso()" style="margin-bottom:12px">⚖️ Registrar peso hoje</button>
     <div class="card">
       <div class="card-titulo" style="margin-bottom:12px">Histórico de peso</div>
       <div id="hist-peso-lista"></div>
     </div>
-  </div>
-
-  <div id="sub-calorias" style="display:none">
-    <div class="card">
-      <div class="card-header">Calorias vs Meta (14 dias)</div>
-      <div class="chart-container"><canvas id="chart-cal"></canvas></div>
-    </div>
-    <div class="card">
-      <div class="stats-row">
-        <div class="stat-item"><div class="stat-val" id="stat-media-cal">—</div><div class="stat-label">kcal/dia</div></div>
-        <div class="stat-item"><div class="stat-val" id="stat-media-def" style="color:var(--verde)">—</div><div class="stat-label">déficit méd</div></div>
-        <div class="stat-item"><div class="stat-val" id="stat-dias-ok">—</div><div class="stat-label">dias em déficit</div></div>
-      </div>
-    </div>
-  </div>
-
-  <div id="sub-sono" style="display:none">
-    <div class="card">
-      <div class="card-header">Sono por noite (14 dias)</div>
-      <div class="chart-container"><canvas id="chart-sono"></canvas></div>
-    </div>
-    <div class="card">
-      <div class="stats-row">
-        <div class="stat-item"><div class="stat-val" id="stat-media-sono" style="color:var(--azul)">—</div><div class="stat-label">horas/noite</div></div>
-        <div class="stat-item"><div class="stat-val" id="stat-noites-7h">—</div><div class="stat-label">noites ≥ 7h</div></div>
-        <div class="stat-item"><div class="stat-val" id="stat-noites-reg">—</div><div class="stat-label">registradas</div></div>
-      </div>
-    </div>
-  </div>
-
-  <div id="sub-agua" style="display:none">
-    <div class="card">
-      <div class="card-header">Água diária (14 dias)</div>
-      <div class="chart-container"><canvas id="chart-agua"></canvas></div>
-    </div>
-    <div class="card">
-      <div class="stats-row">
-        <div class="stat-item"><div class="stat-val" id="stat-media-agua" style="color:#38bdf8">—</div><div class="stat-label">litros/dia</div></div>
-        <div class="stat-item"><div class="stat-val" id="stat-dias-25l">—</div><div class="stat-label">dias ≥ 2.5L</div></div>
-        <div class="stat-item"><div class="stat-val" id="stat-dias-agua-reg">—</div><div class="stat-label">dias registrados</div></div>
-      </div>
-    </div>
-  </div>
-
-  <div id="sub-treinos" style="display:none">
-    <div class="card">
-      <div class="card-header">Pontos por semana</div>
-      <div style="font-size:0.75em;color:var(--cinza);margin-bottom:10px">
-        Meta: <strong style="color:var(--branco)">4 pontos/semana</strong> · 1pt por treino · Musculação 2x = 2pts
-      </div>
-      <div style="display:flex;gap:12px;flex-wrap:wrap;font-size:0.75em;color:var(--cinza);margin-bottom:14px">
-        <span style="padding:4px 10px;border-radius:20px;background:rgba(52,211,153,0.12);color:var(--verde);font-weight:700">≥4pts = Meta ✓</span>
-        <span style="padding:4px 10px;border-radius:20px;background:rgba(251,191,36,0.12);color:var(--amarelo);font-weight:700">2–3pts = Parcial</span>
-        <span style="padding:4px 10px;border-radius:20px;background:rgba(248,113,113,0.1);color:var(--vermelho);font-weight:700">≤1pt = Abaixo</span>
-        <span style="padding:4px 10px;border-radius:20px;background:rgba(100,149,237,0.15);color:#60a5fa;font-weight:700">&gt;4pts = Acima 🔥</span>
-      </div>
-      <div class="semanas-treino-lista" id="semanas-treino-lista"></div>
-    </div>
-    <div class="card">
-      <div class="card-header">Total por modalidade</div>
-      <div id="treinos-resumo-stats"></div>
-    </div>
+    <!-- Botão registrar peso abaixo do histórico (v1.3) -->
+    <button class="btn btn-outline" onclick="abrirModalPeso()" style="margin-bottom:12px">⚖️ Registrar peso hoje</button>
   </div>
 </div>
 
@@ -913,7 +931,6 @@ body{
     <button class="toggle-aba ativa" onclick="mudarSubTreino('a',this)">💪 Treino A</button>
     <button class="toggle-aba" onclick="mudarSubTreino('b',this)">💪 Treino B</button>
   </div>
-
   <div id="sub-treino-a-tela">
     <div class="card">
       <div class="card-header">💪 Exercícios — Treino A</div>
@@ -921,7 +938,6 @@ body{
     </div>
     <div id="treino-a-lista-tela"></div>
   </div>
-
   <div id="sub-treino-b-tela" style="display:none">
     <div class="card">
       <div class="card-header">💪 Exercícios — Treino B</div>
@@ -991,21 +1007,30 @@ body{
       <div class="ex-reps" id="ex-reps">—</div>
     </div>
     <div class="progress-dots" id="ex-progress"></div>
-    <!-- GIF maior com fundo branco -->
     <div class="gif-wrap">
       <div class="gif-loading" id="gif-loading">⏳ Carregando...</div>
       <img id="exercise-gif" style="display:none"
         onload="document.getElementById('gif-loading').style.display='none';this.style.display='block'"
         onerror="document.getElementById('gif-loading').style.display='flex';document.getElementById('gif-loading').textContent='⚠ GIF não disponível';this.style.display='none'">
     </div>
-    <div class="ex-peso-row">
-      <div style="flex:1">
-        <div class="ex-peso-label">⚫ Informe a carga</div>
+    <!-- Carga v1.3: painel esquerdo (última) + painel direito (nova) -->
+    <div class="ex-carga-row">
+      <div class="ex-carga-painel">
+        <div class="ex-peso-label">Última carga</div>
+        <div class="ex-carga-val" id="ex-carga-atual-val">— kg</div>
       </div>
-      <input class="ex-peso-input" type="number" id="ex-peso-input" placeholder="0" min="0" step="0.5" onchange="salvarPesoEx()">
-      <span class="ex-peso-unit">kg</span>
+      <div class="ex-carga-painel ex-carga-painel-dir">
+        <div class="ex-peso-label">Nova carga</div>
+        <div class="ex-carga-nova-row">
+          <input class="ex-peso-input" type="number" id="ex-peso-nova-input" placeholder="0" min="0" step="0.5" onchange="salvarPesoEx()">
+          <span class="ex-peso-unit">kg</span>
+        </div>
+      </div>
     </div>
+    <!-- Evolução percentual desde a carga inicial -->
+    <div class="ex-carga-evolucao" id="ex-carga-evolucao"></div>
     <div class="series-row" id="series-row"></div>
+    <!-- btn-nxt começa desabilitado, só acende após última série -->
     <button class="btn" id="btn-nxt" onclick="nextEx()" disabled>Próximo exercício →</button>
   </div>
   <div id="musc-done" class="musc-screen">
@@ -1058,39 +1083,33 @@ body{
   </div>
 </div>
 
-<!-- ══════════ SCREEN: CARDIO ══════════ -->
+<!-- ══════════ SCREEN: CARDIO (simplificado v1.3 — sem timer, sem tipo) ══════════ -->
 <div id="screen-cardio" class="screen-musculacao">
   <div class="musc-header">
     <button class="musc-back" onclick="fecharCardio()">←</button>
     <div class="musc-title-wrap">
       <div class="musc-title">🏃 CARDIO</div>
-      <div class="musc-sub" id="cardio-estado-lbl">Pronto para começar</div>
+      <div class="musc-sub">Registre sua corrida</div>
     </div>
-    <button class="btn btn-sm" id="cardio-btn-timer" style="width:auto" onclick="toggleCardioTimer()">▶ Iniciar</button>
   </div>
   <div style="padding:0 20px 20px">
-    <div class="cardio-tipo-grid">
-      <div class="cardio-tipo-btn ativo" id="ctb-corrida" onclick="selecionarCardioTipo('corrida')">
-        <span>🏃</span><div>Corrida</div>
-      </div>
-      <div class="cardio-tipo-btn" id="ctb-esteira" onclick="selecionarCardioTipo('esteira')">
-        <span>🎚</span><div>Esteira</div>
-      </div>
-    </div>
-    <div class="nat-timer-display">
-      <div class="nat-timer-num" id="cardio-timer-display">00:00:00</div>
-      <div class="nat-timer-lbl">tempo de atividade</div>
-    </div>
     <div class="nat-campos">
+      <div class="nat-campo-row">
+        <div class="nat-campo-icon">⏱</div>
+        <div class="nat-campo-info">
+          <div class="nat-campo-label">Duração (minutos)</div>
+          <input class="nat-campo-input" type="number" id="cardio-minutos" placeholder="30" min="1" max="300" value="30">
+        </div>
+      </div>
       <div class="nat-campo-row">
         <div class="nat-campo-icon">📍</div>
         <div class="nat-campo-info">
           <div class="nat-campo-label">Distância (km)</div>
-          <input class="nat-campo-input" type="number" id="cardio-km" placeholder="Ex: 5.2" min="0" step="0.1">
+          <input class="nat-campo-input" type="number" id="cardio-km" placeholder="5.0" min="0" step="0.1">
         </div>
       </div>
     </div>
-    <button class="btn btn-verde" style="margin-top:20px" onclick="finalizarCardio()">✅ Registrar cardio</button>
+    <button class="btn btn-verde" style="margin-top:24px" onclick="finalizarCardio()">✅ Registrar cardio</button>
     <button class="btn btn-ghost" style="margin-top:10px" onclick="fecharCardio()">← Cancelar</button>
   </div>
 </div>
@@ -1173,13 +1192,14 @@ body{
   </div>
 </div>
 
-<!-- Modal: Água -->
+<!-- Modal: Água — meta dinâmica baseada no peso -->
 <div class="modal-overlay" id="modal-agua">
   <div class="modal-box">
     <div class="modal-titulo">💧 ÁGUA DE HOJE</div>
     <div style="text-align:center;margin-bottom:16px">
       <div style="font-family:var(--fonte-display);font-size:3em;color:#38bdf8" id="agua-total-modal">0 ml</div>
       <div style="font-size:0.75em;color:var(--cinza)">total registrado hoje</div>
+      <div style="font-size:0.68em;color:var(--cinza);margin-top:2px">Meta: <span id="agua-meta-label" style="color:var(--branco);font-weight:700">—</span></div>
     </div>
     <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:16px">
       <button class="btn btn-ghost btn-sm" onclick="addAguaRapido(100)">🥤 100ml<br><span style="font-size:0.7em;color:var(--cinza)">copo p</span></button>
@@ -1201,7 +1221,7 @@ body{
       <div id="barra-agua-modal" style="height:100%;border-radius:8px;background:linear-gradient(90deg,#0ea5e9,#38bdf8);transition:width 0.5s"></div>
     </div>
     <div style="display:flex;justify-content:space-between;font-size:0.65em;color:var(--cinza);margin-bottom:12px">
-      <span>0</span><span>Meta: 2.500 ml</span>
+      <span>0</span><span id="agua-meta-barra-label">Meta: —</span>
     </div>
     <div class="modal-btns">
       <button class="btn btn-danger btn-sm" onclick="zerarAgua()">Zerar</button>
@@ -1269,10 +1289,10 @@ body{
 (function(){
   const svg=`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400"><circle cx="200" cy="200" r="180" fill="#111318" stroke="#3b82f6" stroke-width="12"/><text x="200" y="240" font-family="Arial" font-size="130" font-weight="bold" fill="#3b82f6" text-anchor="middle">100</text></svg>`;
   const icon='data:image/svg+xml;base64,'+btoa(unescape(encodeURIComponent(svg)));
-  const mf={name:"100 Dias v1.2",short_name:"100 Dias",start_url:"./",scope:"./",display:"standalone",background_color:"#111318",theme_color:"#1a1d23",icons:[{src:icon,sizes:"192x192",type:"image/svg+xml",purpose:"any maskable"},{src:icon,sizes:"512x512",type:"image/svg+xml",purpose:"any maskable"}]};
+  const mf={name:"100 Dias v1.3",short_name:"100 Dias",start_url:"./",scope:"./",display:"standalone",background_color:"#111318",theme_color:"#1a1d23",icons:[{src:icon,sizes:"192x192",type:"image/svg+xml",purpose:"any maskable"},{src:icon,sizes:"512x512",type:"image/svg+xml",purpose:"any maskable"}]};
   document.getElementById('manifest-link').href=URL.createObjectURL(new Blob([JSON.stringify(mf)],{type:'application/manifest+json'}));
   if('serviceWorker' in navigator){
-    const sw=`const C='100dias-v1.2';self.addEventListener('install',e=>{e.waitUntil(caches.open(C).then(c=>c.addAll(['./','/index.html'])));self.skipWaiting();});self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(k=>Promise.all(k.filter(x=>x!==C).map(x=>caches.delete(x)))).then(()=>self.clients.claim()));});self.addEventListener('fetch',e=>{e.respondWith(caches.match(e.request).then(r=>r||fetch(e.request)));});`;
+    const sw=`const C='100dias-v1.3';self.addEventListener('install',e=>{e.waitUntil(caches.open(C).then(c=>c.addAll(['./','/index.html'])));self.skipWaiting();});self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(k=>Promise.all(k.filter(x=>x!==C).map(x=>caches.delete(x)))).then(()=>self.clients.claim()));});self.addEventListener('fetch',e=>{e.respondWith(caches.match(e.request).then(r=>r||fetch(e.request)));});`;
     navigator.serviceWorker.register(URL.createObjectURL(new Blob([sw],{type:'text/javascript'}))).catch(()=>{});
   }
 })();
@@ -1311,27 +1331,24 @@ const TREINOS = {
   ]
 };
 
-// Metas por modalidade por semana
-const META_MUSC_SEMANA = 2;   // Musculação: 2x
-const META_NAT_SEMANA  = 1;   // Natação: 1x
-const META_CARD_SEMANA = 1;   // Cardio: 1x
-const META_PONTOS_SEMANA = 4; // Total mínimo de pontos
+// Metas semanais
+const META_MUSC_SEMANA  = 2;
+const META_NAT_SEMANA   = 1;
+const META_CARD_SEMANA  = 1;
+const META_PONTOS_SEMANA = 4;
 
 // ═══════════════════════════════
 // ESTADO GLOBAL
 // ═══════════════════════════════
-const CHAVE='app100dias_v1.2';
+const CHAVE='app100dias_v1.3';
 let dados=carregarDados();
 let refPeriodo='manhã';
 let refItensTemp=[];
 let mesAtual=new Date();
-let subAbaAtiva='peso';
+let subAbaAtiva='treinos'; // v1.3: começa em treinos
 let subTreinoAtiva='a';
-let chartPeso=null,chartCal=null,chartSono=null,chartAgua=null;
-
+let chartPeso=null,chartCal=null,chartSono=null,chartAgua=null,chartTreinos=null;
 let curTreino='A',curExIdx=0,seriesDone=[],timerInterval=null;
-let cardioTimerSec=0,cardioTimerRunning=false,cardioTimerRef=null;
-let cardioTipoAtual='corrida';
 
 // ═══════════════════════════════
 // DADOS
@@ -1341,25 +1358,25 @@ function carregarDados(){
     const s=localStorage.getItem(CHAVE);
     // Migrar de versão anterior
     if(!s){
-      const old=localStorage.getItem('app100dias_v1.1')||localStorage.getItem('app100dias_v1');
+      const old=localStorage.getItem('app100dias_v1.2')||localStorage.getItem('app100dias_v1.1')||localStorage.getItem('app100dias_v1');
       if(old){
         const d=JSON.parse(old);
-        d.registrosSono=d.registrosSono||{};
-        d.registrosAgua=d.registrosAgua||{};
-        d.pesosExercicios=d.pesosExercicios||{};
-        d.proximoTreino=d.proximoTreino||'A';
-        return d;
+        return migrarDados(d);
       }
     }
-    if(s){
-      const d=JSON.parse(s);
-      if(!d.registrosSono) d.registrosSono={};
-      if(!d.registrosAgua) d.registrosAgua={};
-      if(!d.pesosExercicios) d.pesosExercicios={};
-      if(!d.proximoTreino) d.proximoTreino='A';
-      return d;
-    }
+    if(s){const d=JSON.parse(s);return migrarDados(d);}
   }catch(e){}
+  return dadosPadrao();
+}
+function migrarDados(d){
+  if(!d.registrosSono)        d.registrosSono={};
+  if(!d.registrosAgua)        d.registrosAgua={};
+  if(!d.pesosExercicios)      d.pesosExercicios={};
+  if(!d.pesosExerciciosInicial) d.pesosExerciciosInicial={};
+  if(!d.proximoTreino)        d.proximoTreino='A';
+  return d;
+}
+function dadosPadrao(){
   return {
     perfil:{idade:0,alturaCm:0,peso:0,fatorAtividade:1.55,deficit:500,inicio:hoje()},
     medicoesPeso:[],
@@ -1370,6 +1387,7 @@ function carregarDados(){
     registrosSono:{},
     registrosAgua:{},
     pesosExercicios:{},
+    pesosExerciciosInicial:{},
     proximoTreino:'A'
   };
 }
@@ -1391,8 +1409,14 @@ function classIMC(imc){
   return{txt:'Obesidade',cor:'var(--vermelho)'};
 }
 function calcDiaDesafio(){const ini=dados.perfil.inicio;if(!ini)return 1;const ms=new Date(hoje())-new Date(ini);return Math.max(1,Math.min(100,Math.floor(ms/86400000)+1));}
-function calcStreak(){let s=0,d=new Date(hoje());while(true){const iso=d.toISOString().slice(0,10);const dia=dados.desafioDias[iso];if(dia&&dia.status==='concluido'){s++;d.setDate(d.getDate()-1);}else break;}return s;}
 function pesoMaisRecente(){if(!dados.medicoesPeso.length)return dados.perfil.peso||0;return dados.medicoesPeso[dados.medicoesPeso.length-1].pesoKg;}
+
+// Meta de água baseada no peso (v1.3): 35ml/kg arredondado para 100ml
+function calcMetaAgua(){
+  const peso=pesoMaisRecente();
+  if(!peso)return 2500;
+  return Math.round(peso*35/100)*100;
+}
 
 // Semana atual (seg → dom)
 function getDiasSemanaAtual(){
@@ -1403,34 +1427,34 @@ function getDiasSemanaAtual(){
   return dias;
 }
 
-// Retorna semanas (últimas N) como array de arrays de datas
-function getUltimasSemanas(n){
-  const hoje_=new Date();
-  const dow=(hoje_.getDay()+6)%7;
-  const semanas=[];
-  for(let w=n-1;w>=0;w--){
-    const seg=new Date(hoje_);seg.setDate(hoje_.getDate()-dow-(w*7));
-    const dias=[];
-    for(let i=0;i<7;i++){const x=new Date(seg);x.setDate(seg.getDate()+i);dias.push(x.toISOString().slice(0,10));}
-    semanas.push(dias);
+function getSemanaOffset(weeksAgo){
+  const d=new Date();const dow=(d.getDay()+6)%7;
+  const dias=[];
+  for(let i=0;i<7;i++){
+    const x=new Date(d);x.setDate(d.getDate()-dow-(weeksAgo*7)+i);
+    dias.push(x.toISOString().slice(0,10));
   }
+  return dias;
+}
+
+function getUltimasSemanas(n){
+  const semanas=[];
+  for(let w=n-1;w>=0;w--)semanas.push(getSemanaOffset(w));
   return semanas;
 }
 
 function getTreinosDia(iso){
   const d=dados.desafioDias[iso];
-  if(!d) return [];
-  if(Array.isArray(d.tipos)) return d.tipos;
-  if(d.tipo) return [d.tipo];
-  return [];
+  if(!d)return[];
+  if(Array.isArray(d.tipos))return d.tipos;
+  if(d.tipo)return[d.tipo];
+  return[];
 }
 
-// Contagem semanal por modalidade
 function getContagemSemanal(dias){
   let musc=0,nat=0,cardio=0;
   dias.forEach(iso=>{
-    const t=getTreinosDia(iso);
-    t.forEach(x=>{
+    getTreinosDia(iso).forEach(x=>{
       if(x==='Musculação')musc++;
       if(x==='Natação')nat++;
       if(x==='Cardio')cardio++;
@@ -1439,10 +1463,43 @@ function getContagemSemanal(dias){
   return{musc,nat,cardio};
 }
 
-// Pontos semanais: 1pt por treino
-function calcPontosSemana(dias){
+function calcPontosSemana(dias){const{musc,nat,cardio}=getContagemSemanal(dias);return musc+nat+cardio;}
+
+// Meta semanal específica: musc≥2 AND nat≥1 AND cardio≥1
+function metaSemanalAtingida(dias){
   const{musc,nat,cardio}=getContagemSemanal(dias);
-  return musc+nat+cardio;
+  return musc>=META_MUSC_SEMANA&&nat>=META_NAT_SEMANA&&cardio>=META_CARD_SEMANA;
+}
+
+// Streak semanal (v1.3): conta semanas consecutivas com meta atingida
+function calcStreakSemanal(){
+  let streak=0;
+  for(let w=0;w<52;w++){
+    if(metaSemanalAtingida(getSemanaOffset(w)))streak++;
+    else break;
+  }
+  return streak;
+}
+
+// Emojis sono
+function emojiSono(horas){
+  if(horas===null||horas===undefined)return'😴';
+  if(horas<4)return'😵';
+  if(horas<5)return'🥱';
+  if(horas<7)return'😐';
+  if(horas<=8)return'😊';
+  return'🤩';
+}
+
+// Emojis água
+function emojiAgua(ml,meta){
+  if(!ml||ml===0)return'🏜️';
+  const pct=ml/meta;
+  if(pct<0.3)return'😵';
+  if(pct<0.6)return'😫';
+  if(pct<0.85)return'😐';
+  if(pct<1.0)return'😊';
+  return'🎉';
 }
 
 function corSono(horas){
@@ -1474,54 +1531,37 @@ function irPara(id){
 // ═══════════════════════════════
 function renderHoje(){
   const dia=calcDiaDesafio();
-  const streak=calcStreak();
+  const streak=calcStreakSemanal();
   const pct=(dia/100*100).toFixed(0);
   document.getElementById('hero-num').textContent=dia;
-  document.getElementById('hero-streak').textContent=`${streak} 🔥 seguidos`;
+  // v1.3: streak semanal, sem text abaixo da barra
+  document.getElementById('hero-streak').textContent=streak===1?'1 🔥 semana':streak===0?'0 🔥':streak+' 🔥 semanas';
   document.getElementById('hero-pct').textContent=pct+'%';
   document.getElementById('barra-progress').style.width=pct+'%';
 
   const peso=pesoMaisRecente();
   const meta=peso?calcMeta(peso):0;
+  const metaAgua=calcMetaAgua();
 
-  // Calorias + botões refeição v1.2
+  // Calorias
   document.getElementById('cal-meta-display').textContent=meta||'—';
   const diarioHoje=dados.diarioAlimentar[hoje()]||{refeicoes:{}};
   let totalKcal=0;
-
   const mapeiaRef={
-    'manhã':   {btnId:'ref-btn-manha',   kcalId:'ref-kcal-manha'},
-    'almoço':  {btnId:'ref-btn-almoco',  kcalId:'ref-kcal-almoco'},
-    'jantar':  {btnId:'ref-btn-jantar',  kcalId:'ref-kcal-jantar'},
-    'extra':   {btnId:'ref-btn-extra',   kcalId:'ref-kcal-extra'},
+    'manhã':  {btnId:'ref-btn-manha', kcalId:'ref-kcal-manha'},
+    'almoço': {btnId:'ref-btn-almoco',kcalId:'ref-kcal-almoco'},
+    'jantar': {btnId:'ref-btn-jantar',kcalId:'ref-kcal-jantar'},
+    'extra':  {btnId:'ref-btn-extra', kcalId:'ref-kcal-extra'},
   };
-  let refsHTML='';
   Object.entries(mapeiaRef).forEach(([periodo,{btnId,kcalId}])=>{
     const itens=diarioHoje.refeicoes[periodo]||[];
     const k=itens.reduce((s,x)=>s+(x.kcal||0),0);
     const btn=document.getElementById(btnId);
     const kcalEl=document.getElementById(kcalId);
-    if(k>0){
-      totalKcal+=k;
-      btn.classList.add('tem-dados');
-      kcalEl.textContent=k+'kcal';
-      refsHTML+=`<div class="cal-compact-ref">${kcalEl.closest('.ref-btn').querySelector('.ref-btn-icon').textContent} <span>${k}</span></div>`;
-    }else{
-      btn.classList.remove('tem-dados');
-      kcalEl.textContent='';
-    }
+    if(k>0){totalKcal+=k;btn.classList.add('tem-dados');kcalEl.textContent=k+'kcal';}
+    else{btn.classList.remove('tem-dados');kcalEl.textContent='';}
   });
-  // Recalcular refsHTML sem depender de DOM não renderizado ainda
-  refsHTML='';
-  const nomeRef={'manhã':'☕','almoço':'🍽️','jantar':'🌙','extra':'🍎'};
-  ['manhã','almoço','jantar','extra'].forEach(r=>{
-    const itens=diarioHoje.refeicoes[r]||[];
-    const k=itens.reduce((s,x)=>s+(x.kcal||0),0);
-    if(k>0) refsHTML+=`<div class="cal-compact-ref">${nomeRef[r]} <span>${k}</span></div>`;
-  });
-  document.getElementById('cal-refs-row').innerHTML=refsHTML;
   document.getElementById('cal-ingeridas-hoje').textContent=totalKcal;
-
   const compactCard=document.getElementById('cal-compact');
   if(meta){
     const pctCal=Math.min((totalKcal/meta*100),115);
@@ -1540,17 +1580,16 @@ function renderHoje(){
       badge.textContent='↑ '+Math.abs(def)+' kcal';
       compactCard.style.borderLeftColor='var(--vermelho)';
     }
-    document.getElementById('hero-meta-cal-mini').textContent=`Meta: ${meta} kcal/dia`;
   }
 
-  // Treino semanal
   renderCardTreinoSemanal();
 
-  // Sono — valor de hoje + média
+  // Sono com emoji (v1.3)
   const sonoHoje=dados.registrosSono[hoje()];
   const miniSono=document.getElementById('mini-sono');
   const miniSonoSub=document.getElementById('mini-sono-sub');
   const miniSonoMedia=document.getElementById('mini-sono-media');
+  const miniSonoEmoji=document.getElementById('mini-sono-emoji');
   if(sonoHoje&&sonoHoje.horas!==undefined){
     const h=Math.floor(sonoHoje.horas);const m=Math.round((sonoHoje.horas-h)*60);
     miniSono.textContent=`${h}h${m>0?m+'m':''}`;
@@ -1558,87 +1597,86 @@ function renderHoje(){
     miniSono.style.color=cor==='verde'?'var(--verde)':cor==='amarela'?'var(--amarelo)':'var(--vermelho)';
     miniSonoSub.textContent=sonoHoje.horas>=7?'Boa noite ✓':'Abaixo meta';
     document.getElementById('mc-sono').className='mini-card borda-'+cor;
+    miniSonoEmoji.textContent=emojiSono(sonoHoje.horas);
   }else{
     miniSono.textContent='—';miniSono.style.color='var(--azul)';
     miniSonoSub.textContent='registrar';
     document.getElementById('mc-sono').className='mini-card borda-cinza';
+    miniSonoEmoji.textContent='😴';
   }
-  // Média sono
   const regSono=Object.values(dados.registrosSono||{}).filter(r=>r.horas>0);
   if(regSono.length>0){
     const media=regSono.reduce((s,r)=>s+(r.horas||0),0)/regSono.length;
     const mh=Math.floor(media);const mm=Math.round((media-mh)*60);
     miniSonoMedia.innerHTML=`Média: <span>${mh}h${mm>0?mm+'m':''}</span>`;
-  }else{
-    miniSonoMedia.innerHTML='';
-  }
+  }else{miniSonoMedia.innerHTML='';}
 
-  // Água — valor de hoje + média
+  // Água com emoji (v1.3) — meta baseada no peso
   const aguaHoje=dados.registrosAgua[hoje()]||0;
   const miniAgua=document.getElementById('mini-agua');
   const miniAguaSub=document.getElementById('mini-agua-sub');
   const miniAguaMedia=document.getElementById('mini-agua-media');
+  const miniAguaEmoji=document.getElementById('mini-agua-emoji');
   if(aguaHoje>0){
     miniAgua.textContent=aguaHoje>=1000?(aguaHoje/1000).toFixed(1)+'L':aguaHoje+'ml';
-    const pctA=Math.min(100,Math.round(aguaHoje/2500*100));
+    const pctA=Math.min(100,Math.round(aguaHoje/metaAgua*100));
     miniAguaSub.textContent=pctA+'% meta';
-    const corA=aguaHoje>=2500?'verde':aguaHoje>=1500?'amarela':'vermelha';
+    const corA=aguaHoje>=metaAgua?'verde':aguaHoje>=metaAgua*0.6?'amarela':'vermelha';
     miniAgua.style.color=corA==='verde'?'var(--verde)':corA==='amarela'?'var(--amarelo)':'var(--vermelho)';
     document.getElementById('mc-agua').className='mini-card borda-'+corA;
+    miniAguaEmoji.textContent=emojiAgua(aguaHoje,metaAgua);
   }else{
     miniAgua.textContent='—';miniAgua.style.color='#38bdf8';
     miniAguaSub.textContent='registrar';
     document.getElementById('mc-agua').className='mini-card';
+    miniAguaEmoji.textContent='🏜️';
   }
-  // Média água
   const regAgua=Object.values(dados.registrosAgua||{}).filter(v=>v>0);
   if(regAgua.length>0){
     const mediaA=regAgua.reduce((s,v)=>s+v,0)/regAgua.length;
-    const litros=(mediaA/1000).toFixed(1);
-    miniAguaMedia.innerHTML=`Média: <span>${litros}L</span>`;
+    miniAguaMedia.innerHTML=`Média: <span>${(mediaA/1000).toFixed(1)}L</span> · meta: ${(metaAgua/1000).toFixed(1)}L`;
   }else{
-    miniAguaMedia.innerHTML='';
+    miniAguaMedia.innerHTML=`Meta: <span>${(metaAgua/1000).toFixed(1)}L</span> (35ml/kg)`;
   }
 }
 
-// ─── Card Treino Semanal v1.2 ───
+// ─── Card Treino Semanal v1.3: azul quando acima da meta ───
 function renderCardTreinoSemanal(){
   const dias=getDiasSemanaAtual();
   const{musc,nat,cardio}=getContagemSemanal(dias);
 
-  // Progresso dos botões de modalidade
-  // Musculação: 0=vazio, 1=50%, ≥2=100%
-  const modMusc=document.getElementById('mod-musc');
-  const modMuscCnt=document.getElementById('mod-musc-cnt');
-  modMusc.classList.remove('prog-50','prog-100');
-  if(musc>=META_MUSC_SEMANA){modMusc.classList.add('prog-100');modMuscCnt.textContent=musc+'/'+META_MUSC_SEMANA+' ✓';}
-  else if(musc===1){modMusc.classList.add('prog-50');modMuscCnt.textContent='1/'+META_MUSC_SEMANA;}
-  else{modMuscCnt.textContent='0/'+META_MUSC_SEMANA;}
+  function setModBtn(elId,cntId,count,meta){
+    const mod=document.getElementById(elId);
+    const cnt=document.getElementById(cntId);
+    mod.classList.remove('prog-50','prog-100','prog-acima');
+    if(count>meta){
+      mod.classList.add('prog-acima');
+      cnt.textContent=count+'/'+meta+' 🔥';
+    }else if(count===meta){
+      mod.classList.add('prog-100');
+      cnt.textContent=count+'/'+meta+' ✓';
+    }else if(meta===2&&count===1){
+      mod.classList.add('prog-50');
+      cnt.textContent='1/'+meta;
+    }else{
+      cnt.textContent=count+'/'+meta;
+    }
+  }
+  setModBtn('mod-musc','mod-musc-cnt',musc,META_MUSC_SEMANA);
+  setModBtn('mod-nat','mod-nat-cnt',nat,META_NAT_SEMANA);
+  setModBtn('mod-card','mod-card-cnt',cardio,META_CARD_SEMANA);
 
-  // Natação: 0=vazio, ≥1=100%
-  const modNat=document.getElementById('mod-nat');
-  const modNatCnt=document.getElementById('mod-nat-cnt');
-  modNat.classList.remove('prog-50','prog-100');
-  if(nat>=META_NAT_SEMANA){modNat.classList.add('prog-100');modNatCnt.textContent=nat+'/'+META_NAT_SEMANA+' ✓';}
-  else{modNatCnt.textContent=nat+'/'+META_NAT_SEMANA;}
-
-  // Cardio: 0=vazio, ≥1=100%
-  const modCard=document.getElementById('mod-card');
-  const modCardCnt=document.getElementById('mod-card-cnt');
-  modCard.classList.remove('prog-50','prog-100');
-  if(cardio>=META_CARD_SEMANA){modCard.classList.add('prog-100');modCardCnt.textContent=cardio+'/'+META_CARD_SEMANA+' ✓';}
-  else{modCardCnt.textContent=cardio+'/'+META_CARD_SEMANA;}
-
-  // Resumo status
   const pts=musc+nat+cardio;
+  const metaAting=metaSemanalAtingida(dias);
   const resumoEl=document.getElementById('treino-hoje-resumo');
-  if(pts>=META_PONTOS_SEMANA){
+  if(pts>META_PONTOS_SEMANA){
+    resumoEl.innerHTML=`<span style="color:var(--azul);font-size:0.82em">🔥 ${pts}pts — Acima!</span>`;
+  }else if(metaAting){
     resumoEl.innerHTML=`<span style="color:var(--verde);font-size:0.82em">✅ ${pts}pts — Meta!</span>`;
   }else{
     resumoEl.innerHTML=`<span style="font-size:0.78em;color:var(--cinza)">${pts}/${META_PONTOS_SEMANA}pts</span>`;
   }
 
-  // Grade de dias da semana
   const nomes=['Seg','Ter','Qua','Qui','Sex','Sáb','Dom'];
   const hojeStr=hoje();
   let html='';
@@ -1648,6 +1686,7 @@ function renderCardTreinoSemanal(){
     let icone='';
     if(tipos.includes('Musculação')&&tipos.includes('Natação'))icone='🏋🏊';
     else if(tipos.includes('Musculação')&&tipos.includes('Cardio'))icone='🏋🏃';
+    else if(tipos.includes('Natação')&&tipos.includes('Cardio'))icone='🏊🏃';
     else if(tipos.includes('Musculação'))icone='🏋️';
     else if(tipos.includes('Natação'))icone='🏊';
     else if(tipos.includes('Cardio'))icone='🏃';
@@ -1661,7 +1700,7 @@ function renderCardTreinoSemanal(){
 }
 
 // ═══════════════════════════════
-// RENDER: CALENDÁRIO
+// RENDER: CALENDÁRIO (simplificado v1.3)
 // ═══════════════════════════════
 function renderCalendario(){
   const ano=mesAtual.getFullYear(),mes=mesAtual.getMonth();
@@ -1673,29 +1712,27 @@ function renderCalendario(){
   let html='';
   ['Seg','Ter','Qua','Qui','Sex','Sáb','Dom'].forEach(n=>{html+=`<div class="cal-dia-semana">${n}</div>`;});
   for(let i=0;i<diaSemanaInicio;i++)html+=`<div class="cal-dia vazio"></div>`;
-  let treinos=0,descansos=0;
+  let treinos=0;
   for(let d=1;d<=ultimoDia.getDate();d++){
     const iso=`${ano}-${String(mes+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
-    const diaData=dados.desafioDias[iso];
+    const tipos=getTreinosDia(iso);
+    const temTreino=tipos.length>0;
     const isHoje=iso===hojeStr,isFuturo=iso>hojeStr;
     let cls=isFuturo?'futuro':'passado';
-    if(diaData){
-      if(diaData.status==='concluido'){cls='concluido';treinos++;}
-      if(diaData.status==='descanso'){cls='descanso';descansos++;}
-    }else if(!isFuturo&&iso<hojeStr)cls='sem-registro';
+    if(temTreino){cls='concluido';treinos++;}
+    else if(!isFuturo&&iso<hojeStr)cls='sem-registro';
     if(isHoje)cls+=' hoje';
     html+=`<div class="cal-dia ${cls}" onclick="verDiaCal('${iso}')">${d}</div>`;
   }
   document.getElementById('cal-grid-dias').innerHTML=html;
   document.getElementById('cal-stat-treinos').textContent=treinos;
-  document.getElementById('cal-stat-descanso').textContent=descansos;
 }
 function mudarMes(delta){mesAtual.setMonth(mesAtual.getMonth()+delta);renderCalendario();}
 function verDiaCal(iso){
-  const d=dados.desafioDias[iso];if(!d)return;
-  let tipos=[];
-  if(Array.isArray(d.tipos))tipos=d.tipos;else if(d.tipo)tipos=[d.tipo];
-  showToast(`${formatarData(iso)}: ${tipos.join(', ')||d.status}`);
+  const tipos=getTreinosDia(iso);
+  if(!tipos.length)return;
+  const icones={Musculação:'💪',Natação:'🏊',Cardio:'🏃'};
+  showToast(`${formatarData(iso)}: ${tipos.map(t=>(icones[t]||'🏋')+' '+t).join(', ')}`);
 }
 
 // ═══════════════════════════════
@@ -1705,7 +1742,7 @@ function mudarSubAba(sub,el){
   subAbaAtiva=sub;
   document.querySelectorAll('#tela-progresso .toggle-aba').forEach(a=>a.classList.remove('ativa'));
   el.classList.add('ativa');
-  ['peso','calorias','sono','agua','treinos'].forEach(s=>{
+  ['treinos','sono','calorias','agua','peso'].forEach(s=>{
     const el2=document.getElementById('sub-'+s);
     if(el2)el2.style.display=s===sub?'block':'none';
   });
@@ -1713,11 +1750,55 @@ function mudarSubAba(sub,el){
 }
 
 function renderProgresso(){
-  const med=dados.medicoesPeso;
+  if(subAbaAtiva==='treinos'){
+    // Chart.js barras semanais (12 semanas)
+    const semanas12=getUltimasSemanas(12);
+    const labels=semanas12.map(dias=>{
+      const d=new Date(dias[0]);return`${d.getDate()}/${d.getMonth()+1}`;
+    });
+    const pontosData=semanas12.map(dias=>calcPontosSemana(dias));
+    const metasOk=semanas12.map(dias=>metaSemanalAtingida(dias));
+    const ctx=document.getElementById('chart-treinos').getContext('2d');
+    if(chartTreinos)chartTreinos.destroy();
+    chartTreinos=new Chart(ctx,{
+      type:'bar',
+      data:{labels,datasets:[{
+        data:pontosData,
+        backgroundColor:pontosData.map((v,i)=>{
+          if(v>META_PONTOS_SEMANA)return'rgba(59,130,246,0.55)';
+          if(metasOk[i])return'rgba(52,211,153,0.5)';
+          if(v>=2)return'rgba(251,191,36,0.4)';
+          if(v>0)return'rgba(248,113,113,0.4)';
+          return'rgba(90,100,120,0.15)';
+        }),
+        borderColor:pontosData.map((v,i)=>{
+          if(v>META_PONTOS_SEMANA)return'#3b82f6';
+          if(metasOk[i])return'#34d399';
+          if(v>=2)return'#fbbf24';
+          if(v>0)return'#f87171';
+          return'transparent';
+        }),
+        borderWidth:1.5,borderRadius:5
+      }]},
+      options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{
+        x:{ticks:{color:'#5a6478',font:{size:9}},grid:{display:false}},
+        y:{min:0,max:Math.max(6,...pontosData),ticks:{color:'#5a6478',font:{size:10},stepSize:1},grid:{color:'rgba(255,255,255,0.05)'}}
+      }}
+    });
+    const comDados=pontosData.filter(v=>v>0);
+    const media=comDados.length?comDados.reduce((a,b)=>a+b,0)/comDados.length:0;
+    const semanasOk=semanas12.filter((_,i)=>metasOk[i]).length;
+    document.getElementById('stat-semanas-meta').textContent=semanasOk;
+    document.getElementById('stat-media-pts').textContent=media?media.toFixed(1):'—';
+    document.getElementById('stat-streak-treino').textContent=calcStreakSemanal();
+  }
   if(subAbaAtiva==='peso'){
+    const med=dados.medicoesPeso;
     const labels=med.map(m=>formatarData(m.data));
     const vals=med.map(m=>m.pesoKg);
-    renderLineChart('chart-peso',labels,vals);
+    if(chartPeso)chartPeso.destroy();
+    const ctx=document.getElementById('chart-peso').getContext('2d');
+    chartPeso=new Chart(ctx,{type:'line',data:{labels:labels.length?labels:['—'],datasets:[{label:'Peso (kg)',data:vals.length?vals:[0],backgroundColor:'rgba(59,130,246,0.25)',borderColor:'#3b82f6',borderWidth:2.5,pointRadius:4,pointBackgroundColor:'#3b82f6',tension:0.4,fill:true}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{ticks:{color:'#5a6478',font:{size:10}},grid:{color:'rgba(255,255,255,0.04)'}},y:{ticks:{color:'#5a6478',font:{size:10}},grid:{color:'rgba(255,255,255,0.06)'}}}}});
     const peso=pesoMaisRecente();
     if(peso&&dados.perfil.alturaCm){
       const imc=calcIMC(peso);const cls=classIMC(imc);
@@ -1762,71 +1843,19 @@ function renderProgresso(){
     document.getElementById('stat-noites-reg').textContent=reg.length;
   }
   if(subAbaAtiva==='agua'){
+    const metaAgua=calcMetaAgua();
     const dias14=[];for(let i=13;i>=0;i--){const d=new Date();d.setDate(d.getDate()-i);dias14.push(d.toISOString().slice(0,10));}
     const aguaPorDia=dias14.map(iso=>dados.registrosAgua[iso]||0);
     const labels=dias14.map(iso=>formatarData(iso).slice(0,5));
     const ctx=document.getElementById('chart-agua').getContext('2d');
     if(chartAgua)chartAgua.destroy();
-    chartAgua=new Chart(ctx,{type:'bar',data:{labels,datasets:[{data:aguaPorDia,backgroundColor:aguaPorDia.map(v=>v>=2500?'rgba(56,189,248,0.55)':'rgba(14,165,233,0.35)'),borderColor:aguaPorDia.map(v=>v>=2500?'#38bdf8':'#0ea5e9'),borderWidth:1.5,borderRadius:5}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{ticks:{color:'#5a6478',font:{size:9}},grid:{display:false}},y:{ticks:{color:'#5a6478',font:{size:10},callback:v=>v>=1000?(v/1000)+'L':v},grid:{color:'rgba(255,255,255,0.05)'}}}}});
+    chartAgua=new Chart(ctx,{type:'bar',data:{labels,datasets:[{data:aguaPorDia,backgroundColor:aguaPorDia.map(v=>v>=metaAgua?'rgba(56,189,248,0.55)':'rgba(14,165,233,0.35)'),borderColor:aguaPorDia.map(v=>v>=metaAgua?'#38bdf8':'#0ea5e9'),borderWidth:1.5,borderRadius:5}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{ticks:{color:'#5a6478',font:{size:9}},grid:{display:false}},y:{ticks:{color:'#5a6478',font:{size:10},callback:v=>v>=1000?(v/1000)+'L':v},grid:{color:'rgba(255,255,255,0.05)'}}}}});
     const comDados=aguaPorDia.filter(v=>v>0);
     const mediaAgua=comDados.length?comDados.reduce((a,b)=>a+b,0)/comDados.length:0;
     document.getElementById('stat-media-agua').textContent=mediaAgua?(mediaAgua/1000).toFixed(1)+'L':'—';
-    document.getElementById('stat-dias-25l').textContent=comDados.filter(v=>v>=2500).length;
+    document.getElementById('stat-dias-meta-agua').textContent=comDados.filter(v=>v>=metaAgua).length;
     document.getElementById('stat-dias-agua-reg').textContent=comDados.length;
   }
-  if(subAbaAtiva==='treinos'){
-    // Barras semanais com pontos (últimas 8 semanas)
-    const semanas=getUltimasSemanas(8);
-    const meses=['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'];
-    let htmlSemanas='';
-    semanas.forEach((dias,idx)=>{
-      const pts=calcPontosSemana(dias);
-      const{musc,nat,cardio}=getContagemSemanal(dias);
-      const semInicio=dias[0];const semFim=dias[6];
-      const dI=new Date(semInicio);const dF=new Date(semFim);
-      const label=`${dI.getDate()}/${dI.getMonth()+1} – ${dF.getDate()}/${dF.getMonth()+1}`;
-      const pctBarra=Math.min(100,pts/Math.max(META_PONTOS_SEMANA,pts)*100);
-      const maxPts=Math.max(META_PONTOS_SEMANA,pts);
-      const pctRelativo=Math.min(100,(pts/maxPts)*100);
-      let corBarra,corPts;
-      if(pts>META_PONTOS_SEMANA){corBarra='#60a5fa';corPts='#60a5fa';}
-      else if(pts===META_PONTOS_SEMANA){corBarra='var(--verde)';corPts='var(--verde)';}
-      else if(pts>=2){corBarra='var(--amarelo)';corPts='var(--amarelo)';}
-      else if(pts>0){corBarra='var(--vermelho)';corPts='var(--vermelho)';}
-      else{corBarra='var(--card2)';corPts='var(--cinza)';}
-      const pctBarraFinal=META_PONTOS_SEMANA>0?Math.min(100,(pts/META_PONTOS_SEMANA)*100):0;
-      const detalhe=[musc?`💪${musc}`:'',nat?`🏊${nat}`:'',cardio?`🏃${cardio}`:''].filter(Boolean).join(' ');
-      htmlSemanas+=`<div class="semana-treino-item">
-        <div class="semana-treino-header">
-          <span class="semana-treino-label">${label}${detalhe?' · '+detalhe:''}</span>
-          <span class="semana-treino-pts" style="color:${corPts}">${pts}pts</span>
-        </div>
-        <div class="semana-treino-barra">
-          <div class="semana-treino-fill" style="width:${pctBarraFinal}%;background:${corBarra}"></div>
-        </div>
-      </div>`;
-    });
-    document.getElementById('semanas-treino-lista').innerHTML=htmlSemanas||'<div class="empty"><div class="empty-icon">🏋️</div>Nenhum treino registrado ainda.</div>';
-
-    // Total por modalidade
-    const todos=Object.values(dados.desafioDias).filter(d=>d.status==='concluido');
-    let tipos={};
-    todos.forEach(d=>{const t=Array.isArray(d.tipos)?d.tipos:[d.tipo].filter(Boolean);t.forEach(x=>{tipos[x]=(tipos[x]||0)+1;});});
-    const icones={Musculação:'💪',Natação:'🏊',Cardio:'🏃'};
-    let html='';
-    if(Object.keys(tipos).length){
-      Object.entries(tipos).forEach(([k,v])=>{
-        html+=`<div style="display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--card2);font-size:0.87em"><span>${icones[k]||'🏋'} ${k}</span><span style="font-family:var(--fonte-display);font-size:1.3em;color:var(--azul)">${v}x</span></div>`;
-      });
-    }else{html='<div class="empty"><div class="empty-icon">🏋️</div>Nenhum treino registrado ainda.</div>';}
-    document.getElementById('treinos-resumo-stats').innerHTML=html;
-  }
-}
-
-function renderLineChart(canvasId,labels,data){
-  const ctx=document.getElementById(canvasId).getContext('2d');
-  if(chartPeso)chartPeso.destroy();
-  chartPeso=new Chart(ctx,{type:'line',data:{labels:labels.length?labels:['—'],datasets:[{label:'Peso (kg)',data:data.length?data:[0],backgroundColor:'rgba(59,130,246,0.25)',borderColor:'#3b82f6',borderWidth:2.5,pointRadius:4,pointBackgroundColor:'#3b82f6',tension:0.4,fill:true}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{ticks:{color:'#5a6478',font:{size:10}},grid:{color:'rgba(255,255,255,0.04)'}},y:{ticks:{color:'#5a6478',font:{size:10}},grid:{color:'rgba(255,255,255,0.06)'}}}}}); 
 }
 
 // ═══════════════════════════════
@@ -1834,10 +1863,7 @@ function renderLineChart(canvasId,labels,data){
 // ═══════════════════════════════
 function renderBiblioteca(){
   const lista=dados.biblioteca;
-  if(!lista.length){
-    document.getElementById('biblioteca-lista').innerHTML=`<div class="empty"><div class="empty-icon">🥗</div>Nenhum alimento cadastrado.</div>`;
-    return;
-  }
+  if(!lista.length){document.getElementById('biblioteca-lista').innerHTML=`<div class="empty"><div class="empty-icon">🥗</div>Nenhum alimento cadastrado.</div>`;return;}
   document.getElementById('biblioteca-lista').innerHTML=lista.map((a,i)=>`
     <div class="biblioteca-item">
       <div><div class="biblioteca-nome">${a.nome}</div><div class="biblioteca-info">${a.kcal100}kcal/100g · porção ${a.porcao}g</div></div>
@@ -1858,7 +1884,6 @@ function mudarSubTreino(sub,el){
   document.getElementById('sub-treino-b-tela').style.display=sub==='b'?'block':'none';
   renderTreinosTela();
 }
-
 function renderTreinosTela(){
   ['A','B'].forEach(letra=>{
     const containerId=`treino-${letra.toLowerCase()}-lista-tela`;
@@ -1870,7 +1895,7 @@ function renderTreinosTela(){
           <div class="treino-bibl-nome">${ex.n}</div>
           <div class="treino-bibl-desc">${ex.g} · ${ex.s} séries × ${ex.r} reps</div>
         </div>
-        ${ex.gif?`<a class="treino-bibl-link" href="${ex.gif}" target="_blank">Ver GIF</a>`:''}
+        ${ex.gif?`<a class="treino-bibl-link" href="${ex.gif}" target="_blank">GIF</a>`:''}
       </div>`).join('');
   });
 }
@@ -1879,10 +1904,10 @@ function renderTreinosTela(){
 // RENDER: CONQUISTAS
 // ═══════════════════════════════
 const CONQUISTAS_DEF=[
-  {id:'streak3',icon:'🌱',nome:'Primeiros passos',desc:'3 dias seguidos de treino'},
-  {id:'streak7',icon:'🔥',nome:'Uma semana de fogo',desc:'7 dias seguidos'},
-  {id:'streak14',icon:'⚡',nome:'Quinzena imparável',desc:'14 dias seguidos'},
-  {id:'streak21',icon:'💪',nome:'Hábito formado',desc:'21 dias seguidos'},
+  {id:'streak3',icon:'🌱',nome:'Primeiros passos',desc:'3 semanas seguidas com meta batida'},
+  {id:'streak7',icon:'🔥',nome:'Uma semana de fogo',desc:'7 semanas seguidas'},
+  {id:'streak14',icon:'⚡',nome:'Trimestre imparável',desc:'14 semanas seguidas'},
+  {id:'streak21',icon:'💪',nome:'Hábito formado',desc:'21 semanas seguidas'},
   {id:'streak50',icon:'🏅',nome:'Metade da batalha',desc:'50 treinos concluídos'},
   {id:'streak100',icon:'🏆',nome:'100 DIAS',desc:'Desafio completado!'},
   {id:'deficit7',icon:'🥗',nome:'Semana em déficit',desc:'7 dias com déficit calórico'},
@@ -1893,21 +1918,21 @@ const CONQUISTAS_DEF=[
   {id:'natacao5',icon:'🏊',nome:'Mergulhador',desc:'5 treinos de natação registrados'},
   {id:'meta_semanal5',icon:'📅',nome:'5 semanas completas',desc:'Meta semanal atingida 5x'},
   {id:'sono7h',icon:'🌙',nome:'Noites reparadoras',desc:'Média de 7h de sono'},
-  {id:'agua25l',icon:'💧',nome:'Bem hidratado',desc:'Média de 2,5L de água/dia'},
+  {id:'agua_meta',icon:'💧',nome:'Bem hidratado',desc:'Média de água acima da meta por peso'},
 ];
 function verificarConquistas(){
-  const streak=calcStreak();
+  const streakS=calcStreakSemanal();
   const todos=Object.values(dados.desafioDias);
   const diasConcluidos=todos.filter(d=>d.status==='concluido').length;
   let natacoes=0;
   todos.forEach(d=>{const t=Array.isArray(d.tipos)?d.tipos:[d.tipo].filter(Boolean);if(t.includes('Natação'))natacoes++;});
-  [3,7,14,21].forEach(n=>{if(streak>=n)dados.conquistas['streak'+n]=true;});
+  [3,7,14,21].forEach(n=>{if(streakS>=n)dados.conquistas['streak'+n]=true;});
   if(diasConcluidos>=50)dados.conquistas['streak50']=true;
   if(diasConcluidos>=100)dados.conquistas['streak100']=true;
   if(natacoes>=5)dados.conquistas['natacao5']=true;
-  const peso=pesoMaisRecente();const meta=peso?calcMeta(peso):0;
-  if(meta){
-    const diasDeficit=Object.entries(dados.diarioAlimentar).filter(([,d])=>{const t=Object.values(d.refeicoes||{}).flat().reduce((s,x)=>s+(x.kcal||0),0);return t>0&&t<=meta;}).length;
+  const peso=pesoMaisRecente();const metaCal=peso?calcMeta(peso):0;
+  if(metaCal){
+    const diasDeficit=Object.entries(dados.diarioAlimentar).filter(([,d])=>{const t=Object.values(d.refeicoes||{}).flat().reduce((s,x)=>s+(x.kcal||0),0);return t>0&&t<=metaCal;}).length;
     if(diasDeficit>=7)dados.conquistas['deficit7']=true;
     if(diasDeficit>=21)dados.conquistas['deficit21']=true;
   }
@@ -1919,12 +1944,11 @@ function verificarConquistas(){
   if(peso&&dados.perfil.alturaCm){const imc=calcIMC(peso);if(imc>=18.5&&imc<25)dados.conquistas['imc_normal']=true;}
   const regSono=Object.values(dados.registrosSono||{});
   if(regSono.length>=7){const m=regSono.reduce((s,r)=>s+(r.horas||0),0)/regSono.length;if(m>=7)dados.conquistas['sono7h']=true;}
+  const metaAgua=calcMetaAgua();
   const regAgua=Object.values(dados.registrosAgua||{});
-  if(regAgua.length>=7){const m=regAgua.reduce((s,v)=>s+v,0)/regAgua.length;if(m>=2500)dados.conquistas['agua25l']=true;}
-  // Meta semanal 5x
+  if(regAgua.length>=7){const m=regAgua.reduce((s,v)=>s+v,0)/regAgua.length;if(m>=metaAgua)dados.conquistas['agua_meta']=true;}
   const semanas=getUltimasSemanas(20);
-  let semanasCompletas=0;
-  semanas.forEach(dias=>{if(calcPontosSemana(dias)>=META_PONTOS_SEMANA)semanasCompletas++;});
+  const semanasCompletas=semanas.filter(dias=>metaSemanalAtingida(dias)).length;
   if(semanasCompletas>=5)dados.conquistas['meta_semanal5']=true;
   salvarDados();
 }
@@ -1946,12 +1970,14 @@ function renderConquistas(){
 function renderPerfil(){
   const p=dados.perfil;const peso=pesoMaisRecente();
   const tmb=Math.round(calcTMB(peso));const get=calcGET(peso);const meta=calcMeta(peso);
+  const metaAgua=calcMetaAgua();
   document.getElementById('perfil-resumo').innerHTML=`
     <div class="perfil-row"><span class="perfil-label">Idade</span><span class="perfil-val">${p.idade||'—'} anos</span></div>
     <div class="perfil-row"><span class="perfil-label">Altura</span><span class="perfil-val">${p.alturaCm||'—'} cm</span></div>
     <div class="perfil-row"><span class="perfil-label">Peso atual</span><span class="perfil-val">${peso?peso+' kg':'—'}</span></div>
     <div class="perfil-row"><span class="perfil-label">IMC</span><span class="perfil-val">${peso&&p.alturaCm?calcIMC(peso):'—'}</span></div>
-    <div class="perfil-row"><span class="perfil-label">Déficit diário</span><span class="perfil-val">${p.deficit} kcal</span></div>`;
+    <div class="perfil-row"><span class="perfil-label">Déficit diário</span><span class="perfil-val">${p.deficit} kcal</span></div>
+    <div class="perfil-row"><span class="perfil-label">Meta de água</span><span class="perfil-val">${(metaAgua/1000).toFixed(1)}L/dia (35ml/kg)</span></div>`;
   document.getElementById('calc-resumo').innerHTML=`
     <div class="perfil-row"><span class="perfil-label">TMB (taxa basal)</span><span class="perfil-val">${tmb||'—'} kcal</span></div>
     <div class="perfil-row"><span class="perfil-label">Gasto total (GET)</span><span class="perfil-val">${get||'—'} kcal</span></div>
@@ -2054,11 +2080,15 @@ function salvarSono(){
   showToast(`😴 ${h}h${m>0?m+'min':''} registrado!`);renderHoje();verificarConquistas();
 }
 
+// Água (v1.3) — meta dinâmica por peso
 function abrirModalAgua(){atualizarModalAgua();abrirModal('modal-agua');}
 function atualizarModalAgua(){
+  const metaAgua=calcMetaAgua();
   const aguaHoje=dados.registrosAgua[hoje()]||0;
   document.getElementById('agua-total-modal').textContent=aguaHoje>=1000?(aguaHoje/1000).toFixed(2).replace('.',',')+' L':aguaHoje+' ml';
-  document.getElementById('barra-agua-modal').style.width=Math.min(100,aguaHoje/2500*100)+'%';
+  document.getElementById('barra-agua-modal').style.width=Math.min(100,aguaHoje/metaAgua*100)+'%';
+  document.getElementById('agua-meta-label').textContent=(metaAgua/1000).toFixed(1)+'L (35ml/kg)';
+  document.getElementById('agua-meta-barra-label').textContent='Meta: '+(metaAgua>=1000?(metaAgua/1000).toFixed(1)+'L':metaAgua+'ml');
 }
 function addAguaRapido(ml){
   if(!dados.registrosAgua[hoje()])dados.registrosAgua[hoje()]=0;
@@ -2074,7 +2104,7 @@ function zerarAgua(){if(confirm('Zerar água de hoje?')){dados.registrosAgua[hoj
 
 function abrirModalRefeicao(periodo){
   refPeriodo=periodo;refItensTemp=[];
-  const nomes={'manhã':'☕ CAFÉ DA MANHÃ','almoço':'🍽️ ALMOÇO','jantar':'🌙 JANTAR','extra':'🍎 EXTRA'};
+  const nomes={'manhã':'☕ CAFÉ DA MANHÃ','almoço':'🍽️ ALMOÇO','jantar':'🥗 JANTAR','extra':'🍎 EXTRA'};
   document.getElementById('modal-ref-titulo').textContent=nomes[periodo]||periodo.toUpperCase();
   document.getElementById('ref-busca').value='';document.getElementById('ref-nome').value='';
   document.getElementById('ref-porcao').value='';document.getElementById('ref-kcal').value='';
@@ -2138,7 +2168,7 @@ function salvarAlimento(){
 }
 
 // ═══════════════════════════════
-// MUSCULAÇÃO — Lógica A/B bloqueante
+// MUSCULAÇÃO — v1.3
 // ═══════════════════════════════
 function abrirMusculacao(){
   atualizarABCards();
@@ -2151,24 +2181,20 @@ function mostrarMuscScreen(id){
   document.getElementById(id).classList.add('ativo');
   window.scrollTo(0,0);
 }
-
 function atualizarABCards(){
   const proximo=dados.proximoTreino||'A';
   document.getElementById('ab-grid').innerHTML=['A','B'].map(letra=>{
     const ehProximo=letra===proximo;
-    const ehBloqueado=!ehProximo;
-    return`<div class="ab-card ${ehProximo?'proximo':''} ${ehBloqueado?'bloqueado':''}" onclick="${ehBloqueado?'':'startTreino(\''+letra+'\')'}">
+    return`<div class="ab-card ${ehProximo?'proximo':''} ${!ehProximo?'bloqueado':''}" onclick="${ehProximo?'startTreino(\''+letra+'\')':''}">
       <div class="ab-card-titulo">TREINO ${letra}</div>
       <div class="ab-card-sub">${TREINOS[letra].map(e=>e.g).filter((v,i,a)=>a.indexOf(v)===i).join(' · ')}</div>
       <div class="ab-card-badge ${ehProximo?'badge-proximo':'badge-bloq'}">${ehProximo?'▶ Próximo':'🔒 Aguardando'}</div>
     </div>`;
   }).join('');
 }
+function startTreino(letra){curTreino=letra;curExIdx=0;loadEx();mostrarMuscScreen('musc-ex');}
 
-function startTreino(letra){
-  curTreino=letra;curExIdx=0;loadEx();mostrarMuscScreen('musc-ex');
-}
-
+// v1.3: peso no painel esquerdo/direito + evolução
 function loadEx(){
   clearTimerMusc();
   const ex=TREINOS[curTreino][curExIdx];
@@ -2181,18 +2207,38 @@ function loadEx(){
   document.getElementById('ex-nm').textContent=ex.n;
   document.getElementById('ex-reps').textContent=ex.s+' séries · '+ex.r+' repetições';
   const chave=curTreino+'_'+ex.n;
-  const pesoSalvo=dados.pesosExercicios[chave]||'';
-  document.getElementById('ex-peso-input').value=pesoSalvo;
+  const pesoSalvo=dados.pesosExercicios[chave]||null;
+  document.getElementById('ex-carga-atual-val').textContent=pesoSalvo?pesoSalvo+' kg':'—';
+  document.getElementById('ex-peso-nova-input').value='';
+  atualizarEvolucaoEx(chave);
   buildProgress();buildSeries(ex.s,ex.r);
   document.getElementById('btn-nxt').disabled=true;
 }
 
+// v1.3: salvar nova carga no painel direito
 function salvarPesoEx(){
   const ex=TREINOS[curTreino][curExIdx];
   const chave=curTreino+'_'+ex.n;
-  const val=parseFloat(document.getElementById('ex-peso-input').value)||0;
-  if(val>0)dados.pesosExercicios[chave]=val;
-  salvarDados();
+  const val=parseFloat(document.getElementById('ex-peso-nova-input').value)||0;
+  if(val>0){
+    if(!dados.pesosExerciciosInicial[chave])dados.pesosExerciciosInicial[chave]=val;
+    dados.pesosExercicios[chave]=val;
+    document.getElementById('ex-carga-atual-val').textContent=val+' kg';
+    salvarDados();
+    atualizarEvolucaoEx(chave);
+  }
+}
+
+function atualizarEvolucaoEx(chave){
+  const el=document.getElementById('ex-carga-evolucao');
+  const atual=dados.pesosExercicios[chave];
+  const inicial=dados.pesosExerciciosInicial[chave];
+  if(!atual||!inicial){el.innerHTML='';return;}
+  const delta=Math.round((atual-inicial)/inicial*100);
+  if(delta===0){el.innerHTML=`<span style="font-size:0.75em;color:var(--cinza)">Carga inicial: ${inicial}kg</span>`;return;}
+  const seta=delta>0?'↑':'↓';
+  const cor=delta>0?'var(--verde)':'var(--vermelho)';
+  el.innerHTML=`<span style="color:${cor};font-weight:700">${seta} ${Math.abs(delta)}%</span> <span style="font-size:0.72em;color:var(--cinza)">vs inicial (${inicial}kg)</span>`;
 }
 
 function buildProgress(){
@@ -2228,6 +2274,7 @@ function buildSeries(num,reps){
   }
 }
 
+// v1.3: todas as séries mostram azul (inclusive a última)
 function clickSerie(idx,totalSeries){
   const anilha=document.getElementById('sa-'+idx);
   if(!anilha.classList.contains('clickable')||seriesDone[idx])return;
@@ -2236,8 +2283,9 @@ function clickSerie(idx,totalSeries){
   if(navigator.vibrate)navigator.vibrate(40);
   const isLast=(idx===seriesDone.length-1);
   if(isLast){
+    // v1.3: última série também em azul, acende btn-nxt
     const timerEl=document.getElementById('st-'+idx);
-    timerEl.textContent='✓';timerEl.style.color='var(--verde)';
+    timerEl.textContent='✓';timerEl.style.color='var(--azul)';
     document.getElementById('btn-nxt').disabled=false;
     return;
   }
@@ -2256,7 +2304,6 @@ function clickSerie(idx,totalSeries){
     }
   },1000);
 }
-
 function clearTimerMusc(){if(timerInterval){clearInterval(timerInterval);timerInterval=null;}}
 
 function nextEx(){
@@ -2271,7 +2318,6 @@ function nextEx(){
     mostrarMuscScreen('musc-done');
   }else{loadEx();}
 }
-
 function finalizarMusculacao(){
   const proximo=curTreino==='A'?'B':'A';
   dados.proximoTreino=proximo;
@@ -2297,42 +2343,20 @@ function finalizarNatacao(){
 }
 
 // ═══════════════════════════════
-// CARDIO
+// CARDIO (simplificado v1.3)
 // ═══════════════════════════════
 function abrirCardio(){
-  cardioTimerSec=0;cardioTimerRunning=false;clearInterval(cardioTimerRef);
-  document.getElementById('cardio-timer-display').textContent='00:00:00';
-  document.getElementById('cardio-btn-timer').textContent='▶ Iniciar';
-  document.getElementById('cardio-estado-lbl').textContent='Pronto para começar';
+  document.getElementById('cardio-minutos').value='30';
   document.getElementById('cardio-km').value='';
-  cardioTipoAtual='corrida';
-  document.querySelectorAll('.cardio-tipo-btn').forEach(b=>b.classList.remove('ativo'));
-  document.getElementById('ctb-corrida').classList.add('ativo');
   document.getElementById('screen-cardio').classList.add('ativo');
 }
-function fecharCardio(){clearInterval(cardioTimerRef);cardioTimerRunning=false;document.getElementById('screen-cardio').classList.remove('ativo');}
-function toggleCardioTimer(){
-  if(cardioTimerRunning){
-    cardioTimerRunning=false;clearInterval(cardioTimerRef);
-    document.getElementById('cardio-btn-timer').textContent='▶ Continuar';
-    document.getElementById('cardio-estado-lbl').textContent='⏸ Pausado';
-  }else{
-    cardioTimerRunning=true;
-    document.getElementById('cardio-btn-timer').textContent='⏸ Pausar';
-    document.getElementById('cardio-estado-lbl').textContent='🏃 Correndo...';
-    cardioTimerRef=setInterval(()=>{cardioTimerSec++;document.getElementById('cardio-timer-display').textContent=formatTimer(cardioTimerSec);},1000);
-  }
-}
-function selecionarCardioTipo(tipo){
-  cardioTipoAtual=tipo;
-  document.querySelectorAll('.cardio-tipo-btn').forEach(b=>b.classList.remove('ativo'));
-  document.getElementById('ctb-'+tipo).classList.add('ativo');
-}
+function fecharCardio(){document.getElementById('screen-cardio').classList.remove('ativo');}
 function finalizarCardio(){
+  const min=parseInt(document.getElementById('cardio-minutos').value)||0;
   const km=parseFloat(document.getElementById('cardio-km').value)||0;
-  registrarTreino('Cardio',{duracao:Math.floor(cardioTimerSec/60),tipoCardio:cardioTipoAtual,km});
+  registrarTreino('Cardio',{duracao:min,km});
   fecharCardio();
-  showToast(`🏃 Cardio registrado!${km?' '+km+'km':''}${cardioTimerSec>0?' · '+formatTimer(cardioTimerSec):''}`);
+  showToast(`🏃 Cardio registrado!${min?' '+min+'min':''}${km?' · '+km+'km':''}`);
 }
 
 // ── Helper ──
@@ -2344,10 +2368,6 @@ function registrarTreino(tipo,extras){
   Object.assign(d,extras);
   dados.desafioDias[hoje()]=d;
   salvarDados();renderHoje();verificarConquistas();
-}
-function formatTimer(secs){
-  const h=Math.floor(secs/3600);const m=Math.floor((secs%3600)/60);const s=secs%60;
-  return`${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
 }
 
 // ═══════════════════════════════
@@ -2363,7 +2383,7 @@ function importarDados(){document.getElementById('input-import').click();}
 function processarImport(e){
   const file=e.target.files[0];if(!file)return;
   const reader=new FileReader();
-  reader.onload=ev=>{try{dados=JSON.parse(ev.target.result);salvarDados();showToast('Dados importados! ✅');renderHoje();}catch{showToast('Erro ao importar!');}};
+  reader.onload=ev=>{try{dados=migrarDados(JSON.parse(ev.target.result));salvarDados();showToast('Dados importados! ✅');renderHoje();}catch{showToast('Erro ao importar!');}};
   reader.readAsText(file);
 }
 function confirmarReiniciar(){
@@ -2383,11 +2403,16 @@ function showToast(msg,dur=2800){
 // ═══════════════════════════════
 (function init(){
   if(!dados.proximoTreino)dados.proximoTreino='A';
-  // Render treinos tela na inicialização
+  if(!dados.pesosExerciciosInicial)dados.pesosExerciciosInicial={};
   renderTreinosTela();
   if(!dados.perfil.alturaCm||!dados.perfil.idade){
     setTimeout(()=>abrirModalConfigurar(),500);
   }
+  // v1.3: progresso começa em treinos
+  ['treinos','sono','calorias','agua','peso'].forEach(s=>{
+    const el=document.getElementById('sub-'+s);
+    if(el)el.style.display=s==='treinos'?'block':'none';
+  });
   renderHoje();
   mesAtual=new Date();
 })();
