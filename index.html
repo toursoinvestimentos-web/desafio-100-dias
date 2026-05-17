@@ -1484,22 +1484,22 @@ function calcStreakSemanal(){
 // Emojis sono
 function emojiSono(horas){
   if(horas===null||horas===undefined)return'😴';
-  if(horas<4)return'😵';
+  if(horas<4)return'😟';
   if(horas<5)return'🥱';
   if(horas<7)return'😐';
   if(horas<=8)return'😊';
-  return'🤩';
+  return'👍';
 }
 
 // Emojis água
 function emojiAgua(ml,meta){
-  if(!ml||ml===0)return'🏜️';
+  if(!ml||ml===0)return'😫';
   const pct=ml/meta;
-  if(pct<0.3)return'😵';
-  if(pct<0.6)return'😫';
+  if(pct<0.3)return'😟';
+  if(pct<0.6)return'😕';
   if(pct<0.85)return'😐';
   if(pct<1.0)return'😊';
-  return'🎉';
+  return'👍';
 }
 
 function corSono(horas){
