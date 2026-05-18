@@ -272,9 +272,9 @@ body{
 .mini-card.borda-cinza .mini-card-emoji svg { color: var(--cinza); }
 .mini-card-label{
   font-size:0.58em;text-transform:uppercase;letter-spacing:0.1em;
-  color:var(--cinza);margin-bottom:8px;font-weight:600;
+  color:var(--cinza);margin-bottom:4px;font-weight:600;
 }
-.mini-card-body{display:flex;align-items:center;gap:10px;}
+.mini-card-body{display:flex;align-items:center;gap:6px;}
 .mini-card-left{flex:1;min-width:0;}
 .mini-card-val{
   font-family:var(--fonte-display);font-size:1.6em;
@@ -282,15 +282,18 @@ body{
 }
 .mini-card-sub{font-size:0.6em;color:var(--cinza);}
 .mini-card-emoji{
-  width:80px;height:80px;
+  width:52px;          
+  height:52px;         
   flex-shrink:0;
   display:flex;
   align-items:center;
   justify-content:center;
 }
 .mini-card-emoji svg{
-  width:80px;height:80px;
+  width:100%;          
+  height:100%;
   display:block;
+  object-fit: contain; 
 }
 .mini-card-media{
   font-size:0.62em;color:var(--cinza);
