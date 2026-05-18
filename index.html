@@ -1419,7 +1419,23 @@ function getContagemSemanal(dias){
 function calcPontosSemana(dias){const{musc,nat,cardio}=getContagemSemanal(dias);return musc+nat+cardio;}
 function metaSemanalAtingida(dias){const{musc,nat,cardio}=getContagemSemanal(dias);return musc>=META_MUSC_SEMANA&&nat>=META_NAT_SEMANA&&cardio>=META_CARD_SEMANA;}
 function calcStreakSemanal(){let streak=0;for(let w=0;w<52;w++){if(metaSemanalAtingida(getSemanaOffset(w)))streak++;else break;}return streak;}
-function emojiSono(horas){if(horas===null||horas===undefined)return'😴';if(horas<4)return'😟';if(horas<5)return'🥱';if(horas<7)return'😐';if(horas<=8)return'😊';return'👍';}
+  
+function emojiSono(horas){
+  if (horas === null || horas === undefined) {
+    return `<svg viewBox="0 0 24 24" width="28" height="28" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9 10h.01M15 10h.01"/><line x1="9" y1="14" x2="15" y2="14"/></svg>`;
+  }
+  if (horas < 4) {
+    return `<svg viewBox="0 0 24 24" width="28" height="28" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="8" y1="9" x2="8" y2="9.01"/><line x1="16" y1="9" x2="16" y2="9.01"/><path d="M9 15c1.5-1 3.5-1 5 0"/><line x1="9" y1="8" x2="10" y2="9"/><line x1="15" y1="8" x2="14" y2="9"/><path d="M9 16l-1 1"/><path d="M15 16l1 1"/></svg>`;
+  }
+  if (horas < 5) {
+    return `<svg viewBox="0 0 24 24" width="28" height="28" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 9s1-1 2-1 2 1 2 1"/><path d="M12 9s1-1 2-1 2 1 2 1"/><path d="M9 15c1.5-1 3.5-1 5 0"/><line x1="9" y1="15" x2="8" y2="14"/><line x1="15" y1="15" x2="16" y2="14"/></svg>`;
+  }
+  if (horas < 7) {
+    return `<svg viewBox="0 0 24 24" width="28" height="28" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="8" y1="10" x2="8" y2="10.01"/><line x1="16" y1="10" x2="16" y2="10.01"/><path d="M9 14c1.5-1 3.5-1 5 0"/><path d="M9 14l-1-1"/><path d="M15 14l1-1"/></svg>`;
+  }
+  return `<svg viewBox="0 0 24 24" width="28" height="28" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 9c.5 0 2 0 2 1s-1 1-2 1-2 0-2-1 1.5-1 2-1z"/><path d="M16 9c.5 0 2 0 2 1s-1 1-2 1-2 0-2-1 1.5-1 2-1z"/><path d="M9 15c1.5 1 3.5 1 5 0"/></svg>`;
+}
+  
 function emojiAgua(ml,meta){if(!ml||ml===0)return'😫';const pct=ml/meta;if(pct<0.3)return'😟';if(pct<0.6)return'😕';if(pct<0.85)return'😐';if(pct<1.0)return'😊';return'👍';}
 function corSono(horas){if(horas===null||horas===undefined)return'cinza';if(horas>=7)return'verde';if(horas>=5)return'amarela';return'vermelha';}
 
@@ -1508,12 +1524,12 @@ function renderHoje(){
     miniSono.style.color=cor==='verde'?'var(--verde)':cor==='amarela'?'var(--amarelo)':'var(--vermelho)';
     miniSonoSub.textContent=sonoHoje.horas>=7?'Boa noite ✓':'Abaixo meta';
     document.getElementById('mc-sono').className='mini-card borda-'+cor;
-    miniSonoEmoji.textContent=emojiSono(sonoHoje.horas);
+    miniSonoEmoji.innerHTML = emojiSono(sonoHoje.horas);
   }else{
     miniSono.textContent='—';miniSono.style.color='var(--azul)';
     miniSonoSub.textContent='registrar';
     document.getElementById('mc-sono').className='mini-card borda-cinza';
-    miniSonoEmoji.textContent='😴';
+    miniSonoEmoji.innerHTML = `<svg viewBox="0 0 24 24" width="28" height="28" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9 10h.01M15 10h.01"/><line x1="9" y1="14" x2="15" y2="14"/></svg>`;
   }
   const regSono=Object.values(dados.registrosSono||{}).filter(r=>r.horas>0);
   if(regSono.length>0){
