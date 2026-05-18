@@ -1569,26 +1569,42 @@ function renderCardTreinoSemanal(){
     resumoEl.innerHTML=`<span style="font-size:0.78em;color:var(--cinza)">${pts}/${META_PONTOS_SEMANA}pts</span>`;
   }
 
-  const nomes=['Seg','Ter','Qua','Qui','Sex','Sáb','Dom'];
-  const hojeStr=hoje();
-  let html='';
-  dias.forEach((iso,i)=>{
-    const tipos=getTreinosDia(iso);
-    const isHoje=iso===hojeStr;
-    let icone='';
-    if(tipos.includes('Musculação')&&tipos.includes('Natação'))icone='🏋🏊';
-    else if(tipos.includes('Musculação')&&tipos.includes('Cardio'))icone='🏋🏃';
-    else if(tipos.includes('Natação')&&tipos.includes('Cardio'))icone='🏊🏃';
-    else if(tipos.includes('Musculação'))icone='🏋️';
-    else if(tipos.includes('Natação'))icone='🏊';
-    else if(tipos.includes('Cardio'))icone='🏃';
-    const temTreino=tipos.length>0;
-    html+=`<div class="treino-dia-chip ${temTreino?'ok':''} ${isHoje?'hoje-chip':''}">
+    const nomes = ['Seg','Ter','Qua','Qui','Sex','Sáb','Dom'];
+  const hojeStr = hoje();
+  
+  // Pega os ícones SVG já prontos dos botões
+  const iconMusc = document.querySelector('#mod-musc .treino-mod-icon');
+  const iconNat  = document.querySelector('#mod-nat .treino-mod-icon');
+  const iconCard = document.querySelector('#mod-card .treino-mod-icon');
+  
+  let html = '';
+  dias.forEach((iso, i) => {
+    const tipos = getTreinosDia(iso);
+    const isHoje = iso === hojeStr;
+    let iconeHTML = '';
+    
+    if (tipos.includes('Musculação') && tipos.includes('Natação')) {
+      iconeHTML = (iconMusc ? iconMusc.innerHTML : '') + (iconNat ? iconNat.innerHTML : '');
+    } else if (tipos.includes('Musculação') && tipos.includes('Cardio')) {
+      iconeHTML = (iconMusc ? iconMusc.innerHTML : '') + (iconCard ? iconCard.innerHTML : '');
+    } else if (tipos.includes('Natação') && tipos.includes('Cardio')) {
+      iconeHTML = (iconNat ? iconNat.innerHTML : '') + (iconCard ? iconCard.innerHTML : '');
+    } else if (tipos.includes('Musculação')) {
+      iconeHTML = iconMusc ? iconMusc.innerHTML : '';
+    } else if (tipos.includes('Natação')) {
+      iconeHTML = iconNat ? iconNat.innerHTML : '';
+    } else if (tipos.includes('Cardio')) {
+      iconeHTML = iconCard ? iconCard.innerHTML : '';
+    }
+    
+    const temTreino = tipos.length > 0;
+    html += `<div class="treino-dia-chip ${temTreino ? 'ok' : ''} ${isHoje ? 'hoje-chip' : ''}">
       <div class="treino-dia-chip-nome">${nomes[i]}</div>
-      <div class="treino-dia-chip-icon">${icone}</div>
+      <div class="treino-dia-chip-icon">${iconeHTML}</div>
     </div>`;
   });
-  document.getElementById('semana-treinos-grid').innerHTML=html;
+  
+  document.getElementById('semana-treinos-grid').innerHTML = html;
 }
 
 // ═══════════════════════════════
