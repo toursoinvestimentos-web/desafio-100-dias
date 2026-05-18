@@ -266,6 +266,8 @@ body{
 .mini-card.borda-amarela{border-left-color:var(--amarelo);}
 .mini-card.borda-vermelha{border-left-color:var(--vermelho);}
 .mini-card.borda-cinza{border-left-color:var(--cinza);}
+.mini-card.borda-azul{border-left-color:#38bdf8;}
+.mini-card.borda-azul .mini-card-emoji svg { color: #38bdf8; } 
 .mini-card.borda-verde .mini-card-emoji svg { color: var(--verde); }
 .mini-card.borda-amarela .mini-card-emoji svg { color: var(--amarelo); }
 .mini-card.borda-vermelha .mini-card-emoji svg { color: var(--vermelho); }
@@ -1589,11 +1591,21 @@ function renderHoje(){
   const miniAguaEmoji=document.getElementById('mini-agua-emoji');
   if(aguaHoje>0){
     miniAgua.textContent=aguaHoje>=1000?(aguaHoje/1000).toFixed(1)+'L':aguaHoje+'ml';
-    const pctA=Math.min(100,Math.round(aguaHoje/metaAgua*100));
-    miniAguaSub.textContent=pctA+'% meta';
-    const corA=aguaHoje>=metaAgua?'verde':aguaHoje>=metaAgua*0.6?'amarela':'vermelha';
-    miniAgua.style.color=corA==='verde'?'var(--verde)':corA==='amarela'?'var(--amarelo)':'var(--vermelho)';
-    document.getElementById('mc-agua').className='mini-card borda-'+corA;
+    const pctA = Math.min(100, Math.round(aguaHoje / metaAgua * 100));
+miniAguaSub.textContent = pctA + '% meta';
+
+let corA;
+if (pctA >= 100) corA = 'azul';
+else if (pctA >= 80) corA = 'verde';
+else if (pctA >= 50) corA = 'amarela';
+else corA = 'vermelha';
+
+if (corA === 'azul') miniAgua.style.color = '#38bdf8';
+else if (corA === 'verde') miniAgua.style.color = 'var(--verde)';
+else if (corA === 'amarela') miniAgua.style.color = 'var(--amarelo)';
+else miniAgua.style.color = 'var(--vermelho)';
+
+document.getElementById('mc-agua').className = 'mini-card borda-' + corA;
     miniAguaEmoji.innerHTML = emojiAgua(aguaHoje, metaAgua);
   }else{
     miniAgua.textContent='—';miniAgua.style.color='#38bdf8';
