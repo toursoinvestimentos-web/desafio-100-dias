@@ -266,8 +266,8 @@ body{
 .mini-card.borda-amarela{border-left-color:var(--amarelo);}
 .mini-card.borda-vermelha{border-left-color:var(--vermelho);}
 .mini-card.borda-cinza{border-left-color:var(--cinza);}
-.mini-card.borda-azul{border-left-color:#38bdf8;}
-.mini-card.borda-azul .mini-card-emoji svg { color: #38bdf8; } 
+.mini-card.borda-azul{border-left-color:var(--azul);}
+.mini-card.borda-azul .mini-card-emoji svg { color: var(--azul); } 
 .mini-card.borda-verde .mini-card-emoji svg { color: var(--verde); }
 .mini-card.borda-amarela .mini-card-emoji svg { color: var(--amarelo); }
 .mini-card.borda-vermelha .mini-card-emoji svg { color: var(--vermelho); }
@@ -1587,8 +1587,11 @@ function renderHoje(){
   if(sonoHoje&&sonoHoje.horas!==undefined){
     const h=Math.floor(sonoHoje.horas);const m=Math.round((sonoHoje.horas-h)*60);
     miniSono.textContent=`${h}h${m>0?m+'m':''}`;
-    const cor=corSono(sonoHoje.horas);
-    miniSono.style.color=cor==='verde'?'var(--verde)':cor==='amarela'?'var(--amarelo)':'var(--vermelho)';
+    const cor = corSono(sonoHoje.horas);
+if (cor === 'verde') miniSono.style.color = 'var(--verde)';
+else if (cor === 'amarela') miniSono.style.color = 'var(--amarelo)';
+else if (cor === 'azul') miniSono.style.color = 'var(--azul)';
+else miniSono.style.color = 'var(--vermelho)';
     if (sonoHoje.horas >= 7) miniSonoSub.textContent = 'Boa noite ✓';
     else miniSonoSub.textContent = 'Abaixo meta';
     document.getElementById('mc-sono').className='mini-card borda-'+cor;
