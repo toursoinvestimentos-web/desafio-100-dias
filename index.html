@@ -1365,11 +1365,27 @@ function carregarDados(){
   return dadosPadrao();
 }
 function migrarDados(d){
-  if(!d.registrosSono)        d.registrosSono={};
-  if(!d.registrosAgua)        d.registrosAgua={};
-  if(!d.pesosExercicios)      d.pesosExercicios={};
-  if(!d.pesosExerciciosInicial) d.pesosExerciciosInicial={};
-  if(!d.proximoTreino)        d.proximoTreino='A';
+  const padrao = dadosPadrao();
+  if(!d.perfil) d.perfil = padrao.perfil;
+  else {
+    if(d.perfil.idade === undefined) d.perfil.idade = padrao.perfil.idade;
+    if(d.perfil.alturaCm === undefined) d.perfil.alturaCm = padrao.perfil.alturaCm;
+    if(d.perfil.peso === undefined) d.perfil.peso = padrao.perfil.peso;
+    if(d.perfil.fatorAtividade === undefined) d.perfil.fatorAtividade = padrao.perfil.fatorAtividade;
+    if(d.perfil.deficit === undefined) d.perfil.deficit = padrao.perfil.deficit;
+    if(d.perfil.inicio === undefined) d.perfil.inicio = padrao.perfil.inicio;
+  }
+  if(!d.medicoesPeso) d.medicoesPeso = padrao.medicoesPeso;
+  if(!d.desafioDias) d.desafioDias = padrao.desafioDias;
+  if(!d.diarioAlimentar) d.diarioAlimentar = padrao.diarioAlimentar;
+  if(!d.biblioteca) d.biblioteca = padrao.biblioteca;
+  if(!d.conquistas) d.conquistas = padrao.conquistas;
+  if(!d.registrosSono) d.registrosSono = padrao.registrosSono;
+  if(!d.registrosAgua) d.registrosAgua = padrao.registrosAgua;
+  if(!d.pesosExercicios) d.pesosExercicios = padrao.pesosExercicios;
+  if(!d.pesosExerciciosInicial) d.pesosExerciciosInicial = padrao.pesosExerciciosInicial;
+  if(!d.proximoTreino) d.proximoTreino = padrao.proximoTreino;
+  
   return d;
 }
 function dadosPadrao(){
