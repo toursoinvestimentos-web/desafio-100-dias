@@ -1472,11 +1472,11 @@ function emojiAgua(ml, meta){
   // Altura total útil do copo: do fundo (y=780) ao topo (y=200)
   const totalHeight = 580;
   const waterHeight = (pct / 100) * totalHeight;
-  const waterTop = 780 - waterHeight + 8;  // y do topo da água
+  const waterTop = 780 - waterHeight - 15;  // y do topo da água
   
   // Largura da água: linearmente interpolada entre fundo (260) e topo (400)
   // Quanto maior o waterTop (mais baixo), menor a largura; quanto menor (mais alto), maior a largura.
-  const larguraFundo = 320;
+  const larguraFundo = 330;
   const larguraTopoMax = 430;
   // Fator de progresso: 0 no fundo, 1 no topo
   const progresso = (780 - waterTop) / totalHeight; // 0 = fundo, 1 = topo
