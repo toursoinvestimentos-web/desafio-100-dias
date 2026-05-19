@@ -1469,32 +1469,37 @@ function emojiAgua(ml, meta){
   if(pct > 100) pct = 100;
   if(pct < 0) pct = 0;
   
-  // Altura total útil do copo: do fundo (y=780) ao topo (y=200)
+  // Se atingiu a meta, desenha o copo completamente preenchido de azul
+  if (ml >= meta) {
+    return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 1000" preserveAspectRatio="xMidYMid meet">
+      <!-- Água preenche todo o interior do copo -->
+      <rect x="150" y="200" width="400" height="580" fill="#38bdf8" />
+      <!-- Contorno do copo -->
+      <path d="M171.86 937.73c-12.61,1.25 -25.61,-7.66 -33.18,-14.89 -7.76,-7.41 -12.78,-17.88 -15.18,-32.84l64.97 -0.06 378.53 0c-2.5,18.75 -10.89,27.96 -20.87,37.12 -10.99,10.07 -23.89,12.6 -42.49,12.63 -47.65,0.08 -324.3,2.95 -331.78,-1.96zm13.53 -82.44l-65.68 -0.4c-8.52,-130.75 -21.53,-262.57 -31.95,-393.32 -2.14,-26.87 -33.19,-376.28 -30.74,-392.58l-1.57 -7.96 580 0.08 -64.61 794.16 -385.45 0.02zm-166.19 -815.22c0,38.14 11.08,139.63 14.72,187.58 1.63,21.45 2.63,44.1 5.18,63.49l35.77 441.23c0.27,19.92 4.57,43.49 5.54,63.13 0.59,11.94 1.09,19.23 2.01,31.39 0.57,7.48 1.54,22.02 2.81,30.61 4.98,33.75 0.13,70.71 38.4,98.94 11.34,8.38 30.83,19.06 49.62,19.06l345.21 0c18.29,0 37.6,-10.22 48.56,-18.26 37.1,-27.21 35.06,-59.67 38.96,-96.53 2,-18.93 4.66,-43.5 5.29,-63.39l10.62 -124.86c2.84,-21.62 1.89,-42.32 4.73,-63.94 6.19,-47.01 10.07,-133.06 15.91,-188.25 2.29,-21.66 1.95,-42.36 5.07,-63.61l10.07 -125.42c0.62,-19.91 4.56,-43.57 5.53,-63.14 1.9,-38.48 9.31,-93.82 9.31,-128.03 0,-2.67 -5.06,-14.85 -16.7,-14.85l-619.91 0c-8.27,0 -16.7,7.52 -16.7,14.85z" fill="none" stroke="currentColor" stroke-width="2.2" stroke-miterlimit="22.9256" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>`;
+  }
+  
+  // Caso não tenha atingido a meta, desenha a água subindo (com formato de funil)
   const totalHeight = 580;
   const waterHeight = (pct / 100) * totalHeight;
-  const waterTop = 780 - waterHeight - 30;  // y do topo da água
-  
+  const ajusteTopo = -50;   // ← ajuste este valor conforme você desejar (negativo sobe)
+  const waterTop = 780 - waterHeight + ajusteTopo;
   // Largura da água: linearmente interpolada entre fundo (260) e topo (400)
   // Quanto maior o waterTop (mais baixo), menor a largura; quanto menor (mais alto), maior a largura.
-  const larguraFundo = 340;
+  const larguraFundo = 350;
   const larguraTopoMax = 430;
-  // Fator de progresso: 0 no fundo, 1 no topo
-  const progresso = (780 - waterTop) / totalHeight; // 0 = fundo, 1 = topo
+  const progresso = (780 - waterTop) / totalHeight;
   const larguraAtual = larguraFundo + (larguraTopoMax - larguraFundo) * progresso;
-  
-  const centro = 350; // centro do copo no eixo X
+  const centro = 350;
   const x1 = centro - larguraAtual/2;
   const x2 = centro + larguraAtual/2;
   const xFundo1 = centro - larguraFundo/2;
   const xFundo2 = centro + larguraFundo/2;
   
-  // Polígono da água: topo (largura atual) até fundo (largura fixa)
   const waterPolygon = `M ${x1} ${waterTop} L ${x2} ${waterTop} L ${xFundo2} 780 L ${xFundo1} 780 Z`;
   
   return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 1000" preserveAspectRatio="xMidYMid meet">
-    <!-- Água com formato de funil (trapézio) -->
     <path d="${waterPolygon}" fill="#38bdf8" />
-    <!-- Contorno do copo (borda mais grossa e visível) -->
     <path d="M171.86 937.73c-12.61,1.25 -25.61,-7.66 -33.18,-14.89 -7.76,-7.41 -12.78,-17.88 -15.18,-32.84l64.97 -0.06 378.53 0c-2.5,18.75 -10.89,27.96 -20.87,37.12 -10.99,10.07 -23.89,12.6 -42.49,12.63 -47.65,0.08 -324.3,2.95 -331.78,-1.96zm13.53 -82.44l-65.68 -0.4c-8.52,-130.75 -21.53,-262.57 -31.95,-393.32 -2.14,-26.87 -33.19,-376.28 -30.74,-392.58l-1.57 -7.96 580 0.08 -64.61 794.16 -385.45 0.02zm-166.19 -815.22c0,38.14 11.08,139.63 14.72,187.58 1.63,21.45 2.63,44.1 5.18,63.49l35.77 441.23c0.27,19.92 4.57,43.49 5.54,63.13 0.59,11.94 1.09,19.23 2.01,31.39 0.57,7.48 1.54,22.02 2.81,30.61 4.98,33.75 0.13,70.71 38.4,98.94 11.34,8.38 30.83,19.06 49.62,19.06l345.21 0c18.29,0 37.6,-10.22 48.56,-18.26 37.1,-27.21 35.06,-59.67 38.96,-96.53 2,-18.93 4.66,-43.5 5.29,-63.39l10.62 -124.86c2.84,-21.62 1.89,-42.32 4.73,-63.94 6.19,-47.01 10.07,-133.06 15.91,-188.25 2.29,-21.66 1.95,-42.36 5.07,-63.61l10.07 -125.42c0.62,-19.91 4.56,-43.57 5.53,-63.14 1.9,-38.48 9.31,-93.82 9.31,-128.03 0,-2.67 -5.06,-14.85 -16.7,-14.85l-619.91 0c-8.27,0 -16.7,7.52 -16.7,14.85z" fill="none" stroke="currentColor" stroke-width="2.2" stroke-miterlimit="22.9256" stroke-linecap="round" stroke-linejoin="round"/>
   </svg>`;
 }
