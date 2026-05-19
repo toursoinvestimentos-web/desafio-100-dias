@@ -1192,7 +1192,7 @@ body{
 
 <div class="modal-overlay" id="modal-sono">
   <div class="modal-box">
-    <div class="modal-titulo">😴 SONO DE HOJE</div>
+    <div class="modal-titulo">💤 SONO DE HOJE</div>
     <p style="font-size:0.78em;color:var(--cinza);margin-bottom:16px">Registre os horários de ontem à noite / hoje de manhã.</p>
     <div class="modal-campo"><label>Fui dormir às</label><input type="time" id="sono-inicio" oninput="atualizarPreviewSono()"></div>
     <div class="modal-campo"><label>Acordei às</label><input type="time" id="sono-fim" oninput="atualizarPreviewSono()"></div>
@@ -2031,7 +2031,10 @@ function atualizarPreviewSono(){
   const h=Math.floor(horas);const m=Math.round((horas-h)*60);
   document.getElementById('sono-duracao-preview').textContent=`${h}h ${m}min`;
   const cor=corSono(horas);
-  document.getElementById('sono-duracao-preview').style.color=cor==='verde'?'var(--verde)':cor==='amarela'?'var(--amarelo)':'var(--vermelho)';
+  if (cor === 'verde') document.getElementById('sono-duracao-preview').style.color = 'var(--verde)';
+else if (cor === 'amarela') document.getElementById('sono-duracao-preview').style.color = 'var(--amarelo)';
+else if (cor === 'azul') document.getElementById('sono-duracao-preview').style.color = 'var(--azul)';
+else document.getElementById('sono-duracao-preview').style.color = 'var(--vermelho)';
   const qual=horas<5?'😰 Muito pouco sono':horas<6?'😕 Insuficiente':horas<7?'😐 Tente chegar a 7h':horas<=9?'😊 Ótimo!':'😴 Dormiu bastante';
   document.getElementById('sono-qualidade-preview').textContent=qual;
 }
