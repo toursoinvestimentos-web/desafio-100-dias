@@ -1078,33 +1078,27 @@ body{
   <div class="musc-header">
     <button class="musc-back" onclick="fecharNatacao()">←</button>
     <div class="musc-title-wrap">
-      <div class="musc-title">🏊 NATAÇÃO</div>
+      <div class="musc-title">NATAÇÃO</div>
       <div class="musc-sub">Registre sua sessão</div>
     </div>
   </div>
   <div style="padding:0 20px 20px">
-    <div class="nat-campos">
-      <div class="nat-campo-row">
-        <div class="nat-campo-icon">⏱</div>
-        <div class="nat-campo-info">
-          <div class="nat-campo-label">Duração (minutos)</div>
-          <input class="nat-campo-input" type="number" id="nat-minutos" placeholder="45" min="1" max="300" value="45">
-        </div>
+    <div class="nat-campos" style="gap:20px;">
+      <div class="nat-campo-row" style="background:var(--card2); border-radius:12px; padding:14px; display:flex; flex-direction:column; gap:8px;">
+        <div class="nat-campo-label" style="font-size:0.65em; text-transform:uppercase; letter-spacing:0.1em; color:var(--cinza);">Duração (minutos)</div>
+        <input type="number" id="nat-minutos" placeholder="45" min="1" max="300" value="45" style="background:transparent; border:none; font-family:var(--fonte-display); font-size:1.6em; color:var(--azul); outline:none; width:100%; text-align:center; padding:8px 0;">
       </div>
-      <div class="nat-campo-row">
-        <div class="nat-campo-icon">💪</div>
-        <div class="nat-campo-info">
-          <div class="nat-campo-label">Intensidade</div>
-          <select id="nat-intensidade" style="background:transparent;border:none;color:var(--azul);font-family:var(--fonte-display);font-size:1.2em;outline:none;width:100%;text-align:right">
-            <option value="leve">Leve</option>
-            <option value="moderada" selected>Moderada</option>
-            <option value="intensa">Intensa</option>
-          </select>
-        </div>
+      <div class="nat-campo-row" style="background:var(--card2); border-radius:12px; padding:14px; display:flex; flex-direction:column; gap:8px;">
+        <div class="nat-campo-label" style="font-size:0.65em; text-transform:uppercase; letter-spacing:0.1em; color:var(--cinza);">Intensidade</div>
+        <select id="nat-intensidade" style="background:transparent; border:none; font-family:var(--fonte-display); font-size:1.6em; color:var(--azul); outline:none; width:100%; text-align:center;">
+          <option value="leve">Leve</option>
+          <option value="moderada" selected>Moderada</option>
+          <option value="intensa">Intensa</option>
+        </select>
       </div>
     </div>
-    <button class="btn btn-verde" style="margin-top:24px" onclick="finalizarNatacao()">✅ Registrar natação</button>
-    <button class="btn btn-ghost" style="margin-top:10px" onclick="fecharNatacao()">← Cancelar</button>
+    <button class="btn" style="margin-top:24px" onclick="finalizarNatacao()">Registrar natação</button>
+    <button class="btn btn-ghost" style="margin-top:10px" onclick="fecharNatacao()">Cancelar</button>
   </div>
 </div>
 
@@ -1113,29 +1107,23 @@ body{
   <div class="musc-header">
     <button class="musc-back" onclick="fecharCardio()">←</button>
     <div class="musc-title-wrap">
-      <div class="musc-title">🏃 CARDIO</div>
+      <div class="musc-title">CARDIO</div>
       <div class="musc-sub">Registre sua corrida</div>
     </div>
   </div>
   <div style="padding:0 20px 20px">
-    <div class="nat-campos">
-      <div class="nat-campo-row">
-        <div class="nat-campo-icon">⏱</div>
-        <div class="nat-campo-info">
-          <div class="nat-campo-label">Duração (minutos)</div>
-          <input class="nat-campo-input" type="number" id="cardio-minutos" placeholder="30" min="1" max="300" value="30">
-        </div>
+    <div class="nat-campos" style="gap:20px;">
+      <div class="nat-campo-row" style="background:var(--card2); border-radius:12px; padding:14px; display:flex; flex-direction:column; gap:8px;">
+        <div class="nat-campo-label" style="font-size:0.65em; text-transform:uppercase; letter-spacing:0.1em; color:var(--cinza);">Duração (minutos)</div>
+        <input type="number" id="cardio-minutos" placeholder="30" min="1" max="300" value="30" style="background:transparent; border:none; font-family:var(--fonte-display); font-size:1.6em; color:var(--azul); outline:none; width:100%; text-align:center; padding:8px 0;">
       </div>
-      <div class="nat-campo-row">
-        <div class="nat-campo-icon">📍</div>
-        <div class="nat-campo-info">
-          <div class="nat-campo-label">Distância (km)</div>
-          <input class="nat-campo-input" type="number" id="cardio-km" placeholder="5.0" min="0" step="0.1">
-        </div>
+      <div class="nat-campo-row" style="background:var(--card2); border-radius:12px; padding:14px; display:flex; flex-direction:column; gap:8px;">
+        <div class="nat-campo-label" style="font-size:0.65em; text-transform:uppercase; letter-spacing:0.1em; color:var(--cinza);">Distância (km)</div>
+        <input type="number" id="cardio-km" placeholder="5.0" min="0" step="0.1" style="background:transparent; border:none; font-family:var(--fonte-display); font-size:1.6em; color:var(--azul); outline:none; width:100%; text-align:center; padding:8px 0;">
       </div>
     </div>
-    <button class="btn btn-verde" style="margin-top:24px" onclick="finalizarCardio()">✅ Registrar cardio</button>
-    <button class="btn btn-ghost" style="margin-top:10px" onclick="fecharCardio()">← Cancelar</button>
+    <button class="btn" style="margin-top:24px" onclick="finalizarCardio()">Registrar cardio</button>
+    <button class="btn btn-ghost" style="margin-top:10px" onclick="fecharCardio()">Cancelar</button>
   </div>
 </div>
 
