@@ -8,7 +8,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"> 
 <link rel="manifest" id="manifest-link">
-<title>100 DIAS v1.3</title>
+<title>100 DIAS v1.4</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600;700&display=swap');
 
@@ -110,16 +110,12 @@ body{
   letter-spacing:0.1em;color:var(--cinza);margin-bottom:8px;
 }
 
-/* ── HERO 100 DIAS (NOVO) ── */
+/* ── HERO 100 DIAS v1.4 ── */
 .hero-100{
   background:linear-gradient(135deg,var(--card) 0%,var(--card2) 100%);
-  border-radius:var(--radius);
-  padding:16px 20px;
-  margin-bottom:10px;
-  border:1px solid rgba(59,130,246,0.25);
-  border-left:4px solid var(--azul);
-  position:relative;
-  overflow:hidden;
+  border-radius:var(--radius);padding:14px 18px;
+  margin-bottom:10px;border:1px solid rgba(59,130,246,0.25);
+  border-left:4px solid var(--azul);position:relative;overflow:hidden;
 }
 .hero-100::before{
   content:'';position:absolute;top:-20px;right:-20px;
@@ -127,100 +123,19 @@ body{
   background:radial-gradient(circle,rgba(59,130,246,0.15) 0%,transparent 70%);
   border-radius:50%;
 }
-.hero-100-inner {
-  display: flex;
-  align-items: stretch;
-  gap: 20px;
-}
-.hero-left {
-  flex: 0 0 auto;
-  border-right: 1px solid var(--card2);
-  padding-right: 20px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-.hero-right {
-  flex: 1;
-}
-.hero-dia-label{
-  font-size:0.58em;
-  font-weight:700;
-  text-transform:uppercase;
-  letter-spacing:0.15em;
-  color:var(--cinza);
-  margin-bottom:2px;
-}
-.hero-dia-num{
-  font-family:var(--fonte-display);
-  font-size:2.8em;
-  color:var(--azul);
-  line-height:0.9;
-  letter-spacing:2px;
-}
-.hero-dia-de100{
-  font-size:0.68em;
-  color:var(--cinza);
-  margin-top:2px;
-}
-.hero-dia-de100 span{
-  color:var(--branco);
-  font-weight:600;
-}
-.meta-list {
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-}
-.meta-item {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  font-size: 0.7em;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-}
-.meta-name {
-  width: 70px;
-  color: var(--cinza);
-}
-.meta-bar-container {
-  flex: 1;
-  background: var(--bg);
-  border-radius: 6px;
-  height: 6px;
-  overflow: hidden;
-}
-.meta-bar {
-  height: 100%;
-  width: 0%;
-  background: var(--azul);
-  border-radius: 6px;
-  transition: width 0.4s;
-}
-.heart-container {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  margin-top: 6px;
-}
-.heart-svg {
-  width: 38px;
-  height: auto;
-  transition: all 0.3s;
-}
-.heart-svg path,
-.heart-svg polyline {
-  stroke: #4a5568;
-  fill: #4a5568;
-  transition: stroke 0.3s, fill 0.3s;
-}
-.heart-svg.active path,
-.heart-svg.active polyline {
-  stroke: var(--azul);
-  fill: var(--azul);
-}
+.hero-inner{display:flex;align-items:center;gap:0;}
+.hero-left-quarter{width:25%;text-align:center;flex-shrink:0;}
+.hero-dia-label{font-size:0.55em;font-weight:700;text-transform:uppercase;letter-spacing:0.15em;color:var(--cinza);margin-bottom:2px;}
+.hero-dia-num{font-family:var(--fonte-display);font-size:3.2em;color:var(--azul);line-height:0.9;letter-spacing:2px;}
+.hero-dia-de100{font-size:0.62em;color:var(--cinza);margin-top:2px;}
+.hero-divider{width:1px;background:rgba(255,255,255,0.10);align-self:stretch;margin:0 14px;flex-shrink:0;}
+.hero-right-bars{flex:1;position:relative;padding-right:72px;}
+.desafio-barra-row{display:flex;align-items:center;gap:8px;margin-bottom:10px;}
+.desafio-barra-row:last-child{margin-bottom:0;}
+.desafio-barra-label{font-size:0.53em;font-weight:700;text-transform:uppercase;letter-spacing:0.09em;color:var(--cinza);width:56px;flex-shrink:0;}
+.desafio-barra-trilho{flex:1;height:4px;background:var(--cinza2);border-radius:4px;position:relative;overflow:hidden;}
+.desafio-barra-fill{position:absolute;left:0;top:0;height:100%;background:linear-gradient(90deg,var(--azul3),var(--azul));border-radius:4px;transition:width 0.9s cubic-bezier(0.4,0,0.2,1);}
+.desafio-coracao-wrap{position:absolute;right:0;top:50%;transform:translateY(-50%);width:66px;height:66px;transition:filter 0.5s;}
 
 /* ═══════════════════════════════
    CARD CALORIAS v1.3
@@ -291,12 +206,13 @@ body{
 
 /* ── SVG icon sizing e cor (v1.3 + SVGs do v1.1) ── */
 .treino-mod-icon{display:flex;align-items:center;justify-content:center;margin-bottom:4px;height:36px;position:relative;z-index:1;}
-#mod-nat .treino-mod-icon svg {margin-top: 10px;}
+#mod-nat .treino-mod-icon svg {margin-top: 10px; /* empurra só o desenho para baixo */}
 .treino-mod-icon svg{width:36px;height:36px;fill:var(--azul);transition:fill 0.18s;}
 .treino-mod-btn.prog-100 .treino-mod-icon svg{fill:var(--verde);}
 .treino-mod-btn.prog-50 .treino-mod-icon svg{fill:var(--amarelo);}
 .treino-mod-btn.prog-acima .treino-mod-icon svg{fill:var(--azul);}
 
+/* Ajustes de tamanho individuais */
 #mod-musc .treino-mod-icon svg { width: 54px; height: 54px; }
 #mod-nat  .treino-mod-icon svg { width: 44px; height: 44px; }
 #mod-card .treino-mod-icon svg { width: 39px; height: 39px; }
@@ -366,6 +282,7 @@ body{
   align-items: center;
   justify-content: center;
 }
+
 .mini-card-emoji svg{
   width: 100%;
   height: 100%;
@@ -743,7 +660,7 @@ body{
 <!-- ══ HEADER ══ -->
 <div class="header">
   <div class="header-top">
-    <div class="logo">100<span>DIAS</span><span class="logo-ver">v1.3</span></div>
+    <div class="logo">100<span>DIAS</span><span class="logo-ver">v1.4</span></div>
     <button class="btn-perfil" onclick="irPara('tela-perfil')">⚙</button>
   </div>
   <div class="nav-abas">
@@ -761,15 +678,46 @@ body{
 <div id="tela-hoje" class="tela ativa">
 
   <div class="hero-100" id="hero-100">
-    <div class="hero-100-inner">
-      <div class="hero-left">
+    <div class="hero-inner">
+      <!-- Esquerda: número do dia -->
+      <div class="hero-left-quarter">
         <div class="hero-dia-label">Desafio</div>
         <div class="hero-dia-num" id="hero-num">—</div>
-        <div class="hero-dia-de100">de <span>100</span> dias</div>
+        <div class="hero-dia-de100">de 100 dias</div>
       </div>
-      <div class="hero-right">
-        <div class="meta-list" id="meta-list"></div>
-        <div class="heart-container" id="heart-container"></div>
+      <!-- Divisória -->
+      <div class="hero-divider"></div>
+      <!-- Direita: 4 barras + coração -->
+      <div class="hero-right-bars">
+        <div class="desafio-barra-row">
+          <div class="desafio-barra-label">Calorias</div>
+          <div class="desafio-barra-trilho"><div class="desafio-barra-fill" id="desafio-fill-cal" style="width:0%"></div></div>
+        </div>
+        <div class="desafio-barra-row">
+          <div class="desafio-barra-label">Treinos</div>
+          <div class="desafio-barra-trilho"><div class="desafio-barra-fill" id="desafio-fill-treino" style="width:0%"></div></div>
+        </div>
+        <div class="desafio-barra-row">
+          <div class="desafio-barra-label">Sono</div>
+          <div class="desafio-barra-trilho"><div class="desafio-barra-fill" id="desafio-fill-sono" style="width:0%"></div></div>
+        </div>
+        <div class="desafio-barra-row">
+          <div class="desafio-barra-label">Água</div>
+          <div class="desafio-barra-trilho"><div class="desafio-barra-fill" id="desafio-fill-agua" style="width:0%"></div></div>
+        </div>
+        <!-- Coração SVG -->
+        <div class="desafio-coracao-wrap" id="desafio-coracao-wrap">
+          <svg viewBox="0 0 100 90" xmlns="http://www.w3.org/2000/svg" width="66" height="66">
+            <!-- trilho apagado -->
+            <path d="M50 30 A20 20 0 0 1 90 30 Q90 62 50 85 Q10 62 10 30 A20 20 0 0 1 50 30 Z"
+              fill="none" stroke="var(--cinza2)" stroke-width="9" stroke-linejoin="round"/>
+            <!-- fill aceso -->
+            <path id="desafio-coracao-path"
+              d="M50 30 A20 20 0 0 1 90 30 Q90 62 50 85 Q10 62 10 30 A20 20 0 0 1 50 30 Z"
+              fill="none" stroke="var(--azul)" stroke-width="9" stroke-linejoin="round"
+              style="opacity:0;transition:opacity 0.5s;"/>
+          </svg>
+        </div>
       </div>
     </div>
   </div>
@@ -1360,10 +1308,10 @@ body{
 (function(){
   const svg=`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400"><circle cx="200" cy="200" r="180" fill="#111318" stroke="#3b82f6" stroke-width="12"/><text x="200" y="240" font-family="Arial" font-size="130" font-weight="bold" fill="#3b82f6" text-anchor="middle">100</text></svg>`;
   const icon='data:image/svg+xml;base64,'+btoa(unescape(encodeURIComponent(svg)));
-  const mf={name:"100 Dias v1.3",short_name:"100 Dias",start_url:"./",scope:"./",display:"standalone",background_color:"#111318",theme_color:"#1a1d23",icons:[{src:icon,sizes:"192x192",type:"image/svg+xml",purpose:"any maskable"},{src:icon,sizes:"512x512",type:"image/svg+xml",purpose:"any maskable"}]};
+  const mf={name:"100 Dias v1.4",short_name:"100 Dias",start_url:"./",scope:"./",display:"standalone",background_color:"#111318",theme_color:"#1a1d23",icons:[{src:icon,sizes:"192x192",type:"image/svg+xml",purpose:"any maskable"},{src:icon,sizes:"512x512",type:"image/svg+xml",purpose:"any maskable"}]};
   document.getElementById('manifest-link').href=URL.createObjectURL(new Blob([JSON.stringify(mf)],{type:'application/manifest+json'}));
   if('serviceWorker' in navigator){
-    const sw=`const C='100dias-v1.3';self.addEventListener('install',e=>{e.waitUntil(caches.open(C).then(c=>c.addAll(['./','/index.html'])));self.skipWaiting();});self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(k=>Promise.all(k.filter(x=>x!==C).map(x=>caches.delete(x)))).then(()=>self.clients.claim()));});self.addEventListener('fetch',e=>{e.respondWith(caches.match(e.request).then(r=>r||fetch(e.request)));});`;
+    const sw=`const C='100dias-v1.4';self.addEventListener('install',e=>{e.waitUntil(caches.open(C).then(c=>c.addAll(['./','/index.html'])));self.skipWaiting();});self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(k=>Promise.all(k.filter(x=>x!==C).map(x=>caches.delete(x)))).then(()=>self.clients.claim()));});self.addEventListener('fetch',e=>{e.respondWith(caches.match(e.request).then(r=>r||fetch(e.request)));});`;
     navigator.serviceWorker.register(URL.createObjectURL(new Blob([sw],{type:'text/javascript'}))).catch(()=>{});
   }
 })();
@@ -1410,7 +1358,7 @@ const META_PONTOS_SEMANA = 4;
 // ═══════════════════════════════
 // ESTADO GLOBAL
 // ═══════════════════════════════
-const CHAVE='app100dias_v1.3';
+const CHAVE='app100dias_v1.4';
 let dados=carregarDados();
 let refPeriodo='manhã';
 let refItensTemp=[];
@@ -1427,7 +1375,7 @@ function carregarDados(){
   try{
     const s=localStorage.getItem(CHAVE);
     if(!s){
-      const old=localStorage.getItem('app100dias_v1.2')||localStorage.getItem('app100dias_v1.1')||localStorage.getItem('app100dias_v1');
+      const old=localStorage.getItem('app100dias_v1.3')||localStorage.getItem('app100dias_v1.2')||localStorage.getItem('app100dias_v1.1')||localStorage.getItem('app100dias_v1');
       if(old){const d=JSON.parse(old);return migrarDados(d);}
     }
     if(s){const d=JSON.parse(s);return migrarDados(d);}
@@ -1455,6 +1403,12 @@ function migrarDados(d){
   if(!d.pesosExercicios) d.pesosExercicios = padrao.pesosExercicios;
   if(!d.pesosExerciciosInicial) d.pesosExerciciosInicial = padrao.pesosExerciciosInicial;
   if(!d.proximoTreino) d.proximoTreino = padrao.proximoTreino;
+  if(!d.streakState) d.streakState = padrao.streakState;
+  else {
+    if(!d.streakState.calorias) d.streakState.calorias = padrao.streakState.calorias;
+    if(!d.streakState.sono) d.streakState.sono = padrao.streakState.sono;
+    if(!d.streakState.agua) d.streakState.agua = padrao.streakState.agua;
+  }
   
   return d;
 }
@@ -1462,7 +1416,12 @@ function dadosPadrao(){
   return {
     perfil:{idade:0,alturaCm:0,peso:0,fatorAtividade:1.55,deficit:500,inicio:hoje()},
     medicoesPeso:[],desafioDias:{},diarioAlimentar:{},biblioteca:[],conquistas:{},
-    registrosSono:{},registrosAgua:{},pesosExercicios:{},pesosExerciciosInicial:{},proximoTreino:'A'
+    registrosSono:{},registrosAgua:{},pesosExercicios:{},pesosExerciciosInicial:{},proximoTreino:'A',
+    streakState:{
+      calorias:{fase:1,streakDias:0,errosPosFase2:0,dataUltimaVerificacao:''},
+      sono:{fase:1,streakDias:0,errosPosFase2:0,dataUltimaVerificacao:''},
+      agua:{fase:1,streakDias:0,errosPosFase2:0,dataUltimaVerificacao:''}
+    }
   };
 }
 function salvarDados(){localStorage.setItem(CHAVE,JSON.stringify(dados));}
@@ -1517,102 +1476,6 @@ function calcPontosSemana(dias){const{musc,nat,cardio}=getContagemSemanal(dias);
 function metaSemanalAtingida(dias){const{musc,nat,cardio}=getContagemSemanal(dias);return musc>=META_MUSC_SEMANA&&nat>=META_NAT_SEMANA&&cardio>=META_CARD_SEMANA;}
 function calcStreakSemanal(){let streak=0;for(let w=0;w<52;w++){if(metaSemanalAtingida(getSemanaOffset(w)))streak++;else break;}return streak;}
   
-function streakComTolerancia(verificadorDia, hojeISO) {
-  let streak = 0;
-  let errosNoStreak = 0;
-  const data = new Date(hojeISO);
-  for (let i = 0; i < 100; i++) {
-    const iso = data.toISOString().slice(0,10);
-    const sucesso = verificadorDia(iso);
-    if (sucesso) {
-      streak++;
-      errosNoStreak = 0;
-    } else {
-      if (streak >= 7) {
-        errosNoStreak++;
-        if (errosNoStreak >= 3) {
-          streak = 0;
-          errosNoStreak = 0;
-          break;
-        }
-      } else {
-        streak = 0;
-        errosNoStreak = 0;
-        break;
-      }
-    }
-    data.setDate(data.getDate() - 1);
-  }
-  return Math.min(streak, 7);
-}
-function metaCaloriaOk(iso) {
-  const diario = dados.diarioAlimentar[iso] || { refeicoes: {} };
-  const totalKcal = Object.values(diario.refeicoes).flat().reduce((s,x)=>s+(x.kcal||0),0);
-  const metaKcal = calcMeta(pesoMaisRecente());
-  return totalKcal <= metaKcal && totalKcal > 0;
-}
-function metaSonoOk(iso) {
-  const sono = dados.registrosSono[iso];
-  return sono && sono.horas >= 7;
-}
-function metaAguaOk(iso) {
-  const agua = dados.registrosAgua[iso] || 0;
-  const meta = calcMetaAgua();
-  return agua >= meta;
-}
-function pontosTreinoNaSemana(iso) {
-  const data = new Date(iso);
-  const diaSemana = data.getDay();
-  let segunda = new Date(data);
-  if (diaSemana === 0) segunda.setDate(data.getDate() - 6);
-  else segunda.setDate(data.getDate() - (diaSemana - 1));
-  const domingo = new Date(segunda);
-  domingo.setDate(segunda.getDate() + 6);
-  let pontos = 0;
-  let dia = new Date(segunda);
-  while (dia <= domingo) {
-    const isoDia = dia.toISOString().slice(0,10);
-    const tipos = getTreinosDia(isoDia);
-    pontos += tipos.filter(t => t === 'Musculação' || t === 'Natação' || t === 'Cardio').length;
-    dia.setDate(dia.getDate() + 1);
-  }
-  return Math.min(pontos, 4);
-}
-function atualizarMetasDesafio() {
-  const hojeISO = hoje();
-  const streakCal = streakComTolerancia(metaCaloriaOk, hojeISO);
-  const pctCal = (streakCal / 7) * 100;
-  const streakSono = streakComTolerancia(metaSonoOk, hojeISO);
-  const pctSono = (streakSono / 7) * 100;
-  const streakAgua = streakComTolerancia(metaAguaOk, hojeISO);
-  const pctAgua = (streakAgua / 7) * 100;
-  const pontosTreino = pontosTreinoNaSemana(hojeISO);
-  const pctTreino = (pontosTreino / 4) * 100;
-  const metas = [
-    { nome: 'CALORIAS', pct: pctCal },
-    { nome: 'TREINOS',  pct: pctTreino },
-    { nome: 'SONO',     pct: pctSono },
-    { nome: 'ÁGUA',     pct: pctAgua }
-  ];
-  const metaListDiv = document.getElementById('meta-list');
-  if (metaListDiv) {
-    metaListDiv.innerHTML = metas.map(m => `
-      <div class="meta-item">
-        <div class="meta-name">${m.nome}</div>
-        <div class="meta-bar-container">
-          <div class="meta-bar" style="width: ${m.pct}%;"></div>
-        </div>
-      </div>
-    `).join('');
-  }
-  const todasCompletas = metas.every(m => m.pct >= 99.9);
-  const heartSvg = document.querySelector('.heart-svg');
-  if (heartSvg) {
-    if (todasCompletas) heartSvg.classList.add('active');
-    else heartSvg.classList.remove('active');
-  }
-}
-
 function emojiSono(horas){
   if(horas===null||horas===undefined){
     return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" fill="currentColor"><path d="M5 7l3-4 3 4-3 4zM11 12l3-4 3 4-3 4zM17 17l3-4 3 4-3 4z"/></svg>`;
@@ -1639,27 +1502,36 @@ function emojiAgua(ml, meta){
   if(pct > 100) pct = 100;
   if(pct < 0) pct = 0;
   
+  // Altura total útil do copo: do fundo (y=780) ao topo (y=200)
   const totalHeight = 580;
   const waterHeight = (pct / 100) * totalHeight;
-  const waterTop = 780 - waterHeight - 70;
+  const waterTop = 780 - waterHeight - 70;  // -5 sobe um pouco mais
   
+  // Largura da água: linearmente interpolada entre fundo (260) e topo (400)
+  // Quanto maior o waterTop (mais baixo), menor a largura; quanto menor (mais alto), maior a largura.
   const larguraFundo = 350;
   const larguraTopoMax = 430;
-  const progresso = (780 - waterTop) / totalHeight;
+  // Fator de progresso: 0 no fundo, 1 no topo
+  const progresso = (780 - waterTop) / totalHeight; // 0 = fundo, 1 = topo
   const larguraAtual = larguraFundo + (larguraTopoMax - larguraFundo) * progresso;
-  const centro = 350;
+  
+  const centro = 350; // centro do copo no eixo X
   const x1 = centro - larguraAtual/2;
   const x2 = centro + larguraAtual/2;
   const xFundo1 = centro - larguraFundo/2;
   const xFundo2 = centro + larguraFundo/2;
+  
+  // Polígono da água: topo (largura atual) até fundo (largura fixa)
   const waterPolygon = `M ${x1} ${waterTop} L ${x2} ${waterTop} L ${xFundo2} 780 L ${xFundo1} 780 Z`;
   
   return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 1000" preserveAspectRatio="xMidYMid meet">
+    <!-- Água com formato de funil (trapézio) -->
     <path d="${waterPolygon}" fill="#38bdf8" />
+    <!-- Contorno do copo (borda mais grossa e visível) -->
     <path d="M171.86 937.73c-12.61,1.25 -25.61,-7.66 -33.18,-14.89 -7.76,-7.41 -12.78,-17.88 -15.18,-32.84l64.97 -0.06 378.53 0c-2.5,18.75 -10.89,27.96 -20.87,37.12 -10.99,10.07 -23.89,12.6 -42.49,12.63 -47.65,0.08 -324.3,2.95 -331.78,-1.96zm13.53 -82.44l-65.68 -0.4c-8.52,-130.75 -21.53,-262.57 -31.95,-393.32 -2.14,-26.87 -33.19,-376.28 -30.74,-392.58l-1.57 -7.96 580 0.08 -64.61 794.16 -385.45 0.02zm-166.19 -815.22c0,38.14 11.08,139.63 14.72,187.58 1.63,21.45 2.63,44.1 5.18,63.49l35.77 441.23c0.27,19.92 4.57,43.49 5.54,63.13 0.59,11.94 1.09,19.23 2.01,31.39 0.57,7.48 1.54,22.02 2.81,30.61 4.98,33.75 0.13,70.71 38.4,98.94 11.34,8.38 30.83,19.06 49.62,19.06l345.21 0c18.29,0 37.6,-10.22 48.56,-18.26 37.1,-27.21 35.06,-59.67 38.96,-96.53 2,-18.93 4.66,-43.5 5.29,-63.39l10.62 -124.86c2.84,-21.62 1.89,-42.32 4.73,-63.94 6.19,-47.01 10.07,-133.06 15.91,-188.25 2.29,-21.66 1.95,-42.36 5.07,-63.61l10.07 -125.42c0.62,-19.91 4.56,-43.57 5.53,-63.14 1.9,-38.48 9.31,-93.82 9.31,-128.03 0,-2.67 -5.06,-14.85 -16.7,-14.85l-619.91 0c-8.27,0 -16.7,7.52 -16.7,14.85z" fill="none" stroke="currentColor" stroke-width="2.2" stroke-miterlimit="22.9256" stroke-linecap="round" stroke-linejoin="round"/>
   </svg>`;
 }
-function corSono(horas){
+  function corSono(horas){
   if(horas===null||horas===undefined) return 'cinza';
   if(horas >= 7) return 'azul';
   if(horas >= 6) return 'verde';
@@ -1686,16 +1558,107 @@ function irPara(id){
   if(id==='tela-perfil')renderPerfil();
 }
 
+
+// ═══════════════════════════════
+// DESAFIO v1.4 — STREAK LÓGICA
+// ═══════════════════════════════
+function diaAtingiuMeta(iso, tipo){
+  if(tipo==='calorias'){
+    const d=dados.diarioAlimentar[iso];
+    if(!d||!d.refeicoes)return false;
+    const total=Object.values(d.refeicoes).flat().reduce((s,x)=>s+(x.kcal||0),0);
+    if(total===0)return false;
+    const meta=calcMeta(pesoMaisRecente());
+    return total<=meta;
+  }
+  if(tipo==='sono'){
+    const r=dados.registrosSono[iso];
+    if(!r||!r.horas)return false;
+    return r.horas>=7;
+  }
+  if(tipo==='agua'){
+    const ml=dados.registrosAgua[iso]||0;
+    if(ml===0)return false;
+    return ml>=calcMetaAgua();
+  }
+  return false;
+}
+
+function atualizarStreakState(tipo){
+  if(!dados.streakState)dados.streakState={
+    calorias:{fase:1,streakDias:0,errosPosFase2:0,dataUltimaVerificacao:''},
+    sono:{fase:1,streakDias:0,errosPosFase2:0,dataUltimaVerificacao:''},
+    agua:{fase:1,streakDias:0,errosPosFase2:0,dataUltimaVerificacao:''}
+  };
+  const state=dados.streakState[tipo];
+  const hojeIso=hoje();
+  if(state.dataUltimaVerificacao===hojeIso)return;
+  // Descobre dias a processar (da última verificação até hoje)
+  const ultima=state.dataUltimaVerificacao;
+  const diasAProcessar=[];
+  const dtIni=ultima?new Date(ultima):new Date(hojeIso);
+  const dtFim=new Date(hojeIso);
+  // Se nunca processou, processa só hoje
+  if(!ultima){diasAProcessar.push(hojeIso);}
+  else{
+    const d=new Date(dtIni);d.setDate(d.getDate()+1);
+    while(d<=dtFim){diasAProcessar.push(d.toISOString().slice(0,10));d.setDate(d.getDate()+1);}
+  }
+  for(const dia of diasAProcessar){
+    const acertou=diaAtingiuMeta(dia,tipo);
+    if(state.fase===1){
+      if(acertou){state.streakDias++;if(state.streakDias>=7){state.fase=2;state.errosPosFase2=0;}}
+      else{state.streakDias=0;}
+    }else{
+      if(!acertou){
+        state.errosPosFase2++;
+        if(state.errosPosFase2>=3){state.fase=1;state.streakDias=0;state.errosPosFase2=0;}
+      }
+    }
+  }
+  state.dataUltimaVerificacao=hojeIso;
+  salvarDados();
+}
+
+function calcProgressoMetaDiaria(tipo){
+  atualizarStreakState(tipo);
+  const state=dados.streakState[tipo];
+  if(state.fase===1)return Math.min(state.streakDias/7,0.999);
+  return 1.0;
+}
+
+function calcProgressoTreinos(){
+  const dias=getDiasSemanaAtual();
+  const pts=calcPontosSemana(dias);
+  return Math.min(1,pts/META_PONTOS_SEMANA);
+}
+
+function renderCardDesafio(){
+  const dia=calcDiaDesafio();
+  document.getElementById('hero-num').textContent=dia;
+
+  const progCal=calcProgressoMetaDiaria('calorias');
+  const progTreino=calcProgressoTreinos();
+  const progSono=calcProgressoMetaDiaria('sono');
+  const progAgua=calcProgressoMetaDiaria('agua');
+
+  document.getElementById('desafio-fill-cal').style.width=(progCal*100)+'%';
+  document.getElementById('desafio-fill-treino').style.width=(progTreino*100)+'%';
+  document.getElementById('desafio-fill-sono').style.width=(progSono*100)+'%';
+  document.getElementById('desafio-fill-agua').style.width=(progAgua*100)+'%';
+
+  const todasCem=progCal>=1&&progTreino>=1&&progSono>=1&&progAgua>=1;
+  const pathEl=document.getElementById('desafio-coracao-path');
+  const wrapEl=document.getElementById('desafio-coracao-wrap');
+  if(pathEl){pathEl.style.opacity=todasCem?'1':'0';}
+  if(wrapEl){wrapEl.style.filter=todasCem?'drop-shadow(0 0 8px #3b82f6)':'none';}
+}
+
 // ═══════════════════════════════
 // RENDER: HOJE
 // ═══════════════════════════════
 function renderHoje(){
-  const dia=calcDiaDesafio();
-  const streak=calcStreakSemanal();
-  const pct=(dia/100*100).toFixed(0);
-  document.getElementById('hero-num').textContent=dia;
-  // O streak não é mais usado no card, mas mantemos a variável.
-  document.getElementById('barra-progress').style.width=pct+'%';
+  renderCardDesafio();
 
   const peso=pesoMaisRecente();
   const meta=peso?calcMeta(peso):0;
@@ -1748,10 +1711,10 @@ function renderHoje(){
     const h=Math.floor(sonoHoje.horas);const m=Math.round((sonoHoje.horas-h)*60);
     miniSono.textContent=`${h}h${m>0?m+'m':''}`;
     const cor = corSono(sonoHoje.horas);
-    if (cor === 'verde') miniSono.style.color = 'var(--verde)';
-    else if (cor === 'amarela') miniSono.style.color = 'var(--amarelo)';
-    else if (cor === 'azul') miniSono.style.color = 'var(--azul)';
-    else miniSono.style.color = 'var(--vermelho)';
+if (cor === 'verde') miniSono.style.color = 'var(--verde)';
+else if (cor === 'amarela') miniSono.style.color = 'var(--amarelo)';
+else if (cor === 'azul') miniSono.style.color = 'var(--azul)';
+else miniSono.style.color = 'var(--vermelho)';
     if (sonoHoje.horas >= 7) miniSonoSub.textContent = 'Boa noite ✓';
     else miniSonoSub.textContent = 'Abaixo meta';
     document.getElementById('mc-sono').className='mini-card borda-'+cor;
@@ -1777,17 +1740,20 @@ function renderHoje(){
   if(aguaHoje>0){
     miniAgua.textContent=aguaHoje>=1000?(aguaHoje/1000).toFixed(1)+'L':aguaHoje+'ml';
     const pctA = Math.min(100, Math.round(aguaHoje / metaAgua * 100));
-    miniAguaSub.textContent = pctA + '% meta';
-    let corA;
-    if (pctA >= 100) corA = 'azul';
-    else if (pctA >= 80) corA = 'verde';
-    else if (pctA >= 50) corA = 'amarela';
-    else corA = 'vermelha';
-    if (corA === 'azul') miniAgua.style.color = '#38bdf8';
-    else if (corA === 'verde') miniAgua.style.color = 'var(--verde)';
-    else if (corA === 'amarela') miniAgua.style.color = 'var(--amarelo)';
-    else miniAgua.style.color = 'var(--vermelho)';
-    document.getElementById('mc-agua').className = 'mini-card borda-' + corA;
+miniAguaSub.textContent = pctA + '% meta';
+
+let corA;
+if (pctA >= 100) corA = 'azul';
+else if (pctA >= 80) corA = 'verde';
+else if (pctA >= 50) corA = 'amarela';
+else corA = 'vermelha';
+
+if (corA === 'azul') miniAgua.style.color = '#38bdf8';
+else if (corA === 'verde') miniAgua.style.color = 'var(--verde)';
+else if (corA === 'amarela') miniAgua.style.color = 'var(--amarelo)';
+else miniAgua.style.color = 'var(--vermelho)';
+
+document.getElementById('mc-agua').className = 'mini-card borda-' + corA;
     miniAguaEmoji.innerHTML = emojiAgua(aguaHoje, metaAgua);
   }else{
     miniAgua.textContent='—';miniAgua.style.color='#38bdf8';
@@ -1802,18 +1768,6 @@ function renderHoje(){
   }else{
     miniAguaMedia.innerHTML=`Meta: <span>${(metaAgua/1000).toFixed(1)}L</span> (35ml/kg)`;
   }
-
-  // Inserir o coração e atualizar as metas do desafio
-  if (!document.querySelector('.heart-svg')) {
-    const heartContainer = document.getElementById('heart-container');
-    if (heartContainer) {
-      heartContainer.innerHTML = `<svg class="heart-svg" viewBox="0 0 500 450" preserveAspectRatio="xMidYMid meet">
-        <polyline points="43.66,220.66 131.9,220.97 175.14,137.06 223.44,279.77 284.4,170.46 307.13,233.89 448.54,234.74" fill="none" stroke="currentColor" stroke-width="17.64" stroke-miterlimit="22.9256"/>
-        <path d="M248.33 108.57c23.87,0 19.06,-28.42 58.68,-52.47 10.06,-6.1 25.14,-12.86 40.22,-13.47 9.32,-0.39 11.85,-1.6 24.94,0.51 29.78,4.79 49.28,18.31 67.1,40.28 4.25,5.23 7.16,10.66 10.34,16.99 18.63,37.02 17.38,79.85 -2.05,118.84 -1.69,3.39 -3.47,6.13 -5.13,9.01l-10.41 15.96c-1.84,2.62 -3.73,4.85 -5.78,7.41 -10.87,13.6 -34.16,40.06 -46.03,49.12 -2.72,2.07 -4.3,3.81 -6.83,6.36l-35.84 31.98c-1.75,1.47 -1.94,1.31 -3.71,2.89l-83.62 71.81c-1.91,-1.27 -1.83,-1.53 -3.56,-3.03 -1.71,-1.5 -2.02,-1.48 -3.69,-2.9l-50.5 -43.71c-1.74,-1.48 -1.94,-1.31 -3.7,-2.89 -1.45,-1.29 -1.9,-1.97 -3.41,-3.19l-36.48 -31.34c-2.91,-2.25 -4.18,-4.2 -6.85,-6.34l-21.27 -19.24c-5.46,-4.22 -9.18,-8.57 -13.96,-13.35 -4.6,-4.6 -8.71,-8.5 -13.21,-13.17 -2.6,-2.7 -3.31,-4.34 -6.1,-7.1 -2.94,-2.89 -3.89,-4.69 -6.6,-7.52l-11.69 -14.7c-10.07,-13.71 -12.84,-19.66 -20.27,-34.36 -19.96,-39.47 -13.18,-99.12 17.35,-133.71l7.06 -7.07c5.63,-4.91 8.2,-8.06 15.15,-12.17 39.08,-23.14 77.23,-20.92 112.19,3.08l13.98 12.4c5.8,5.74 13.81,16.33 18.05,23.4 3.05,5.07 9.09,11.69 15.63,11.69zm-239.28 41.45c0,36.99 4.38,57.55 22.32,89.79 17.47,31.4 41.8,54.65 66.46,79.54 3.31,3.34 5.86,4.9 8.97,8 5.6,5.54 10.81,10.02 16.9,15.13l8.48 7.53c1.6,1.34 2.3,2.3 3.79,3.74 2.09,2.04 2.61,2.06 4.69,3.8 1.62,1.37 2.27,2.34 3.81,3.72 15.48,13.75 37.64,31.14 52.28,44.75 2.05,1.9 2.7,2 4.7,3.79 6.04,5.38 29.7,26.45 35.54,29.45 9.48,4.87 16.07,4.73 25.9,0.4 4.35,-1.91 5.99,-3.97 9.28,-6.74 6.12,-5.15 11.23,-9.54 17.32,-14.7l69.77 -60.23c1.88,-1.67 2.33,-1.65 4.22,-3.32l21.21 -19.3c2.01,-1.77 2.68,-1.87 4.72,-3.76 1.63,-1.51 2.61,-2.69 4.21,-4.26l16.5 -15.53c8.73,-8.74 19.25,-18.77 27.28,-28.31 26.82,-31.89 53.97,-73.75 53.97,-117.47 0,-27.98 -1.24,-43.33 -12.11,-69.85 -10.07,-24.57 -29.48,-49.29 -52.25,-62.68 -4.17,-2.45 -6.06,-3.97 -10.68,-6.27 -21.93,-10.91 -38.64,-13.81 -64.38,-13.81 -25.39,0 -55.78,12.72 -72.26,26.65 -3.84,3.25 -6.89,5.85 -10.41,9.38 -3.21,3.23 -7.09,6.61 -9.79,9.99 -2.39,2.98 -7.4,7.93 -8.34,11.44l-1.88 0c-1.82,-6.79 -22.28,-25.52 -28.54,-30.81 -16.4,-13.86 -46.78,-26.65 -72.26,-26.65 -25.06,0 -42.43,2.84 -63.75,13.5 -10.63,5.31 -30.77,19.56 -37.59,28.34 -11.63,14.98 -17.3,19.69 -25.7,40.25 -3.25,7.94 -6.18,15.3 -8.22,24.75 -1.88,8.69 -4.16,19.94 -4.16,29.75z"/>
-      </svg>`;
-    }
-  }
-  atualizarMetasDesafio();
 }
 
 function renderCardTreinoSemanal(){
@@ -1843,16 +1797,20 @@ function renderCardTreinoSemanal(){
     resumoEl.innerHTML=`<span style="font-size:0.78em;color:var(--cinza)">${pts}/${META_PONTOS_SEMANA}pts</span>`;
   }
 
-  const nomes = ['Seg','Ter','Qua','Qui','Sex','Sáb','Dom'];
+    const nomes = ['Seg','Ter','Qua','Qui','Sex','Sáb','Dom'];
   const hojeStr = hoje();
+  
+  // Pega os ícones SVG já prontos dos botões
   const iconMusc = document.querySelector('#mod-musc .treino-mod-icon');
   const iconNat  = document.querySelector('#mod-nat .treino-mod-icon');
   const iconCard = document.querySelector('#mod-card .treino-mod-icon');
+  
   let html = '';
   dias.forEach((iso, i) => {
     const tipos = getTreinosDia(iso);
     const isHoje = iso === hojeStr;
     let iconeHTML = '';
+    
     if (tipos.includes('Musculação') && tipos.includes('Natação')) {
       iconeHTML = (iconMusc ? iconMusc.innerHTML : '') + (iconNat ? iconNat.innerHTML : '');
     } else if (tipos.includes('Musculação') && tipos.includes('Cardio')) {
@@ -1866,12 +1824,14 @@ function renderCardTreinoSemanal(){
     } else if (tipos.includes('Cardio')) {
       iconeHTML = iconCard ? iconCard.innerHTML : '';
     }
+    
     const temTreino = tipos.length > 0;
     html += `<div class="treino-dia-chip ${temTreino ? 'ok' : ''} ${isHoje ? 'hoje-chip' : ''}">
       <div class="treino-dia-chip-nome">${nomes[i]}</div>
       <div class="treino-dia-chip-icon">${iconeHTML}</div>
     </div>`;
   });
+  
   document.getElementById('semana-treinos-grid').innerHTML = html;
 }
 
@@ -2195,9 +2155,9 @@ function atualizarPreviewSono(){
   document.getElementById('sono-duracao-preview').textContent=`${h}h ${m}min`;
   const cor=corSono(horas);
   if (cor === 'verde') document.getElementById('sono-duracao-preview').style.color = 'var(--verde)';
-  else if (cor === 'amarela') document.getElementById('sono-duracao-preview').style.color = 'var(--amarelo)';
-  else if (cor === 'azul') document.getElementById('sono-duracao-preview').style.color = 'var(--azul)';
-  else document.getElementById('sono-duracao-preview').style.color = 'var(--vermelho)';
+else if (cor === 'amarela') document.getElementById('sono-duracao-preview').style.color = 'var(--amarelo)';
+else if (cor === 'azul') document.getElementById('sono-duracao-preview').style.color = 'var(--azul)';
+else document.getElementById('sono-duracao-preview').style.color = 'var(--vermelho)';
   const qual=horas<5?'😰 Muito pouco sono':horas<6?'😕 Insuficiente':horas<7?'😐 Tente chegar a 7h':horas<=9?'😊 Ótimo!':'😴 Dormiu bastante';
   document.getElementById('sono-qualidade-preview').textContent=qual;
 }
