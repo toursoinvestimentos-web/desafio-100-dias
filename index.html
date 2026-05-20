@@ -110,12 +110,16 @@ body{
   letter-spacing:0.1em;color:var(--cinza);margin-bottom:8px;
 }
 
-/* ── HERO 100 DIAS ── */
+/* ── HERO 100 DIAS (NOVO) ── */
 .hero-100{
   background:linear-gradient(135deg,var(--card) 0%,var(--card2) 100%);
-  border-radius:var(--radius);padding:14px 18px;
-  margin-bottom:10px;border:1px solid rgba(59,130,246,0.25);
-  border-left:4px solid var(--azul);position:relative;overflow:hidden;
+  border-radius:var(--radius);
+  padding:16px 20px;
+  margin-bottom:10px;
+  border:1px solid rgba(59,130,246,0.25);
+  border-left:4px solid var(--azul);
+  position:relative;
+  overflow:hidden;
 }
 .hero-100::before{
   content:'';position:absolute;top:-20px;right:-20px;
@@ -123,27 +127,99 @@ body{
   background:radial-gradient(circle,rgba(59,130,246,0.15) 0%,transparent 70%);
   border-radius:50%;
 }
-.hero-inner{display:flex;align-items:center;gap:16px;}
+.hero-100-inner {
+  display: flex;
+  align-items: stretch;
+  gap: 20px;
+}
+.hero-left {
+  flex: 0 0 auto;
+  border-right: 1px solid var(--card2);
+  padding-right: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.hero-right {
+  flex: 1;
+}
 .hero-dia-label{
-  font-size:0.58em;font-weight:700;text-transform:uppercase;
-  letter-spacing:0.15em;color:var(--cinza);margin-bottom:2px;
+  font-size:0.58em;
+  font-weight:700;
+  text-transform:uppercase;
+  letter-spacing:0.15em;
+  color:var(--cinza);
+  margin-bottom:2px;
 }
 .hero-dia-num{
-  font-family:var(--fonte-display);font-size:3.2em;
-  color:var(--azul);line-height:0.9;letter-spacing:2px;
+  font-family:var(--fonte-display);
+  font-size:2.8em;
+  color:var(--azul);
+  line-height:0.9;
+  letter-spacing:2px;
 }
-.hero-dia-de100{font-size:0.72em;color:var(--cinza);margin-top:2px;}
-.hero-dia-de100 span{color:var(--branco);font-weight:600;}
-.hero-right{flex:1;}
-.hero-streak-lbl{font-size:0.58em;color:var(--cinza);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:3px;}
-.hero-streak-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;}
-.hero-streak-val{font-size:0.78em;font-weight:700;color:var(--branco);}
-.hero-pct{font-size:0.68em;color:var(--azul);font-weight:700;}
-.barra-100{background:var(--bg);border-radius:8px;height:6px;overflow:hidden;}
-.barra-100-fill{
-  height:100%;
-  background:linear-gradient(90deg,var(--azul3),var(--azul));
-  border-radius:8px;transition:width 0.8s cubic-bezier(0.4,0,0.2,1);
+.hero-dia-de100{
+  font-size:0.68em;
+  color:var(--cinza);
+  margin-top:2px;
+}
+.hero-dia-de100 span{
+  color:var(--branco);
+  font-weight:600;
+}
+.meta-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.meta-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.7em;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.meta-name {
+  width: 70px;
+  color: var(--cinza);
+}
+.meta-bar-container {
+  flex: 1;
+  background: var(--bg);
+  border-radius: 6px;
+  height: 6px;
+  overflow: hidden;
+}
+.meta-bar {
+  height: 100%;
+  width: 0%;
+  background: var(--azul);
+  border-radius: 6px;
+  transition: width 0.4s;
+}
+.heart-container {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-top: 6px;
+}
+.heart-svg {
+  width: 38px;
+  height: auto;
+  transition: all 0.3s;
+}
+.heart-svg path,
+.heart-svg polyline {
+  stroke: #4a5568;
+  fill: #4a5568;
+  transition: stroke 0.3s, fill 0.3s;
+}
+.heart-svg.active path,
+.heart-svg.active polyline {
+  stroke: var(--azul);
+  fill: var(--azul);
 }
 
 /* ═══════════════════════════════
@@ -215,13 +291,12 @@ body{
 
 /* ── SVG icon sizing e cor (v1.3 + SVGs do v1.1) ── */
 .treino-mod-icon{display:flex;align-items:center;justify-content:center;margin-bottom:4px;height:36px;position:relative;z-index:1;}
-#mod-nat .treino-mod-icon svg {margin-top: 10px; /* empurra só o desenho para baixo */}
+#mod-nat .treino-mod-icon svg {margin-top: 10px;}
 .treino-mod-icon svg{width:36px;height:36px;fill:var(--azul);transition:fill 0.18s;}
 .treino-mod-btn.prog-100 .treino-mod-icon svg{fill:var(--verde);}
 .treino-mod-btn.prog-50 .treino-mod-icon svg{fill:var(--amarelo);}
 .treino-mod-btn.prog-acima .treino-mod-icon svg{fill:var(--azul);}
 
-/* Ajustes de tamanho individuais */
 #mod-musc .treino-mod-icon svg { width: 54px; height: 54px; }
 #mod-nat  .treino-mod-icon svg { width: 44px; height: 44px; }
 #mod-card .treino-mod-icon svg { width: 39px; height: 39px; }
@@ -291,7 +366,6 @@ body{
   align-items: center;
   justify-content: center;
 }
-
 .mini-card-emoji svg{
   width: 100%;
   height: 100%;
@@ -662,82 +736,6 @@ body{
   background:var(--bg);color:var(--azul);border:none;
   border-radius:8px;padding:8px 14px;font-weight:800;cursor:pointer;
 }
-
-/* NOVO CARD DESAFIO – 4 BARRAS + CORAÇÃO */
-.hero-100 {
-  padding: 16px 20px;
-}
-.hero-100-inner {
-  display: flex;
-  align-items: stretch;
-  gap: 20px;
-}
-.hero-left {
-  flex: 0 0 auto;
-  border-right: 1px solid var(--card2);
-  padding-right: 20px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-.hero-right {
-  flex: 1;
-}
-.meta-list {
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-}
-.meta-item {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  font-size: 0.7em;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-}
-.meta-name {
-  width: 70px;
-  color: var(--cinza);
-}
-.meta-bar-container {
-  flex: 1;
-  background: var(--bg);
-  border-radius: 6px;
-  height: 6px;
-  overflow: hidden;
-}
-.meta-bar {
-  height: 100%;
-  width: 0%;
-  background: var(--azul);
-  border-radius: 6px;
-  transition: width 0.4s;
-}
-.heart-container {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  margin-top: 6px;
-}
-.heart-svg {
-  width: 38px;
-  height: auto;
-  transition: all 0.3s;
-}
-.heart-svg path,
-.heart-svg polyline {
-  stroke: #4a5568;
-  fill: #4a5568;
-  transition: stroke 0.3s, fill 0.3s;
-}
-.heart-svg.active path,
-.heart-svg.active polyline {
-  stroke: var(--azul);
-  fill: var(--azul);
-}
-  
 </style>
 </head>
 <body>
@@ -762,7 +760,7 @@ body{
 <!-- ══════════ TELA: HOJE ══════════ -->
 <div id="tela-hoje" class="tela ativa">
 
-    <div class="hero-100" id="hero-100">
+  <div class="hero-100" id="hero-100">
     <div class="hero-100-inner">
       <div class="hero-left">
         <div class="hero-dia-label">Desafio</div>
@@ -1518,7 +1516,7 @@ function getContagemSemanal(dias){
 function calcPontosSemana(dias){const{musc,nat,cardio}=getContagemSemanal(dias);return musc+nat+cardio;}
 function metaSemanalAtingida(dias){const{musc,nat,cardio}=getContagemSemanal(dias);return musc>=META_MUSC_SEMANA&&nat>=META_NAT_SEMANA&&cardio>=META_CARD_SEMANA;}
 function calcStreakSemanal(){let streak=0;for(let w=0;w<52;w++){if(metaSemanalAtingida(getSemanaOffset(w)))streak++;else break;}return streak;}
-
+  
 function streakComTolerancia(verificadorDia, hojeISO) {
   let streak = 0;
   let errosNoStreak = 0;
@@ -1614,7 +1612,7 @@ function atualizarMetasDesafio() {
     else heartSvg.classList.remove('active');
   }
 }
-  
+
 function emojiSono(horas){
   if(horas===null||horas===undefined){
     return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" fill="currentColor"><path d="M5 7l3-4 3 4-3 4zM11 12l3-4 3 4-3 4zM17 17l3-4 3 4-3 4z"/></svg>`;
@@ -1641,36 +1639,27 @@ function emojiAgua(ml, meta){
   if(pct > 100) pct = 100;
   if(pct < 0) pct = 0;
   
-  // Altura total útil do copo: do fundo (y=780) ao topo (y=200)
   const totalHeight = 580;
   const waterHeight = (pct / 100) * totalHeight;
-  const waterTop = 780 - waterHeight - 70;  // -5 sobe um pouco mais
+  const waterTop = 780 - waterHeight - 70;
   
-  // Largura da água: linearmente interpolada entre fundo (260) e topo (400)
-  // Quanto maior o waterTop (mais baixo), menor a largura; quanto menor (mais alto), maior a largura.
   const larguraFundo = 350;
   const larguraTopoMax = 430;
-  // Fator de progresso: 0 no fundo, 1 no topo
-  const progresso = (780 - waterTop) / totalHeight; // 0 = fundo, 1 = topo
+  const progresso = (780 - waterTop) / totalHeight;
   const larguraAtual = larguraFundo + (larguraTopoMax - larguraFundo) * progresso;
-  
-  const centro = 350; // centro do copo no eixo X
+  const centro = 350;
   const x1 = centro - larguraAtual/2;
   const x2 = centro + larguraAtual/2;
   const xFundo1 = centro - larguraFundo/2;
   const xFundo2 = centro + larguraFundo/2;
-  
-  // Polígono da água: topo (largura atual) até fundo (largura fixa)
   const waterPolygon = `M ${x1} ${waterTop} L ${x2} ${waterTop} L ${xFundo2} 780 L ${xFundo1} 780 Z`;
   
   return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 1000" preserveAspectRatio="xMidYMid meet">
-    <!-- Água com formato de funil (trapézio) -->
     <path d="${waterPolygon}" fill="#38bdf8" />
-    <!-- Contorno do copo (borda mais grossa e visível) -->
     <path d="M171.86 937.73c-12.61,1.25 -25.61,-7.66 -33.18,-14.89 -7.76,-7.41 -12.78,-17.88 -15.18,-32.84l64.97 -0.06 378.53 0c-2.5,18.75 -10.89,27.96 -20.87,37.12 -10.99,10.07 -23.89,12.6 -42.49,12.63 -47.65,0.08 -324.3,2.95 -331.78,-1.96zm13.53 -82.44l-65.68 -0.4c-8.52,-130.75 -21.53,-262.57 -31.95,-393.32 -2.14,-26.87 -33.19,-376.28 -30.74,-392.58l-1.57 -7.96 580 0.08 -64.61 794.16 -385.45 0.02zm-166.19 -815.22c0,38.14 11.08,139.63 14.72,187.58 1.63,21.45 2.63,44.1 5.18,63.49l35.77 441.23c0.27,19.92 4.57,43.49 5.54,63.13 0.59,11.94 1.09,19.23 2.01,31.39 0.57,7.48 1.54,22.02 2.81,30.61 4.98,33.75 0.13,70.71 38.4,98.94 11.34,8.38 30.83,19.06 49.62,19.06l345.21 0c18.29,0 37.6,-10.22 48.56,-18.26 37.1,-27.21 35.06,-59.67 38.96,-96.53 2,-18.93 4.66,-43.5 5.29,-63.39l10.62 -124.86c2.84,-21.62 1.89,-42.32 4.73,-63.94 6.19,-47.01 10.07,-133.06 15.91,-188.25 2.29,-21.66 1.95,-42.36 5.07,-63.61l10.07 -125.42c0.62,-19.91 4.56,-43.57 5.53,-63.14 1.9,-38.48 9.31,-93.82 9.31,-128.03 0,-2.67 -5.06,-14.85 -16.7,-14.85l-619.91 0c-8.27,0 -16.7,7.52 -16.7,14.85z" fill="none" stroke="currentColor" stroke-width="2.2" stroke-miterlimit="22.9256" stroke-linecap="round" stroke-linejoin="round"/>
   </svg>`;
 }
-  function corSono(horas){
+function corSono(horas){
   if(horas===null||horas===undefined) return 'cinza';
   if(horas >= 7) return 'azul';
   if(horas >= 6) return 'verde';
@@ -1705,8 +1694,7 @@ function renderHoje(){
   const streak=calcStreakSemanal();
   const pct=(dia/100*100).toFixed(0);
   document.getElementById('hero-num').textContent=dia;
-  document.getElementById('hero-streak').textContent=streak===1?'1 🔥 semana':streak===0?'0 🔥':streak+' 🔥 semanas';
-  document.getElementById('hero-pct').textContent=pct+'%';
+  // O streak não é mais usado no card, mas mantemos a variável.
   document.getElementById('barra-progress').style.width=pct+'%';
 
   const peso=pesoMaisRecente();
@@ -1760,10 +1748,10 @@ function renderHoje(){
     const h=Math.floor(sonoHoje.horas);const m=Math.round((sonoHoje.horas-h)*60);
     miniSono.textContent=`${h}h${m>0?m+'m':''}`;
     const cor = corSono(sonoHoje.horas);
-if (cor === 'verde') miniSono.style.color = 'var(--verde)';
-else if (cor === 'amarela') miniSono.style.color = 'var(--amarelo)';
-else if (cor === 'azul') miniSono.style.color = 'var(--azul)';
-else miniSono.style.color = 'var(--vermelho)';
+    if (cor === 'verde') miniSono.style.color = 'var(--verde)';
+    else if (cor === 'amarela') miniSono.style.color = 'var(--amarelo)';
+    else if (cor === 'azul') miniSono.style.color = 'var(--azul)';
+    else miniSono.style.color = 'var(--vermelho)';
     if (sonoHoje.horas >= 7) miniSonoSub.textContent = 'Boa noite ✓';
     else miniSonoSub.textContent = 'Abaixo meta';
     document.getElementById('mc-sono').className='mini-card borda-'+cor;
@@ -1789,20 +1777,17 @@ else miniSono.style.color = 'var(--vermelho)';
   if(aguaHoje>0){
     miniAgua.textContent=aguaHoje>=1000?(aguaHoje/1000).toFixed(1)+'L':aguaHoje+'ml';
     const pctA = Math.min(100, Math.round(aguaHoje / metaAgua * 100));
-miniAguaSub.textContent = pctA + '% meta';
-
-let corA;
-if (pctA >= 100) corA = 'azul';
-else if (pctA >= 80) corA = 'verde';
-else if (pctA >= 50) corA = 'amarela';
-else corA = 'vermelha';
-
-if (corA === 'azul') miniAgua.style.color = '#38bdf8';
-else if (corA === 'verde') miniAgua.style.color = 'var(--verde)';
-else if (corA === 'amarela') miniAgua.style.color = 'var(--amarelo)';
-else miniAgua.style.color = 'var(--vermelho)';
-
-document.getElementById('mc-agua').className = 'mini-card borda-' + corA;
+    miniAguaSub.textContent = pctA + '% meta';
+    let corA;
+    if (pctA >= 100) corA = 'azul';
+    else if (pctA >= 80) corA = 'verde';
+    else if (pctA >= 50) corA = 'amarela';
+    else corA = 'vermelha';
+    if (corA === 'azul') miniAgua.style.color = '#38bdf8';
+    else if (corA === 'verde') miniAgua.style.color = 'var(--verde)';
+    else if (corA === 'amarela') miniAgua.style.color = 'var(--amarelo)';
+    else miniAgua.style.color = 'var(--vermelho)';
+    document.getElementById('mc-agua').className = 'mini-card borda-' + corA;
     miniAguaEmoji.innerHTML = emojiAgua(aguaHoje, metaAgua);
   }else{
     miniAgua.textContent='—';miniAgua.style.color='#38bdf8';
@@ -1810,13 +1795,15 @@ document.getElementById('mc-agua').className = 'mini-card borda-' + corA;
     document.getElementById('mc-agua').className='mini-card';
     miniAguaEmoji.innerHTML = emojiAgua(0, metaAgua);
   }
-    const regAgua=Object.values(dados.registrosAgua||{}).filter(v=>v>0);
+  const regAgua=Object.values(dados.registrosAgua||{}).filter(v=>v>0);
   if(regAgua.length>0){
     const mediaA=regAgua.reduce((s,v)=>s+v,0)/regAgua.length;
     miniAguaMedia.innerHTML=`Média: <span>${(mediaA/1000).toFixed(1)}L</span> · meta: ${(metaAgua/1000).toFixed(1)}L`;
   }else{
     miniAguaMedia.innerHTML=`Meta: <span>${(metaAgua/1000).toFixed(1)}L</span> (35ml/kg)`;
   }
+
+  // Inserir o coração e atualizar as metas do desafio
   if (!document.querySelector('.heart-svg')) {
     const heartContainer = document.getElementById('heart-container');
     if (heartContainer) {
@@ -1856,20 +1843,16 @@ function renderCardTreinoSemanal(){
     resumoEl.innerHTML=`<span style="font-size:0.78em;color:var(--cinza)">${pts}/${META_PONTOS_SEMANA}pts</span>`;
   }
 
-    const nomes = ['Seg','Ter','Qua','Qui','Sex','Sáb','Dom'];
+  const nomes = ['Seg','Ter','Qua','Qui','Sex','Sáb','Dom'];
   const hojeStr = hoje();
-  
-  // Pega os ícones SVG já prontos dos botões
   const iconMusc = document.querySelector('#mod-musc .treino-mod-icon');
   const iconNat  = document.querySelector('#mod-nat .treino-mod-icon');
   const iconCard = document.querySelector('#mod-card .treino-mod-icon');
-  
   let html = '';
   dias.forEach((iso, i) => {
     const tipos = getTreinosDia(iso);
     const isHoje = iso === hojeStr;
     let iconeHTML = '';
-    
     if (tipos.includes('Musculação') && tipos.includes('Natação')) {
       iconeHTML = (iconMusc ? iconMusc.innerHTML : '') + (iconNat ? iconNat.innerHTML : '');
     } else if (tipos.includes('Musculação') && tipos.includes('Cardio')) {
@@ -1883,14 +1866,12 @@ function renderCardTreinoSemanal(){
     } else if (tipos.includes('Cardio')) {
       iconeHTML = iconCard ? iconCard.innerHTML : '';
     }
-    
     const temTreino = tipos.length > 0;
     html += `<div class="treino-dia-chip ${temTreino ? 'ok' : ''} ${isHoje ? 'hoje-chip' : ''}">
       <div class="treino-dia-chip-nome">${nomes[i]}</div>
       <div class="treino-dia-chip-icon">${iconeHTML}</div>
     </div>`;
   });
-  
   document.getElementById('semana-treinos-grid').innerHTML = html;
 }
 
@@ -2214,9 +2195,9 @@ function atualizarPreviewSono(){
   document.getElementById('sono-duracao-preview').textContent=`${h}h ${m}min`;
   const cor=corSono(horas);
   if (cor === 'verde') document.getElementById('sono-duracao-preview').style.color = 'var(--verde)';
-else if (cor === 'amarela') document.getElementById('sono-duracao-preview').style.color = 'var(--amarelo)';
-else if (cor === 'azul') document.getElementById('sono-duracao-preview').style.color = 'var(--azul)';
-else document.getElementById('sono-duracao-preview').style.color = 'var(--vermelho)';
+  else if (cor === 'amarela') document.getElementById('sono-duracao-preview').style.color = 'var(--amarelo)';
+  else if (cor === 'azul') document.getElementById('sono-duracao-preview').style.color = 'var(--azul)';
+  else document.getElementById('sono-duracao-preview').style.color = 'var(--vermelho)';
   const qual=horas<5?'😰 Muito pouco sono':horas<6?'😕 Insuficiente':horas<7?'😐 Tente chegar a 7h':horas<=9?'😊 Ótimo!':'😴 Dormiu bastante';
   document.getElementById('sono-qualidade-preview').textContent=qual;
 }
