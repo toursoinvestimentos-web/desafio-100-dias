@@ -1443,6 +1443,7 @@ function migrarDados(d){
     if(!d.streakState.calorias) d.streakState.calorias = padrao.streakState.calorias;
     if(!d.streakState.sono) d.streakState.sono = padrao.streakState.sono;
     if(!d.streakState.agua) d.streakState.agua = padrao.streakState.agua;
+    if(!d.streakState.treinos) d.streakState.treinos = padrao.streakState.treinos;
   }
   
   return d;
@@ -1455,7 +1456,8 @@ function dadosPadrao(){
     streakState:{
       calorias:{fase:1,streakDias:0,errosPosFase2:0,dataUltimaVerificacao:''},
       sono:{fase:1,streakDias:0,errosPosFase2:0,dataUltimaVerificacao:''},
-      agua:{fase:1,streakDias:0,errosPosFase2:0,dataUltimaVerificacao:''}
+      agua:{fase:1,streakDias:0,errosPosFase2:0,dataUltimaVerificacao:''},
+      treinos:{fase:1,streakSemanas:0,ultimaSemanaVerificada:''}
     }
   };
 }
@@ -1620,52 +1622,184 @@ function diaAtingiuMeta(iso, tipo){
 }
 
 function atualizarStreakState(tipo){
-  if(!dados.streakState)dados.streakState={
-    calorias:{fase:1,streakDias:0,errosPosFase2:0,dataUltimaVerificacao:''},
-    sono:{fase:1,streakDias:0,errosPosFase2:0,dataUltimaVerificacao:''},
-    agua:{fase:1,streakDias:0,errosPosFase2:0,dataUltimaVerificacao:''}
+  if(!dados.streakState) dados.streakState = {
+    calorias: { fase: 1, streakDias: 0, dataUltimaVerificacao: '', errosUltimos7: 0 },
+    sono: { fase: 1, streakDias: 0, dataUltimaVerificacao: '', errosUltimos7: 0 },
+    agua: { fase: 1, streakDias: 0, dataUltimaVerificacao: '', errosUltimos7: 0 }
   };
-  const state=dados.streakState[tipo];
-  const hojeIso=hoje();
-  if(state.dataUltimaVerificacao===hojeIso)return;
-  // Descobre dias a processar (da última verificação até hoje)
-  const ultima=state.dataUltimaVerificacao;
-  const diasAProcessar=[];
-  const dtIni=ultima?new Date(ultima):new Date(hojeIso);
-  const dtFim=new Date(hojeIso);
-  // Se nunca processou, processa só hoje
-  if(!ultima){diasAProcessar.push(hojeIso);}
-  else{
-    const d=new Date(dtIni);d.setDate(d.getDate()+1);
-    while(d<=dtFim){diasAProcessar.push(d.toISOString().slice(0,10));d.setDate(d.getDate()+1);}
+  const state = dados.streakState[tipo];
+  const hojeIso = hoje();
+  if (state.dataUltimaVerificacao === hojeIso) return;
+
+  // Coleta todos os dias desde a última verificação até hoje (inclusive)
+  let diasParaProcessar = [];
+  if (!state.dataUltimaVerificacao) {
+    diasParaProcessar.push(hojeIso);
+  } else {
+    let d = new Date(state.dataUltimaVerificacao);
+    d.setDate(d.getDate() + 1);
+    const fim = new Date(hojeIso);
+    while (d <= fim) {
+      diasParaProcessar.push(d.toISOString().slice(0,10));
+      d.setDate(d.getDate() + 1);
+    }
   }
-  for(const dia of diasAProcessar){
-    const acertou=diaAtingiuMeta(dia,tipo);
-    if(state.fase===1){
-      if(acertou){state.streakDias++;if(state.streakDias>=7){state.fase=2;state.errosPosFase2=0;}}
-      else{state.streakDias=0;}
-    }else{
-      if(!acertou){
-        state.errosPosFase2++;
-        if(state.errosPosFase2>=3){state.fase=1;state.streakDias=0;state.errosPosFase2=0;}
+  if (diasParaProcessar.length === 0) return;
+
+  // Para cada dia novo, atualiza a streak consecutiva (fase 1) ou conta erros nos últimos 7 dias (fase 2)
+  for (const dia of diasParaProcessar) {
+    const acertou = diaAtingiuMeta(dia, tipo);
+
+    if (state.fase === 1) {
+      if (acertou) {
+        state.streakDias++;
+        if (state.streakDias >= 7) {
+          state.fase = 2;
+          state.streakDias = 7; // mantém só para referência
+          // recalcula erros nos últimos 7 dias (incluindo hoje)
+          const ultimos7 = getUltimos7Dias(dia);
+          let erros = 0;
+          for (const d7 of ultimos7) {
+            if (!diaAtingiuMeta(d7, tipo)) erros++;
+          }
+          state.errosUltimos7 = erros;
+        }
+      } else {
+        state.streakDias = 0;
+      }
+    } else { // fase 2
+      // Atualiza a lista dos últimos 7 dias (janela deslizante)
+      const ultimos7 = getUltimos7Dias(dia);
+      let erros = 0;
+      for (const d7 of ultimos7) {
+        if (!diaAtingiuMeta(d7, tipo)) erros++;
+      }
+      state.errosUltimos7 = erros;
+      if (erros >= 3) {
+        // reseta para fase 1
+        state.fase = 1;
+        state.streakDias = 0;
+        state.errosUltimos7 = 0;
       }
     }
   }
-  state.dataUltimaVerificacao=hojeIso;
+  state.dataUltimaVerificacao = hojeIso;
   salvarDados();
+}
+
+// Função auxiliar para obter os últimos 7 dias (incluindo a data passada)
+function getUltimos7Dias(iso) {
+  let dias = [];
+  let d = new Date(iso);
+  for (let i = 6; i >= 0; i--) {
+    let dia = new Date(d);
+    dia.setDate(d.getDate() - i);
+    dias.push(dia.toISOString().slice(0,10));
+  }
+  return dias;
 }
 
 function calcProgressoMetaDiaria(tipo){
   atualizarStreakState(tipo);
-  const state=dados.streakState[tipo];
-  if(state.fase===1)return Math.min(state.streakDias/7,0.999);
-  return 1.0;
+  const state = dados.streakState[tipo];
+  if (state.fase === 1) {
+    return Math.min(state.streakDias / 7, 0.999);
+  } else { // fase 2
+    if (state.errosUltimos7 >= 3) return 0;
+    return 1.0;
+  }
 }
 
-function calcProgressoTreinos(){
-  const dias=getDiasSemanaAtual();
-  const pts=calcPontosSemana(dias);
-  return Math.min(1,pts/META_PONTOS_SEMANA);
+// Estado de streak para treinos (com tolerância 0)
+function atualizarStreakTreinos() {
+  if (!dados.streakState.treinos) {
+    dados.streakState.treinos = {
+      fase: 1,          // 1 = construção, 2 = manutenção
+      streakSemanas: 0, // semanas consecutivas batendo a meta (útil para fase 2)
+      ultimaSemanaVerificada: ''
+    };
+  }
+  const state = dados.streakState.treinos;
+  const hojeISO = hoje();
+  // Obtém a semana atual (segunda a domingo)
+  const semanaAtual = getSemanaAtual();
+  const semanaAtualStr = `${semanaAtual[0]}_${semanaAtual[6]}`; // identificador único
+
+  // Se já verificamos essa semana, não faz nada
+  if (state.ultimaSemanaVerificada === semanaAtualStr) return;
+
+  // Verifica se a semana anterior (completa) bateu a meta
+  const semanaAnterior = getSemanaAnteriorCompleta();
+  if (semanaAnterior) {
+    const metaAnterior = metaSemanalAtingida(semanaAnterior);
+    if (state.fase === 2) {
+      // Manutenção: se a semana anterior NÃO bateu a meta, reseta
+      if (!metaAnterior) {
+        state.fase = 1;
+        state.streakSemanas = 0;
+      } else {
+        state.streakSemanas++;
+      }
+    } else if (state.fase === 1) {
+      // Construção: se a semana anterior bateu a meta, aumenta contagem
+      if (metaAnterior) {
+        state.streakSemanas++;
+        if (state.streakSemanas >= 1) { // uma única semana já entra em manutenção
+          state.fase = 2;
+        }
+      } else {
+        state.streakSemanas = 0;
+      }
+    }
+  }
+  state.ultimaSemanaVerificada = semanaAtualStr;
+  salvarDados();
+}
+
+function getSemanaAtual() {
+  const hoje = new Date();
+  const diaSemana = hoje.getDay(); // 0 = domingo, 1 = segunda...
+  const seg = new Date(hoje);
+  seg.setDate(hoje.getDate() - (diaSemana === 0 ? 6 : diaSemana - 1));
+  const dias = [];
+  for (let i = 0; i < 7; i++) {
+    const d = new Date(seg);
+    d.setDate(seg.getDate() + i);
+    dias.push(d.toISOString().slice(0,10));
+  }
+  return dias;
+}
+
+function getSemanaAnteriorCompleta() {
+  const hoje = new Date();
+  const diaSemana = hoje.getDay(); // 0 domingo
+  // Quantos dias faltam para o domingo passado?
+  const diasAteUltimoDomingo = (diaSemana === 0 ? 0 : diaSemana);
+  const ultimoDomingo = new Date(hoje);
+  ultimoDomingo.setDate(hoje.getDate() - diasAteUltimoDomingo);
+  // A semana anterior completa é de segunda a domingo, onde o domingo é o ultimoDomingo
+  const seg = new Date(ultimoDomingo);
+  seg.setDate(ultimoDomingo.getDate() - 6);
+  if (seg > hoje) return null; // ainda não temos uma semana completa
+  const dias = [];
+  for (let i = 0; i < 7; i++) {
+    const d = new Date(seg);
+    d.setDate(seg.getDate() + i);
+    dias.push(d.toISOString().slice(0,10));
+  }
+  return dias;
+}
+
+function calcProgressoTreinos() {
+  atualizarStreakTreinos();
+  const state = dados.streakState.treinos;
+  if (state.fase === 2) {
+    return 1.0; // manutenção: barra 100%
+  } else {
+    const diasSemanaAtual = getDiasSemanaAtual();
+    const pts = calcPontosSemana(diasSemanaAtual);
+    return Math.min(1, pts / META_PONTOS_SEMANA);
+  }
 }
 
 function renderCardDesafio(){
