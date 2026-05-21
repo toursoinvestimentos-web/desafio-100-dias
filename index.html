@@ -653,6 +653,18 @@ body{
   background:var(--bg);color:var(--azul);border:none;
   border-radius:8px;padding:8px 14px;font-weight:800;cursor:pointer;
 }
+
+/* Animação do batimento (pisca rápido) */
+@keyframes pulse-ecg {
+  0% { opacity: 1; filter: drop-shadow(0 0 0 #3b82f6); }
+  50% { opacity: 0.55; filter: drop-shadow(0 0 6px #3b82f6); }
+  100% { opacity: 1; filter: drop-shadow(0 0 0 #3b82f6); }
+}
+
+.pulsar-ecg {
+  animation: pulse-ecg 0.8s ease-in-out infinite;
+}
+  
 </style>
 </head>
 <body>
@@ -1375,7 +1387,22 @@ let subAbaAtiva='treinos';
 let subTreinoAtiva='a';
 let chartPeso=null,chartCal=null,chartSono=null,chartAgua=null,chartTreinos=null;
 let curTreino='A',curExIdx=0,seriesDone=[],timerInterval=null;
+let blinkECGTimeout = null;
+let jaPiscouNaTela = false;
 
+function piscarECG(vezes = 3) {
+  const ecg = document.getElementById('desafio-ecg-path');
+  if (!ecg) return;
+  ecg.classList.remove('pulsar-ecg');
+  void ecg.offsetWidth;
+  ecg.classList.add('pulsar-ecg');
+  if (blinkECGTimeout) clearTimeout(blinkECGTimeout);
+  const duracao = 0.8 * vezes * 1000;
+  blinkECGTimeout = setTimeout(() => {
+    ecg.classList.remove('pulsar-ecg');
+    blinkECGTimeout = null;
+  }, duracao);
+}
 // ═══════════════════════════════
 // DADOS
 // ═══════════════════════════════
@@ -1655,19 +1682,28 @@ function renderCardDesafio(){
   document.getElementById('desafio-fill-sono').style.width=(progSono*100)+'%';
   document.getElementById('desafio-fill-agua').style.width=(progAgua*100)+'%';
 
-  const todasCem=progCal>=1&&progTreino>=1&&progSono>=1&&progAgua>=1;
-  const pathEl=document.getElementById('desafio-coracao-path');
-  const ecgEl=document.getElementById('desafio-ecg-path');
-  const wrapEl=document.getElementById('desafio-coracao-wrap');
-  if(pathEl){pathEl.style.opacity=todasCem?'1':'0';}
-  if(ecgEl){ecgEl.style.opacity=todasCem?'1':'0';}
-  if(wrapEl){wrapEl.style.filter=todasCem?'drop-shadow(0 0 8px #3b82f6)':'none';}
+  const todasCem = progCal >= 1 && progTreino >= 1 && progSono >= 1 && progAgua >= 1;
+  const pathEl = document.getElementById('desafio-coracao-path');
+  const ecgEl = document.getElementById('desafio-ecg-path');
+  const wrapEl = document.getElementById('desafio-coracao-wrap');
+
+  if (pathEl) pathEl.style.opacity = todasCem ? '1' : '0';
+  if (ecgEl) ecgEl.style.opacity = todasCem ? '1' : '0';
+  if (wrapEl) wrapEl.style.filter = todasCem ? 'drop-shadow(0 0 8px #3b82f6)' : 'none';
+
+  // Piscar limitado (3 vezes) ao atingir 100% pela primeira vez na tela
+  if (todasCem && !jaPiscouNaTela) {
+    piscarECG(3);
+    jaPiscouNaTela = true;
+  }
 }
 
 // ═══════════════════════════════
 // RENDER: HOJE
 // ═══════════════════════════════
 function renderHoje(){
+   jaPiscouNaTela = false;
+  if (blinkECGTimeout) clearTimeout(blinkECGTimeout);
   renderCardDesafio();
 
   const peso=pesoMaisRecente();
