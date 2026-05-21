@@ -1449,7 +1449,7 @@ function classIMC(imc){
 }
 function calcDiaDesafio(){const ini=dados.perfil.inicio;if(!ini)return 1;const ms=new Date(hoje())-new Date(ini);return Math.max(1,Math.min(100,Math.floor(ms/86400000)+1));}
 function pesoMaisRecente(){if(!dados.medicoesPeso.length)return dados.perfil.peso||0;return dados.medicoesPeso[dados.medicoesPeso.length-1].pesoKg;}
-function calcMetaAgua(){const peso=pesoMaisRecente();if(!peso)return 2500;return Math.round(peso*25/100)*100;}
+function calcMetaAgua(){const peso=pesoMaisRecente();if(!peso)return 2500;return Math.round(peso*30/100)*100;}
 
 function getSegundaFeira(iso){
   const d=new Date(iso);
