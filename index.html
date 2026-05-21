@@ -1043,6 +1043,7 @@ body{
     <div class="perfil-row"><span class="perfil-label">Dia atual</span><span class="perfil-val" id="perf-dia">—</span></div>
     <div class="perfil-row"><span class="perfil-label">Previsão fim</span><span class="perfil-val" id="perf-fim">—</span></div>
     <button class="btn btn-danger btn-sm" style="margin-top:14px;width:100%" onclick="confirmarReiniciar()">Reiniciar desafio</button>
+    <button class="btn btn-danger btn-sm" style="margin-top:8px;width:100%" onclick="confirmarApagarHistorico()">🗑 Apagar histórico e reiniciar</button>
   </div>
   <div class="card">
     <div class="card-header">💾 Backup de dados</div>
@@ -2643,6 +2644,26 @@ function processarImport(e){
 function confirmarReiniciar(){
   if(confirm('Reiniciar o desafio de 100 dias?')){
     dados.perfil.inicio=hoje();salvarDados();showToast('Desafio reiniciado! 💪');renderPerfil();renderHoje();
+  }
+}
+
+  function confirmarApagarHistorico(){
+  if(confirm('Apagar todo o histórico e reiniciar o desafio? Perfil, biblioteca e exercícios serão mantidos.')){
+    dados.desafioDias={};
+    dados.diarioAlimentar={};
+    dados.registrosSono={};
+    dados.registrosAgua={};
+    dados.medicoesPeso=[];
+    dados.conquistas={};
+    dados.pesosExercicios={};
+    dados.pesosExerciciosInicial={};
+    dados.proximoTreino='A';
+    dados.perfil.inicio=hoje();
+    dados.streakState=dadosPadrao().streakState;
+    salvarDados();
+    showToast('Histórico apagado e desafio reiniciado! ✅');
+    renderHoje();
+    renderPerfil();
   }
 }
 
