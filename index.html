@@ -950,7 +950,7 @@ body{
       <div class="card-titulo" style="margin-bottom:12px">Histórico de peso</div>
       <div id="hist-peso-lista"></div>
     </div>
-    <button class="btn btn-outline" onclick="abrirModalPeso()" style="margin-bottom:12px">⚖️ Registrar peso hoje</button>
+    <button class="btn btn-outline" onclick="abrirModalPeso()" style="margin-bottom:12px">Registrar peso hoje</button>
   </div>
 </div>
 
@@ -1943,7 +1943,7 @@ function renderProgresso(){
     if(peso&&dados.perfil.alturaCm){const imc=calcIMC(peso);const cls=classIMC(imc);document.getElementById('imc-prog-val').textContent=imc;document.getElementById('imc-prog-val').style.color=cls.cor;document.getElementById('imc-prog-class').textContent=cls.txt;}
     let hist='';const rev=[...med].reverse();
     rev.forEach((m,i)=>{const prev=rev[i+1];let delta='';if(prev){const d=m.pesoKg-prev.pesoKg;delta=`<span class="hist-delta ${d>0?'delta-pos':'delta-neg'}">${d>0?'+':''}${d.toFixed(1)}kg</span>`;}hist+=`<div class="hist-item"><span class="hist-data">${formatarData(m.data)}</span><span class="hist-val">${m.pesoKg}kg ${delta}</span></div>`;});
-    document.getElementById('hist-peso-lista').innerHTML=hist||'<div class="empty"><div class="empty-icon">⚖️</div>Nenhum registro.</div>';
+    document.getElementById('hist-peso-lista').innerHTML=hist||'<div class="empty">Nenhum registro.</div>';
   }
   if(subAbaAtiva==='calorias'){
     const dias14=[];for(let i=13;i>=0;i--){const d=new Date();d.setDate(d.getDate()-i);dias14.push(d.toISOString().slice(0,10));}
