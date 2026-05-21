@@ -113,7 +113,7 @@ body{
 /* ── HERO 100 DIAS v1.4 ── */
 .hero-100{
   background:linear-gradient(135deg,var(--card) 0%,var(--card2) 100%);
-  border-radius:var(--radius);padding:14px 18px;
+  border-radius:var(--radius);padding:20px 18px;
   margin-bottom:10px;border:1px solid rgba(59,130,246,0.25);
   border-left:4px solid var(--azul);position:relative;overflow:hidden;
 }
@@ -1480,7 +1480,7 @@ function classIMC(imc){
 }
 function calcDiaDesafio(){const ini=dados.perfil.inicio;if(!ini)return 1;const ms=new Date(hoje())-new Date(ini);return Math.max(1,Math.min(100,Math.floor(ms/86400000)+1));}
 function pesoMaisRecente(){if(!dados.medicoesPeso.length)return dados.perfil.peso||0;return dados.medicoesPeso[dados.medicoesPeso.length-1].pesoKg;}
-function calcMetaAgua(){const peso=pesoMaisRecente();if(!peso)return 2500;return Math.round(peso*35/100)*100;}
+function calcMetaAgua(){const peso=pesoMaisRecente();if(!peso)return 2500;return Math.round(peso*25/100)*100;}
 
 function getDiasSemanaAtual(){
   const d=new Date();const dow=(d.getDay()+6)%7;
