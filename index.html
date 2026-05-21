@@ -673,9 +673,10 @@ body{
   <div class="hero-100" id="hero-100">
     <div class="hero-inner">
       <div class="hero-left-quarter">
-        <div class="hero-dia-label">Desafio</div>
-        <div class="hero-dia-num" id="hero-num">—</div>
-        <div class="hero-dia-de100">de <span style="color:var(--branco);font-weight:700">100</span> dias</div>
+        
+      <div class="hero-dia-label">Sequência</div>
+        <div class="hero-dia-num" id="hero-num">0</div>
+        <div class="hero-dia-de100">Recorde: <span style="color:var(--branco);font-weight:700" id="hero-recorde">0</span> dias</div>
       </div>
       <div class="hero-divider"></div>
       <div class="hero-right-bars">
@@ -1008,12 +1009,10 @@ body{
     <div id="calc-resumo"></div>
   </div>
   <div class="card">
-    <div class="card-header">🗓 Desafio</div>
-    <div class="perfil-row"><span class="perfil-label">Início</span><span class="perfil-val" id="perf-inicio">—</span></div>
-    <div class="perfil-row"><span class="perfil-label">Dia atual</span><span class="perfil-val" id="perf-dia">—</span></div>
-    <div class="perfil-row"><span class="perfil-label">Previsão fim</span><span class="perfil-val" id="perf-fim">—</span></div>
-    <button class="btn btn-danger btn-sm" style="margin-top:14px;width:100%" onclick="confirmarReiniciar()">Reiniciar desafio</button>
-    <button class="btn btn-danger btn-sm" style="margin-top:20px;width:100%" onclick="confirmarApagarHistorico()">🗑 Apagar histórico e reiniciar</button>
+    <div class="card-header">❤️ Sequência</div>
+    <div class="perfil-row"><span class="perfil-label">Dias ativos</span><span class="perfil-val" id="perf-seq-ativos">—</span></div>
+    <div class="perfil-row"><span class="perfil-label">Recorde</span><span class="perfil-val" id="perf-seq-recorde">—</span></div>
+    <button class="btn btn-danger btn-sm" style="margin-top:14px;width:100%" onclick="confirmarApagarHistorico()">🗑 Apagar histórico</button>
   </div>
   <div class="card">
     <div class="card-header">💾 Backup de dados</div>
@@ -1412,7 +1411,8 @@ function migrarDados(d){
   if(!d.pesosExercicios)d.pesosExercicios=padrao.pesosExercicios;
   if(!d.pesosExerciciosInicial)d.pesosExerciciosInicial=padrao.pesosExerciciosInicial;
   if(!d.proximoTreino)d.proximoTreino=padrao.proximoTreino;
-  if(!d.desafioBarras)d.desafioBarras=padrao.desafioBarras;
+if(!d.desafioBarras)d.desafioBarras=padrao.desafioBarras;
+  if(!d.sequencia)d.sequencia={diasAtivos:0,recorde:0,inicio:null};
   return d;
 }
 
@@ -1421,12 +1421,13 @@ function dadosPadrao(){
     perfil:{idade:0,alturaCm:0,peso:0,fatorAtividade:1.55,deficit:500,inicio:hoje()},
     medicoesPeso:[],desafioDias:{},diarioAlimentar:{},biblioteca:[],conquistas:{},
     registrosSono:{},registrosAgua:{},pesosExercicios:{},pesosExerciciosInicial:{},proximoTreino:'A',
-    desafioBarras:{
+  desafioBarras:{
       calorias: { pontosSemana:0, travado:false, ultimaVerificacao:'' },
       treinos:  { pontosSemana:0, travado:false, ultimaVerificacao:'' },
       sono:     { pontosSemana:0, travado:false, ultimaVerificacao:'' },
       agua:     { pontosSemana:0, travado:false, ultimaVerificacao:'' },
-    }
+    },
+    sequencia:{ diasAtivos:0, recorde:0, inicio:null }
   };
 }
 
@@ -1447,7 +1448,23 @@ function classIMC(imc){
   if(imc<30)return{txt:'Sobrepeso ⚠',cor:'var(--amarelo)'};
   return{txt:'Obesidade',cor:'var(--vermelho)'};
 }
-function calcDiaDesafio(){const ini=dados.perfil.inicio;if(!ini)return 1;const ms=new Date(hoje())-new Date(ini);return Math.max(1,Math.min(100,Math.floor(ms/86400000)+1));}
+function calcSequencia(){
+  if(!dados.sequencia)dados.sequencia={diasAtivos:0,recorde:0,inicio:null};
+  const seq=dados.sequencia;
+  const hojeStr=hoje();
+  const todasCem=['calorias','treinos','sono','agua'].every(t=>getProgressoBarra(t)>=1.0);
+  if(todasCem){
+    if(!seq.inicio)seq.inicio=hojeStr;
+    const ms=new Date(hojeStr)-new Date(seq.inicio);
+    seq.diasAtivos=Math.max(1,Math.floor(ms/86400000)+1);
+    if(seq.diasAtivos>seq.recorde)seq.recorde=seq.diasAtivos;
+  }else{
+    if(seq.inicio)seq.inicio=null;
+    seq.diasAtivos=0;
+  }
+  salvarDados();
+  return seq;
+}
 function pesoMaisRecente(){if(!dados.medicoesPeso.length)return dados.perfil.peso||0;return dados.medicoesPeso[dados.medicoesPeso.length-1].pesoKg;}
 function calcMetaAgua(){const peso=pesoMaisRecente();if(!peso)return 2500;return Math.round(peso*30/100)*100;}
 
@@ -1578,8 +1595,10 @@ function corDaBarra(progresso){
 // RENDER: CARD DESAFIO
 // ═══════════════════════════════
 function renderCardDesafio(){
-  const dia=calcDiaDesafio();
-  document.getElementById('hero-num').textContent=dia;
+  const seq=calcSequencia();
+  document.getElementById('hero-num').textContent=seq.diasAtivos;
+  const recEl=document.getElementById('hero-recorde');
+  if(recEl)recEl.textContent=seq.recorde;
 
   const tipos=['cal','treino','sono','agua'];
   const tiposNome={cal:'calorias',treino:'treinos',sono:'sono',agua:'agua'};
@@ -2108,10 +2127,11 @@ function renderPerfil(){
     <div class="perfil-row"><span class="perfil-label">TMB (taxa basal)</span><span class="perfil-val">${tmb||'—'} kcal</span></div>
     <div class="perfil-row"><span class="perfil-label">Gasto total (GET)</span><span class="perfil-val">${get||'—'} kcal</span></div>
     <div class="perfil-row"><span class="perfil-label">Meta diária</span><span class="perfil-val" style="color:var(--verde)">${meta||'—'} kcal</span></div>`;
-  const ini=new Date(p.inicio);const fim=new Date(ini);fim.setDate(fim.getDate()+99);
-  document.getElementById('perf-inicio').textContent=formatarData(p.inicio);
-  document.getElementById('perf-dia').textContent=calcDiaDesafio()+' de 100';
-  document.getElementById('perf-fim').textContent=formatarData(fim.toISOString().slice(0,10));
+  const seq=calcSequencia();
+  const elAtivos=document.getElementById('perf-seq-ativos');
+  const elRecorde=document.getElementById('perf-seq-recorde');
+  if(elAtivos)elAtivos.textContent=seq.diasAtivos+' dias';
+  if(elRecorde)elRecorde.textContent=seq.recorde+' dias';
 }
 
 // ═══════════════════════════════
@@ -2492,11 +2512,7 @@ function processarImport(e){
   reader.onload=ev=>{try{dados=migrarDados(JSON.parse(ev.target.result));salvarDados();showToast('Dados importados! ✅');renderHoje();}catch{showToast('Erro ao importar!');}};
   reader.readAsText(file);
 }
-function confirmarReiniciar(){
-  if(confirm('Reiniciar o desafio de 100 dias?')){
-    dados.perfil.inicio=hoje();salvarDados();showToast('Desafio reiniciado! 💪');renderPerfil();renderHoje();
-  }
-}
+
 
 function confirmarApagarHistorico(){
   if(confirm('Apagar todo o histórico e reiniciar o desafio? Perfil, biblioteca e exercícios serão mantidos.')){
@@ -2511,6 +2527,7 @@ function confirmarApagarHistorico(){
     dados.proximoTreino='A';
     dados.perfil.inicio=hoje();
     dados.desafioBarras=dadosPadrao().desafioBarras;
+    dados.sequencia={diasAtivos:0,recorde:0,inicio:null};
     salvarDados();
     showToast('Histórico apagado e desafio reiniciado! ✅');
     renderHoje();
