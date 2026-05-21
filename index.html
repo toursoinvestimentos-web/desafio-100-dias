@@ -676,9 +676,8 @@ body{
         
       <div class="hero-dia-label">Sequência</div>
         <div class="hero-dia-num" id="hero-num">0</div>
-        <div class="hero-dia-de100">Recorde: <span style="color:var(--branco);font-weight:700" id="hero-recorde">0</span> dias</div>
+        <div class="hero-dia-de100">Recorde: <span style="color:var(--branco);font-weight:700" id="hero-recorde">0</span></div>
       </div>
-      <div class="hero-divider"></div>
       <div class="hero-right-bars">
         <div class="desafio-barra-row">
           <div class="desafio-barra-label">Calorias</div>
@@ -1009,20 +1008,15 @@ body{
     <div id="calc-resumo"></div>
   </div>
   <div class="card">
-    <div class="card-header">❤️ Sequência</div>
-    <div class="perfil-row"><span class="perfil-label">Dias ativos</span><span class="perfil-val" id="perf-seq-ativos">—</span></div>
-    <div class="perfil-row"><span class="perfil-label">Recorde</span><span class="perfil-val" id="perf-seq-recorde">—</span></div>
-    <button class="btn btn-danger btn-sm" style="margin-top:14px;width:100%" onclick="confirmarApagarHistorico()">🗑 Apagar histórico</button>
-  </div>
-  <div class="card">
     <div class="card-header">💾 Backup de dados</div>
     <p style="font-size:0.78em;color:var(--cinza);margin-bottom:14px">Exporte um JSON com todos os seus dados.</p>
     <div style="display:flex;gap:8px">
       <button class="btn btn-ghost btn-sm" style="flex:1" onclick="exportarDados()">⬇ Exportar JSON</button>
       <button class="btn btn-ghost btn-sm" style="flex:1" onclick="importarDados()">⬆ Importar JSON</button>
     </div>
-    <input type="file" id="input-import" accept=".json" style="display:none" onchange="processarImport(event)">
+   <input type="file" id="input-import" accept=".json" style="display:none" onchange="processarImport(event)">
   </div>
+  <button class="btn btn-ghost" style="margin-top:8px;width:100%;color:var(--vermelho);border-color:rgba(248,113,113,0.25);font-size:0.78em" onclick="confirmarApagarHistorico()">🗑 Apagar histórico</button>
 </div>
 
 <!-- ══════════ SCREEN: MUSCULAÇÃO ══════════ -->
