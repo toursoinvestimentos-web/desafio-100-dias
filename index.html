@@ -1452,11 +1452,10 @@ function pesoMaisRecente(){if(!dados.medicoesPeso.length)return dados.perfil.pes
 function calcMetaAgua(){const peso=pesoMaisRecente();if(!peso)return 2500;return Math.round(peso*30/100)*100;}
 
 function getSegundaFeira(iso){
-  // Adiciona T12:00:00 para garantir que a data seja interpretada no fuso local
-  const d = new Date(iso + 'T12:00:00');
-  const dow = (d.getDay() + 6) % 7;
-  const seg = new Date(d);
-  seg.setDate(d.getDate() - dow);
+  const d=new Date(iso);
+  const dow=(d.getDay()+6)%7;
+  const seg=new Date(d);
+  seg.setDate(d.getDate()-dow);
   return seg.toISOString().slice(0,10);
 }
 
