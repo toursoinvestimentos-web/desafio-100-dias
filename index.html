@@ -905,6 +905,7 @@ body{
     <button class="toggle-aba ativa" onclick="mudarSubAba('treinos',this)" style="flex:0 0 auto">Treinos</button>
     <button class="toggle-aba" onclick="mudarSubAba('sono',this)" style="flex:0 0 auto">Sono</button>
     <button class="toggle-aba" onclick="mudarSubAba('calorias',this)" style="flex:0 0 auto">Cal</button>
+    <button class="toggle-aba" onclick="mudarSubAba('proteina',this)" style="flex:0 0 auto">Prot</button>
     <button class="toggle-aba" onclick="mudarSubAba('agua',this)" style="flex:0 0 auto">Água</button>
     <button class="toggle-aba" onclick="mudarSubAba('peso',this)" style="flex:0 0 auto">Peso</button>
   </div>
@@ -966,6 +967,30 @@ body{
     </div>
   </div>
 
+<div id="sub-proteina" style="display:none">
+    <div class="card" id="card-proteina-borda">
+      <div class="card-header">🥩 Meta Proteica Diária</div>
+      <div class="stats-row">
+        <div class="stat-item">
+          <div class="stat-val" id="stat-prot-meta" style="color:var(--azul)">—</div>
+          <div class="stat-label">meta/dia (g)</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-val" id="stat-prot-hoje">—</div>
+          <div class="stat-label">consumido hoje</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-val" id="stat-prot-media">—</div>
+          <div class="stat-label">média 30 dias</div>
+        </div>
+      </div>
+      <div style="margin-top:8px;font-size:0.65em;color:var(--cinza);text-align:center">média baseada nos últimos 30 dias registrados</div>
+    </div>
+    <div class="dica-saude">
+      💡 <strong>ISSN/ACSM:</strong> Para quem pratica musculação e busca composição corporal ideal, recomenda-se entre 1,4 g e 2,0 g de proteína por kg/dia. A proteína é essencial para a síntese muscular, recuperação pós-treino, saciedade e manutenção da massa magra durante o déficit calórico.
+    </div>
+  </div>
+  
   <div id="sub-agua" style="display:none">
     <div class="card">
       <div class="card-header">Água diária (14 dias)</div>
@@ -1287,9 +1312,10 @@ body{
     <div class="sep"></div>
     <div style="font-size:0.7em;color:var(--cinza);text-transform:uppercase;font-weight:700;letter-spacing:0.1em;margin-bottom:12px">Ou adicionar manual</div>
     <div class="modal-campo"><label>Nome</label><input type="text" id="ref-nome" placeholder="Ex: Omelete"></div>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+   <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px">
       <div class="modal-campo"><label>Porção</label><input type="text" id="ref-porcao" placeholder="Ex: 2 ovos"></div>
-      <div class="modal-campo"><label>Calorias (kcal)</label><input type="number" id="ref-kcal" placeholder="Ex: 180" min="0"></div>
+      <div class="modal-campo"><label>Kcal</label><input type="number" id="ref-kcal" placeholder="Ex: 180" min="0"></div>
+      <div class="modal-campo"><label>Prot (g)</label><input type="number" id="ref-prot" placeholder="Ex: 25" min="0" step="0.1"></div>
     </div>
     <div id="ref-itens-lista" style="margin-top:4px"></div>
     <div style="background:var(--azul-dim);border-radius:10px;padding:10px 14px;text-align:center;margin-top:10px">
@@ -1493,8 +1519,13 @@ function calcSequencia(){
   return seq;
 }
 function pesoMaisRecente(){if(!dados.medicoesPeso.length)return dados.perfil.peso||0;return dados.medicoesPeso[dados.medicoesPeso.length-1].pesoKg;}
+function calcMetaProteina(){const peso=pesoMaisRecente();if(!peso)return 0;return Math.round(peso*1.4);}
+function calcProteinaDia(iso){
+  const d=dados.diarioAlimentar[iso];
+  if(!d||!d.refeicoes)return 0;
+  return Object.values(d.refeicoes).flat().reduce((s,x)=>s+(x.prot||0),0);
+}
 function calcMetaAgua(){const peso=pesoMaisRecente();if(!peso)return 2500;return Math.round(peso*30/100)*100;}
-
 function getSegundaFeira(iso){
   const d=new Date(iso);
   const dow=(d.getDay()+6)%7;
@@ -1933,7 +1964,7 @@ function mudarSubAba(sub,el){
   subAbaAtiva=sub;
   document.querySelectorAll('#tela-progresso .toggle-aba').forEach(a=>a.classList.remove('ativa'));
   el.classList.add('ativa');
-  ['treinos','sono','calorias','agua','peso'].forEach(s=>{
+ ['treinos','sono','calorias','proteina','agua','peso'].forEach(s=>{
     const el2=document.getElementById('sub-'+s);
     if(el2)el2.style.display=s===sub?'block':'none';
   });
@@ -2017,6 +2048,24 @@ function renderProgresso(){
     document.getElementById('stat-noites-7h').textContent=reg.filter(v=>v>=7).length;
     document.getElementById('stat-noites-reg').textContent=reg.length;
   }
+
+  if(subAbaAtiva==='proteina'){
+    const metaProt=calcMetaProteina();
+    document.getElementById('stat-prot-meta').textContent=metaProt||'—';
+    const protHoje=calcProteinaDia(hoje());
+    const protHojeEl=document.getElementById('stat-prot-hoje');
+    protHojeEl.textContent=protHoje?protHoje+'g':'0g';
+    protHojeEl.style.color=protHoje>=metaProt?'var(--verde)':protHoje>0?'var(--amarelo)':'var(--cinza)';
+    const dias30=[];for(let i=0;i<30;i++){const d=new Date();d.setDate(d.getDate()-i);dias30.push(d.toISOString().slice(0,10));}
+    const protDias=dias30.map(iso=>calcProteinaDia(iso)).filter(v=>v>0);
+    const media=protDias.length?Math.round(protDias.reduce((a,b)=>a+b,0)/protDias.length):0;
+    const mediaEl=document.getElementById('stat-prot-media');
+    mediaEl.textContent=media?media+'g':'—';
+    mediaEl.style.color=media>=metaProt?'var(--azul)':'var(--vermelho)';
+    const card=document.getElementById('card-proteina-borda');
+    if(card)card.style.borderLeftColor=media>=metaProt?'var(--azul)':'var(--vermelho)';
+  }
+  
   if(subAbaAtiva==='agua'){
     const metaAgua=calcMetaAgua();
     const dias14=[];for(let i=13;i>=0;i--){const d=new Date();d.setDate(d.getDate()-i);dias14.push(d.toISOString().slice(0,10));}
@@ -2217,7 +2266,7 @@ function abrirModalRefeicao(periodo){
   const nomes={'manhã':'☕ CAFÉ DA MANHÃ','almoço':'🍽️ ALMOÇO','jantar':'🥗 JANTAR','extra':'🍎 EXTRA'};
   document.getElementById('modal-ref-titulo').textContent=nomes[periodo]||periodo.toUpperCase();
   document.getElementById('ref-busca').value='';document.getElementById('ref-nome').value='';
-  document.getElementById('ref-porcao').value='';document.getElementById('ref-kcal').value='';
+  document.getElementById('ref-porcao').value='';document.getElementById('ref-kcal').value='';document.getElementById('ref-prot').value='';
   const d=dados.diarioAlimentar[hoje()];
   if(d&&d.refeicoes&&d.refeicoes[periodo])refItensTemp=[...d.refeicoes[periodo]];
   filtrarBiblioteca();renderItensRef();abrirModal('modal-refeicao');
@@ -2226,22 +2275,24 @@ function filtrarBiblioteca(){
   const q=document.getElementById('ref-busca').value.toLowerCase();
   const filtrado=dados.biblioteca.filter(a=>!q||a.nome.toLowerCase().includes(q));
   document.getElementById('ref-biblioteca-filtrada').innerHTML=filtrado.map(a=>`
-    <div class="biblioteca-item" data-nome="${a.nome.replace(/"/g, '&quot;')}" data-kcal="${a.kcal100}" data-porcao="${a.porcao}" onclick="adicionarDaBiblioteca(this.dataset.nome, this.dataset.kcal, this.dataset.porcao)">
-      <div><div class="biblioteca-nome">${a.nome}</div><div class="biblioteca-info">porção:${a.porcao}g=${Math.round(a.kcal100*a.porcao/100)}kcal</div></div>
-      <div class="biblioteca-kcal">${Math.round(a.kcal100*a.porcao/100)}<span style="font-size:0.5em;color:var(--cinza)">kcal</span></div>
+    <div class="biblioteca-item" data-nome="${a.nome.replace(/"/g, '&quot;')}" data-kcal="${a.kcal100}" data-porcao="${a.porcao}" data-prot="${a.prot||0}" onclick="adicionarDaBiblioteca(this.dataset.nome, this.dataset.kcal, this.dataset.porcao, this.dataset.prot)">
+      <div><div class="biblioteca-nome">${a.nome}</div><div class="biblioteca-info">porção:${a.porcao}g=${Math.round(a.kcal100*a.porcao/100)}kcal${a.prot?' · '+Math.round(a.prot*a.porcao/100)+'g prot':''}</div></div>
+      <div class="biblioteca-kcal">${Math.round(a.kcal100*a.porcao/100)}<span style="font-size:0.5em;color:var(--cinza)"> kcal</span></div>
     </div>`).join('');
 }
-function adicionarDaBiblioteca(nome,kcal100,porcao){
-  refItensTemp.push({nome,porcao:`${porcao}g`,kcal:Math.round(kcal100*porcao/100)});
+function adicionarDaBiblioteca(nome,kcal100,porcao,prot100){
+  const protG=parseFloat(prot100)>0?Math.round(parseFloat(prot100)*parseFloat(porcao)/100):0;
+  refItensTemp.push({nome,porcao:`${porcao}g`,kcal:Math.round(kcal100*porcao/100),prot:protG});
   renderItensRef();document.getElementById('ref-busca').value='';filtrarBiblioteca();
 }
 function adicionarItemRef(){
   const nome=document.getElementById('ref-nome').value.trim();
   const porcao=document.getElementById('ref-porcao').value.trim();
   const kcal=parseInt(document.getElementById('ref-kcal').value);
+  const prot=parseFloat(document.getElementById('ref-prot').value)||0;
   if(!nome||!kcal){showToast('Informe nome e calorias!');return;}
-  refItensTemp.push({nome,porcao,kcal});
-  document.getElementById('ref-nome').value='';document.getElementById('ref-porcao').value='';document.getElementById('ref-kcal').value='';
+  refItensTemp.push({nome,porcao,kcal,prot});
+  document.getElementById('ref-nome').value='';document.getElementById('ref-porcao').value='';document.getElementById('ref-kcal').value='';document.getElementById('ref-prot').value='';
   renderItensRef();
 }
 function renderItensRef(){
@@ -2515,7 +2566,7 @@ function showToast(msg,dur=2800){
   if(!dados.perfil.alturaCm||!dados.perfil.idade){
     setTimeout(()=>abrirModalConfigurar(),500);
   }
-  ['treinos','sono','calorias','agua','peso'].forEach(s=>{
+ ['treinos','sono','calorias','proteina','agua','peso'].forEach(s=>{
     const el=document.getElementById('sub-'+s);
     if(el)el.style.display=s==='treinos'?'block':'none';
   });
