@@ -1859,7 +1859,7 @@ function renderHoje(){
     const mediaA=regAgua.reduce((s,v)=>s+v,0)/regAgua.length;
     miniAguaMedia.innerHTML=`Média: <span>${(mediaA/1000).toFixed(1)}L</span> · meta: ${(metaAgua/1000).toFixed(1)}L`;
   }else{
-    miniAguaMedia.innerHTML=`Meta: <span>${(metaAgua/1000).toFixed(1)}L</span> (35ml/kg)`;
+    miniAguaMedia.innerHTML=`Meta: <span>${(metaAgua/1000).toFixed(1)}L</span> (30ml/kg)`;
   }
 }
 
@@ -2140,7 +2140,7 @@ function renderPerfil(){
     <div class="perfil-row"><span class="perfil-label">Peso atual</span><span class="perfil-val">${peso?peso+' kg':'—'}</span></div>
     <div class="perfil-row"><span class="perfil-label">IMC</span><span class="perfil-val">${peso&&p.alturaCm?calcIMC(peso):'—'}</span></div>
     <div class="perfil-row"><span class="perfil-label">Déficit diário</span><span class="perfil-val">${p.deficit} kcal</span></div>
-    <div class="perfil-row"><span class="perfil-label">Meta de água</span><span class="perfil-val">${(metaAgua/1000).toFixed(1)}L/dia (35ml/kg)</span></div>`;
+    <div class="perfil-row"><span class="perfil-label">Meta de água</span><span class="perfil-val">${(metaAgua/1000).toFixed(1)}L/dia (30ml/kg)</span></div>`;
   document.getElementById('calc-resumo').innerHTML=`
     <div class="perfil-row"><span class="perfil-label">TMB (taxa basal)</span><span class="perfil-val">${tmb||'—'} kcal</span></div>
     <div class="perfil-row"><span class="perfil-label">Gasto total (GET)</span><span class="perfil-val">${get||'—'} kcal</span></div>
@@ -2248,7 +2248,7 @@ function atualizarModalAgua(){
   const aguaHoje=dados.registrosAgua[hoje()]||0;
   document.getElementById('agua-total-modal').textContent=aguaHoje>=1000?(aguaHoje/1000).toFixed(2).replace('.',',')+' L':aguaHoje+' ml';
   document.getElementById('barra-agua-modal').style.width=Math.min(100,aguaHoje/metaAgua*100)+'%';
-  document.getElementById('agua-meta-label').textContent=(metaAgua/1000).toFixed(1)+'L (35ml/kg)';
+  document.getElementById('agua-meta-label').textContent=(metaAgua/1000).toFixed(1)+'L (30ml/kg)';
   document.getElementById('agua-meta-barra-label').textContent='Meta: '+(metaAgua>=1000?(metaAgua/1000).toFixed(1)+'L':metaAgua+'ml');
 }
 function addAguaRapido(ml){
