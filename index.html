@@ -34,7 +34,7 @@
   --radius:  16px;
   --shadow:  0 8px 32px rgba(0,0,0,0.5);
 }
-html{overflow-x:hidden;}
+html{overflow-x:hidden;overscroll-behavior-x:none;}
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
 
 body{
@@ -44,6 +44,8 @@ body{
   min-height:100vh;
   padding-bottom:80px;
   padding-top:max(0px,env(safe-area-inset-top));
+  overscroll-behavior-x:none;
+  touch-action:pan-y;
 }
 
 /* ── HEADER ── */
