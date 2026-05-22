@@ -431,17 +431,7 @@ body{
 .perfil-label{color:var(--cinza);}
 .perfil-val{color:var(--branco);font-weight:600;}
 
-/* ── CONQUISTAS ── */
-.conquista-item{
-  display:flex;align-items:center;gap:14px;padding:14px;
-  background:var(--card2);border-radius:12px;margin-bottom:10px;
-  opacity:0.4;transition:opacity 0.3s;
-}
-.conquista-item.desbloqueada{opacity:1;border:1px solid rgba(59,130,246,0.3);background:var(--azul-dim2);}
-.conquista-icon{font-size:1.8em;}
-.conquista-info{flex:1;}
-.conquista-nome{font-size:0.88em;font-weight:700;color:var(--branco);}
-.conquista-desc{font-size:0.72em;color:var(--cinza);margin-top:2px;}
+
 
 /* ── BIBLIOTECA ── */
 .biblioteca-item{
@@ -725,7 +715,6 @@ body{
     <button class="aba" onclick="irPara('tela-progresso')">Progresso</button>
     <button class="aba" onclick="irPara('tela-alimentos')">Alimentos</button>
     <button class="aba" onclick="irPara('tela-treinos')">Treinos</button>
-    <button class="aba" onclick="irPara('tela-conquistas')">Conquistas</button>
     <button class="aba" onclick="irPara('tela-perfil')">Perfil</button>
   </div>
 </div>
@@ -1048,17 +1037,6 @@ body{
   </div>
 </div>
 
-<!-- ══════════ TELA: CONQUISTAS ══════════ -->
-<div id="tela-conquistas" class="tela">
-  <div class="card">
-    <div class="card-header">🏆 Suas conquistas</div>
-    <div class="stats-row">
-      <div class="stat-item"><div class="stat-val" id="conq-total">0</div><div class="stat-label">desbloqueadas</div></div>
-      <div class="stat-item"><div class="stat-val">15</div><div class="stat-label">total</div></div>
-    </div>
-  </div>
-  <div id="conquistas-lista"></div>
-</div>
 
 <!-- ══════════ TELA: PERFIL ══════════ -->
 <div id="tela-perfil" class="tela">
@@ -1219,7 +1197,6 @@ body{
       </div>
       <input type="number" id="p-deficit" value="500" placeholder="kcal" min="100" max="1000">
     </div>
-    <div class="modal-campo"><label>Data de início do desafio</label><input type="date" id="p-inicio"></div>
     <div class="modal-btns">
       <button class="btn btn-ghost" onclick="fecharModal('modal-perfil')">Cancelar</button>
       <button class="btn" onclick="salvarPerfil()">Salvar</button>
@@ -1407,7 +1384,7 @@ const PCT_POR_PONTO = 20;     // 100/5 = 20% por ponto
 // ═══════════════════════════════
 // ESTADO GLOBAL
 // ═══════════════════════════════
-const CHAVE = 'apppulse_v1.5';
+const CHAVE = 'apppulse_v2';
 let dados = carregarDados();
 let refPeriodo = 'manhã';
 let refItensTemp = [];
@@ -1435,15 +1412,7 @@ function piscarECG(vezes=3){
 function carregarDados(){
   try{
     const s=localStorage.getItem(CHAVE);
-    if(!s){
-      const old=localStorage.getItem('app100dias_v1.5')
-        ||localStorage.getItem('app100dias_v1.4')
-        ||localStorage.getItem('app100dias_v1.3')
-        ||localStorage.getItem('app100dias_v1.2')
-        ||localStorage.getItem('app100dias_v1.1')
-        ||localStorage.getItem('app100dias_v1');
-      if(old){const d=JSON.parse(old);return migrarDados(d);}
-    }
+   if(!s){return dadosPadrao();}
     if(s){const d=JSON.parse(s);return migrarDados(d);}
   }catch(e){}
   return dadosPadrao();
@@ -1464,7 +1433,6 @@ function migrarDados(d){
   if(!d.desafioDias)d.desafioDias=padrao.desafioDias;
   if(!d.diarioAlimentar)d.diarioAlimentar=padrao.diarioAlimentar;
   if(!d.biblioteca)d.biblioteca=padrao.biblioteca;
-  if(!d.conquistas)d.conquistas=padrao.conquistas;
   if(!d.registrosSono)d.registrosSono=padrao.registrosSono;
   if(!d.registrosAgua)d.registrosAgua=padrao.registrosAgua;
   if(!d.pesosExercicios)d.pesosExercicios=padrao.pesosExercicios;
@@ -1477,8 +1445,8 @@ if(!d.desafioBarras)d.desafioBarras=padrao.desafioBarras;
 
 function dadosPadrao(){
   return {
-    perfil:{idade:0,alturaCm:0,peso:0,fatorAtividade:1.55,deficit:500,inicio:hoje()},
-    medicoesPeso:[],desafioDias:{},diarioAlimentar:{},biblioteca:[],conquistas:{},
+    perfil:{idade:0,alturaCm:0,peso:0,fatorAtividade:1.55,deficit:500},
+    medicoesPeso:[],desafioDias:{},diarioAlimentar:{},biblioteca:[],
     registrosSono:{},registrosAgua:{},pesosExercicios:{},pesosExerciciosInicial:{},proximoTreino:'A',
   desafioBarras:{
       calorias: { pontosSemana:0, travado:false, ultimaVerificacao:'' },
@@ -1737,7 +1705,7 @@ function irPara(id){
   document.querySelectorAll('.tela').forEach(t=>t.classList.remove('ativa'));
   document.querySelectorAll('.aba').forEach(a=>a.classList.remove('ativa'));
   document.getElementById(id).classList.add('ativa');
-  const mapa={'tela-hoje':0,'tela-calendario':1,'tela-progresso':2,'tela-alimentos':3,'tela-treinos':4,'tela-conquistas':5,'tela-perfil':6};
+  const mapa={'tela-hoje':0,'tela-calendario':1,'tela-progresso':2,'tela-alimentos':3,'tela-treinos':4,'tela-perfil':5};
   const abas=document.querySelectorAll('.aba');
   if(mapa[id]!==undefined)abas[mapa[id]].classList.add('ativa');
   if(id==='tela-hoje')renderHoje();
@@ -1745,7 +1713,6 @@ function irPara(id){
   if(id==='tela-progresso')renderProgresso();
   if(id==='tela-alimentos')renderBiblioteca();
   if(id==='tela-treinos')renderTreinosTela();
-  if(id==='tela-conquistas')renderConquistas();
   if(id==='tela-perfil')renderPerfil();
 }
 
@@ -2108,65 +2075,6 @@ function renderTreinosTela(){
   });
 }
 
-// ═══════════════════════════════
-// RENDER: CONQUISTAS
-// ═══════════════════════════════
-const CONQUISTAS_DEF=[
-  {id:'streak3',icon:'🌱',nome:'Primeiros passos',desc:'3 semanas seguidas com meta batida'},
-  {id:'streak7',icon:'🔥',nome:'Uma semana de fogo',desc:'7 semanas seguidas'},
-  {id:'streak14',icon:'⚡',nome:'Trimestre imparável',desc:'14 semanas seguidas'},
-  {id:'streak21',icon:'💪',nome:'Hábito formado',desc:'21 semanas seguidas'},
-  {id:'streak50',icon:'🏅',nome:'Metade da batalha',desc:'50 treinos concluídos'},
-  {id:'streak100',icon:'🏆',nome:'100 DIAS',desc:'Desafio completado!'},
-  {id:'deficit7',icon:'🥗',nome:'Semana em déficit',desc:'7 dias com déficit calórico'},
-  {id:'deficit21',icon:'🎯',nome:'Consistência alimentar',desc:'21 dias com déficit calórico'},
-  {id:'peso1',icon:'📉',nome:'Primeira queda',desc:'Perdeu 1 kg desde o início'},
-  {id:'peso5',icon:'🏋️',nome:'Menos 5 kg',desc:'Perdeu 5 kg desde o início'},
-  {id:'imc_normal',icon:'✅',nome:'IMC Saudável',desc:'Atingiu a faixa de IMC normal'},
-  {id:'natacao5',icon:'🏊',nome:'Mergulhador',desc:'5 treinos de natação registrados'},
-  {id:'meta_semanal5',icon:'📅',nome:'5 semanas completas',desc:'Meta semanal (5 pontos) atingida 5x'},
-  {id:'sono7h',icon:'🌙',nome:'Noites reparadoras',desc:'Média de 7h de sono'},
-  {id:'agua_meta',icon:'💧',nome:'Bem hidratado',desc:'Média de água acima da meta por peso'},
-];
-function verificarConquistas(){
-  const streakS=calcStreakSemanal();
-  const todos=Object.values(dados.desafioDias);
-  const diasConcluidos=todos.filter(d=>d.status==='concluido').length;
-  let natacoes=0;
-  todos.forEach(d=>{const t=Array.isArray(d.tipos)?d.tipos:[d.tipo].filter(Boolean);if(t.includes('Natação'))natacoes++;});
-  [3,7,14,21].forEach(n=>{if(streakS>=n)dados.conquistas['streak'+n]=true;});
-  if(diasConcluidos>=50)dados.conquistas['streak50']=true;
-  if(diasConcluidos>=100)dados.conquistas['streak100']=true;
-  if(natacoes>=5)dados.conquistas['natacao5']=true;
-  const peso=pesoMaisRecente();const metaCal=peso?calcMeta(peso):0;
-  if(metaCal){
-    const diasDeficit=Object.entries(dados.diarioAlimentar).filter(([,d])=>{const t=Object.values(d.refeicoes||{}).flat().reduce((s,x)=>s+(x.kcal||0),0);return t>0&&t<=metaCal;}).length;
-    if(diasDeficit>=7)dados.conquistas['deficit7']=true;
-    if(diasDeficit>=21)dados.conquistas['deficit21']=true;
-  }
-  if(dados.medicoesPeso.length>=2){const pInicio=dados.medicoesPeso[0].pesoKg;const pAtual=pesoMaisRecente();if(pInicio-pAtual>=1)dados.conquistas['peso1']=true;if(pInicio-pAtual>=5)dados.conquistas['peso5']=true;}
-  if(peso&&dados.perfil.alturaCm){const imc=calcIMC(peso);if(imc>=18.5&&imc<25)dados.conquistas['imc_normal']=true;}
-  const regSono=Object.values(dados.registrosSono||{});
-  if(regSono.length>=7){const m=regSono.reduce((s,r)=>s+(r.horas||0),0)/regSono.length;if(m>=7)dados.conquistas['sono7h']=true;}
-  const metaAgua=calcMetaAgua();
-  const regAgua=Object.values(dados.registrosAgua||{});
-  if(regAgua.length>=7){const m=regAgua.reduce((s,v)=>s+v,0)/regAgua.length;if(m>=metaAgua)dados.conquistas['agua_meta']=true;}
-  const semanas=getUltimasSemanas(20);
-  const semanasCompletas=semanas.filter(dias=>getTotalTreinosSemana(dias)>=META_PONTOS).length;
-  if(semanasCompletas>=5)dados.conquistas['meta_semanal5']=true;
-  salvarDados();
-}
-function renderConquistas(){
-  verificarConquistas();
-  const total=Object.values(dados.conquistas).filter(Boolean).length;
-  document.getElementById('conq-total').textContent=total;
-  document.getElementById('conquistas-lista').innerHTML=CONQUISTAS_DEF.map(c=>`
-    <div class="conquista-item ${dados.conquistas[c.id]?'desbloqueada':''}">
-      <div class="conquista-icon">${c.icon}</div>
-      <div class="conquista-info"><div class="conquista-nome">${c.nome}</div><div class="conquista-desc">${c.desc}</div></div>
-      ${dados.conquistas[c.id]?'<span style="font-size:0.7em;color:var(--azul);font-weight:700">✓</span>':'<span style="font-size:0.7em;color:var(--cinza)">🔒</span>'}
-    </div>`).join('');
-}
 
 // ═══════════════════════════════
 // RENDER: PERFIL
@@ -2204,7 +2112,7 @@ function abrirModalConfigurar(){
   const p=dados.perfil;
   document.getElementById('p-idade').value=p.idade||'';document.getElementById('p-altura').value=p.alturaCm||'';
   document.getElementById('p-peso').value=p.peso||'';document.getElementById('p-atividade').value=p.fatorAtividade||'1.55';
-  document.getElementById('p-deficit').value=p.deficit||500;document.getElementById('p-inicio').value=p.inicio||hoje();
+  document.getElementById('p-deficit').value=p.deficit||500;
   abrirModal('modal-perfil');
 }
 function selecionarDeficit(val,el){document.querySelectorAll('#modal-perfil .chip').forEach(c=>c.classList.remove('ativo'));el.classList.add('ativo');document.getElementById('p-deficit').value=val;}
@@ -2216,7 +2124,6 @@ function salvarPerfil(){
   dados.perfil.idade=idade;dados.perfil.alturaCm=altura;dados.perfil.peso=peso;
   dados.perfil.fatorAtividade=document.getElementById('p-atividade').value;
   dados.perfil.deficit=parseInt(document.getElementById('p-deficit').value)||500;
-  dados.perfil.inicio=document.getElementById('p-inicio').value||hoje();
   if(!dados.medicoesPeso.length)dados.medicoesPeso.push({data:dados.perfil.inicio,pesoKg:peso,imc:calcIMC(peso)});
   salvarDados();fecharModal('modal-perfil');showToast('Perfil salvo! ✅');renderHoje();
 }
@@ -2281,7 +2188,7 @@ function salvarSono(){
   dados.registrosSono[hoje()]={inicio:ini,fim,horas};
   salvarDados();fecharModal('modal-sono');
   const h=Math.floor(horas);const m=Math.round((horas-h)*60);
-  showToast(`😴 ${h}h${m>0?m+'min':''} registrado!`);renderHoje();verificarConquistas();
+  showToast(`😴 ${h}h${m>0?m+'min':''} registrado!`);renderHoje();
 }
 
 function abrirModalAgua(){atualizarModalAgua();abrirModal('modal-agua');}
@@ -2296,7 +2203,7 @@ function atualizarModalAgua(){
 function addAguaRapido(ml){
   if(!dados.registrosAgua[hoje()])dados.registrosAgua[hoje()]=0;
   dados.registrosAgua[hoje()]+=ml;
-  salvarDados();atualizarModalAgua();renderHoje();verificarConquistas();showToast(`💧 +${ml>=1000?(ml/1000)+'L':ml+'ml'}!`);
+  salvarDados();atualizarModalAgua();renderHoje();showToast(`💧 +${ml>=1000?(ml/1000)+'L':ml+'ml'}!`);
 }
 function addAguaManual(){
   const val=parseInt(document.getElementById('agua-manual').value);
@@ -2552,7 +2459,7 @@ function registrarTreino(tipo,extras){
   d.status='concluido';
   Object.assign(d,extras);
   dados.desafioDias[hoje()]=d;
-  salvarDados();renderHoje();verificarConquistas();
+  salvarDados();renderHoje();
 }
 
 // ═══════════════════════════════
@@ -2584,7 +2491,6 @@ function confirmarApagarHistorico(){
     dados.pesosExercicios={};
     dados.pesosExerciciosInicial={};
     dados.proximoTreino='A';
-    dados.perfil.inicio=hoje();
     dados.desafioBarras=dadosPadrao().desafioBarras;
     dados.sequencia={diasAtivos:0,recorde:0,inicio:null};
     salvarDados();
