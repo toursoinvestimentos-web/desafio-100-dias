@@ -1861,7 +1861,7 @@ function renderHoje(){
   }else{
     miniAgua.textContent='—';miniAgua.style.color='#38bdf8';
     miniAguaSub.textContent='registrar';
-    document.getElementById('mc-agua').className='mini-card';
+    document.getElementById('mc-agua').className = 'mini-card borda-cinza';
     miniAguaEmoji.innerHTML=emojiAgua(0,metaAgua);
   }
   const regAgua=Object.values(dados.registrosAgua||{}).filter(v=>v>0);
