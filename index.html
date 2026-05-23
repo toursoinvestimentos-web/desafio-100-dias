@@ -1790,20 +1790,26 @@ function renderHoje(){
   });
   document.getElementById('cal-ingeridas-hoje').textContent=totalKcal;
   const compactCard=document.getElementById('cal-compact');
-  if(meta){
+   if(meta){
+     
     const pctCal=Math.min((totalKcal/meta*100),115);
     const fill=document.getElementById('barra-cal-hoje');
     fill.style.width=pctCal+'%';
     const corFill=pctCal>100?'var(--vermelho)':pctCal>85?'var(--amarelo)':'var(--verde)';
     fill.style.background=corFill;
-    const def=meta-totalKcal;
     const badge=document.getElementById('deficit-badge-hoje');
-    if(def>=0){
-      badge.style.background='rgba(52,211,153,0.15)';badge.style.color='var(--verde)';
-      badge.textContent='↓ '+def+' kcal';compactCard.style.borderLeftColor='var(--verde)';
+    if(totalKcal===0){
+      badge.style.background='rgba(90,100,120,0.15)';badge.style.color='var(--cinza)';
+      badge.textContent='Nenhum registro';compactCard.style.borderLeftColor='var(--cinza)';
     }else{
-      badge.style.background='rgba(248,113,113,0.12)';badge.style.color='var(--vermelho)';
-      badge.textContent='↑ '+Math.abs(def)+' kcal';compactCard.style.borderLeftColor='var(--vermelho)';
+      const def=meta-totalKcal;
+      if(def>=0){
+        badge.style.background='rgba(59,130,246,0.15)';badge.style.color='var(--azul)';
+        badge.textContent='↓ '+def+' kcal';compactCard.style.borderLeftColor='var(--azul)';
+      }else{
+        badge.style.background='rgba(248,113,113,0.12)';badge.style.color='var(--vermelho)';
+        badge.textContent='↑ '+Math.abs(def)+' kcal';compactCard.style.borderLeftColor='var(--vermelho)';
+      }
     }
   }
 
