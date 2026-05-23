@@ -1829,7 +1829,7 @@ function renderHoje(){
     miniSono.textContent='—';miniSono.style.color='var(--azul)';
     miniSonoSub.textContent='registrar';
     document.getElementById('mc-sono').className='mini-card borda-cinza';
-    miniSonoEmoji.innerHTML=`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" fill="currentColor"><path d="M5 7l3-4 3 4-3 4zM11 12l3-4 3 4-3 4zM17 17l3-4 3 4-3 4z"/></svg>`;
+    miniSonoEmoji.innerHTML=`<span style="font-size: 2.8em; line-height: 1;">💤</span>`;
   }
   const regSono=Object.values(dados.registrosSono||{}).filter(r=>r.horas>0);
   if(regSono.length>0){
