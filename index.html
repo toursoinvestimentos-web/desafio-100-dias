@@ -44,7 +44,8 @@ body{
   min-height:100vh;
   padding-bottom:80px;
   padding-top:max(0px,env(safe-area-inset-top));
-  overscroll-behavior-x:none;
+  overscroll-behavior:none;
+  overflow-x:hidden;
   touch-action:pan-y;
 }
 
@@ -91,6 +92,9 @@ body{
   display:flex;gap:4px;
   border-bottom:1px solid var(--card2);
   overflow-x:auto;scrollbar-width:none;
+  touch-action:pan-x;
+  overscroll-behavior-x:contain;
+  -webkit-overflow-scrolling:touch;
 }
 .nav-abas::-webkit-scrollbar{display:none;}
 .aba{
@@ -99,6 +103,7 @@ body{
   font-family:var(--fonte);font-size:0.78em;font-weight:600;
   text-transform:uppercase;letter-spacing:0.08em;cursor:pointer;
   border-bottom:2px solid transparent;margin-bottom:-1px;transition:all 0.2s;
+  touch-action:manipulation;
 }
 .aba.ativa{color:var(--azul);border-bottom-color:var(--azul);}
 
