@@ -700,7 +700,7 @@ body{
   
 
 <!-- ══ SPLASH ══ -->
-<div id="splash">
+<div id="splash" style="display:none">
   <svg width="260" height="65"><use href="#logo-pulse"/></svg>
   <div class="splash-ver">v1.5</div>
 </div>
@@ -2580,10 +2580,10 @@ function showToast(msg,dur=2800){
   if(s){
     const jaAbriu=localStorage.getItem('pulse_abriu');
     if(jaAbriu){
-      s.style.display='none';
       s.remove();
     }else{
       localStorage.setItem('pulse_abriu','1');
+      s.style.display='flex';
       setTimeout(()=>{
         s.classList.add('hide');
         setTimeout(()=>s.remove(),500);
