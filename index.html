@@ -2580,19 +2580,20 @@ function showToast(msg,dur=2800){
  renderHoje();
   mesAtual=new Date();
   const s=document.getElementById('splash');
-  if(s){
-    const jaAbriu=localStorage.getItem('pulse_abriu');
-    if(jaAbriu){
-      s.remove();
-    }else{
-      localStorage.setItem('pulse_abriu','1');
-      s.style.display='flex';
-      setTimeout(()=>{
-        s.classList.add('hide');
-        setTimeout(()=>s.remove(),500);
-      },1800);
-    }
+if(s){
+  // Usa sessionStorage: a splash aparece em cada nova sessão (app aberto do zero)
+  // mas não aparece ao dar refresh na mesma sessão.
+  if(!sessionStorage.getItem('splash_shown')){
+    sessionStorage.setItem('splash_shown','1');
+    s.style.display='flex';
+    setTimeout(()=>{
+      s.classList.add('hide');
+      setTimeout(()=>s.remove(),500);
+    },1800);
+  } else {
+    s.remove(); // se já mostrou nesta sessão (refresh), remove sem exibir
   }
+}
 })();
 </script>
 </body>
