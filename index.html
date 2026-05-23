@@ -1378,6 +1378,8 @@ function instalarPWA(){if(!deferredPrompt)return;deferredPrompt.prompt();deferre
 // ═══════════════════════════════
 // TREINOS
 // ═══════════════════════════════
+function toLocalDate(iso){return new Date(iso+'T12:00:00');}
+function toLocalISO(date){return`${date.getFullYear()}-${String(date.getMonth()+1).padStart(2,'0')}-${String(date.getDate()).padStart(2,'0')}`;}
 const TREINOS = {
   A: [
     {g:'Peito',   n:'Supino Reto',                  s:4,r:10,gif:'https://www.gifdotreino.com/Exercicios/Peitoral/Supino%20Reto.gif'},
@@ -1512,7 +1514,7 @@ function calcSequencia(){
   const todasCem=['calorias','treinos','sono','agua'].every(t=>getProgressoBarra(t)>=1.0);
   if(todasCem){
     if(!seq.inicio)seq.inicio=hojeStr;
-    const ms=new Date(hojeStr)-new Date(seq.inicio);
+    const ms=toLocalDate(hojeStr)-toLocalDate(seq.inicio);
     seq.diasAtivos=Math.max(1,Math.floor(ms/86400000)+1);
     if(seq.diasAtivos>seq.recorde)seq.recorde=seq.diasAtivos;
   }else{
@@ -1531,28 +1533,28 @@ function calcProteinaDia(iso){
 }
 function calcMetaAgua(){const peso=pesoMaisRecente();if(!peso)return 2500;return Math.round(peso*30/100)*100;}
 function getSegundaFeira(iso){
-  const d=new Date(iso);
+  const d=toLocalDate(iso);
   const dow=(d.getDay()+6)%7;
   const seg=new Date(d);
   seg.setDate(d.getDate()-dow);
-  return seg.toISOString().slice(0,10);
+  return toLocalISO(seg);
 }
 
 function getDiasDaSemana(iso){
-  const seg=new Date(getSegundaFeira(iso));
+  const seg=toLocalDate(getSegundaFeira(iso));
   const dias=[];
-  for(let i=0;i<7;i++){const x=new Date(seg);x.setDate(seg.getDate()+i);dias.push(x.toISOString().slice(0,10));}
+  for(let i=0;i<7;i++){const x=new Date(seg);x.setDate(seg.getDate()+i);dias.push(toLocalISO(x));}
   return dias;
 }
 
 function getDiasSemanaAtual(){return getDiasDaSemana(hoje());}
 
 function getSemanaOffset(weeksAgo){
-  const d=new Date();const dow=(d.getDay()+6)%7;
+  const d=new Date();d.setHours(12,0,0,0);const dow=(d.getDay()+6)%7;
   const dias=[];
   for(let i=0;i<7;i++){
     const x=new Date(d);x.setDate(d.getDate()-dow-(weeksAgo*7)+i);
-    dias.push(x.toISOString().slice(0,10));
+    dias.push(toLocalISO(x));
   }
   return dias;
 }
@@ -2026,7 +2028,7 @@ function renderProgresso(){
     document.getElementById('hist-peso-lista').innerHTML=hist||'<div class="empty">Nenhum registro.</div>';
   }
   if(subAbaAtiva==='calorias'){
-    const dias14=[];for(let i=13;i>=0;i--){const d=new Date();d.setDate(d.getDate()-i);dias14.push(d.toISOString().slice(0,10));}
+    const dias14=[];for(let i=13;i>=0;i--){const d=new Date();d.setHours(12,0,0,0);d.setDate(d.getDate()-i);dias14.push(toLocalISO(d));}
     const pesoCal=pesoMaisRecente();const metaCal=pesoCal?calcMeta(pesoCal):0;
     const calPorDia=dias14.map(iso=>{const d=dados.diarioAlimentar[iso];if(!d)return 0;return Object.values(d.refeicoes||{}).flat().reduce((s,x)=>s+(x.kcal||0),0);});
     const labels=dias14.map(iso=>formatarData(iso).slice(0,5));
@@ -2040,7 +2042,7 @@ function renderProgresso(){
     document.getElementById('stat-dias-ok').textContent=calPorDia.filter(v=>v>0&&v<=metaCal).length;
   }
   if(subAbaAtiva==='sono'){
-    const dias14=[];for(let i=13;i>=0;i--){const d=new Date();d.setDate(d.getDate()-i);dias14.push(d.toISOString().slice(0,10));}
+    const dias14=[];for(let i=13;i>=0;i--){const d=new Date();d.setHours(12,0,0,0);d.setDate(d.getDate()-i);dias14.push(toLocalISO(d));}
     const sonoPorDia=dias14.map(iso=>{const r=dados.registrosSono[iso];return r?r.horas:null;});
     const labels=dias14.map(iso=>formatarData(iso).slice(0,5));
     const ctx=document.getElementById('chart-sono').getContext('2d');
@@ -2060,7 +2062,7 @@ function renderProgresso(){
     const protHojeEl=document.getElementById('stat-prot-hoje');
     protHojeEl.textContent=protHoje?protHoje+'g':'0g';
     protHojeEl.style.color=protHoje>=metaProt?'var(--verde)':protHoje>0?'var(--amarelo)':'var(--cinza)';
-    const dias30=[];for(let i=0;i<30;i++){const d=new Date();d.setDate(d.getDate()-i);dias30.push(d.toISOString().slice(0,10));}
+    const dias30=[];for(let i=0;i<30;i++){const d=new Date();d.setHours(12,0,0,0);d.setDate(d.getDate()-i);dias30.push(toLocalISO(d));}
     const protDias=dias30.map(iso=>calcProteinaDia(iso)).filter(v=>v>0);
     const media=protDias.length?Math.round(protDias.reduce((a,b)=>a+b,0)/protDias.length):0;
     const mediaEl=document.getElementById('stat-prot-media');
@@ -2072,7 +2074,7 @@ function renderProgresso(){
   
   if(subAbaAtiva==='agua'){
     const metaAgua=calcMetaAgua();
-    const dias14=[];for(let i=13;i>=0;i--){const d=new Date();d.setDate(d.getDate()-i);dias14.push(d.toISOString().slice(0,10));}
+    const dias14=[];for(let i=13;i>=0;i--){const d=new Date();d.setHours(12,0,0,0);d.setDate(d.getDate()-i);dias14.push(toLocalISO(d));}
     const aguaPorDia=dias14.map(iso=>dados.registrosAgua[iso]||0);
     const labels=dias14.map(iso=>formatarData(iso).slice(0,5));
     const ctx=document.getElementById('chart-agua').getContext('2d');
