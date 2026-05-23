@@ -2576,16 +2576,19 @@ function showToast(msg,dur=2800){
   });
  renderHoje();
   mesAtual=new Date();
-  const jaAbriu=sessionStorage.getItem('pulse_abriu');
-  if(jaAbriu){
-    const s=document.getElementById('splash');
-    if(s)s.remove();
-  }else{
-    sessionStorage.setItem('pulse_abriu','1');
-    setTimeout(()=>{
-      const s=document.getElementById('splash');
-      if(s){s.classList.add('hide');setTimeout(()=>s.remove(),500);}
-    },1800);
+  const s=document.getElementById('splash');
+  if(s){
+    const jaAbriu=sessionStorage.getItem('pulse_abriu');
+    if(jaAbriu){
+      s.style.display='none';
+      s.remove();
+    }else{
+      sessionStorage.setItem('pulse_abriu','1');
+      setTimeout(()=>{
+        s.classList.add('hide');
+        setTimeout(()=>s.remove(),500);
+      },1800);
+    }
   }
 })();
 </script>
