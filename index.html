@@ -2574,12 +2574,19 @@ function showToast(msg,dur=2800){
     const el=document.getElementById('sub-'+s);
     if(el)el.style.display=s==='treinos'?'block':'none';
   });
-  renderHoje();
+ renderHoje();
   mesAtual=new Date();
-  setTimeout(()=>{
+  const jaAbriu=sessionStorage.getItem('pulse_abriu');
+  if(jaAbriu){
     const s=document.getElementById('splash');
-    if(s){s.classList.add('hide');setTimeout(()=>s.remove(),500);}
-  },1800);
+    if(s)s.remove();
+  }else{
+    sessionStorage.setItem('pulse_abriu','1');
+    setTimeout(()=>{
+      const s=document.getElementById('splash');
+      if(s){s.classList.add('hide');setTimeout(()=>s.remove(),500);}
+    },1800);
+  }
 })();
 </script>
 </body>
