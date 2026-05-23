@@ -2578,12 +2578,12 @@ function showToast(msg,dur=2800){
   mesAtual=new Date();
   const s=document.getElementById('splash');
   if(s){
-    const jaAbriu=sessionStorage.getItem('pulse_abriu');
+    const jaAbriu=localStorage.getItem('pulse_abriu');
     if(jaAbriu){
       s.style.display='none';
       s.remove();
     }else{
-      sessionStorage.setItem('pulse_abriu','1');
+      localStorage.setItem('pulse_abriu','1');
       setTimeout(()=>{
         s.classList.add('hide');
         setTimeout(()=>s.remove(),500);
