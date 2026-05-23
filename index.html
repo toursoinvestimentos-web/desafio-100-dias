@@ -1809,6 +1809,13 @@ function renderHoje(){
 
   renderCardTreinoSemanal();
 
+  const temTreinoHoje = getTreinosDia(hoje()).length > 0;
+  const treinoCard = document.getElementById('card-treino-hoje');
+  if (temTreinoHoje) {
+      treinoCard.className = 'treino-compact';
+  } else {
+      treinoCard.className = 'treino-compact borda-cinza';
+  }
   const sonoHoje=dados.registrosSono[hoje()];
   const miniSono=document.getElementById('mini-sono');
   const miniSonoSub=document.getElementById('mini-sono-sub');
