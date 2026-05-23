@@ -1362,11 +1362,12 @@ body{
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 
 <script>
+  
 // ═══════════════════════════════
 // PWA 
 // ═══════════════════════════════
 (function(){
- const svg=`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500"><rect fill="#FEFEFE" x="100" y="190" width="300" height="40"/><rect fill="#3b82f6" x="100" y="230" width="300" height="40"/><rect fill="#FEFEFE" x="100" y="270" width="300" height="40"/></svg>`;
+  const svg=`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500"><g transform="translate(75, 72) scale(0.7)"><rect fill="#FEFEFE" x="22.33" y="43.07" width="455.89" height="70.1"/><rect fill="#3b82f6" x="25.53" y="219.3" width="449.82" height="70.1"/><rect fill="#FEFEFE" x="22.66" y="395.54" width="455.88" height="70.1"/></g></svg>`;
   const icon='data:image/svg+xml;base64,'+btoa(unescape(encodeURIComponent(svg)));
   const mf={name:"PULSE",short_name:"PULSE",start_url:"./",scope:"./",display:"standalone",background_color:"#111318",theme_color:"#1a1d23",icons:[{src:icon,sizes:"192x192",type:"image/svg+xml",purpose:"any maskable"},{src:icon,sizes:"512x512",type:"image/svg+xml",purpose:"any maskable"}]};
   document.getElementById('manifest-link').href=URL.createObjectURL(new Blob([JSON.stringify(mf)],{type:'application/manifest+json'}));
