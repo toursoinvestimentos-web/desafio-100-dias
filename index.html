@@ -1388,28 +1388,28 @@ function toLocalDate(iso){return new Date(iso+'T12:00:00');}
 function toLocalISO(date){return`${date.getFullYear()}-${String(date.getMonth()+1).padStart(2,'0')}-${String(date.getDate()).padStart(2,'0')}`;}
 const TREINOS = {
   A: [
-    {g:'Peito',   n:'Supino Reto',                  s:4,r:10,gif:'https://www.gifdotreino.com/Exercicios/Peitoral/Supino%20Reto.gif'},
-    {g:'Peito',   n:'Crucifixo com Halteres',        s:3,r:12,gif:'https://www.gifdotreino.com/Exercicios/Peitoral/Crucifixo%20com%20halteres.gif'},
-    {g:'Costas',  n:'Puxada Alta',                   s:3,r:10,gif:'https://www.gifdotreino.com/Exercicios/Costas/Puxada%20Alta.gif'},
-    {g:'Costas',  n:'Remada Curvada com Barra',      s:3,r:10,gif:'https://www.gifdotreino.com/Exercicios/Costas/Remada%20Curvada%20com%20Barra.gif'},
-    {g:'Ombros',  n:'Desenv. Ombro na Máquina',      s:3,r:12,gif:'https://www.gifdotreino.com/Exercicios/Ombros/Desenvolvimento%20de%20ombro%20na%20m%C3%A1quina.gif'},
-    {g:'Ombros',  n:'Elevação Lateral',              s:3,r:12,gif:'https://www.gifdotreino.com/Exercicios/Ombros/Eleva%C3%A7%C3%A3o%20lateral%20de%20bra%C3%A7os%20com%20halteres.gif'},
-    {g:'Bíceps',  n:'Rosca Direta com Barra',        s:3,r:12,gif:'https://www.gifdotreino.com/Exercicios/Biceps/Rosca%20Direta%20com%20Barra.gif'},
-    {g:'Tríceps', n:'Tríceps Pulley Corda',           s:3,r:12,gif:'https://www.gifdotreino.com/Exercicios/Triceps/Tr%C3%ADceps%20pulley%20corda.gif'},
-    {g:'Pernas',  n:'Agachamento Barra',             s:3,r:10,gif:'https://www.gifdotreino.com/Exercicios/Pernas/Agachamento%20Barra.gif'},
-    {g:'Pernas',  n:'Cadeira Flexora',               s:3,r:12,gif:'https://www.gifdotreino.com/Exercicios/Pernas/Cadeira%20flexora.gif'},
+    { g: "Pernas",      n: "Leg Press",                                        s: 3, r: 10, gif: "https://www.gifdotreino.com/Exercicios/Pernas/Leg%20Press.gif" },
+    { g: "Pernas",      n: "Cadeira flexora",                                  s: 3, r: 12, gif: "https://www.gifdotreino.com/Exercicios/Pernas/Cadeira%20flexora.gif" },
+    { g: "Peito",       n: "Supino Reto",                                      s: 3, r: 10, gif: "https://www.gifdotreino.com/Exercicios/Peitoral/Supino%20Reto.gif" },
+    { g: "Costas",      n: "Puxada Alta",                                      s: 3, r: 10, gif: "https://www.gifdotreino.com/Exercicios/Costas/Puxada%20Alta.gif" },
+    { g: "Costas",      n: "Remada Sentada com Cabo",                          s: 3, r: 10, gif: "https://www.gifdotreino.com/Exercicios/Costas/Remada%20Sentada%20com%20Cabo.gif" },
+    { g: "Ombros",      n: "Desenvolvimento de Ombro no Banco com Halteres",   s: 3, r: 12, gif: "https://www.gifdotreino.com/Exercicios/Ombros/Desenvolvimento%20de%20Ombro%20no%20Banco%20com%20Halteres.gif" },
+    { g: "Ombros",      n: "Elevação lateral com halteres sentado",            s: 2, r: 12, gif: "https://www.gifdotreino.com/Exercicios/Ombros/Eleva%C3%A7%C3%A3o%20lateral%20com%20halteres%20sentado.gif" },
+    { g: "Bíceps",      n: "Rosca direta com barra w",                         s: 2, r: 12, gif: "https://www.gifdotreino.com/Exercicios/B%C3%ADceps/Rosca%20direta%20com%20barra%20w.gif" },
+    { g: "Tríceps",     n: "Tríceps pulley corda",                             s: 2, r: 12, gif: "https://www.gifdotreino.com/Exercicios/Tr%C3%ADceps/Tr%C3%ADceps%20pulley%20corda.gif" },
+    { g: "Panturrilha", n: "Panturrilha em Pé",                                s: 3, r: 15, gif: "https://www.gifdotreino.com/Exercicios/Panturrilhas/Panturrilha%20em%20P%C3%A9%20no%20Smith.gif" }
   ],
   B: [
-    {g:'Peito',   n:'Supino Inclinado com Halteres', s:4,r:10,gif:'https://www.gifdotreino.com/Exercicios/Peitoral/Supino%20Inclinado%20com%20Halteres.gif'},
-    {g:'Peito',   n:'Voador na Máquina',             s:3,r:12,gif:'https://www.gifdotreino.com/Exercicios/Peitoral/Voador%20na%20M%C3%A1quina.gif'},
-    {g:'Costas',  n:'Remada Sentada com Cabo',       s:3,r:10,gif:'https://www.gifdotreino.com/Exercicios/Costas/Remada%20Sentada%20com%20Cabo.gif'},
-    {g:'Costas',  n:'Pullover com Haltere',          s:3,r:12,gif:'https://www.gifdotreino.com/Exercicios/Costas/Pullover%20com%20haltere.gif'},
-    {g:'Ombros',  n:'Desenvolvimento Arnold',        s:3,r:10,gif:'https://www.gifdotreino.com/Exercicios/Ombros/Desenvolvimento%20Arnold.gif'},
-    {g:'Ombros',  n:'Elevação Frontal',              s:3,r:12,gif:'https://www.gifdotreino.com/Exercicios/Ombros/Eleva%C3%A7%C3%A3o%20frontal%20com%20halteres.gif'},
-    {g:'Bíceps',  n:'Rosca Martelo',                 s:3,r:12,gif:'https://www.gifdotreino.com/Exercicios/Biceps/Rosca%20martelo.gif'},
-    {g:'Tríceps', n:'Tríceps Francês',               s:3,r:12,gif:'https://www.gifdotreino.com/Exercicios/Triceps/Tr%C3%ADceps%20Franc%C3%AAs%20com%20Halteres.gif'},
-    {g:'Pernas',  n:'Leg Press',                     s:3,r:10,gif:'https://www.gifdotreino.com/Exercicios/Pernas/Leg%20Press.gif'},
-    {g:'Pernas',  n:'Cadeira Extensora',             s:3,r:12,gif:'https://www.gifdotreino.com/Exercicios/Pernas/Cadeira%20extensora.gif'},
+    { g: "Pernas",      n: "Agachamento no Smith",                             s: 3, r: 10, gif: "https://www.gifdotreino.com/Exercicios/Pernas/Agachamento%20no%20Smith.gif" },
+    { g: "Pernas",      n: "Cadeira extensora",                                s: 3, r: 12, gif: "https://www.gifdotreino.com/Exercicios/Pernas/Cadeira%20extensora.gif" },
+    { g: "Peito",       n: "Supino Inclinado com Halteres",                    s: 3, r: 10, gif: "https://www.gifdotreino.com/Exercicios/Peitoral/Supino%20Inclinado%20com%20Halteres.gif" },
+    { g: "Costas",      n: "Remada sentado com cabo pegada fechada",           s: 3, r: 10, gif: "https://www.gifdotreino.com/Exercicios/Costas/Remada%20sentado%20com%20cabo%20pegada%20fechada.gif" },
+    { g: "Costas",      n: "Puxada Alta com Triângulo",                        s: 3, r: 10, gif: "https://www.gifdotreino.com/Exercicios/Costas/Puxada%20Alta%20com%20Tri%C3%A2ngulo.gif" },
+    { g: "Ombros",      n: "Desenvolvimento de Ombro no Banco com Halteres",   s: 3, r: 10, gif: "https://www.gifdotreino.com/Exercicios/Ombros/Desenvolvimento%20de%20Ombro%20no%20Banco%20com%20Halteres.gif" },
+    { g: "Ombros",      n: "Face Pull",                                        s: 2, r: 12, gif: "https://www.gifdotreino.com/Exercicios/Trap%C3%A9zio/Face%20Pull.gif" },
+    { g: "Bíceps",      n: "Rosca martelo",                                    s: 2, r: 12, gif: "https://www.gifdotreino.com/Exercicios/B%C3%ADceps/Rosca%20martelo.gif" },
+    { g: "Tríceps",     n: "Tríceps pulley barra",                             s: 2, r: 12, gif: "https://www.gifdotreino.com/Exercicios/Tr%C3%ADceps/Tr%C3%ADceps%20pulley%20barra.gif" },
+    { g: "Panturrilha", n: "Elevação de Panturrilha Sentado com Alavanca",     s: 3, r: 15, gif: "https://www.gifdotreino.com/Exercicios/Panturrilhas/Eleva%C3%A7%C3%A3o%20de%20Panturrilha%20Sentado%20com%20Alavanca.gif" }
   ]
 };
 
