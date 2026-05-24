@@ -1054,18 +1054,18 @@ body{
 <!-- ══════════ TELA: TREINOS ══════════ -->
 <div id="tela-treinos" class="tela">
   <div class="toggle-abas">
-    <button class="toggle-aba ativa" onclick="mudarSubTreino('a',this)">💪 Treino A</button>
-    <button class="toggle-aba" onclick="mudarSubTreino('b',this)">💪 Treino B</button>
+    <button class="toggle-aba ativa" onclick="mudarSubTreino('a',this)">Treino A</button>
+    <button class="toggle-aba" onclick="mudarSubTreino('b',this)">Treino B</button>
   </div>
   <div id="sub-treino-a-tela">
     <div class="card">
-      <div class="card-header">💪 Exercícios — Treino A</div>
+      <div class="card-header">Exercícios — Treino A</div>
     </div>
     <div id="treino-a-lista-tela"></div>
   </div>
   <div id="sub-treino-b-tela" style="display:none">
     <div class="card">
-      <div class="card-header">💪 Exercícios — Treino B</div>
+      <div class="card-header">Exercícios — Treino B</div>
     </div>
     <div id="treino-b-lista-tela"></div>
   </div>
@@ -2146,7 +2146,7 @@ function renderTreinosTela(){
     const lista=TREINOS[letra];
     document.getElementById(containerId).innerHTML=lista.map(ex=>`
       <div class="treino-bibl-item">
-        <div class="treino-bibl-icon">💪</div>
+        <div class="treino-bibl-icon"></div>
         <div class="treino-bibl-info">
           <div class="treino-bibl-nome">${ex.n}</div>
           <div class="treino-bibl-desc">${ex.g} · ${ex.s} séries × ${ex.r} reps</div>
@@ -2492,7 +2492,7 @@ function nextEx(){
     const total=TREINOS[curTreino].length;let totalSeries=0;TREINOS[curTreino].forEach(e=>totalSeries+=e.s);
     document.getElementById('done-ex').textContent=total;document.getElementById('done-ser').textContent=totalSeries;
     document.getElementById('done-t').textContent='TREINO '+curTreino+' CONCLUÍDO!';
-    document.getElementById('done-s').textContent='Ótimo trabalho! 💪 Clique abaixo para registrar.';
+    document.getElementById('done-s').textContent='Ótimo trabalho! Clique abaixo para registrar.';
     mostrarMuscScreen('musc-done');
   }else{loadEx();}
 }
@@ -2500,7 +2500,7 @@ function finalizarMusculacao(){
   const proximo=curTreino==='A'?'B':'A';
   dados.proximoTreino=proximo;
   registrarTreino('Musculação',{treinoLetra:curTreino});
-  fecharMusculacao();showToast(`💪 Treino ${curTreino} registrado! Próximo: ${proximo}`);
+  fecharMusculacao();showToast(`Treino ${curTreino} registrado! Próximo: ${proximo}`);
 }
 
 // ═══════════════════════════════
