@@ -1344,11 +1344,11 @@ body{
   <div class="modal-box">
     <div class="modal-titulo">NOVO ALIMENTO</div>
     <div class="modal-campo"><label>Nome</label><input type="text" id="al-nome" placeholder="Ex: Frango grelhado"></div>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
-      <div class="modal-campo"><label>Calorias / 100g</label><input type="number" id="al-kcal100" placeholder="Ex: 165" min="0"></div>
-      <div class="modal-campo"><label>Porção padrão (g)</label><input type="number" id="al-porcao" placeholder="Ex: 150" min="0"></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px">
+      <div class="modal-campo"><label>Porção (g)</label><input type="number" id="al-porcao" placeholder="Ex: 150" min="0"></div>
+      <div class="modal-campo"><label>Kcal/100g</label><input type="number" id="al-kcal100" placeholder="Ex: 165" min="0"></div>
+      <div class="modal-campo"><label>Prot/100g</label><input type="number" id="al-prot" placeholder="Ex: 31" min="0"></div>
     </div>
-    <div class="modal-campo"><label>Proteína / 100g (opcional)</label><input type="number" id="al-prot" placeholder="Ex: 31" min="0"></div>
     <div class="modal-btns">
       <button class="btn btn-ghost" onclick="fecharModal('modal-alimento')">Cancelar</button>
       <button class="btn" onclick="salvarAlimento()">Salvar</button>
