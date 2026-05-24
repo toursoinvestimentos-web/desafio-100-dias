@@ -2146,7 +2146,7 @@ function renderTreinosTela(){
     const lista=TREINOS[letra];
     document.getElementById(containerId).innerHTML=lista.map(ex=>`
       <div class="treino-bibl-item">
-        <div class="treino-bibl-icon">•</div>
+        <div class="treino-bibl-icon">✓</div>
         <div class="treino-bibl-info">
           <div class="treino-bibl-nome">${ex.n}</div>
           <div class="treino-bibl-desc">${ex.g} · ${ex.s} séries × ${ex.r} reps</div>
