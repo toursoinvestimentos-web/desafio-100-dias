@@ -1413,6 +1413,38 @@ const TREINOS = {
   ]
 };
 
+// ═══════════════════════════════
+// BIBLIOTECA PADRÃO (fixa no código)
+// ═══════════════════════════════
+const BIBLIOTECA_PADRAO = [
+    {"nome": "🥞 Crepioca de Banana", "kcal100": 148, "porcao": 160, "prot": 5},
+    {"nome": "🥞 Crepioca com Batata Doce", "kcal100": 150, "porcao": 120, "prot": 6},
+    {"nome": "🥛 Leite de Coco", "kcal100": 78, "porcao": 115, "prot": 0.5},
+    {"nome": "🍌 Banana (unidade)", "kcal100": 98, "porcao": 80, "prot": 1},
+    {"nome": "🍎 Maçã (unidade)", "kcal100": 52, "porcao": 150, "prot": 0},
+    {"nome": "🍊 Laranja (unidade)", "kcal100": 47, "porcao": 180, "prot": 1},
+    {"nome": "🍊 Mexerica (unidade)", "kcal100": 53, "porcao": 120, "prot": 1},
+    {"nome": "🍛 PF Carne (Arroz+Feijão+Bife)", "kcal100": 175, "porcao": 180, "prot": 19},
+    {"nome": "🍳 PF Ovo (Arroz+Feijão+Ovo)", "kcal100": 135, "porcao": 130, "prot": 7},
+    {"nome": "🥗 Legumes Cozidos Sortidos", "kcal100": 35, "porcao": 200, "prot": 1},
+    {"nome": "🥞 Panqueca de Aveia e Banana", "kcal100": 161, "porcao": 162, "prot": 6.5},
+    {"nome": "🥚 Ovo Cozido", "kcal100": 146, "porcao": 50, "prot": 13},
+    {"nome": "🥖 Pão Francês c/ Azeite", "kcal100": 330, "porcao": 55, "prot": 7.5},
+    {"nome": "🍳 Pão Francês c/ Ovo", "kcal100": 225, "porcao": 100, "prot": 11.5},
+    {"nome": "🥖 Pão Francês", "kcal100": 270, "porcao": 50, "prot": 8},
+    {"nome": "🍊 Bolo de Laranja (caseiro)", "kcal100": 370, "porcao": 100, "prot": 5},
+    {"nome": "🍕 Fatia de Pizza", "kcal100": 285, "porcao": 100, "prot": 12},
+    {"nome": "🥗 Salada Mista", "kcal100": 20, "porcao": 150, "prot": 1},
+    {"nome": "🍗 Filé de Frango Grelhado", "kcal100": 165, "porcao": 100, "prot": 32},
+    {"nome": "🥩 Bife de Carne", "kcal100": 180, "porcao": 100, "prot": 26},
+    {"nome": "☕ Café Preto", "kcal100": 4, "porcao": 50, "prot": 0.2},
+    {"nome": "☕ Café com Leite", "kcal100": 33, "porcao": 150, "prot": 1.7},
+    {"nome": "🥤 Shake de Albumina", "kcal100": 44, "porcao": 250, "prot": 9.6},
+    {"nome": "🌴 Tâmara (4 unid.)", "kcal100": 282, "porcao": 80, "prot": 2.5},
+    {"nome": "🌰 Nozes (4 unid.)", "kcal100": 654, "porcao": 20, "prot": 15}
+];
+  
+
 // ═══════════════════════════════════════════════════════
 // CONSTANTES v1.5 — SISTEMA UNIFICADO DE 5 PONTOS
 // ═══════════════════════════════════════════════════════
@@ -1470,7 +1502,12 @@ function migrarDados(d){
   if(!d.medicoesPeso)d.medicoesPeso=padrao.medicoesPeso;
   if(!d.desafioDias)d.desafioDias=padrao.desafioDias;
   if(!d.diarioAlimentar)d.diarioAlimentar=padrao.diarioAlimentar;
-  if(!d.biblioteca)d.biblioteca=padrao.biblioteca;
+  if(!d.biblioteca)d.biblioteca=[...BIBLIOTECA_PADRAO];
+  else{
+    BIBLIOTECA_PADRAO.forEach(item=>{
+      if(!d.biblioteca.some(a=>a.nome===item.nome))d.biblioteca.push(item);
+    });
+  }
   if(!d.registrosSono)d.registrosSono=padrao.registrosSono;
   if(!d.registrosAgua)d.registrosAgua=padrao.registrosAgua;
   if(!d.pesosExercicios)d.pesosExercicios=padrao.pesosExercicios;
