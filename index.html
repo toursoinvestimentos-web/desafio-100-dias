@@ -1014,24 +1014,17 @@ body{
   </div>
 </div>
   
- <div id="sub-agua" style="display:none">
-  <div class="card" id="card-agua">
-    <div class="card-header">💧 Água</div>
-    <div class="stats-row">
-      <div class="stat-item">
-        <div class="stat-val" id="agua-meta">—</div>
-        <div class="stat-label">Meta/dia</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-val" id="agua-hoje">—</div>
-        <div class="stat-label">Consumido hoje</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-val" id="agua-media-30">—</div>
-        <div class="stat-label">Média 30 dias</div>
-      </div>
-    </div>
+<div id="sub-agua" style="display:none">
+  <div class="card">
+    <div class="card-header">Água diária (14 dias)</div>
     <div class="chart-container"><canvas id="chart-agua"></canvas></div>
+  </div>
+  <div class="card">
+    <div class="stats-row">
+      <div class="stat-item"><div class="stat-val" id="stat-media-agua" style="color:#38bdf8">—</div><div class="stat-label">litros/dia</div></div>
+      <div class="stat-item"><div class="stat-val" id="stat-dias-meta-agua">—</div><div class="stat-label">dias ≥ meta</div></div>
+      <div class="stat-item"><div class="stat-val" id="stat-dias-agua-reg">—</div><div class="stat-label">dias registrados</div></div>
+    </div>
   </div>
   <div class="dica-saude">
     💡 <strong>EFSA:</strong> A recomendação é ~35 ml por kg de peso. Hidratação adequada melhora o desempenho nos treinos.
@@ -2251,48 +2244,20 @@ function renderProgresso(){
     window.chartProteina=new Chart(ctx,{type:'bar',data:{labels,datasets:[{data:protPorDia,backgroundColor:protPorDia.map(v=>v>=metaProt?'rgba(59,130,246,0.55)':'rgba(248,113,113,0.45)'),borderColor:protPorDia.map(v=>v>=metaProt?'#3b82f6':'#f87171'),borderWidth:1.5,borderRadius:5}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{ticks:{color:'#5a6478',font:{size:9}},grid:{display:false}},y:{ticks:{color:'#5a6478',font:{size:10},callback:v=>v+'g'},grid:{color:'rgba(255,255,255,0.05)'}}}}});
   }
   
-    if(subAbaAtiva==='agua'){
-    // Meta diária (calculada pelo peso)
+     if(subAbaAtiva==='agua'){
     const metaAgua=calcMetaAgua();
-    const metaEl=document.getElementById('agua-meta');
-    metaEl.textContent=metaAgua?(metaAgua/1000).toFixed(1)+'L':'—';
-    metaEl.style.fontWeight='normal';
-    metaEl.style.color='var(--cinza)';
-    // Consumido hoje
-    const hojeStr=hoje();
-    const aguaHoje=dados.registrosAgua[hojeStr]||0;
-    const hojeEl=document.getElementById('agua-hoje');
-    hojeEl.textContent=aguaHoje?(aguaHoje/1000).toFixed(1)+'L':'0L';
-    hojeEl.style.fontWeight='normal';
-    hojeEl.style.color='var(--cinza)';
-    // Média 30 dias (últimos 30 dias com registro)
-    const ultimos30=[];for(let i=0;i<30;i++){const d=new Date();d.setHours(12,0,0,0);d.setDate(d.getDate()-i);ultimos30.push(toLocalISO(d));}
-    const valores30=ultimos30.map(iso=>dados.registrosAgua[iso]||0).filter(v=>v>0);
-    const media30=valores30.length?valores30.reduce((a,b)=>a+b,0)/valores30.length:0;
-    const media30El=document.getElementById('agua-media-30');
-    media30El.textContent=media30?(media30/1000).toFixed(1)+'L':'—';
-    media30El.style.fontWeight='bold';
-    // Cor da borda e do valor da média (azul se média ≥ meta, vermelho se média < meta)
-    const cardAgua=document.getElementById('card-agua');
-    if(media30 && metaAgua){
-      if(media30 >= metaAgua){
-        cardAgua.style.borderLeftColor='var(--azul)';
-        media30El.style.color='var(--azul)';
-      }else{
-        cardAgua.style.borderLeftColor='var(--vermelho)';
-        media30El.style.color='var(--vermelho)';
-      }
-    }else{
-      cardAgua.style.borderLeftColor='var(--cinza)';
-      media30El.style.color='var(--cinza)';
-    }
-    // Gráfico (14 dias) – mantido
     const dias14=[];for(let i=13;i>=0;i--){const d=new Date();d.setHours(12,0,0,0);d.setDate(d.getDate()-i);dias14.push(toLocalISO(d));}
     const aguaPorDia=dias14.map(iso=>dados.registrosAgua[iso]||0);
     const labels=dias14.map(iso=>formatarData(iso).slice(0,5));
     const ctx=document.getElementById('chart-agua').getContext('2d');
     if(chartAgua)chartAgua.destroy();
     chartAgua=new Chart(ctx,{type:'bar',data:{labels,datasets:[{data:aguaPorDia,backgroundColor:aguaPorDia.map(v=>v>=metaAgua?'rgba(56,189,248,0.55)':'rgba(14,165,233,0.35)'),borderColor:aguaPorDia.map(v=>v>=metaAgua?'#38bdf8':'#0ea5e9'),borderWidth:1.5,borderRadius:5}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{ticks:{color:'#5a6478',font:{size:9}},grid:{display:false}},y:{ticks:{color:'#5a6478',font:{size:10},callback:v=>v>=1000?(v/1000)+'L':v},grid:{color:'rgba(255,255,255,0.05)'}}}}});
+    const comDados=aguaPorDia.filter(v=>v>0);
+    const mediaAgua=comDados.length?comDados.reduce((a,b)=>a+b,0)/comDados.length:0;
+    document.getElementById('stat-media-agua').textContent=mediaAgua?(mediaAgua/1000).toFixed(1)+'L':'—';
+    document.getElementById('stat-dias-meta-agua').textContent=comDados.filter(v=>v>=metaAgua).length;
+    document.getElementById('stat-dias-agua-reg').textContent=comDados.length;
+  }
   }
 
 // ═══════════════════════════════
