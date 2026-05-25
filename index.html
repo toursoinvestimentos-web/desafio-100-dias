@@ -991,23 +991,23 @@ body{
 </div>
 
 <div id="sub-proteina" style="display:none">
-  <div class="card" id="card-proteina">
-    <div class="card-header">🥩 Proteína</div>
+  <div class="card" id="card-proteina-borda">
+    <div class="card-header">🥩 Meta Proteica Diária</div>
     <div class="stats-row">
       <div class="stat-item">
-        <div class="stat-val" id="prot-meta">—</div>
-        <div class="stat-label">Meta/dia</div>
+        <div class="stat-val" id="stat-prot-meta" style="color:var(--azul)">—</div>
+        <div class="stat-label">meta/dia (g)</div>
       </div>
       <div class="stat-item">
-        <div class="stat-val" id="prot-hoje">—</div>
-        <div class="stat-label">Consumido hoje</div>
+        <div class="stat-val" id="stat-prot-hoje">—</div>
+        <div class="stat-label">consumido hoje</div>
       </div>
       <div class="stat-item">
-        <div class="stat-val" id="prot-media-30">—</div>
-        <div class="stat-label">Média 30 dias</div>
+        <div class="stat-val" id="stat-prot-media">—</div>
+        <div class="stat-label">média 30 dias</div>
       </div>
     </div>
-    <div class="chart-container"><canvas id="chart-proteina"></canvas></div>
+    <div style="margin-top:8px;font-size:0.65em;color:var(--cinza);text-align:center">média baseada nos últimos 30 dias registrados</div>
   </div>
   <div class="dica-saude">
     💡 <strong>ISSN/ACSM:</strong> Para quem pratica musculação e busca composição corporal ideal, recomenda-se entre 1,4 g e 2,0 g de proteína por kg/dia. A proteína é essencial para a síntese muscular, recuperação pós-treino, saciedade e manutenção da massa magra durante o déficit calórico.
@@ -2202,47 +2202,20 @@ function renderProgresso(){
   }
 
    if(subAbaAtiva==='proteina'){
-    // Meta diária (calculada pelo peso)
     const metaProt=calcMetaProteina();
-    const metaEl=document.getElementById('prot-meta');
-    metaEl.textContent=metaProt?metaProt+' g':'—';
-    metaEl.style.fontWeight='normal';
-    metaEl.style.color='var(--cinza)';
-    // Consumido hoje
-    const hojeStr=hoje();
-    const protHoje=calcProteinaDia(hojeStr);
-    const hojeEl=document.getElementById('prot-hoje');
-    hojeEl.textContent=protHoje?protHoje+' g':'0 g';
-    hojeEl.style.fontWeight='normal';
-    hojeEl.style.color='var(--cinza)';
-    // Média 30 dias (últimos 30 dias com registro)
-    const ultimos30=[];for(let i=0;i<30;i++){const d=new Date();d.setHours(12,0,0,0);d.setDate(d.getDate()-i);ultimos30.push(toLocalISO(d));}
-    const valores30=ultimos30.map(iso=>calcProteinaDia(iso)).filter(v=>v>0);
-    const media30=valores30.length?Math.round(valores30.reduce((a,b)=>a+b,0)/valores30.length):0;
-    const media30El=document.getElementById('prot-media-30');
-    media30El.textContent=media30?media30+' g':'—';
-    media30El.style.fontWeight='bold';
-    // Cor da borda e do valor da média (azul se média ≥ meta, vermelho se média < meta)
-    const cardProt=document.getElementById('card-proteina');
-    if(media30 && metaProt){
-      if(media30 >= metaProt){
-        cardProt.style.borderLeftColor='var(--azul)';
-        media30El.style.color='var(--azul)';
-      }else{
-        cardProt.style.borderLeftColor='var(--vermelho)';
-        media30El.style.color='var(--vermelho)';
-      }
-    }else{
-      cardProt.style.borderLeftColor='var(--cinza)';
-      media30El.style.color='var(--cinza)';
-    }
-    // Gráfico (14 dias) – valores diários de proteína
-    const dias14=[];for(let i=13;i>=0;i--){const d=new Date();d.setHours(12,0,0,0);d.setDate(d.getDate()-i);dias14.push(toLocalISO(d));}
-    const protPorDia=dias14.map(iso=>calcProteinaDia(iso));
-    const labels=dias14.map(iso=>formatarData(iso).slice(0,5));
-    const ctx=document.getElementById('chart-proteina').getContext('2d');
-    if(window.chartProteina)window.chartProteina.destroy();
-    window.chartProteina=new Chart(ctx,{type:'bar',data:{labels,datasets:[{data:protPorDia,backgroundColor:protPorDia.map(v=>v>=metaProt?'rgba(59,130,246,0.55)':'rgba(248,113,113,0.45)'),borderColor:protPorDia.map(v=>v>=metaProt?'#3b82f6':'#f87171'),borderWidth:1.5,borderRadius:5}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{ticks:{color:'#5a6478',font:{size:9}},grid:{display:false}},y:{ticks:{color:'#5a6478',font:{size:10},callback:v=>v+'g'},grid:{color:'rgba(255,255,255,0.05)'}}}}});
+    document.getElementById('stat-prot-meta').textContent=metaProt||'—';
+    const protHoje=calcProteinaDia(hoje());
+    const protHojeEl=document.getElementById('stat-prot-hoje');
+    protHojeEl.textContent=protHoje?protHoje+'g':'0g';
+    protHojeEl.style.color=protHoje>=metaProt?'var(--verde)':protHoje>0?'var(--amarelo)':'var(--cinza)';
+    const dias30=[];for(let i=0;i<30;i++){const d=new Date();d.setHours(12,0,0,0);d.setDate(d.getDate()-i);dias30.push(toLocalISO(d));}
+    const protDias=dias30.map(iso=>calcProteinaDia(iso)).filter(v=>v>0);
+    const media=protDias.length?Math.round(protDias.reduce((a,b)=>a+b,0)/protDias.length):0;
+    const mediaEl=document.getElementById('stat-prot-media');
+    mediaEl.textContent=media?media+'g':'—';
+    mediaEl.style.color=media>=metaProt?'var(--azul)':'var(--vermelho)';
+    const card=document.getElementById('card-proteina-borda');
+    if(card)card.style.borderLeftColor=media>=metaProt?'var(--azul)':'var(--vermelho)';
   }
   
       if(subAbaAtiva==='agua'){
