@@ -2097,23 +2097,30 @@ function renderProgresso(){
     rev.forEach((m,i)=>{const prev=rev[i+1];let delta='';if(prev){const d=m.pesoKg-prev.pesoKg;delta=`<span class="hist-delta ${d>0?'delta-pos':'delta-neg'}">${d>0?'+':''}${d.toFixed(1)}kg</span>`;}hist+=`<div class="hist-item"><span class="hist-data">${formatarData(m.data)}</span><span class="hist-val">${m.pesoKg}kg ${delta}</span></div>`;});
     document.getElementById('hist-peso-lista').innerHTML=hist||'<div class="empty">Nenhum registro.</div>';
   }
-   if(subAbaAtiva==='calorias'){
+     if(subAbaAtiva==='calorias'){
     // Meta diária
     const pesoCal=pesoMaisRecente();
     const metaCal=pesoCal?calcMeta(pesoCal):0;
-    document.getElementById('cal-meta').textContent=metaCal?metaCal+' kcal':'—';
+    const metaEl=document.getElementById('cal-meta');
+    metaEl.textContent=metaCal?metaCal+' kcal':'—';
+    metaEl.style.fontWeight='normal';
+    metaEl.style.color='var(--cinza)';
     // Consumido hoje
     const hojeStr=hoje();
     const diarioHoje=dados.diarioAlimentar[hojeStr]||{refeicoes:{}};
     const totalKcal=Object.values(diarioHoje.refeicoes).flat().reduce((s,x)=>s+(x.kcal||0),0);
-    document.getElementById('cal-hoje').textContent=totalKcal?totalKcal+' kcal':'0 kcal';
-    // Média 30 dias (últimos 30 dias com registro)
+    const hojeEl=document.getElementById('cal-hoje');
+    hojeEl.textContent=totalKcal?totalKcal+' kcal':'0 kcal';
+    hojeEl.style.fontWeight='normal';
+    hojeEl.style.color='var(--cinza)';
+    // Média 30 dias
     const ultimos30=[];for(let i=0;i<30;i++){const d=new Date();d.setHours(12,0,0,0);d.setDate(d.getDate()-i);ultimos30.push(toLocalISO(d));}
     const valores30=ultimos30.map(iso=>{const d=dados.diarioAlimentar[iso];if(!d)return null;return Object.values(d.refeicoes||{}).flat().reduce((s,x)=>s+(x.kcal||0),0);}).filter(v=>v!==null);
     const media30=valores30.length?Math.round(valores30.reduce((a,b)=>a+b,0)/valores30.length):0;
     const media30El=document.getElementById('cal-media-30');
     media30El.textContent=media30?media30+' kcal':'—';
-    // Cor da borda e do valor da média (azul se média ≤ meta, vermelho se média > meta)
+    media30El.style.fontWeight='bold';
+    // Cor da borda e do valor da média
     const cardCal=document.getElementById('card-calorias');
     if(media30 && metaCal){
       if(media30 <= metaCal){
@@ -2127,7 +2134,7 @@ function renderProgresso(){
       cardCal.style.borderLeftColor='var(--cinza)';
       media30El.style.color='var(--cinza)';
     }
-    // Gráfico (14 dias) – manter igual, apenas atualizar dados
+    // Gráfico (14 dias)
     const dias14=[];for(let i=13;i>=0;i--){const d=new Date();d.setHours(12,0,0,0);d.setDate(d.getDate()-i);dias14.push(toLocalISO(d));}
     const calPorDia=dias14.map(iso=>{const d=dados.diarioAlimentar[iso];if(!d)return 0;return Object.values(d.refeicoes||{}).flat().reduce((s,x)=>s+(x.kcal||0),0);});
     const labels=dias14.map(iso=>formatarData(iso).slice(0,5));
