@@ -959,22 +959,29 @@ body{
     </div>
   </div>
 
-  <div id="sub-calorias" style="display:none">
-    <div class="card">
-      <div class="card-header">Calorias vs Meta (14 dias)</div>
-      <div class="chart-container"><canvas id="chart-cal"></canvas></div>
-    </div>
-    <div class="card">
-      <div class="stats-row">
-        <div class="stat-item"><div class="stat-val" id="stat-media-cal">—</div><div class="stat-label">kcal/dia</div></div>
-        <div class="stat-item"><div class="stat-val" id="stat-media-def" style="color:var(--verde)">—</div><div class="stat-label">déficit méd</div></div>
-        <div class="stat-item"><div class="stat-val" id="stat-dias-ok">—</div><div class="stat-label">dias em déficit</div></div>
+ <div id="sub-calorias" style="display:none">
+  <div class="card" id="card-calorias">
+    <div class="card-header">🔥 Calorias</div>
+    <div class="stats-row">
+      <div class="stat-item">
+        <div class="stat-val" id="cal-meta">—</div>
+        <div class="stat-label">Meta/dia</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-val" id="cal-hoje">—</div>
+        <div class="stat-label">Consumido hoje</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-val" id="cal-media-30">—</div>
+        <div class="stat-label">Média 30 dias</div>
       </div>
     </div>
-    <div class="dica-saude">
-      💡 <strong>OMS/EFSA:</strong> Um déficit de 500 kcal/dia gera ~0,5 kg de perda semanal — ritmo seguro e sustentável.
-    </div>
+    <div class="chart-container"><canvas id="chart-cal"></canvas></div>
   </div>
+  <div class="dica-saude">
+    💡 <strong>OMS/EFSA:</strong> Um déficit de 500 kcal/dia gera ~0,5 kg de perda semanal — ritmo seguro e sustentável.
+  </div>
+</div>
 
 <div id="sub-proteina" style="display:none">
     <div class="card" id="card-proteina-borda">
@@ -2090,20 +2097,46 @@ function renderProgresso(){
     rev.forEach((m,i)=>{const prev=rev[i+1];let delta='';if(prev){const d=m.pesoKg-prev.pesoKg;delta=`<span class="hist-delta ${d>0?'delta-pos':'delta-neg'}">${d>0?'+':''}${d.toFixed(1)}kg</span>`;}hist+=`<div class="hist-item"><span class="hist-data">${formatarData(m.data)}</span><span class="hist-val">${m.pesoKg}kg ${delta}</span></div>`;});
     document.getElementById('hist-peso-lista').innerHTML=hist||'<div class="empty">Nenhum registro.</div>';
   }
-  if(subAbaAtiva==='calorias'){
+   if(subAbaAtiva==='calorias'){
+    // Meta diária
+    const pesoCal=pesoMaisRecente();
+    const metaCal=pesoCal?calcMeta(pesoCal):0;
+    document.getElementById('cal-meta').textContent=metaCal?metaCal+' kcal':'—';
+    // Consumido hoje
+    const hojeStr=hoje();
+    const diarioHoje=dados.diarioAlimentar[hojeStr]||{refeicoes:{}};
+    const totalKcal=Object.values(diarioHoje.refeicoes).flat().reduce((s,x)=>s+(x.kcal||0),0);
+    document.getElementById('cal-hoje').textContent=totalKcal?totalKcal+' kcal':'0 kcal';
+    // Média 30 dias (últimos 30 dias com registro)
+    const ultimos30=[];for(let i=0;i<30;i++){const d=new Date();d.setHours(12,0,0,0);d.setDate(d.getDate()-i);ultimos30.push(toLocalISO(d));}
+    const valores30=ultimos30.map(iso=>{const d=dados.diarioAlimentar[iso];if(!d)return null;return Object.values(d.refeicoes||{}).flat().reduce((s,x)=>s+(x.kcal||0),0);}).filter(v=>v!==null);
+    const media30=valores30.length?Math.round(valores30.reduce((a,b)=>a+b,0)/valores30.length):0;
+    const media30El=document.getElementById('cal-media-30');
+    media30El.textContent=media30?media30+' kcal':'—';
+    // Cor da borda e do valor da média (azul se média ≤ meta, vermelho se média > meta)
+    const cardCal=document.getElementById('card-calorias');
+    if(media30 && metaCal){
+      if(media30 <= metaCal){
+        cardCal.style.borderLeftColor='var(--azul)';
+        media30El.style.color='var(--azul)';
+      }else{
+        cardCal.style.borderLeftColor='var(--vermelho)';
+        media30El.style.color='var(--vermelho)';
+      }
+    }else{
+      cardCal.style.borderLeftColor='var(--cinza)';
+      media30El.style.color='var(--cinza)';
+    }
+    // Gráfico (14 dias) – manter igual, apenas atualizar dados
     const dias14=[];for(let i=13;i>=0;i--){const d=new Date();d.setHours(12,0,0,0);d.setDate(d.getDate()-i);dias14.push(toLocalISO(d));}
-    const pesoCal=pesoMaisRecente();const metaCal=pesoCal?calcMeta(pesoCal):0;
     const calPorDia=dias14.map(iso=>{const d=dados.diarioAlimentar[iso];if(!d)return 0;return Object.values(d.refeicoes||{}).flat().reduce((s,x)=>s+(x.kcal||0),0);});
     const labels=dias14.map(iso=>formatarData(iso).slice(0,5));
     const ctx=document.getElementById('chart-cal').getContext('2d');
     if(chartCal)chartCal.destroy();
     chartCal=new Chart(ctx,{type:'bar',data:{labels,datasets:[{data:calPorDia,backgroundColor:calPorDia.map(v=>v>metaCal?'rgba(248,113,113,0.5)':'rgba(59,130,246,0.45)'),borderColor:calPorDia.map(v=>v>metaCal?'#f87171':'#3b82f6'),borderWidth:1.5,borderRadius:5}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{ticks:{color:'#5a6478',font:{size:9}},grid:{display:false}},y:{ticks:{color:'#5a6478',font:{size:10}},grid:{color:'rgba(255,255,255,0.05)'}}}}});
-    const diasComDados=calPorDia.filter(v=>v>0);
-    const mediaCal=diasComDados.length?Math.round(diasComDados.reduce((a,b)=>a+b,0)/diasComDados.length):0;
-    document.getElementById('stat-media-cal').textContent=mediaCal||'—';
-    document.getElementById('stat-media-def').textContent=mediaCal&&metaCal?'+'+(metaCal-mediaCal):'—';
-    document.getElementById('stat-dias-ok').textContent=calPorDia.filter(v=>v>0&&v<=metaCal).length;
   }
+
+  
   if(subAbaAtiva==='sono'){
     const dias14=[];for(let i=13;i>=0;i--){const d=new Date();d.setHours(12,0,0,0);d.setDate(d.getDate()-i);dias14.push(toLocalISO(d));}
     const sonoPorDia=dias14.map(iso=>{const r=dados.registrosSono[iso];return r?r.horas:null;});
