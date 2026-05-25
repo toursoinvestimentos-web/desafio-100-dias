@@ -919,129 +919,128 @@ body{
     <button class="toggle-aba" onclick="mudarSubAba('peso',this)" style="flex:0 0 auto">Peso</button>
   </div>
 
-<div id="sub-treinos">
-  <div class="card">
-    <div class="card-header">Pontos por semana (12 semanas) — meta: 5</div>
-    <div style="display:flex;gap:0.7px;flex-wrap:wrap;font-size:0.72em;margin-bottom:8px">
-      <span style="padding:3px 8px;border-radius:10px;background:rgba(59,130,246,0.15);color:var(--azul);font-weight:700">Meta ✓ (5+)</span>
-      <span style="padding:3px 8px;border-radius:10px;background:rgba(52,211,153,0.12);color:var(--verde);font-weight:700">Quase (4)</span>
-      <span style="padding:3px 8px;border-radius:10px;background:rgba(251,191,36,0.12);color:var(--amarelo);font-weight:700">Parcial (2-3)</span>
-      <span style="padding:3px 8px;border-radius:10px;background:rgba(248,113,113,0.1);color:var(--vermelho);font-weight:700">Baixo (1)</span>
+  <div id="sub-treinos">
+    <div class="card">
+      <div class="card-header">Pontos por semana (12 semanas) — meta: 5</div>
+      <div style="display:flex;gap:0.7px;flex-wrap:wrap;font-size:0.72em;margin-bottom:8px">
+        <span style="padding:3px 8px;border-radius:10px;background:rgba(59,130,246,0.15);color:var(--azul);font-weight:700">Meta ✓ (5+)</span>
+        <span style="padding:3px 8px;border-radius:10px;background:rgba(52,211,153,0.12);color:var(--verde);font-weight:700">Quase (4)</span>
+        <span style="padding:3px 8px;border-radius:10px;background:rgba(251,191,36,0.12);color:var(--amarelo);font-weight:700">Parcial (2-3)</span>
+        <span style="padding:3px 8px;border-radius:10px;background:rgba(248,113,113,0.1);color:var(--vermelho);font-weight:700">Baixo (1)</span>
+      </div>
+      <div class="chart-container"><canvas id="chart-treinos"></canvas></div>
     </div>
-    <div class="chart-container"><canvas id="chart-treinos"></canvas></div>
-  </div>
-  <div class="card">
-    <div class="stats-row">
-      <div class="stat-item"><div class="stat-val" id="stat-semanas-meta">0</div><div class="stat-label">semanas 5pts</div></div>
-      <div class="stat-item"><div class="stat-val" id="stat-media-pts">—</div><div class="stat-label">pts/semana</div></div>
-      <div class="stat-item"><div class="stat-val" id="stat-streak-treino" style="color:var(--verde)">0</div><div class="stat-label">sem. seguidas</div></div>
+    <div class="card">
+      <div class="stats-row">
+        <div class="stat-item"><div class="stat-val" id="stat-semanas-meta">0</div><div class="stat-label">semanas 5pts</div></div>
+        <div class="stat-item"><div class="stat-val" id="stat-media-pts">—</div><div class="stat-label">pts/semana</div></div>
+        <div class="stat-item"><div class="stat-val" id="stat-streak-treino" style="color:var(--verde)">0</div><div class="stat-label">sem. seguidas</div></div>
+      </div>
+    </div>
+    <div class="dica-saude">
+      💡 <strong>OMS:</strong> Adultos devem praticar ao menos 150 min de atividade moderada por semana. 5 sessões combinando musculação, natação e cardio é um ótimo equilíbrio para o desafio.
     </div>
   </div>
-  <div class="dica-saude">
-    💡 <strong>OMS:</strong> Adultos devem praticar ao menos 150 min de atividade moderada por semana. 5 sessões combinando musculação, natação e cardio é um ótimo equilíbrio para o desafio.
-  </div>
-</div>
 
-<div id="sub-sono" style="display:none">
-  <div class="card">
-    <div class="card-header">Sono por noite (14 dias)</div>
-    <div class="chart-container"><canvas id="chart-sono"></canvas></div>
-  </div>
-  <div class="card">
-    <div class="stats-row">
-      <div class="stat-item"><div class="stat-val" id="stat-media-sono" style="color:var(--azul)">—</div><div class="stat-label">horas/noite</div></div>
-      <div class="stat-item"><div class="stat-val" id="stat-noites-7h">—</div><div class="stat-label">noites ≥ 7h</div></div>
-      <div class="stat-item"><div class="stat-val" id="stat-noites-reg">—</div><div class="stat-label">registradas</div></div>
+  <div id="sub-sono" style="display:none">
+    <div class="card">
+      <div class="card-header">Sono por noite (14 dias)</div>
+      <div class="chart-container"><canvas id="chart-sono"></canvas></div>
+    </div>
+    <div class="card">
+      <div class="stats-row">
+        <div class="stat-item"><div class="stat-val" id="stat-media-sono" style="color:var(--azul)">—</div><div class="stat-label">horas/noite</div></div>
+        <div class="stat-item"><div class="stat-val" id="stat-noites-7h">—</div><div class="stat-label">noites ≥ 7h</div></div>
+        <div class="stat-item"><div class="stat-val" id="stat-noites-reg">—</div><div class="stat-label">registradas</div></div>
+      </div>
+    </div>
+    <div class="dica-saude">
+      💡 <strong>OMS:</strong> Adultos precisam de 7 a 9 horas de sono por noite. Durante o sono profundo o organismo libera GH, repara tecido muscular e consolida memória.
     </div>
   </div>
-  <div class="dica-saude">
-    💡 <strong>OMS:</strong> Adultos precisam de 7 a 9 horas de sono por noite. Durante o sono profundo o organismo libera GH, repara tecido muscular e consolida memória.
-  </div>
-</div>
-  
-<div id="sub-calorias" style="display:none">
-  <div class="card">
-    <div class="card-header">Calorias vs Meta (14 dias)</div>
-    <div class="chart-container"><canvas id="chart-cal"></canvas></div>
-  </div>
-  <div class="card">
-    <div class="stats-row">
-      <div class="stat-item"><div class="stat-val" id="stat-media-cal">—</div><div class="stat-label">kcal/dia</div></div>
-      <div class="stat-item"><div class="stat-val" id="stat-media-def" style="color:var(--verde)">—</div><div class="stat-label">déficit méd</div></div>
-      <div class="stat-item"><div class="stat-val" id="stat-dias-ok">—</div><div class="stat-label">dias em déficit</div></div>
-    </div>
-  </div>
-  <div class="dica-saude">
-    💡 <strong>OMS/EFSA:</strong> Um déficit de 500 kcal/dia gera ~0,5 kg de perda semanal — ritmo seguro e sustentável.
-  </div>
-</div>
 
-  
+  <div id="sub-calorias" style="display:none">
+    <div class="card">
+      <div class="card-header">Calorias vs Meta (14 dias)</div>
+      <div class="chart-container"><canvas id="chart-cal"></canvas></div>
+    </div>
+    <div class="card">
+      <div class="stats-row">
+        <div class="stat-item"><div class="stat-val" id="stat-media-cal">—</div><div class="stat-label">kcal/dia</div></div>
+        <div class="stat-item"><div class="stat-val" id="stat-media-def" style="color:var(--verde)">—</div><div class="stat-label">déficit méd</div></div>
+        <div class="stat-item"><div class="stat-val" id="stat-dias-ok">—</div><div class="stat-label">dias em déficit</div></div>
+      </div>
+    </div>
+    <div class="dica-saude">
+      💡 <strong>OMS/EFSA:</strong> Um déficit de 500 kcal/dia gera ~0,5 kg de perda semanal — ritmo seguro e sustentável.
+    </div>
+  </div>
+
 <div id="sub-proteina" style="display:none">
-  <div class="card" id="card-proteina-borda">
-    <div class="card-header">🥩 Meta Proteica Diária</div>
-    <div class="stats-row">
-      <div class="stat-item">
-        <div class="stat-val" id="stat-prot-meta" style="color:var(--azul)">—</div>
-        <div class="stat-label">meta/dia (g)</div>
+    <div class="card" id="card-proteina-borda">
+      <div class="card-header">🥩 Meta Proteica Diária</div>
+      <div class="stats-row">
+        <div class="stat-item">
+          <div class="stat-val" id="stat-prot-meta" style="color:var(--azul)">—</div>
+          <div class="stat-label">meta/dia (g)</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-val" id="stat-prot-hoje">—</div>
+          <div class="stat-label">consumido hoje</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-val" id="stat-prot-media">—</div>
+          <div class="stat-label">média 30 dias</div>
+        </div>
       </div>
-      <div class="stat-item">
-        <div class="stat-val" id="stat-prot-hoje">—</div>
-        <div class="stat-label">consumido hoje</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-val" id="stat-prot-media">—</div>
-        <div class="stat-label">média 30 dias</div>
-      </div>
+      <div style="margin-top:8px;font-size:0.65em;color:var(--cinza);text-align:center">média baseada nos últimos 30 dias registrados</div>
     </div>
-    <div style="margin-top:8px;font-size:0.65em;color:var(--cinza);text-align:center">média baseada nos últimos 30 dias registrados</div>
+    <div class="dica-saude">
+      💡 <strong>ISSN/ACSM:</strong> Para quem pratica musculação e busca composição corporal ideal, recomenda-se entre 1,4 g e 2,0 g de proteína por kg/dia. A proteína é essencial para a síntese muscular, recuperação pós-treino, saciedade e manutenção da massa magra durante o déficit calórico.
+    </div>
   </div>
-  <div class="dica-saude">
-    💡 <strong>ISSN/ACSM:</strong> Para quem pratica musculação e busca composição corporal ideal, recomenda-se entre 1,4 g e 2,0 g de proteína por kg/dia. A proteína é essencial para a síntese muscular, recuperação pós-treino, saciedade e manutenção da massa magra durante o déficit calórico.
-  </div>
-</div>
   
-<div id="sub-agua" style="display:none">
-  <div class="card">
-    <div class="card-header">Água diária (14 dias)</div>
-    <div class="chart-container"><canvas id="chart-agua"></canvas></div>
-  </div>
-  <div class="card">
-    <div class="stats-row">
-      <div class="stat-item"><div class="stat-val" id="stat-media-agua" style="color:#38bdf8">—</div><div class="stat-label">litros/dia</div></div>
-      <div class="stat-item"><div class="stat-val" id="stat-dias-meta-agua">—</div><div class="stat-label">dias ≥ meta</div></div>
-      <div class="stat-item"><div class="stat-val" id="stat-dias-agua-reg">—</div><div class="stat-label">dias registrados</div></div>
+  <div id="sub-agua" style="display:none">
+    <div class="card">
+      <div class="card-header">Água diária (14 dias)</div>
+      <div class="chart-container"><canvas id="chart-agua"></canvas></div>
+    </div>
+    <div class="card">
+      <div class="stats-row">
+        <div class="stat-item"><div class="stat-val" id="stat-media-agua" style="color:#38bdf8">—</div><div class="stat-label">litros/dia</div></div>
+        <div class="stat-item"><div class="stat-val" id="stat-dias-meta-agua">—</div><div class="stat-label">dias ≥ meta</div></div>
+        <div class="stat-item"><div class="stat-val" id="stat-dias-agua-reg">—</div><div class="stat-label">dias registrados</div></div>
+      </div>
+    </div>
+    <div class="dica-saude">
+      💡 <strong>EFSA:</strong> A recomendação é ~35 ml por kg de peso. Hidratação adequada melhora o desempenho nos treinos.
     </div>
   </div>
-  <div class="dica-saude">
-    💡 <strong>EFSA:</strong> A recomendação é ~35 ml por kg de peso. Hidratação adequada melhora o desempenho nos treinos.
+
+  <div id="sub-peso" style="display:none">
+    <div class="card">
+      <div class="card-header">Evolução do Peso (kg)</div>
+      <div class="chart-container"><canvas id="chart-peso"></canvas></div>
+    </div>
+    <div class="card">
+      <div class="card-titulo" style="margin-bottom:6px">IMC Atual</div>
+      <div id="imc-prog-val" style="font-family:var(--fonte-display);font-size:2.5em;color:var(--azul)">—</div>
+      <div id="imc-prog-class" style="font-size:0.75em;color:var(--cinza)">—</div>
+      <div class="imc-faixa" style="margin-top:12px">
+        <span class="imc-tag" style="background:rgba(59,130,246,0.12);color:var(--azul)">Abaixo &lt;18.5</span>
+        <span class="imc-tag" style="background:rgba(52,211,153,0.12);color:var(--verde)">Normal 18.5–24.9</span>
+        <span class="imc-tag" style="background:rgba(251,191,36,0.12);color:var(--amarelo)">Sobrepeso 25–29.9</span>
+        <span class="imc-tag" style="background:rgba(248,113,113,0.1);color:var(--vermelho)">Obesidade ≥30</span>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-titulo" style="margin-bottom:12px">Histórico de peso</div>
+      <div id="hist-peso-lista"></div>
+    </div>
+    <button class="btn btn-outline" onclick="abrirModalPeso()" style="margin-bottom:12px">Registrar peso hoje</button>
   </div>
 </div>
 
-<div id="sub-peso" style="display:none">
-  <div class="card">
-    <div class="card-header">Evolução do Peso (kg)</div>
-    <div class="chart-container"><canvas id="chart-peso"></canvas></div>
-  </div>
-  <div class="card">
-    <div class="card-titulo" style="margin-bottom:6px">IMC Atual</div>
-    <div id="imc-prog-val" style="font-family:var(--fonte-display);font-size:2.5em;color:var(--azul)">—</div>
-    <div id="imc-prog-class" style="font-size:0.75em;color:var(--cinza)">—</div>
-    <div class="imc-faixa" style="margin-top:12px">
-      <span class="imc-tag" style="background:rgba(59,130,246,0.12);color:var(--azul)">Abaixo &lt;18.5</span>
-      <span class="imc-tag" style="background:rgba(52,211,153,0.12);color:var(--verde)">Normal 18.5–24.9</span>
-      <span class="imc-tag" style="background:rgba(251,191,36,0.12);color:var(--amarelo)">Sobrepeso 25–29.9</span>
-      <span class="imc-tag" style="background:rgba(248,113,113,0.1);color:var(--vermelho)">Obesidade ≥30</span>
-    </div>
-  </div>
-  <div class="card">
-    <div class="card-titulo" style="margin-bottom:12px">Histórico de peso</div>
-    <div id="hist-peso-lista"></div>
-  </div>
-  <button class="btn btn-outline" onclick="abrirModalPeso()" style="margin-bottom:12px">Registrar peso hoje</button>
-</div>
-
-  
 <!-- ══════════ TELA: ALIMENTOS ══════════ -->
 <div id="tela-alimentos" class="tela">
   <div class="card">
@@ -1389,28 +1388,28 @@ function toLocalDate(iso){return new Date(iso+'T12:00:00');}
 function toLocalISO(date){return`${date.getFullYear()}-${String(date.getMonth()+1).padStart(2,'0')}-${String(date.getDate()).padStart(2,'0')}`;}
 const TREINOS = {
   A: [
-    { g: "Pernas",      n: "Leg Press",                                        s: 3, r: 10, gif: "https://www.gifdotreino.com/Exercicios/Pernas/Leg%20Press.gif" },
-    { g: "Pernas",      n: "Cadeira flexora",                                  s: 3, r: 12, gif: "https://www.gifdotreino.com/Exercicios/Pernas/Cadeira%20flexora.gif" },
-    { g: "Peito",       n: "Supino Reto",                                      s: 3, r: 10, gif: "https://www.gifdotreino.com/Exercicios/Peitoral/Supino%20Reto.gif" },
-    { g: "Costas",      n: "Puxada Alta",                                      s: 3, r: 10, gif: "https://www.gifdotreino.com/Exercicios/Costas/Puxada%20Alta.gif" },
-    { g: "Costas",      n: "Remada Sentada com Cabo",                          s: 3, r: 10, gif: "https://www.gifdotreino.com/Exercicios/Costas/Remada%20Sentada%20com%20Cabo.gif" },
-    { g: "Ombros",      n: "Desenvolvimento de Ombro no Banco com Halteres",   s: 3, r: 12, gif: "https://www.gifdotreino.com/Exercicios/Ombros/Desenvolvimento%20de%20Ombro%20no%20Banco%20com%20Halteres.gif" },
-    { g: "Ombros",      n: "Elevação lateral com halteres sentado",            s: 2, r: 12, gif: "https://www.gifdotreino.com/Exercicios/Ombros/Eleva%C3%A7%C3%A3o%20lateral%20com%20halteres%20sentado.gif" },
-    { g: "Bíceps",      n: "Rosca direta com barra w",                         s: 2, r: 12, gif: "https://www.gifdotreino.com/Exercicios/B%C3%ADceps/Rosca%20direta%20com%20barra%20w.gif" },
-    { g: "Tríceps",     n: "Tríceps pulley corda",                             s: 2, r: 12, gif: "https://www.gifdotreino.com/Exercicios/Tr%C3%ADceps/Tr%C3%ADceps%20pulley%20corda.gif" },
-    { g: "Panturrilha", n: "Panturrilha em Pé",                                s: 3, r: 15, gif: "https://www.gifdotreino.com/Exercicios/Panturrilhas/Panturrilha%20em%20P%C3%A9%20no%20Smith.gif" }
+    {g:'Peito',   n:'Supino Reto',                  s:4,r:10,gif:'https://www.gifdotreino.com/Exercicios/Peitoral/Supino%20Reto.gif'},
+    {g:'Peito',   n:'Crucifixo com Halteres',        s:3,r:12,gif:'https://www.gifdotreino.com/Exercicios/Peitoral/Crucifixo%20com%20halteres.gif'},
+    {g:'Costas',  n:'Puxada Alta',                   s:3,r:10,gif:'https://www.gifdotreino.com/Exercicios/Costas/Puxada%20Alta.gif'},
+    {g:'Costas',  n:'Remada Curvada com Barra',      s:3,r:10,gif:'https://www.gifdotreino.com/Exercicios/Costas/Remada%20Curvada%20com%20Barra.gif'},
+    {g:'Ombros',  n:'Desenv. Ombro na Máquina',      s:3,r:12,gif:'https://www.gifdotreino.com/Exercicios/Ombros/Desenvolvimento%20de%20ombro%20na%20m%C3%A1quina.gif'},
+    {g:'Ombros',  n:'Elevação Lateral',              s:3,r:12,gif:'https://www.gifdotreino.com/Exercicios/Ombros/Eleva%C3%A7%C3%A3o%20lateral%20de%20bra%C3%A7os%20com%20halteres.gif'},
+    {g:'Bíceps',  n:'Rosca Direta com Barra',        s:3,r:12,gif:'https://www.gifdotreino.com/Exercicios/Biceps/Rosca%20Direta%20com%20Barra.gif'},
+    {g:'Tríceps', n:'Tríceps Pulley Corda',           s:3,r:12,gif:'https://www.gifdotreino.com/Exercicios/Triceps/Tr%C3%ADceps%20pulley%20corda.gif'},
+    {g:'Pernas',  n:'Agachamento Barra',             s:3,r:10,gif:'https://www.gifdotreino.com/Exercicios/Pernas/Agachamento%20Barra.gif'},
+    {g:'Pernas',  n:'Cadeira Flexora',               s:3,r:12,gif:'https://www.gifdotreino.com/Exercicios/Pernas/Cadeira%20flexora.gif'},
   ],
   B: [
-    { g: "Pernas",      n: "Agachamento no Smith",                             s: 3, r: 10, gif: "https://www.gifdotreino.com/Exercicios/Pernas/Agachamento%20no%20Smith.gif" },
-    { g: "Pernas",      n: "Cadeira extensora",                                s: 3, r: 12, gif: "https://www.gifdotreino.com/Exercicios/Pernas/Cadeira%20extensora.gif" },
-    { g: "Peito",       n: "Supino Inclinado com Halteres",                    s: 3, r: 10, gif: "https://www.gifdotreino.com/Exercicios/Peitoral/Supino%20Inclinado%20com%20Halteres.gif" },
-    { g: "Costas",      n: "Remada sentado com cabo pegada fechada",           s: 3, r: 10, gif: "https://www.gifdotreino.com/Exercicios/Costas/Remada%20sentado%20com%20cabo%20pegada%20fechada.gif" },
-    { g: "Costas",      n: "Puxada Alta com Triângulo",                        s: 3, r: 10, gif: "https://www.gifdotreino.com/Exercicios/Costas/Puxada%20Alta%20com%20Tri%C3%A2ngulo.gif" },
-    { g: "Ombros",      n: "Desenvolvimento de Ombro no Banco com Halteres",   s: 3, r: 10, gif: "https://www.gifdotreino.com/Exercicios/Ombros/Desenvolvimento%20de%20Ombro%20no%20Banco%20com%20Halteres.gif" },
-    { g: "Ombros",      n: "Face Pull",                                        s: 2, r: 12, gif: "https://www.gifdotreino.com/Exercicios/Trap%C3%A9zio/Face%20Pull.gif" },
-    { g: "Bíceps",      n: "Rosca martelo",                                    s: 2, r: 12, gif: "https://www.gifdotreino.com/Exercicios/B%C3%ADceps/Rosca%20martelo.gif" },
-    { g: "Tríceps",     n: "Tríceps pulley barra",                             s: 2, r: 12, gif: "https://www.gifdotreino.com/Exercicios/Tr%C3%ADceps/Tr%C3%ADceps%20pulley%20barra.gif" },
-    { g: "Panturrilha", n: "Elevação de Panturrilha Sentado com Alavanca",     s: 3, r: 15, gif: "https://www.gifdotreino.com/Exercicios/Panturrilhas/Eleva%C3%A7%C3%A3o%20de%20Panturrilha%20Sentado%20com%20Alavanca.gif" }
+    {g:'Peito',   n:'Supino Inclinado com Halteres', s:4,r:10,gif:'https://www.gifdotreino.com/Exercicios/Peitoral/Supino%20Inclinado%20com%20Halteres.gif'},
+    {g:'Peito',   n:'Voador na Máquina',             s:3,r:12,gif:'https://www.gifdotreino.com/Exercicios/Peitoral/Voador%20na%20M%C3%A1quina.gif'},
+    {g:'Costas',  n:'Remada Sentada com Cabo',       s:3,r:10,gif:'https://www.gifdotreino.com/Exercicios/Costas/Remada%20Sentada%20com%20Cabo.gif'},
+    {g:'Costas',  n:'Pullover com Haltere',          s:3,r:12,gif:'https://www.gifdotreino.com/Exercicios/Costas/Pullover%20com%20haltere.gif'},
+    {g:'Ombros',  n:'Desenvolvimento Arnold',        s:3,r:10,gif:'https://www.gifdotreino.com/Exercicios/Ombros/Desenvolvimento%20Arnold.gif'},
+    {g:'Ombros',  n:'Elevação Frontal',              s:3,r:12,gif:'https://www.gifdotreino.com/Exercicios/Ombros/Eleva%C3%A7%C3%A3o%20frontal%20com%20halteres.gif'},
+    {g:'Bíceps',  n:'Rosca Martelo',                 s:3,r:12,gif:'https://www.gifdotreino.com/Exercicios/Biceps/Rosca%20martelo.gif'},
+    {g:'Tríceps', n:'Tríceps Francês',               s:3,r:12,gif:'https://www.gifdotreino.com/Exercicios/Triceps/Tr%C3%ADceps%20Franc%C3%AAs%20com%20Halteres.gif'},
+    {g:'Pernas',  n:'Leg Press',                     s:3,r:10,gif:'https://www.gifdotreino.com/Exercicios/Pernas/Leg%20Press.gif'},
+    {g:'Pernas',  n:'Cadeira Extensora',             s:3,r:12,gif:'https://www.gifdotreino.com/Exercicios/Pernas/Cadeira%20extensora.gif'},
   ]
 };
 
@@ -2052,7 +2051,7 @@ function calcStreakSemanal(){
 }
 
 function renderProgresso(){
-   if(subAbaAtiva==='treinos'){
+  if(subAbaAtiva==='treinos'){
     const semanas12=getUltimasSemanas(12);
     const labels=semanas12.map(dias=>{const d=new Date(dias[0]+'T12:00:00');return`${d.getDate()}/${d.getMonth()+1}`;});
     const pontosData=semanas12.map(dias=>getTotalTreinosSemana(dias));
@@ -2078,8 +2077,7 @@ function renderProgresso(){
     document.getElementById('stat-media-pts').textContent=media?media.toFixed(1):'—';
     document.getElementById('stat-streak-treino').textContent=calcStreakSemanal();
   }
-  
-    if(subAbaAtiva==='peso'){
+  if(subAbaAtiva==='peso'){
     const med=dados.medicoesPeso;
     const labels=med.map(m=>formatarData(m.data));
     const vals=med.map(m=>m.pesoKg);
@@ -2092,8 +2090,7 @@ function renderProgresso(){
     rev.forEach((m,i)=>{const prev=rev[i+1];let delta='';if(prev){const d=m.pesoKg-prev.pesoKg;delta=`<span class="hist-delta ${d>0?'delta-pos':'delta-neg'}">${d>0?'+':''}${d.toFixed(1)}kg</span>`;}hist+=`<div class="hist-item"><span class="hist-data">${formatarData(m.data)}</span><span class="hist-val">${m.pesoKg}kg ${delta}</span></div>`;});
     document.getElementById('hist-peso-lista').innerHTML=hist||'<div class="empty">Nenhum registro.</div>';
   }
-    
-   if(subAbaAtiva==='calorias'){
+  if(subAbaAtiva==='calorias'){
     const dias14=[];for(let i=13;i>=0;i--){const d=new Date();d.setHours(12,0,0,0);d.setDate(d.getDate()-i);dias14.push(toLocalISO(d));}
     const pesoCal=pesoMaisRecente();const metaCal=pesoCal?calcMeta(pesoCal):0;
     const calPorDia=dias14.map(iso=>{const d=dados.diarioAlimentar[iso];if(!d)return 0;return Object.values(d.refeicoes||{}).flat().reduce((s,x)=>s+(x.kcal||0),0);});
@@ -2107,9 +2104,7 @@ function renderProgresso(){
     document.getElementById('stat-media-def').textContent=mediaCal&&metaCal?'+'+(metaCal-mediaCal):'—';
     document.getElementById('stat-dias-ok').textContent=calPorDia.filter(v=>v>0&&v<=metaCal).length;
   }
-
-  
-   if(subAbaAtiva==='sono'){
+  if(subAbaAtiva==='sono'){
     const dias14=[];for(let i=13;i>=0;i--){const d=new Date();d.setHours(12,0,0,0);d.setDate(d.getDate()-i);dias14.push(toLocalISO(d));}
     const sonoPorDia=dias14.map(iso=>{const r=dados.registrosSono[iso];return r?r.horas:null;});
     const labels=dias14.map(iso=>formatarData(iso).slice(0,5));
@@ -2123,7 +2118,7 @@ function renderProgresso(){
     document.getElementById('stat-noites-reg').textContent=reg.length;
   }
 
-   if(subAbaAtiva==='proteina'){
+  if(subAbaAtiva==='proteina'){
     const metaProt=calcMetaProteina();
     document.getElementById('stat-prot-meta').textContent=metaProt||'—';
     const protHoje=calcProteinaDia(hoje());
@@ -2140,7 +2135,7 @@ function renderProgresso(){
     if(card)card.style.borderLeftColor=media>=metaProt?'var(--azul)':'var(--vermelho)';
   }
   
-      if(subAbaAtiva==='agua'){
+  if(subAbaAtiva==='agua'){
     const metaAgua=calcMetaAgua();
     const dias14=[];for(let i=13;i>=0;i--){const d=new Date();d.setHours(12,0,0,0);d.setDate(d.getDate()-i);dias14.push(toLocalISO(d));}
     const aguaPorDia=dias14.map(iso=>dados.registrosAgua[iso]||0);
@@ -2154,7 +2149,7 @@ function renderProgresso(){
     document.getElementById('stat-dias-meta-agua').textContent=comDados.filter(v=>v>=metaAgua).length;
     document.getElementById('stat-dias-agua-reg').textContent=comDados.length;
   }
-  
+}
 
 // ═══════════════════════════════
 // RENDER: BIBLIOTECA
