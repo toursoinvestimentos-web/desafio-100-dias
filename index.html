@@ -1039,30 +1039,35 @@ body{
   </div>
 </div>
 
-  <div id="sub-peso" style="display:none">
-    <div class="card">
-      <div class="card-header">Evolução do Peso (kg)</div>
-      <div class="chart-container"><canvas id="chart-peso"></canvas></div>
-    </div>
-    <div class="card">
-      <div class="card-titulo" style="margin-bottom:6px">IMC Atual</div>
-      <div id="imc-prog-val" style="font-family:var(--fonte-display);font-size:2.5em;color:var(--azul)">—</div>
-      <div id="imc-prog-class" style="font-size:0.75em;color:var(--cinza)">—</div>
-      <div class="imc-faixa" style="margin-top:12px">
-        <span class="imc-tag" style="background:rgba(59,130,246,0.12);color:var(--azul)">Abaixo &lt;18.5</span>
-        <span class="imc-tag" style="background:rgba(52,211,153,0.12);color:var(--verde)">Normal 18.5–24.9</span>
-        <span class="imc-tag" style="background:rgba(251,191,36,0.12);color:var(--amarelo)">Sobrepeso 25–29.9</span>
-        <span class="imc-tag" style="background:rgba(248,113,113,0.1);color:var(--vermelho)">Obesidade ≥30</span>
+ <div id="sub-peso" style="display:none">
+  <div class="card" id="card-peso">
+    <div class="card-header">⚖️ Peso</div>
+    <div class="stats-row">
+      <div class="stat-item">
+        <div class="stat-val" id="peso-atual-val">—</div>
+        <div class="stat-label">Peso atual</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-val" id="imc-atual-val">—</div>
+        <div class="stat-label">IMC atual</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-val" id="classificacao-imc-val">—</div>
+        <div class="stat-label">Classificação</div>
       </div>
     </div>
-    <div class="card">
-      <div class="card-titulo" style="margin-bottom:12px">Histórico de peso</div>
-      <div id="hist-peso-lista"></div>
+    <div class="chart-container"><canvas id="chart-peso"></canvas></div>
+    <div class="imc-faixa" style="display:flex; justify-content:space-between; margin-top:10px; margin-bottom:16px;">
+      <span class="imc-tag" style="background:rgba(59,130,246,0.12);color:var(--azul)">Abaixo &lt;18.5</span>
+      <span class="imc-tag" style="background:rgba(52,211,153,0.12);color:var(--verde)">Normal 18.5–24.9</span>
+      <span class="imc-tag" style="background:rgba(251,191,36,0.12);color:var(--amarelo)">Sobrepeso 25–29.9</span>
+      <span class="imc-tag" style="background:rgba(248,113,113,0.1);color:var(--vermelho)">Obesidade ≥30</span>
     </div>
-    <button class="btn btn-outline" onclick="abrirModalPeso()" style="margin-bottom:12px">Registrar peso hoje</button>
+    <button class="btn btn-outline" onclick="abrirModalPeso()" style="margin-bottom:16px">Registrar peso hoje</button>
+    <div class="card-titulo" style="margin-bottom:12px">Histórico de peso</div>
+    <div id="hist-peso-lista"></div>
   </div>
 </div>
-
 <!-- ══════════ TELA: ALIMENTOS ══════════ -->
 <div id="tela-alimentos" class="tela">
   <div class="card">
@@ -2159,32 +2164,91 @@ function renderProgresso(){
   }
 
   
-   if(subAbaAtiva==='peso'){
-    const med=dados.medicoesPeso;
-    const labels=med.map(m=>formatarData(m.data));
-    const vals=med.map(m=>m.pesoKg);
-    if(chartPeso)chartPeso.destroy();
-    const ctx=document.getElementById('chart-peso').getContext('2d');
-    chartPeso=new Chart(ctx,{type:'line',data:{labels:labels.length?labels:['—'],datasets:[{label:'Peso (kg)',data:vals.length?vals:[0],backgroundColor:'rgba(59,130,246,0.25)',borderColor:'#3b82f6',borderWidth:2.5,pointRadius:4,pointBackgroundColor:'#3b82f6',tension:0.4,fill:true}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{ticks:{color:'#5a6478',font:{size:10}},grid:{color:'rgba(255,255,255,0.04)'}},y:{ticks:{color:'#5a6478',font:{size:10}},grid:{color:'rgba(255,255,255,0.06)'}}}}});
-    const peso=pesoMaisRecente();
-    let imcCor = 'var(--cinza)';
-    if(peso && dados.perfil.alturaCm){
-      const imc = calcIMC(peso);
-      const cls = classIMC(imc);
-      document.getElementById('imc-prog-val').textContent = imc;
-      document.getElementById('imc-prog-val').style.color = cls.cor;
-      document.getElementById('imc-prog-class').textContent = cls.txt;
-      imcCor = cls.cor;
-    } else {
-      document.getElementById('imc-prog-val').textContent = '—';
-      document.getElementById('imc-prog-class').textContent = '—';
+    if(subAbaAtiva==='peso'){
+    // 1. Peso atual (novo)
+    const pesoAtual = pesoMaisRecente();
+    const pesoEl = document.getElementById('peso-atual-val');
+    if (pesoEl) {
+      pesoEl.textContent = pesoAtual ? pesoAtual + ' kg' : '—';
+      pesoEl.style.fontWeight = 'normal';
+      pesoEl.style.color = 'var(--cinza)';
     }
-    // Aplica a cor da borda do card Peso baseada no IMC
-    const cardPeso = document.querySelector('#sub-peso .card:first-child');
+    
+    // 2. IMC e classificação (mantendo os IDs originais)
+    let imcCor = 'var(--cinza)';
+    let classificacaoTexto = '—';
+    let imcValor = '—';
+    if (pesoAtual && dados.perfil.alturaCm) {
+      const imc = calcIMC(pesoAtual);
+      imcValor = imc;
+      const cls = classIMC(imc);
+      imcCor = cls.cor;
+      classificacaoTexto = cls.txt;
+    }
+    const imcEl = document.getElementById('imc-prog-val');
+    if (imcEl) {
+      imcEl.textContent = imcValor;
+      imcEl.style.fontWeight = 'normal';
+      imcEl.style.color = 'var(--cinza)';
+    }
+    const classifEl = document.getElementById('imc-prog-class');
+    if (classifEl) {
+      classifEl.textContent = classificacaoTexto;
+      classifEl.style.fontWeight = 'bold';
+      classifEl.style.color = imcCor;
+    }
+    
+    // 3. Borda do card (agora usando o ID card-peso, se existir; senão, usa o primeiro card)
+    let cardPeso = document.getElementById('card-peso');
+    if (!cardPeso) cardPeso = document.querySelector('#sub-peso .card:first-child');
     if (cardPeso) cardPeso.style.borderLeftColor = imcCor;
-    let hist='';const rev=[...med].reverse();
-    rev.forEach((m,i)=>{const prev=rev[i+1];let delta='';if(prev){const d=m.pesoKg-prev.pesoKg;delta=`<span class="hist-delta ${d>0?'delta-pos':'delta-neg'}">${d>0?'+':''}${d.toFixed(1)}kg</span>`;}hist+=`<div class="hist-item"><span class="hist-data">${formatarData(m.data)}</span><span class="hist-val">${m.pesoKg}kg ${delta}</span></div>`;});
-    document.getElementById('hist-peso-lista').innerHTML=hist||'<div class="empty">Nenhum registro.</div>';
+    
+    // 4. Gráfico de evolução do peso (mantido exatamente igual ao original)
+    const med = dados.medicoesPeso;
+    const labels = med.map(m => formatarData(m.data));
+    const vals = med.map(m => m.pesoKg);
+    if (chartPeso) chartPeso.destroy();
+    const ctx = document.getElementById('chart-peso').getContext('2d');
+    chartPeso = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: labels.length ? labels : ['—'],
+        datasets: [{
+          label: 'Peso (kg)',
+          data: vals.length ? vals : [0],
+          backgroundColor: 'rgba(59,130,246,0.25)',
+          borderColor: '#3b82f6',
+          borderWidth: 2.5,
+          pointRadius: 4,
+          pointBackgroundColor: '#3b82f6',
+          tension: 0.4,
+          fill: true
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: { legend: { display: false } },
+        scales: {
+          x: { ticks: { color: '#5a6478', font: { size: 10 } }, grid: { color: 'rgba(255,255,255,0.04)' } },
+          y: { ticks: { color: '#5a6478', font: { size: 10 } }, grid: { color: 'rgba(255,255,255,0.06)' } }
+        }
+      }
+    });
+    
+    // 5. Histórico de peso (exatamente igual ao original)
+    let hist = '';
+    const rev = [...med].reverse();
+    rev.forEach((m, i) => {
+      const prev = rev[i + 1];
+      let delta = '';
+      if (prev) {
+        const d = m.pesoKg - prev.pesoKg;
+        delta = `<span class="hist-delta ${d > 0 ? 'delta-pos' : 'delta-neg'}">${d > 0 ? '+' : ''}${d.toFixed(1)}kg</span>`;
+      }
+      hist += `<div class="hist-item"><span class="hist-data">${formatarData(m.data)}</span><span class="hist-val">${m.pesoKg}kg ${delta}</span></div>`;
+    });
+    document.getElementById('hist-peso-lista').innerHTML = hist || '<div class="empty">Nenhum registro.</div>';
   }
   
   if(subAbaAtiva==='calorias'){
