@@ -911,18 +911,32 @@ body{
 <!-- ══════════ TELA: PROGRESSO ══════════ -->
 <div id="tela-progresso" class="tela">
   <div class="toggle-abas" style="flex-wrap:wrap">
-    <button class="toggle-aba ativa" onclick="mudarSubAba('treinos',this)" style="flex:0 0 auto">Treinos</button>
-    <button class="toggle-aba" onclick="mudarSubAba('sono',this)" style="flex:0 0 auto">Sono</button>
-    <button class="toggle-aba" onclick="mudarSubAba('calorias',this)" style="flex:0 0 auto">Cal</button>
-    <button class="toggle-aba" onclick="mudarSubAba('proteina',this)" style="flex:0 0 auto">Prot</button>
-    <button class="toggle-aba" onclick="mudarSubAba('agua',this)" style="flex:0 0 auto">Água</button>
-    <button class="toggle-aba" onclick="mudarSubAba('peso',this)" style="flex:0 0 auto">Peso</button>
+    <button class="toggle-aba ativa" onclick="mudarSubAba('treinos',this)" style="flex:0 0 auto">💪 Treino</button>
+    <button class="toggle-aba" onclick="mudarSubAba('sono',this)" style="flex:0 0 auto">💤 Sono</button>
+    <button class="toggle-aba" onclick="mudarSubAba('calorias',this)" style="flex:0 0 auto">🔥 Cal</button>
+    <button class="toggle-aba" onclick="mudarSubAba('proteina',this)" style="flex:0 0 auto">🥩 Prot</button>
+    <button class="toggle-aba" onclick="mudarSubAba('agua',this)" style="flex:0 0 auto">💧 Água</button>
+    <button class="toggle-aba" onclick="mudarSubAba('peso',this)" style="flex:0 0 auto">⚖️ Peso</button>
   </div>
 
-  <div id="sub-treinos">
-    <div class="card">
-      <div class="card-header">Pontos por semana (12 semanas) — meta: 5</div>
-      <div style="display:flex;gap:0.7px;flex-wrap:wrap;font-size:0.72em;margin-bottom:8px">
+<div id="sub-treinos">
+    <div class="card" id="card-treinos">
+      <div class="card-header">💪 Treino semanal</div>
+      <div class="stats-row">
+        <div class="stat-item">
+          <div class="stat-val" id="treino-meta-semana">—</div>
+          <div class="stat-label">Meta/semana</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-val" id="treino-pontos-semana">—</div>
+          <div class="stat-label">Esta semana</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-val" id="treino-media-4sem">—</div>
+          <div class="stat-label">Média 4 sem.</div>
+        </div>
+      </div>
+      <div style="display:flex;gap:6px;flex-wrap:wrap;font-size:0.68em;margin:10px 0 4px">
         <span style="padding:3px 8px;border-radius:10px;background:rgba(59,130,246,0.15);color:var(--azul);font-weight:700">Meta ✓ (5+)</span>
         <span style="padding:3px 8px;border-radius:10px;background:rgba(52,211,153,0.12);color:var(--verde);font-weight:700">Quase (4)</span>
         <span style="padding:3px 8px;border-radius:10px;background:rgba(251,191,36,0.12);color:var(--amarelo);font-weight:700">Parcial (2-3)</span>
@@ -930,46 +944,53 @@ body{
       </div>
       <div class="chart-container"><canvas id="chart-treinos"></canvas></div>
     </div>
-    <div class="card">
-      <div class="stats-row">
-        <div class="stat-item"><div class="stat-val" id="stat-semanas-meta">0</div><div class="stat-label">semanas 5pts</div></div>
-        <div class="stat-item"><div class="stat-val" id="stat-media-pts">—</div><div class="stat-label">pts/semana</div></div>
-        <div class="stat-item"><div class="stat-val" id="stat-streak-treino" style="color:var(--verde)">0</div><div class="stat-label">sem. seguidas</div></div>
-      </div>
-    </div>
     <div class="dica-saude">
       💡 <strong>OMS:</strong> Adultos devem praticar ao menos 150 min de atividade moderada por semana. 5 sessões combinando musculação, natação e cardio é um ótimo equilíbrio para o desafio.
     </div>
   </div>
 
-  <div id="sub-sono" style="display:none">
-    <div class="card">
-      <div class="card-header">Sono por noite (14 dias)</div>
-      <div class="chart-container"><canvas id="chart-sono"></canvas></div>
-    </div>
-    <div class="card">
+ <div id="sub-sono" style="display:none">
+    <div class="card" id="card-sono">
+      <div class="card-header">💤 Sono</div>
       <div class="stats-row">
-        <div class="stat-item"><div class="stat-val" id="stat-media-sono" style="color:var(--azul)">—</div><div class="stat-label">horas/noite</div></div>
-        <div class="stat-item"><div class="stat-val" id="stat-noites-7h">—</div><div class="stat-label">noites ≥ 7h</div></div>
-        <div class="stat-item"><div class="stat-val" id="stat-noites-reg">—</div><div class="stat-label">registradas</div></div>
+        <div class="stat-item">
+          <div class="stat-val" id="sono-meta">7h</div>
+          <div class="stat-label">Meta/noite</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-val" id="sono-hoje">—</div>
+          <div class="stat-label">Esta noite</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-val" id="sono-media-30">—</div>
+          <div class="stat-label">Média 30 dias</div>
+        </div>
       </div>
+      <div class="chart-container"><canvas id="chart-sono"></canvas></div>
     </div>
     <div class="dica-saude">
       💡 <strong>OMS:</strong> Adultos precisam de 7 a 9 horas de sono por noite. Durante o sono profundo o organismo libera GH, repara tecido muscular e consolida memória.
     </div>
   </div>
 
-  <div id="sub-calorias" style="display:none">
-    <div class="card">
-      <div class="card-header">Calorias vs Meta (14 dias)</div>
-      <div class="chart-container"><canvas id="chart-cal"></canvas></div>
-    </div>
-    <div class="card">
+ <div id="sub-calorias" style="display:none">
+    <div class="card" id="card-calorias">
+      <div class="card-header">🔥 Calorias</div>
       <div class="stats-row">
-        <div class="stat-item"><div class="stat-val" id="stat-media-cal">—</div><div class="stat-label">kcal/dia</div></div>
-        <div class="stat-item"><div class="stat-val" id="stat-media-def" style="color:var(--verde)">—</div><div class="stat-label">déficit méd</div></div>
-        <div class="stat-item"><div class="stat-val" id="stat-dias-ok">—</div><div class="stat-label">dias em déficit</div></div>
+        <div class="stat-item">
+          <div class="stat-val" id="cal-meta">—</div>
+          <div class="stat-label">Meta/dia</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-val" id="cal-hoje">—</div>
+          <div class="stat-label">Hoje</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-val" id="cal-media-30">—</div>
+          <div class="stat-label">Média 30 dias</div>
+        </div>
       </div>
+      <div class="chart-container"><canvas id="chart-cal"></canvas></div>
     </div>
     <div class="dica-saude">
       💡 <strong>OMS/EFSA:</strong> Um déficit de 500 kcal/dia gera ~0,5 kg de perda semanal — ritmo seguro e sustentável.
@@ -977,55 +998,71 @@ body{
   </div>
 
 <div id="sub-proteina" style="display:none">
-    <div class="card" id="card-proteina-borda">
-      <div class="card-header">🥩 Meta Proteica Diária</div>
+    <div class="card" id="card-proteina">
+      <div class="card-header">🥩 Proteína</div>
       <div class="stats-row">
         <div class="stat-item">
-          <div class="stat-val" id="stat-prot-meta" style="color:var(--azul)">—</div>
-          <div class="stat-label">meta/dia (g)</div>
+          <div class="stat-val" id="prot-meta">—</div>
+          <div class="stat-label">Meta/dia</div>
         </div>
         <div class="stat-item">
-          <div class="stat-val" id="stat-prot-hoje">—</div>
-          <div class="stat-label">consumido hoje</div>
+          <div class="stat-val" id="prot-hoje">—</div>
+          <div class="stat-label">Hoje</div>
         </div>
         <div class="stat-item">
-          <div class="stat-val" id="stat-prot-media">—</div>
-          <div class="stat-label">média 30 dias</div>
+          <div class="stat-val" id="prot-media-30">—</div>
+          <div class="stat-label">Média 30 dias</div>
         </div>
       </div>
-      <div style="margin-top:8px;font-size:0.65em;color:var(--cinza);text-align:center">média baseada nos últimos 30 dias registrados</div>
+      <div class="chart-container"><canvas id="chart-proteina"></canvas></div>
     </div>
     <div class="dica-saude">
       💡 <strong>ISSN/ACSM:</strong> Para quem pratica musculação e busca composição corporal ideal, recomenda-se entre 1,4 g e 2,0 g de proteína por kg/dia. A proteína é essencial para a síntese muscular, recuperação pós-treino, saciedade e manutenção da massa magra durante o déficit calórico.
     </div>
   </div>
   
-  <div id="sub-agua" style="display:none">
-    <div class="card">
-      <div class="card-header">Água diária (14 dias)</div>
-      <div class="chart-container"><canvas id="chart-agua"></canvas></div>
-    </div>
-    <div class="card">
+<div id="sub-agua" style="display:none">
+    <div class="card" id="card-agua">
+      <div class="card-header">💧 Água</div>
       <div class="stats-row">
-        <div class="stat-item"><div class="stat-val" id="stat-media-agua" style="color:#38bdf8">—</div><div class="stat-label">litros/dia</div></div>
-        <div class="stat-item"><div class="stat-val" id="stat-dias-meta-agua">—</div><div class="stat-label">dias ≥ meta</div></div>
-        <div class="stat-item"><div class="stat-val" id="stat-dias-agua-reg">—</div><div class="stat-label">dias registrados</div></div>
+        <div class="stat-item">
+          <div class="stat-val" id="agua-meta">—</div>
+          <div class="stat-label">Meta/dia</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-val" id="agua-hoje">—</div>
+          <div class="stat-label">Hoje</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-val" id="agua-media-30">—</div>
+          <div class="stat-label">Média 30 dias</div>
+        </div>
       </div>
+      <div class="chart-container"><canvas id="chart-agua"></canvas></div>
     </div>
     <div class="dica-saude">
       💡 <strong>EFSA:</strong> A recomendação é ~35 ml por kg de peso. Hidratação adequada melhora o desempenho nos treinos.
     </div>
   </div>
 
-  <div id="sub-peso" style="display:none">
-    <div class="card">
-      <div class="card-header">Evolução do Peso (kg)</div>
+<div id="sub-peso" style="display:none">
+    <div class="card" id="card-peso">
+      <div class="card-header">⚖️ Peso & IMC</div>
+      <div class="stats-row">
+        <div class="stat-item">
+          <div class="stat-val" id="peso-atual-val">—</div>
+          <div class="stat-label">Peso atual</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-val" id="imc-atual-val">—</div>
+          <div class="stat-label">IMC</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-val" id="classificacao-imc-val" style="font-size:0.7em">—</div>
+          <div class="stat-label">Classificação</div>
+        </div>
+      </div>
       <div class="chart-container"><canvas id="chart-peso"></canvas></div>
-    </div>
-    <div class="card">
-      <div class="card-titulo" style="margin-bottom:6px">IMC Atual</div>
-      <div id="imc-prog-val" style="font-family:var(--fonte-display);font-size:2.5em;color:var(--azul)">—</div>
-      <div id="imc-prog-class" style="font-size:0.75em;color:var(--cinza)">—</div>
       <div class="imc-faixa" style="margin-top:12px">
         <span class="imc-tag" style="background:rgba(59,130,246,0.12);color:var(--azul)">Abaixo &lt;18.5</span>
         <span class="imc-tag" style="background:rgba(52,211,153,0.12);color:var(--verde)">Normal 18.5–24.9</span>
@@ -1033,13 +1070,12 @@ body{
         <span class="imc-tag" style="background:rgba(248,113,113,0.1);color:var(--vermelho)">Obesidade ≥30</span>
       </div>
     </div>
+    <button class="btn btn-outline" onclick="abrirModalPeso()" style="margin-top:12px;margin-bottom:12px">⚖️ Registrar peso hoje</button>
     <div class="card">
-      <div class="card-titulo" style="margin-bottom:12px">Histórico de peso</div>
+      <div class="card-header">Histórico de peso</div>
       <div id="hist-peso-lista"></div>
     </div>
-    <button class="btn btn-outline" onclick="abrirModalPeso()" style="margin-bottom:12px">Registrar peso hoje</button>
   </div>
-</div>
 
 <!-- ══════════ TELA: ALIMENTOS ══════════ -->
 <div id="tela-alimentos" class="tela">
@@ -2033,7 +2069,7 @@ function mudarSubAba(sub,el){
   subAbaAtiva=sub;
   document.querySelectorAll('#tela-progresso .toggle-aba').forEach(a=>a.classList.remove('ativa'));
   el.classList.add('ativa');
- ['treinos','sono','calorias','proteina','agua','peso'].forEach(s=>{
+  ['treinos','sono','calorias','proteina','agua','peso'].forEach(s=>{
     const el2=document.getElementById('sub-'+s);
     if(el2)el2.style.display=s===sub?'block':'none';
   });
@@ -2052,105 +2088,217 @@ function calcStreakSemanal(){
 
 function renderProgresso(){
   if(subAbaAtiva==='treinos'){
+    const META_SEMANA=5;
+    // Meta
+    const metaEl=document.getElementById('treino-meta-semana');
+    metaEl.textContent=META_SEMANA+' pts';
+    metaEl.style.color='var(--cinza)';
+    // Pontos semana atual
+    const diasSemAtual=getDiasSemanaAtual();
+    const hojeStr=hoje();
+    let pontosSemana=0;
+    diasSemAtual.forEach(iso=>{if(iso<=hojeStr&&getTreinosDia(iso).length>0)pontosSemana++;});
+    const pontosEl=document.getElementById('treino-pontos-semana');
+    pontosEl.textContent=pontosSemana+' pts';
+    pontosEl.style.color=pontosSemana>=META_SEMANA?'var(--azul)':pontosSemana>=3?'var(--amarelo)':'var(--cinza)';
+    // Média 4 semanas anteriores
+    const semanas4=[];
+    for(let w=1;w<=4;w++)semanas4.push(getTotalTreinosSemana(getSemanaOffset(w)));
+    const media4=semanas4.reduce((a,b)=>a+b,0)/4;
+    const mediaEl=document.getElementById('treino-media-4sem');
+    mediaEl.textContent=media4>0?media4.toFixed(1)+' pts':'—';
+    mediaEl.style.fontWeight='bold';
+    const cardTreino=document.getElementById('card-treinos');
+    if(media4>=META_SEMANA){cardTreino.style.borderLeftColor='var(--azul)';mediaEl.style.color='var(--azul)';}
+    else if(media4>0){cardTreino.style.borderLeftColor='var(--vermelho)';mediaEl.style.color='var(--vermelho)';}
+    else{cardTreino.style.borderLeftColor='var(--cinza2)';mediaEl.style.color='var(--cinza)';}
+    // Gráfico 12 semanas
     const semanas12=getUltimasSemanas(12);
-    const labels=semanas12.map(dias=>{const d=new Date(dias[0]+'T12:00:00');return`${d.getDate()}/${d.getMonth()+1}`;});
+    const labelsT=semanas12.map(dias=>{const d=new Date(dias[0]+'T12:00:00');return`${d.getDate()}/${d.getMonth()+1}`;});
     const pontosData=semanas12.map(dias=>getTotalTreinosSemana(dias));
-    const ctx=document.getElementById('chart-treinos').getContext('2d');
+    const ctxT=document.getElementById('chart-treinos').getContext('2d');
     if(chartTreinos)chartTreinos.destroy();
-    chartTreinos=new Chart(ctx,{type:'bar',data:{labels,datasets:[{data:pontosData,backgroundColor:pontosData.map(v=>{
-      if(v>=META_PONTOS)return'rgba(59,130,246,0.55)';
-      if(v===4)return'rgba(52,211,153,0.5)';
-      if(v>=2)return'rgba(251,191,36,0.4)';
-      if(v>0)return'rgba(248,113,113,0.4)';
-      return'rgba(90,100,120,0.15)';
-    }),borderColor:pontosData.map(v=>{
-      if(v>=META_PONTOS)return'#3b82f6';
-      if(v===4)return'#34d399';
-      if(v>=2)return'#fbbf24';
-      if(v>0)return'#f87171';
-      return'transparent';
-    }),borderWidth:1.5,borderRadius:5}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{ticks:{color:'#5a6478',font:{size:9}},grid:{display:false}},y:{min:0,max:Math.max(6,...pontosData),ticks:{color:'#5a6478',font:{size:10},stepSize:1},grid:{color:'rgba(255,255,255,0.05)'}}}}});
-    const comDados=pontosData.filter(v=>v>0);
-    const media=comDados.length?comDados.reduce((a,b)=>a+b,0)/comDados.length:0;
-    const semanasOk=pontosData.filter(v=>v>=META_PONTOS).length;
-    document.getElementById('stat-semanas-meta').textContent=semanasOk;
-    document.getElementById('stat-media-pts').textContent=media?media.toFixed(1):'—';
-    document.getElementById('stat-streak-treino').textContent=calcStreakSemanal();
+    chartTreinos=new Chart(ctxT,{type:'bar',data:{labels:labelsT,datasets:[{data:pontosData,backgroundColor:pontosData.map(v=>v>=META_SEMANA?'rgba(59,130,246,0.55)':v===4?'rgba(52,211,153,0.5)':v>=2?'rgba(251,191,36,0.4)':v>0?'rgba(248,113,113,0.4)':'rgba(90,100,120,0.15)'),borderColor:pontosData.map(v=>v>=META_SEMANA?'#3b82f6':v===4?'#34d399':v>=2?'#fbbf24':v>0?'#f87171':'transparent'),borderWidth:1.5,borderRadius:5}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{ticks:{color:'#5a6478',font:{size:9}},grid:{display:false}},y:{min:0,max:Math.max(6,...pontosData),ticks:{color:'#5a6478',font:{size:10},stepSize:1},grid:{color:'rgba(255,255,255,0.05)'}}}}});
   }
-  if(subAbaAtiva==='peso'){
-    const med=dados.medicoesPeso;
-    const labels=med.map(m=>formatarData(m.data));
-    const vals=med.map(m=>m.pesoKg);
-    if(chartPeso)chartPeso.destroy();
-    const ctx=document.getElementById('chart-peso').getContext('2d');
-    chartPeso=new Chart(ctx,{type:'line',data:{labels:labels.length?labels:['—'],datasets:[{label:'Peso (kg)',data:vals.length?vals:[0],backgroundColor:'rgba(59,130,246,0.25)',borderColor:'#3b82f6',borderWidth:2.5,pointRadius:4,pointBackgroundColor:'#3b82f6',tension:0.4,fill:true}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{ticks:{color:'#5a6478',font:{size:10}},grid:{color:'rgba(255,255,255,0.04)'}},y:{ticks:{color:'#5a6478',font:{size:10}},grid:{color:'rgba(255,255,255,0.06)'}}}}});
-    const peso=pesoMaisRecente();
-    if(peso&&dados.perfil.alturaCm){const imc=calcIMC(peso);const cls=classIMC(imc);document.getElementById('imc-prog-val').textContent=imc;document.getElementById('imc-prog-val').style.color=cls.cor;document.getElementById('imc-prog-class').textContent=cls.txt;}
-    let hist='';const rev=[...med].reverse();
-    rev.forEach((m,i)=>{const prev=rev[i+1];let delta='';if(prev){const d=m.pesoKg-prev.pesoKg;delta=`<span class="hist-delta ${d>0?'delta-pos':'delta-neg'}">${d>0?'+':''}${d.toFixed(1)}kg</span>`;}hist+=`<div class="hist-item"><span class="hist-data">${formatarData(m.data)}</span><span class="hist-val">${m.pesoKg}kg ${delta}</span></div>`;});
-    document.getElementById('hist-peso-lista').innerHTML=hist||'<div class="empty">Nenhum registro.</div>';
-  }
-  if(subAbaAtiva==='calorias'){
-    const dias14=[];for(let i=13;i>=0;i--){const d=new Date();d.setHours(12,0,0,0);d.setDate(d.getDate()-i);dias14.push(toLocalISO(d));}
-    const pesoCal=pesoMaisRecente();const metaCal=pesoCal?calcMeta(pesoCal):0;
-    const calPorDia=dias14.map(iso=>{const d=dados.diarioAlimentar[iso];if(!d)return 0;return Object.values(d.refeicoes||{}).flat().reduce((s,x)=>s+(x.kcal||0),0);});
-    const labels=dias14.map(iso=>formatarData(iso).slice(0,5));
-    const ctx=document.getElementById('chart-cal').getContext('2d');
-    if(chartCal)chartCal.destroy();
-    chartCal=new Chart(ctx,{type:'bar',data:{labels,datasets:[{data:calPorDia,backgroundColor:calPorDia.map(v=>v>metaCal?'rgba(248,113,113,0.5)':'rgba(59,130,246,0.45)'),borderColor:calPorDia.map(v=>v>metaCal?'#f87171':'#3b82f6'),borderWidth:1.5,borderRadius:5}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{ticks:{color:'#5a6478',font:{size:9}},grid:{display:false}},y:{ticks:{color:'#5a6478',font:{size:10}},grid:{color:'rgba(255,255,255,0.05)'}}}}});
-    const diasComDados=calPorDia.filter(v=>v>0);
-    const mediaCal=diasComDados.length?Math.round(diasComDados.reduce((a,b)=>a+b,0)/diasComDados.length):0;
-    document.getElementById('stat-media-cal').textContent=mediaCal||'—';
-    document.getElementById('stat-media-def').textContent=mediaCal&&metaCal?'+'+(metaCal-mediaCal):'—';
-    document.getElementById('stat-dias-ok').textContent=calPorDia.filter(v=>v>0&&v<=metaCal).length;
-  }
+
   if(subAbaAtiva==='sono'){
-    const dias14=[];for(let i=13;i>=0;i--){const d=new Date();d.setHours(12,0,0,0);d.setDate(d.getDate()-i);dias14.push(toLocalISO(d));}
-    const sonoPorDia=dias14.map(iso=>{const r=dados.registrosSono[iso];return r?r.horas:null;});
-    const labels=dias14.map(iso=>formatarData(iso).slice(0,5));
-    const ctx=document.getElementById('chart-sono').getContext('2d');
+    const META_SONO=7;
+    // Meta (fixa)
+    document.getElementById('sono-meta').textContent=META_SONO+'h';
+    document.getElementById('sono-meta').style.color='var(--cinza)';
+    // Sono hoje
+    const sonoHoje=dados.registrosSono[hoje()];
+    const hojeEl=document.getElementById('sono-hoje');
+    if(sonoHoje&&sonoHoje.horas){
+      const h=Math.floor(sonoHoje.horas);const m=Math.round((sonoHoje.horas-h)*60);
+      hojeEl.textContent=h+'h'+(m>0?m+'m':'');
+      hojeEl.style.color=sonoHoje.horas>=META_SONO?'var(--azul)':sonoHoje.horas>=5?'var(--amarelo)':'var(--vermelho)';
+    }else{hojeEl.textContent='—';hojeEl.style.color='var(--cinza)';}
+    // Média 30 dias
+    const ultS=[];for(let i=0;i<30;i++){const d=new Date();d.setHours(12,0,0,0);d.setDate(d.getDate()-i);ultS.push(toLocalISO(d));}
+    const valsS=ultS.map(iso=>{const r=dados.registrosSono[iso];return r?r.horas:null;}).filter(v=>v!==null);
+    const media30S=valsS.length?valsS.reduce((a,b)=>a+b,0)/valsS.length:0;
+    const media30ElS=document.getElementById('sono-media-30');
+    media30ElS.textContent=media30S?media30S.toFixed(1)+'h':'—';
+    media30ElS.style.fontWeight='bold';
+    const cardSono=document.getElementById('card-sono');
+    if(media30S>=META_SONO){cardSono.style.borderLeftColor='var(--azul)';media30ElS.style.color='var(--azul)';}
+    else if(media30S>0){cardSono.style.borderLeftColor='var(--vermelho)';media30ElS.style.color='var(--vermelho)';}
+    else{cardSono.style.borderLeftColor='var(--cinza2)';media30ElS.style.color='var(--cinza)';}
+    // Gráfico 14 dias
+    const diasS=[];for(let i=13;i>=0;i--){const d=new Date();d.setHours(12,0,0,0);d.setDate(d.getDate()-i);diasS.push(toLocalISO(d));}
+    const sonoPorDia=diasS.map(iso=>{const r=dados.registrosSono[iso];return r?r.horas:null;});
+    const labelsS=diasS.map(iso=>formatarData(iso).slice(0,5));
+    const ctxS=document.getElementById('chart-sono').getContext('2d');
     if(chartSono)chartSono.destroy();
-    chartSono=new Chart(ctx,{type:'bar',data:{labels,datasets:[{data:sonoPorDia.map(v=>v||0),backgroundColor:sonoPorDia.map(v=>v===null?'rgba(90,100,120,0.2)':v>=7?'rgba(59,130,246,0.5)':v>=5?'rgba(251,191,36,0.4)':'rgba(248,113,113,0.4)'),borderColor:sonoPorDia.map(v=>v===null?'transparent':v>=7?'#3b82f6':v>=5?'#fbbf24':'#f87171'),borderWidth:1.5,borderRadius:5}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{ticks:{color:'#5a6478',font:{size:9}},grid:{display:false}},y:{min:0,max:12,ticks:{color:'#5a6478',font:{size:10},callback:v=>v+'h'},grid:{color:'rgba(255,255,255,0.05)'}}}}});
-    const reg=sonoPorDia.filter(v=>v!==null);
-    const media=reg.length?reg.reduce((a,b)=>a+b,0)/reg.length:0;
-    document.getElementById('stat-media-sono').textContent=media?media.toFixed(1)+'h':'—';
-    document.getElementById('stat-noites-7h').textContent=reg.filter(v=>v>=7).length;
-    document.getElementById('stat-noites-reg').textContent=reg.length;
+    chartSono=new Chart(ctxS,{type:'bar',data:{labels:labelsS,datasets:[{data:sonoPorDia.map(v=>v||0),backgroundColor:sonoPorDia.map(v=>v===null?'rgba(90,100,120,0.2)':v>=7?'rgba(59,130,246,0.5)':v>=5?'rgba(251,191,36,0.4)':'rgba(248,113,113,0.4)'),borderColor:sonoPorDia.map(v=>v===null?'transparent':v>=7?'#3b82f6':v>=5?'#fbbf24':'#f87171'),borderWidth:1.5,borderRadius:5}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{ticks:{color:'#5a6478',font:{size:9}},grid:{display:false}},y:{min:0,max:12,ticks:{color:'#5a6478',font:{size:10},callback:v=>v+'h'},grid:{color:'rgba(255,255,255,0.05)'}}}}});
+  }
+
+  if(subAbaAtiva==='calorias'){
+    const pesoCal=pesoMaisRecente();
+    const metaCal=pesoCal?calcMeta(pesoCal):0;
+    // Meta
+    const metaElC=document.getElementById('cal-meta');
+    metaElC.textContent=metaCal?metaCal+' kcal':'—';
+    metaElC.style.color='var(--cinza)';
+    // Hoje
+    const diarioHoje=dados.diarioAlimentar[hoje()]||{refeicoes:{}};
+    const totalKcal=Object.values(diarioHoje.refeicoes).flat().reduce((s,x)=>s+(x.kcal||0),0);
+    const hojeElC=document.getElementById('cal-hoje');
+    hojeElC.textContent=totalKcal?totalKcal+' kcal':'0 kcal';
+    hojeElC.style.color=totalKcal>0&&metaCal&&totalKcal<=metaCal?'var(--azul)':totalKcal>metaCal?'var(--vermelho)':'var(--cinza)';
+    // Média 30 dias
+    const ultC=[];for(let i=0;i<30;i++){const d=new Date();d.setHours(12,0,0,0);d.setDate(d.getDate()-i);ultC.push(toLocalISO(d));}
+    const valsC=ultC.map(iso=>{const d=dados.diarioAlimentar[iso];if(!d)return null;return Object.values(d.refeicoes||{}).flat().reduce((s,x)=>s+(x.kcal||0),0);}).filter(v=>v!==null);
+    const media30C=valsC.length?Math.round(valsC.reduce((a,b)=>a+b,0)/valsC.length):0;
+    const media30ElC=document.getElementById('cal-media-30');
+    media30ElC.textContent=media30C?media30C+' kcal':'—';
+    media30ElC.style.fontWeight='bold';
+    const cardCal=document.getElementById('card-calorias');
+    if(media30C&&metaCal){
+      if(media30C<=metaCal){cardCal.style.borderLeftColor='var(--azul)';media30ElC.style.color='var(--azul)';}
+      else{cardCal.style.borderLeftColor='var(--vermelho)';media30ElC.style.color='var(--vermelho)';}
+    }else{cardCal.style.borderLeftColor='var(--cinza2)';media30ElC.style.color='var(--cinza)';}
+    // Gráfico 14 dias
+    const diasC=[];for(let i=13;i>=0;i--){const d=new Date();d.setHours(12,0,0,0);d.setDate(d.getDate()-i);diasC.push(toLocalISO(d));}
+    const calPorDia=diasC.map(iso=>{const d=dados.diarioAlimentar[iso];if(!d)return 0;return Object.values(d.refeicoes||{}).flat().reduce((s,x)=>s+(x.kcal||0),0);});
+    const labelsC=diasC.map(iso=>formatarData(iso).slice(0,5));
+    const ctxC=document.getElementById('chart-cal').getContext('2d');
+    if(chartCal)chartCal.destroy();
+    chartCal=new Chart(ctxC,{type:'bar',data:{labels:labelsC,datasets:[{data:calPorDia,backgroundColor:calPorDia.map(v=>v>metaCal?'rgba(248,113,113,0.5)':'rgba(59,130,246,0.45)'),borderColor:calPorDia.map(v=>v>metaCal?'#f87171':'#3b82f6'),borderWidth:1.5,borderRadius:5}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{ticks:{color:'#5a6478',font:{size:9}},grid:{display:false}},y:{ticks:{color:'#5a6478',font:{size:10}},grid:{color:'rgba(255,255,255,0.05)'}}}}});
   }
 
   if(subAbaAtiva==='proteina'){
     const metaProt=calcMetaProteina();
-    document.getElementById('stat-prot-meta').textContent=metaProt||'—';
+    // Meta
+    const metaElP=document.getElementById('prot-meta');
+    metaElP.textContent=metaProt?metaProt+' g':'—';
+    metaElP.style.color='var(--cinza)';
+    // Hoje
     const protHoje=calcProteinaDia(hoje());
-    const protHojeEl=document.getElementById('stat-prot-hoje');
-    protHojeEl.textContent=protHoje?protHoje+'g':'0g';
-    protHojeEl.style.color=protHoje>=metaProt?'var(--verde)':protHoje>0?'var(--amarelo)':'var(--cinza)';
-    const dias30=[];for(let i=0;i<30;i++){const d=new Date();d.setHours(12,0,0,0);d.setDate(d.getDate()-i);dias30.push(toLocalISO(d));}
-    const protDias=dias30.map(iso=>calcProteinaDia(iso)).filter(v=>v>0);
-    const media=protDias.length?Math.round(protDias.reduce((a,b)=>a+b,0)/protDias.length):0;
-    const mediaEl=document.getElementById('stat-prot-media');
-    mediaEl.textContent=media?media+'g':'—';
-    mediaEl.style.color=media>=metaProt?'var(--azul)':'var(--vermelho)';
-    const card=document.getElementById('card-proteina-borda');
-    if(card)card.style.borderLeftColor=media>=metaProt?'var(--azul)':'var(--vermelho)';
+    const hojeElP=document.getElementById('prot-hoje');
+    hojeElP.textContent=protHoje?protHoje+' g':'0 g';
+    hojeElP.style.color=protHoje>=metaProt&&protHoje>0?'var(--azul)':protHoje>0?'var(--amarelo)':'var(--cinza)';
+    // Média 30 dias
+    const ultP=[];for(let i=0;i<30;i++){const d=new Date();d.setHours(12,0,0,0);d.setDate(d.getDate()-i);ultP.push(toLocalISO(d));}
+    const valsP=ultP.map(iso=>calcProteinaDia(iso)).filter(v=>v>0);
+    const media30P=valsP.length?Math.round(valsP.reduce((a,b)=>a+b,0)/valsP.length):0;
+    const media30ElP=document.getElementById('prot-media-30');
+    media30ElP.textContent=media30P?media30P+' g':'—';
+    media30ElP.style.fontWeight='bold';
+    const cardProt=document.getElementById('card-proteina');
+    if(media30P&&metaProt){
+      if(media30P>=metaProt){cardProt.style.borderLeftColor='var(--azul)';media30ElP.style.color='var(--azul)';}
+      else{cardProt.style.borderLeftColor='var(--vermelho)';media30ElP.style.color='var(--vermelho)';}
+    }else{cardProt.style.borderLeftColor='var(--cinza2)';media30ElP.style.color='var(--cinza)';}
+    // Gráfico 14 dias
+    const diasP=[];for(let i=13;i>=0;i--){const d=new Date();d.setHours(12,0,0,0);d.setDate(d.getDate()-i);diasP.push(toLocalISO(d));}
+    const protPorDia=diasP.map(iso=>calcProteinaDia(iso));
+    const labelsP=diasP.map(iso=>formatarData(iso).slice(0,5));
+    const ctxP=document.getElementById('chart-proteina').getContext('2d');
+    if(window.chartProteina)window.chartProteina.destroy();
+    window.chartProteina=new Chart(ctxP,{type:'bar',data:{labels:labelsP,datasets:[{data:protPorDia,backgroundColor:protPorDia.map(v=>v>=metaProt&&v>0?'rgba(59,130,246,0.55)':'rgba(248,113,113,0.45)'),borderColor:protPorDia.map(v=>v>=metaProt&&v>0?'#3b82f6':'#f87171'),borderWidth:1.5,borderRadius:5}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{ticks:{color:'#5a6478',font:{size:9}},grid:{display:false}},y:{ticks:{color:'#5a6478',font:{size:10},callback:v=>v+'g'},grid:{color:'rgba(255,255,255,0.05)'}}}}});
   }
-  
+
   if(subAbaAtiva==='agua'){
     const metaAgua=calcMetaAgua();
-    const dias14=[];for(let i=13;i>=0;i--){const d=new Date();d.setHours(12,0,0,0);d.setDate(d.getDate()-i);dias14.push(toLocalISO(d));}
-    const aguaPorDia=dias14.map(iso=>dados.registrosAgua[iso]||0);
-    const labels=dias14.map(iso=>formatarData(iso).slice(0,5));
-    const ctx=document.getElementById('chart-agua').getContext('2d');
+    // Meta
+    const metaElA=document.getElementById('agua-meta');
+    metaElA.textContent=metaAgua?(metaAgua/1000).toFixed(1)+'L':'—';
+    metaElA.style.color='var(--cinza)';
+    // Hoje
+    const aguaHoje=dados.registrosAgua[hoje()]||0;
+    const hojeElA=document.getElementById('agua-hoje');
+    hojeElA.textContent=aguaHoje?(aguaHoje/1000).toFixed(1)+'L':'0L';
+    hojeElA.style.color=aguaHoje>=metaAgua&&aguaHoje>0?'var(--azul)':aguaHoje>0?'var(--amarelo)':'var(--cinza)';
+    // Média 30 dias
+    const ultA=[];for(let i=0;i<30;i++){const d=new Date();d.setHours(12,0,0,0);d.setDate(d.getDate()-i);ultA.push(toLocalISO(d));}
+    const valsA=ultA.map(iso=>dados.registrosAgua[iso]||0).filter(v=>v>0);
+    const media30A=valsA.length?valsA.reduce((a,b)=>a+b,0)/valsA.length:0;
+    const media30ElA=document.getElementById('agua-media-30');
+    media30ElA.textContent=media30A?(media30A/1000).toFixed(1)+'L':'—';
+    media30ElA.style.fontWeight='bold';
+    const cardAgua=document.getElementById('card-agua');
+    if(media30A&&metaAgua){
+      if(media30A>=metaAgua){cardAgua.style.borderLeftColor='var(--azul)';media30ElA.style.color='var(--azul)';}
+      else{cardAgua.style.borderLeftColor='var(--vermelho)';media30ElA.style.color='var(--vermelho)';}
+    }else{cardAgua.style.borderLeftColor='var(--cinza2)';media30ElA.style.color='var(--cinza)';}
+    // Gráfico 14 dias
+    const diasA=[];for(let i=13;i>=0;i--){const d=new Date();d.setHours(12,0,0,0);d.setDate(d.getDate()-i);diasA.push(toLocalISO(d));}
+    const aguaPorDia=diasA.map(iso=>dados.registrosAgua[iso]||0);
+    const labelsA=diasA.map(iso=>formatarData(iso).slice(0,5));
+    const ctxA=document.getElementById('chart-agua').getContext('2d');
     if(chartAgua)chartAgua.destroy();
-    chartAgua=new Chart(ctx,{type:'bar',data:{labels,datasets:[{data:aguaPorDia,backgroundColor:aguaPorDia.map(v=>v>=metaAgua?'rgba(56,189,248,0.55)':'rgba(14,165,233,0.35)'),borderColor:aguaPorDia.map(v=>v>=metaAgua?'#38bdf8':'#0ea5e9'),borderWidth:1.5,borderRadius:5}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{ticks:{color:'#5a6478',font:{size:9}},grid:{display:false}},y:{ticks:{color:'#5a6478',font:{size:10},callback:v=>v>=1000?(v/1000)+'L':v},grid:{color:'rgba(255,255,255,0.05)'}}}}});
-    const comDados=aguaPorDia.filter(v=>v>0);
-    const mediaAgua=comDados.length?comDados.reduce((a,b)=>a+b,0)/comDados.length:0;
-    document.getElementById('stat-media-agua').textContent=mediaAgua?(mediaAgua/1000).toFixed(1)+'L':'—';
-    document.getElementById('stat-dias-meta-agua').textContent=comDados.filter(v=>v>=metaAgua).length;
-    document.getElementById('stat-dias-agua-reg').textContent=comDados.length;
+    chartAgua=new Chart(ctxA,{type:'bar',data:{labels:labelsA,datasets:[{data:aguaPorDia,backgroundColor:aguaPorDia.map(v=>v>=metaAgua?'rgba(56,189,248,0.55)':'rgba(14,165,233,0.35)'),borderColor:aguaPorDia.map(v=>v>=metaAgua?'#38bdf8':'#0ea5e9'),borderWidth:1.5,borderRadius:5}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{ticks:{color:'#5a6478',font:{size:9}},grid:{display:false}},y:{ticks:{color:'#5a6478',font:{size:10},callback:v=>v>=1000?(v/1000)+'L':v},grid:{color:'rgba(255,255,255,0.05)'}}}}});
+  }
+
+  if(subAbaAtiva==='peso'){
+    const peso=pesoMaisRecente();
+    // Peso atual
+    const pesoEl=document.getElementById('peso-atual-val');
+    pesoEl.textContent=peso?peso+' kg':'—';
+    pesoEl.style.color='var(--cinza)';
+    // IMC e classificação
+    let imcCor='var(--cinza)';
+    let classificacaoTexto='—';
+    let imcValor='—';
+    if(peso&&dados.perfil.alturaCm){
+      const imc=calcIMC(peso);
+      imcValor=imc;
+      const cls=classIMC(imc);
+      imcCor=cls.cor;
+      classificacaoTexto=cls.txt;
+    }
+    const imcEl=document.getElementById('imc-atual-val');
+    imcEl.textContent=imcValor;
+    imcEl.style.color=imcCor;
+    imcEl.style.fontWeight='bold';
+    const classifEl=document.getElementById('classificacao-imc-val');
+    classifEl.textContent=classificacaoTexto;
+    classifEl.style.color=imcCor;
+    classifEl.style.fontWeight='bold';
+    const cardPeso=document.getElementById('card-peso');
+    if(cardPeso)cardPeso.style.borderLeftColor=imcCor;
+    // Gráfico evolução peso
+    const med=dados.medicoesPeso;
+    const labelsPe=med.map(m=>formatarData(m.data));
+    const valsPe=med.map(m=>m.pesoKg);
+    if(chartPeso)chartPeso.destroy();
+    const ctxPe=document.getElementById('chart-peso').getContext('2d');
+    chartPeso=new Chart(ctxPe,{type:'line',data:{labels:labelsPe.length?labelsPe:['—'],datasets:[{label:'Peso (kg)',data:valsPe.length?valsPe:[0],backgroundColor:'rgba(59,130,246,0.2)',borderColor:'#3b82f6',borderWidth:2.5,pointRadius:4,pointBackgroundColor:'#3b82f6',tension:0.4,fill:true}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{ticks:{color:'#5a6478',font:{size:10}},grid:{color:'rgba(255,255,255,0.04)'}},y:{ticks:{color:'#5a6478',font:{size:10}},grid:{color:'rgba(255,255,255,0.06)'}}}}});
+    // Histórico
+    let hist='';
+    const rev=[...med].reverse();
+    rev.forEach((m,i)=>{
+      const prev=rev[i+1];
+      let delta='';
+      if(prev){const dif=m.pesoKg-prev.pesoKg;delta=`<span class="hist-delta ${dif>0?'delta-pos':'delta-neg'}">${dif>0?'+':''}${dif.toFixed(1)}kg</span>`;}
+      hist+=`<div class="hist-item"><span class="hist-data">${formatarData(m.data)}</span><span class="hist-val">${m.pesoKg}kg ${delta}</span></div>`;
+    });
+    document.getElementById('hist-peso-lista').innerHTML=hist||'<div class="empty">Nenhum registro.</div>';
   }
 }
-
+  
 // ═══════════════════════════════
 // RENDER: BIBLIOTECA
 // ═══════════════════════════════
