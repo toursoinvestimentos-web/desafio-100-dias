@@ -942,24 +942,17 @@ body{
   </div>
 </div>
 
- <div id="sub-sono" style="display:none">
-  <div class="card" id="card-sono">
-    <div class="card-header">💤 Sono</div>
-    <div class="stats-row">
-      <div class="stat-item">
-        <div class="stat-val" id="sono-meta">—</div>
-        <div class="stat-label">Meta/dia</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-val" id="sono-hoje">—</div>
-        <div class="stat-label">Sono hoje</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-val" id="sono-media-30">—</div>
-        <div class="stat-label">Média 30 dias</div>
-      </div>
-    </div>
+<div id="sub-sono" style="display:none">
+  <div class="card">
+    <div class="card-header">Sono por noite (14 dias)</div>
     <div class="chart-container"><canvas id="chart-sono"></canvas></div>
+  </div>
+  <div class="card">
+    <div class="stats-row">
+      <div class="stat-item"><div class="stat-val" id="stat-media-sono" style="color:var(--azul)">—</div><div class="stat-label">horas/noite</div></div>
+      <div class="stat-item"><div class="stat-val" id="stat-noites-7h">—</div><div class="stat-label">noites ≥ 7h</div></div>
+      <div class="stat-item"><div class="stat-val" id="stat-noites-reg">—</div><div class="stat-label">registradas</div></div>
+    </div>
   </div>
   <div class="dica-saude">
     💡 <strong>OMS:</strong> Adultos precisam de 7 a 9 horas de sono por noite. Durante o sono profundo o organismo libera GH, repara tecido muscular e consolida memória.
@@ -2153,52 +2146,18 @@ function renderProgresso(){
   }
 
   
-  if(subAbaAtiva==='sono'){
-    // Meta diária (7 horas fixo)
-    const metaSono=7;
-    const metaEl=document.getElementById('sono-meta');
-    metaEl.textContent=metaSono+'h';
-    metaEl.style.fontWeight='normal';
-    metaEl.style.color='var(--cinza)';
-    // Sono hoje
-    const hojeStr=hoje();
-    const sonoHoje=dados.registrosSono[hojeStr];
-    const hojeEl=document.getElementById('sono-hoje');
-    if(sonoHoje && sonoHoje.horas){
-      hojeEl.textContent=sonoHoje.horas.toFixed(1)+'h';
-    }else{
-      hojeEl.textContent='—';
-    }
-    hojeEl.style.fontWeight='normal';
-    hojeEl.style.color='var(--cinza)';
-    // Média 30 dias (últimos 30 dias com registro)
-    const ultimos30=[];for(let i=0;i<30;i++){const d=new Date();d.setHours(12,0,0,0);d.setDate(d.getDate()-i);ultimos30.push(toLocalISO(d));}
-    const valores30=ultimos30.map(iso=>{const r=dados.registrosSono[iso];return r?r.horas:null;}).filter(v=>v!==null);
-    const media30=valores30.length?valores30.reduce((a,b)=>a+b,0)/valores30.length:0;
-    const media30El=document.getElementById('sono-media-30');
-    media30El.textContent=media30?media30.toFixed(1)+'h':'—';
-    media30El.style.fontWeight='bold';
-    // Cor da borda e do valor da média (azul se média ≥ meta, vermelho se média < meta)
-    const cardSono=document.getElementById('card-sono');
-    if(media30 && metaSono){
-      if(media30 >= metaSono){
-        cardSono.style.borderLeftColor='var(--azul)';
-        media30El.style.color='var(--azul)';
-      }else{
-        cardSono.style.borderLeftColor='var(--vermelho)';
-        media30El.style.color='var(--vermelho)';
-      }
-    }else{
-      cardSono.style.borderLeftColor='var(--cinza)';
-      media30El.style.color='var(--cinza)';
-    }
-    // Gráfico (14 dias)
+   if(subAbaAtiva==='sono'){
     const dias14=[];for(let i=13;i>=0;i--){const d=new Date();d.setHours(12,0,0,0);d.setDate(d.getDate()-i);dias14.push(toLocalISO(d));}
     const sonoPorDia=dias14.map(iso=>{const r=dados.registrosSono[iso];return r?r.horas:null;});
     const labels=dias14.map(iso=>formatarData(iso).slice(0,5));
     const ctx=document.getElementById('chart-sono').getContext('2d');
     if(chartSono)chartSono.destroy();
     chartSono=new Chart(ctx,{type:'bar',data:{labels,datasets:[{data:sonoPorDia.map(v=>v||0),backgroundColor:sonoPorDia.map(v=>v===null?'rgba(90,100,120,0.2)':v>=7?'rgba(59,130,246,0.5)':v>=5?'rgba(251,191,36,0.4)':'rgba(248,113,113,0.4)'),borderColor:sonoPorDia.map(v=>v===null?'transparent':v>=7?'#3b82f6':v>=5?'#fbbf24':'#f87171'),borderWidth:1.5,borderRadius:5}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{ticks:{color:'#5a6478',font:{size:9}},grid:{display:false}},y:{min:0,max:12,ticks:{color:'#5a6478',font:{size:10},callback:v=>v+'h'},grid:{color:'rgba(255,255,255,0.05)'}}}}});
+    const reg=sonoPorDia.filter(v=>v!==null);
+    const media=reg.length?reg.reduce((a,b)=>a+b,0)/reg.length:0;
+    document.getElementById('stat-media-sono').textContent=media?media.toFixed(1)+'h':'—';
+    document.getElementById('stat-noites-7h').textContent=reg.filter(v=>v>=7).length;
+    document.getElementById('stat-noites-reg').textContent=reg.length;
   }
 
    if(subAbaAtiva==='proteina'){
