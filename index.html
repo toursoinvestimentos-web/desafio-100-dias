@@ -1033,7 +1033,7 @@ body{
 </div>
 
 <div id="sub-peso" style="display:none">
-  <div class="card" id="card-peso">
+  <div class="card">
     <div class="card-header">Evolução do Peso (kg)</div>
     <div class="chart-container"><canvas id="chart-peso"></canvas></div>
   </div>
@@ -2156,7 +2156,7 @@ function renderProgresso(){
   }
 
   
-   if(subAbaAtiva==='peso'){
+    if(subAbaAtiva==='peso'){
     const med=dados.medicoesPeso;
     const labels=med.map(m=>formatarData(m.data));
     const vals=med.map(m=>m.pesoKg);
@@ -2164,22 +2164,7 @@ function renderProgresso(){
     const ctx=document.getElementById('chart-peso').getContext('2d');
     chartPeso=new Chart(ctx,{type:'line',data:{labels:labels.length?labels:['—'],datasets:[{label:'Peso (kg)',data:vals.length?vals:[0],backgroundColor:'rgba(59,130,246,0.25)',borderColor:'#3b82f6',borderWidth:2.5,pointRadius:4,pointBackgroundColor:'#3b82f6',tension:0.4,fill:true}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{ticks:{color:'#5a6478',font:{size:10}},grid:{color:'rgba(255,255,255,0.04)'}},y:{ticks:{color:'#5a6478',font:{size:10}},grid:{color:'rgba(255,255,255,0.06)'}}}}});
     const peso=pesoMaisRecente();
-    let imcCor = 'var(--cinza)';
-    if(peso && dados.perfil.alturaCm){
-      const imc = calcIMC(peso);
-      const cls = classIMC(imc);
-      document.getElementById('imc-prog-val').textContent = imc;
-      document.getElementById('imc-prog-val').style.color = cls.cor;
-      document.getElementById('imc-prog-class').textContent = cls.txt;
-      imcCor = cls.cor;
-    } else {
-      document.getElementById('imc-prog-val').textContent = '—';
-      document.getElementById('imc-prog-class').textContent = '—';
-    }
-    // Aplica a cor da borda do card Peso baseada no IMC
-    const cardPeso = document.getElementById('card-peso');
-    if (cardPeso) cardPeso.style.borderLeftColor = imcCor;
-    
+    if(peso&&dados.perfil.alturaCm){const imc=calcIMC(peso);const cls=classIMC(imc);document.getElementById('imc-prog-val').textContent=imc;document.getElementById('imc-prog-val').style.color=cls.cor;document.getElementById('imc-prog-class').textContent=cls.txt;}
     let hist='';const rev=[...med].reverse();
     rev.forEach((m,i)=>{const prev=rev[i+1];let delta='';if(prev){const d=m.pesoKg-prev.pesoKg;delta=`<span class="hist-delta ${d>0?'delta-pos':'delta-neg'}">${d>0?'+':''}${d.toFixed(1)}kg</span>`;}hist+=`<div class="hist-item"><span class="hist-data">${formatarData(m.data)}</span><span class="hist-val">${m.pesoKg}kg ${delta}</span></div>`;});
     document.getElementById('hist-peso-lista').innerHTML=hist||'<div class="empty">Nenhum registro.</div>';
