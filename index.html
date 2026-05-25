@@ -1039,35 +1039,30 @@ body{
   </div>
 </div>
 
- <div id="sub-peso" style="display:none">
-  <div class="card" id="card-peso">
-    <div class="card-header">⚖️ Peso</div>
-    <div class="stats-row">
-      <div class="stat-item">
-        <div class="stat-val" id="peso-atual-val">—</div>
-        <div class="stat-label">Peso atual</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-val" id="imc-atual-val">—</div>
-        <div class="stat-label">IMC atual</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-val" id="classificacao-imc-val">—</div>
-        <div class="stat-label">Classificação</div>
-      </div>
-    </div>
+<div id="sub-peso" style="display:none">
+  <div class="card">
+    <div class="card-header">Evolução do Peso (kg)</div>
     <div class="chart-container"><canvas id="chart-peso"></canvas></div>
-    <div class="imc-faixa" style="display:flex; justify-content:space-between; margin-top:10px; margin-bottom:16px;">
+  </div>
+  <div class="card">
+    <div class="card-titulo" style="margin-bottom:6px">IMC Atual</div>
+    <div id="imc-prog-val" style="font-family:var(--fonte-display);font-size:2.5em;color:var(--azul)">—</div>
+    <div id="imc-prog-class" style="font-size:0.75em;color:var(--cinza)">—</div>
+    <div class="imc-faixa" style="margin-top:12px">
       <span class="imc-tag" style="background:rgba(59,130,246,0.12);color:var(--azul)">Abaixo &lt;18.5</span>
       <span class="imc-tag" style="background:rgba(52,211,153,0.12);color:var(--verde)">Normal 18.5–24.9</span>
       <span class="imc-tag" style="background:rgba(251,191,36,0.12);color:var(--amarelo)">Sobrepeso 25–29.9</span>
       <span class="imc-tag" style="background:rgba(248,113,113,0.1);color:var(--vermelho)">Obesidade ≥30</span>
     </div>
-    <button class="btn btn-outline" onclick="abrirModalPeso()" style="margin-bottom:16px">Registrar peso hoje</button>
+  </div>
+  <div class="card">
     <div class="card-titulo" style="margin-bottom:12px">Histórico de peso</div>
     <div id="hist-peso-lista"></div>
   </div>
+  <button class="btn btn-outline" onclick="abrirModalPeso()" style="margin-bottom:12px">Registrar peso hoje</button>
 </div>
+
+  
 <!-- ══════════ TELA: ALIMENTOS ══════════ -->
 <div id="tela-alimentos" class="tela">
   <div class="card">
