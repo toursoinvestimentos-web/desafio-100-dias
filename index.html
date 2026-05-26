@@ -242,8 +242,12 @@ body{
   display:flex;flex-direction:column;align-items:center;gap:2px;
 }
 .treino-dia-chip-nome{font-size:0.55em;font-weight:700;text-transform:uppercase;color:var(--cinza);letter-spacing:0.03em;}
-.treino-dia-chip-icon{font-size:0.9em;min-height:16px;line-height:1.2;}
-.treino-dia-chip-icon svg { width: 25px; height: 25px; }
+.treino-dia-chip-icon{
+  height:28px;width:100%;
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;
+}
+.treino-dia-chip-icon svg { width: 22px; height: 22px; }
 .treino-dia-chip.ok{background:rgba(52,211,153,0.12);border-color:rgba(52,211,153,0.3);}
 .treino-dia-chip.ok .treino-dia-chip-nome{color:var(--verde);}
 .treino-dia-chip.ok .treino-dia-chip-icon svg { fill: var(--verde); }
@@ -328,11 +332,12 @@ body{
   transition:all 0.15s;border:1px solid transparent;
 }
 .cal-dia.vazio{background:none;cursor:default;}
-.cal-dia.futuro{background:var(--card2);color:var(--cinza2);cursor:default;}
+.cal-dia.futuro{background:var(--card2);color:rgba(255,255,255,0.25);cursor:default;}
 .cal-dia.hoje{border-color:var(--azul)!important;color:var(--azul)!important;}
 .cal-dia.concluido{background:rgba(52,211,153,0.15);color:var(--verde);border-color:rgba(52,211,153,0.3);}
-.cal-dia.sem-registro{background:rgba(251,191,36,0.08);color:var(--amarelo);border-color:rgba(251,191,36,0.2);}
+.cal-dia.sem-registro{background:rgba(90,100,120,0.18);color:var(--cinza);border-color:transparent;}
 .cal-dia.passado{background:var(--card2);color:var(--cinza);}
+.cal-dia.streak{border:2px solid var(--azul)!important;background:rgba(59,130,246,0.1);}
 .cal-nav{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;}
 .cal-nav-btn{
   background:var(--card2);border:none;color:var(--branco);
@@ -892,19 +897,21 @@ body{
 <!-- ══════════ TELA: CALENDÁRIO ══════════ -->
 <div id="tela-calendario" class="tela">
   <div class="card">
+    <div class="card-header">📅 Calendário de Treinos</div>
     <div class="cal-nav">
       <button class="cal-nav-btn" onclick="mudarMes(-1)">‹</button>
       <div class="cal-mes-titulo" id="cal-mes-titulo">—</div>
       <button class="cal-nav-btn" onclick="mudarMes(1)">›</button>
     </div>
     <div class="cal-grid-mes" id="cal-grid-dias"></div>
-  </div>
-  <div style="margin-bottom:12px">
-    <div class="mini-card"><div class="mini-card-label">✅ Treinos</div><div class="mini-card-val" id="cal-stat-treinos">0</div><div class="mini-card-sub">registrados no mês</div></div>
-  </div>
-  <div class="card" style="font-size:0.78em;line-height:2">
-    <div><span style="display:inline-block;width:12px;height:12px;border-radius:3px;background:rgba(52,211,153,0.15);border:1px solid rgba(52,211,153,0.3);margin-right:8px;vertical-align:middle"></span>Treino registrado</div>
-    <div><span style="display:inline-block;width:12px;height:12px;border-radius:3px;background:rgba(251,191,36,0.08);border:1px solid rgba(251,191,36,0.2);margin-right:8px;vertical-align:middle"></span>Sem registro</div>
+    <div style="margin-top:14px;font-size:0.75em;color:var(--cinza);border-top:1px solid var(--card2);padding-top:10px">
+      Treinos neste mês: <span id="cal-stat-treinos" style="color:var(--verde);font-weight:700">0</span>
+    </div>
+    <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:10px;font-size:0.7em;color:var(--cinza)">
+      <div style="display:flex;align-items:center;gap:5px"><span style="display:inline-block;width:12px;height:12px;border-radius:3px;background:rgba(52,211,153,0.15);border:1px solid rgba(52,211,153,0.3)"></span>Treino registrado</div>
+      <div style="display:flex;align-items:center;gap:5px"><span style="display:inline-block;width:12px;height:12px;border-radius:3px;background:rgba(90,100,120,0.18)"></span>Sem registro</div>
+      <div style="display:flex;align-items:center;gap:5px"><span style="display:inline-block;width:12px;height:12px;border-radius:3px;border:2px solid var(--azul);background:rgba(59,130,246,0.1);text-align:center;font-size:0.75em;line-height:1.4">❤️</span>Sequência Pulse</div>
+    </div>
   </div>
 </div>
 
@@ -2008,11 +2015,8 @@ function renderCardTreinoSemanal(){
   dias.forEach((iso,i)=>{
     const tipos=getTreinosDia(iso);
     const isHoje=iso===hojeStr;
-    let iconeHTML='';
-    if(tipos.includes('Musculação')&&tipos.includes('Natação'))iconeHTML=(iconMusc?iconMusc.innerHTML:'')+(iconNat?iconNat.innerHTML:'');
-    else if(tipos.includes('Musculação')&&tipos.includes('Cardio'))iconeHTML=(iconMusc?iconMusc.innerHTML:'')+(iconCard?iconCard.innerHTML:'');
-    else if(tipos.includes('Natação')&&tipos.includes('Cardio'))iconeHTML=(iconNat?iconNat.innerHTML:'')+(iconCard?iconCard.innerHTML:'');
-    else if(tipos.includes('Musculação'))iconeHTML=iconMusc?iconMusc.innerHTML:'';
+  let iconeHTML='';
+    if(tipos.includes('Musculação'))iconeHTML=iconMusc?iconMusc.innerHTML:'';
     else if(tipos.includes('Natação'))iconeHTML=iconNat?iconNat.innerHTML:'';
     else if(tipos.includes('Cardio'))iconeHTML=iconCard?iconCard.innerHTML:'';
     const temTreino=tipos.length>0;
@@ -2034,6 +2038,17 @@ function renderCalendario(){
   const primeiroDia=new Date(ano,mes,1),ultimoDia=new Date(ano,mes+1,0);
   const diaSemanaInicio=(primeiroDia.getDay()+6)%7;
   const hojeStr=hoje();
+
+  // Calcular dias da sequência atual
+  const diasStreak=new Set();
+  if(dados.sequencia&&dados.sequencia.inicio&&dados.sequencia.diasAtivos>0){
+    const inicioSeq=toLocalDate(dados.sequencia.inicio);
+    for(let k=0;k<dados.sequencia.diasAtivos;k++){
+      const dx=new Date(inicioSeq);dx.setDate(inicioSeq.getDate()+k);
+      diasStreak.add(toLocalISO(dx));
+    }
+  }
+
   let html='';
   ['Seg','Ter','Qua','Qui','Sex','Sáb','Dom'].forEach(n=>{html+=`<div class="cal-dia-semana">${n}</div>`;});
   for(let i=0;i<diaSemanaInicio;i++)html+=`<div class="cal-dia vazio"></div>`;
@@ -2043,11 +2058,14 @@ function renderCalendario(){
     const tipos=getTreinosDia(iso);
     const temTreino=tipos.length>0;
     const isHoje=iso===hojeStr,isFuturo=iso>hojeStr;
+    const isStreak=diasStreak.has(iso)&&!isFuturo;
     let cls=isFuturo?'futuro':'passado';
     if(temTreino){cls='concluido';treinos++;}
     else if(!isFuturo&&iso<hojeStr)cls='sem-registro';
     if(isHoje)cls+=' hoje';
-    html+=`<div class="cal-dia ${cls}" onclick="verDiaCal('${iso}')">${d}</div>`;
+    if(isStreak)cls+=' streak';
+    const conteudo=isStreak&&!isFuturo?'❤️':d;
+    html+=`<div class="cal-dia ${cls}" onclick="verDiaCal('${iso}')">${conteudo}</div>`;
   }
   document.getElementById('cal-grid-dias').innerHTML=html;
   document.getElementById('cal-stat-treinos').textContent=treinos;
