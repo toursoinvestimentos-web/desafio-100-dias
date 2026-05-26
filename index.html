@@ -51,13 +51,13 @@ body{
 /* ── HEADER ── */
 .header{
   background:linear-gradient(180deg,var(--bg2) 0%,transparent 100%);
-  padding:20px 20px 0;
+  padding:18px 20px 0;
   position:sticky;top:0;z-index:50;
   backdrop-filter:blur(12px);
 }
 .header-top{
   display:flex;justify-content:space-between;align-items:center;
-  margin-bottom:16px;
+  margin-bottom:14px;
 }
 .pulse-logo{line-height:1;cursor:default;}
 .pulse-logo-linha1{display:flex;align-items:center;gap:7px;}
@@ -105,7 +105,9 @@ body{
 .aba.ativa{color:var(--azul);border-bottom-color:var(--azul);}
 
 /* ── TELAS ── */
-.tela{display:none;padding:20px;animation:fadeIn 0.25s ease;}
+.tela{display:none;
+      padding:18px 20px 20px;
+      animation:fadeIn 0.25s ease;}
 .tela.ativa{display:block;}
 @keyframes fadeIn{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
 
