@@ -1144,23 +1144,23 @@ body{
 
 <div class="card">
     <div class="card-header">💙 Metas PULSE</div>
-    <p style="font-size:0.75em;color:var(--cinza);margin-bottom:14px">Pontos semanais para cada barra chegar a 100%.</p>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px">
-      <div class="modal-campo" style="margin-bottom:0">
-        <label>Calorias</label>
-        <input type="number" id="meta-cal" min="1" max="7" step="1" value="5">
+   <p style="font-size:0.72em;color:var(--cinza);margin-bottom:12px">Pontos semanais para cada barra chegar a 100%.</p>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:16px">
+      <div style="text-align:center">
+        <div style="font-size:0.58em;font-weight:700;color:var(--cinza);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:6px">Cal</div>
+        <input type="number" id="meta-cal" min="1" max="7" step="1" value="5" style="width:100%;background:var(--bg);border:1.5px solid var(--card2);border-radius:8px;color:var(--branco);padding:10px 2px;text-align:center;font-family:var(--fonte);font-size:1.1em;font-weight:700;outline:none;-webkit-appearance:none;">
       </div>
-      <div class="modal-campo" style="margin-bottom:0">
-        <label>Treinos</label>
-        <input type="number" id="meta-treino" min="1" max="7" step="1" value="5">
+      <div style="text-align:center">
+        <div style="font-size:0.58em;font-weight:700;color:var(--cinza);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:6px">Treino</div>
+        <input type="number" id="meta-treino" min="1" max="7" step="1" value="5" style="width:100%;background:var(--bg);border:1.5px solid var(--card2);border-radius:8px;color:var(--branco);padding:10px 2px;text-align:center;font-family:var(--fonte);font-size:1.1em;font-weight:700;outline:none;-webkit-appearance:none;">
       </div>
-      <div class="modal-campo" style="margin-bottom:0">
-        <label>Sono</label>
-        <input type="number" id="meta-sono" min="1" max="7" step="1" value="5">
+      <div style="text-align:center">
+        <div style="font-size:0.58em;font-weight:700;color:var(--cinza);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:6px">Sono</div>
+        <input type="number" id="meta-sono" min="1" max="7" step="1" value="5" style="width:100%;background:var(--bg);border:1.5px solid var(--card2);border-radius:8px;color:var(--branco);padding:10px 2px;text-align:center;font-family:var(--fonte);font-size:1.1em;font-weight:700;outline:none;-webkit-appearance:none;">
       </div>
-      <div class="modal-campo" style="margin-bottom:0">
-        <label>Água</label>
-        <input type="number" id="meta-agua" min="1" max="7" step="1" value="5">
+      <div style="text-align:center">
+        <div style="font-size:0.58em;font-weight:700;color:var(--cinza);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:6px">Água</div>
+        <input type="number" id="meta-agua" min="1" max="7" step="1" value="5" style="width:100%;background:var(--bg);border:1.5px solid var(--card2);border-radius:8px;color:var(--branco);padding:10px 2px;text-align:center;font-family:var(--fonte);font-size:1.1em;font-weight:700;outline:none;-webkit-appearance:none;">
       </div>
     </div>
     <button class="btn btn-outline" onclick="salvarMetasPulse()">Salvar metas</button>
