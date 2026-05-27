@@ -8,7 +8,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">   
 <link rel="manifest" id="manifest-link">
-<title>PULSE v1.5</title>
+<title>PULSE v1.6</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600;700&display=swap'); 
 
@@ -711,7 +711,7 @@ body{
 <!-- ══ SPLASH ══ -->
 <div id="splash" style="display:none">
   <svg viewBox="0 0 852 213" style="width: 80%; max-width: 400px; height: auto; display: block; margin: 0 auto;"><use href="#logo-pulse"/></svg>
-  <div class="splash-ver">v1.5</div>
+  <div class="splash-ver">v1.6</div>
 </div>
 
 <!-- ══ HEADER ══ -->
@@ -1141,6 +1141,31 @@ body{
     <div class="card-header">🧮 Cálculos automáticos</div>
     <div id="calc-resumo"></div>
   </div>
+
+<div class="card">
+    <div class="card-header">🎯 Metas PULSE</div>
+    <p style="font-size:0.75em;color:var(--cinza);margin-bottom:14px">Pontos semanais para cada barra chegar a 100%. Faixa: 1 a 7.</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px">
+      <div class="modal-campo" style="margin-bottom:0">
+        <label>🔥 Calorias</label>
+        <input type="number" id="meta-cal" min="1" max="7" step="1" value="5">
+      </div>
+      <div class="modal-campo" style="margin-bottom:0">
+        <label>💪 Treinos</label>
+        <input type="number" id="meta-treino" min="1" max="7" step="1" value="5">
+      </div>
+      <div class="modal-campo" style="margin-bottom:0">
+        <label>💤 Sono</label>
+        <input type="number" id="meta-sono" min="1" max="7" step="1" value="5">
+      </div>
+      <div class="modal-campo" style="margin-bottom:0">
+        <label>💧 Água</label>
+        <input type="number" id="meta-agua" min="1" max="7" step="1" value="5">
+      </div>
+    </div>
+    <button class="btn" onclick="salvarMetasPulse()">Salvar metas</button>
+  </div>
+  
   <div class="card">
     <div class="card-header">💾 Backup de dados</div>
     <p style="font-size:0.78em;color:var(--cinza);margin-bottom:14px">Exporte um JSON com todos os seus dados.</p>
@@ -1430,7 +1455,7 @@ body{
   const mf={name:"PULSE",short_name:"PULSE",start_url:"./",scope:"./",display:"standalone",background_color:"#111318",theme_color:"#1a1d23",icons:[{src:icon,sizes:"192x192",type:"image/svg+xml",purpose:"any maskable"},{src:icon,sizes:"512x512",type:"image/svg+xml",purpose:"any maskable"}]};
   document.getElementById('manifest-link').href=URL.createObjectURL(new Blob([JSON.stringify(mf)],{type:'application/manifest+json'}));
   if('serviceWorker' in navigator){
-    const sw=`const C='pulse-v1.5';self.addEventListener('install',e=>{e.waitUntil(caches.open(C).then(c=>c.addAll(['./','/index.html'])));self.skipWaiting();});self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(k=>Promise.all(k.filter(x=>x!==C).map(x=>caches.delete(x)))).then(()=>self.clients.claim()));});self.addEventListener('fetch',e=>{e.respondWith(caches.match(e.request).then(r=>r||fetch(e.request)));});`;
+    const sw=`const C='pulse-v1.6';self.addEventListener('install',e=>{e.waitUntil(caches.open(C).then(c=>c.addAll(['./','/index.html'])));self.skipWaiting();});self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(k=>Promise.all(k.filter(x=>x!==C).map(x=>caches.delete(x)))).then(()=>self.clients.claim()));});self.addEventListener('fetch',e=>{e.respondWith(caches.match(e.request).then(r=>r||fetch(e.request)));});`;
     navigator.serviceWorker.register(URL.createObjectURL(new Blob([sw],{type:'text/javascript'}))).catch(()=>{});
   }
 })();
@@ -1506,8 +1531,7 @@ const BIBLIOTECA_PADRAO = [
 // ═══════════════════════════════════════════════════════
 // CONSTANTES v1.5 — SISTEMA UNIFICADO DE 5 PONTOS
 // ═══════════════════════════════════════════════════════
-const META_PONTOS = 5;        // pontos necessários para 100%
-const PCT_POR_PONTO = 20;     // 100/5 = 20% por ponto
+const META_PONTOS_PADRAO = 5; // fallback quando não há meta personalizada
 
 // ═══════════════════════════════
 // ESTADO GLOBAL
@@ -1556,6 +1580,7 @@ function migrarDados(d){
     if(d.perfil.fatorAtividade===undefined)d.perfil.fatorAtividade=padrao.perfil.fatorAtividade;
     if(d.perfil.deficit===undefined)d.perfil.deficit=padrao.perfil.deficit;
     if(d.perfil.inicio===undefined)d.perfil.inicio=padrao.perfil.inicio;
+    if(!d.perfil.metasPulse)d.perfil.metasPulse={calorias:5,treinos:5,sono:5,agua:5};
   }
   if(!d.medicoesPeso)d.medicoesPeso=padrao.medicoesPeso;
   if(!d.desafioDias)d.desafioDias=padrao.desafioDias;
@@ -1578,7 +1603,7 @@ if(!d.desafioBarras)d.desafioBarras=padrao.desafioBarras;
 
 function dadosPadrao(){
   return {
-    perfil:{idade:0,alturaCm:0,peso:0,fatorAtividade:1.55,deficit:500},
+    perfil:{idade:0,alturaCm:0,peso:0,fatorAtividade:1.55,deficit:500,metasPulse:{calorias:5,treinos:5,sono:5,agua:5}},
     medicoesPeso:[],desafioDias:{},diarioAlimentar:{},biblioteca:[],
     registrosSono:{},registrosAgua:{},pesosExercicios:{},pesosExerciciosInicial:{},proximoTreino:'A',
   desafioBarras:{
@@ -1708,7 +1733,8 @@ function calcPontosSemanaTipo(tipo){
   dias.forEach(iso=>{
     if(iso<=hojeStr&&diaAtingiuMeta(iso,tipo))pts++;
   });
-  return Math.min(pts, META_PONTOS);
+  const meta=(dados.perfil.metasPulse&&dados.perfil.metasPulse[tipo])||META_PONTOS_PADRAO;
+  return Math.min(pts,meta);
 }
 
 function rodarVerificador(){
@@ -1724,9 +1750,10 @@ function rodarVerificador(){
       const diasSemanaPassada=getDiasDaSemana(bar.ultimaVerificacao);
       let ptsSemanaPassada=0;
       diasSemanaPassada.forEach(iso=>{if(diaAtingiuMeta(iso,tipo))ptsSemanaPassada++;});
-      ptsSemanaPassada=Math.min(ptsSemanaPassada,META_PONTOS);
+      const metaTipo=(dados.perfil.metasPulse&&dados.perfil.metasPulse[tipo])||META_PONTOS_PADRAO;
+      ptsSemanaPassada=Math.min(ptsSemanaPassada,metaTipo);
 
-      if(ptsSemanaPassada>=META_PONTOS){
+      if(ptsSemanaPassada>=metaTipo){
         bar.travado=true;
       }else{
         bar.travado=false;
@@ -1744,7 +1771,8 @@ function getProgressoBarra(tipo){
   if(!bar)return 0;
   if(bar.travado)return 1.0;
   const pts=calcPontosSemanaTipo(tipo);
-  return pts/META_PONTOS;
+  const meta=(dados.perfil.metasPulse&&dados.perfil.metasPulse[tipo])||META_PONTOS_PADRAO;
+  return Math.min(1,pts/meta);
 }
 
 function corDaBarra(progresso){
@@ -2014,10 +2042,11 @@ function renderCardTreinoSemanal(){
 
   const totalSemana=getTotalTreinosSemana(dias);
   const resumoEl=document.getElementById('treino-hoje-resumo');
-  if(totalSemana>=META_PONTOS){
-    resumoEl.innerHTML=`<span style="color:var(--azul);font-size:0.82em">✅ ${totalSemana}/5 pts — Meta!</span>`;
+ const metaTreinos=(dados.perfil.metasPulse&&dados.perfil.metasPulse.treinos)||META_PONTOS_PADRAO;
+  if(totalSemana>=metaTreinos){
+    resumoEl.innerHTML=`<span style="color:var(--azul);font-size:0.82em">✅ ${totalSemana}/${metaTreinos} pts — Meta!</span>`;
   }else{
-    resumoEl.innerHTML=`<span style="font-size:0.78em;color:var(--cinza)">${totalSemana}/${META_PONTOS} pts na semana</span>`;
+    resumoEl.innerHTML=`<span style="font-size:0.78em;color:var(--cinza)">${totalSemana}/${metaTreinos} pts na semana</span>`;
   }
 
   const nomes=['Seg','Ter','Qua','Qui','Sex','Sáb','Dom'];
@@ -2121,11 +2150,13 @@ function calcStreakSemanal(){
 
 function renderProgresso(){
   if(subAbaAtiva==='treinos'){
-    const META_SEMANA=5;
+   const META_SEMANA=(dados.perfil.metasPulse&&dados.perfil.metasPulse.treinos)||META_PONTOS_PADRAO;
+   
     // Meta
     const metaEl=document.getElementById('treino-meta-semana');
     metaEl.textContent=META_SEMANA+' pts';
     metaEl.style.color='var(--cinza)';
+    
     // Pontos semana atual
     const diasSemAtual=getDiasSemanaAtual();
     const hojeStr=hoje();
@@ -2134,6 +2165,7 @@ function renderProgresso(){
     const pontosEl=document.getElementById('treino-pontos-semana');
     pontosEl.textContent=pontosSemana+' pts';
     pontosEl.style.color=pontosSemana>=META_SEMANA?'var(--azul)':pontosSemana>=3?'var(--amarelo)':'var(--cinza)';
+   
     // Média 4 semanas anteriores
     const semanas4=[];
     for(let w=1;w<=4;w++)semanas4.push(getTotalTreinosSemana(getSemanaOffset(w)));
@@ -2145,6 +2177,7 @@ function renderProgresso(){
     if(media4>=META_SEMANA){cardTreino.style.borderLeftColor='var(--azul)';mediaEl.style.color='var(--azul)';}
     else if(media4>0){cardTreino.style.borderLeftColor='var(--vermelho)';mediaEl.style.color='var(--vermelho)';}
     else{cardTreino.style.borderLeftColor='var(--cinza2)';mediaEl.style.color='var(--cinza)';}
+   
     // Gráfico 12 semanas
     const semanas12=getUltimasSemanas(12);
     const labelsT=semanas12.map(dias=>{const d=new Date(dias[0]+'T12:00:00');return`${d.getDate()}/${d.getMonth()+1}`;});
@@ -2398,6 +2431,11 @@ function renderPerfil(){
   const elRecorde=document.getElementById('perf-seq-recorde');
   if(elAtivos)elAtivos.textContent=seq.diasAtivos+' dias';
   if(elRecorde)elRecorde.textContent=seq.recorde+' dias';
+  const mp=dados.perfil.metasPulse||{calorias:5,treinos:5,sono:5,agua:5};
+  const elMC=document.getElementById('meta-cal');if(elMC)elMC.value=mp.calorias;
+  const elMT=document.getElementById('meta-treino');if(elMT)elMT.value=mp.treinos;
+  const elMS=document.getElementById('meta-sono');if(elMS)elMS.value=mp.sono;
+  const elMA=document.getElementById('meta-agua');if(elMA)elMA.value=mp.agua;
 }
 
 // ═══════════════════════════════
@@ -2427,6 +2465,23 @@ function salvarPerfil(){
   salvarDados();fecharModal('modal-perfil');showToast('Perfil salvo! ✅');renderHoje();
 }
 
+function salvarMetasPulse(){
+  if(!dados.perfil.metasPulse)dados.perfil.metasPulse={calorias:5,treinos:5,sono:5,agua:5};
+  const cal=parseInt(document.getElementById('meta-cal').value)||5;
+  const treino=parseInt(document.getElementById('meta-treino').value)||5;
+  const sono=parseInt(document.getElementById('meta-sono').value)||5;
+  const agua=parseInt(document.getElementById('meta-agua').value)||5;
+  dados.perfil.metasPulse={
+    calorias:Math.min(7,Math.max(1,cal)),
+    treinos:Math.min(7,Math.max(1,treino)),
+    sono:Math.min(7,Math.max(1,sono)),
+    agua:Math.min(7,Math.max(1,agua))
+  };
+  salvarDados();
+  showToast('Metas PULSE salvas! 🎯');
+  renderHoje();
+}
+  
 function abrirModalPeso(){
   document.getElementById('m-peso').value='';document.getElementById('m-data').value=hoje();
   document.getElementById('imc-modal-val').textContent='—';document.getElementById('imc-modal-class').textContent='—';
