@@ -2107,7 +2107,7 @@ function renderCalendario(){
     else if(!isFuturo&&iso<hojeStr)cls='sem-registro';
     if(isHoje)cls+=' hoje';
     if(isStreak)cls+=' streak';
-    const conteudo=isStreak&&!isFuturo?'❤️':d;
+    const conteudo=isStreak&&!isFuturo?'💙':d;
     html+=`<div class="cal-dia ${cls}" onclick="verDiaCal('${iso}')">${conteudo}</div>`;
   }
   document.getElementById('cal-grid-dias').innerHTML=html;
