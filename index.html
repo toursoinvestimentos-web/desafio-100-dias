@@ -2322,7 +2322,7 @@ function calcStreakSemanal(){
   let streak=0;
   for(let w=0;w<52;w++){
     const dias=getSemanaOffset(w);
-    if(getTotalTreinosSemana(dias)>=META_PONTOS)streak++;
+    if(getTotalTreinosSemana(dias)>=META_PONTOS_PADRAO)streak++;
     else break;
   }
   return streak;
@@ -2828,6 +2828,15 @@ function abrirMusculacao(){
   document.getElementById('screen-musculacao').classList.add('ativo');
   renderMusculacaoInicio();
   mostrarMuscScreen('musc-inicio');
+}
+  function abrirGif(nome,url){
+  document.getElementById('gif-modal-nome').textContent=nome;
+  document.getElementById('gif-modal-img').src=url;
+  document.getElementById('gif-modal').classList.add('ativo');
+}
+function fecharGifModal(){
+  document.getElementById('gif-modal').classList.remove('ativo');
+  document.getElementById('gif-modal-img').src='';
 }
 function fecharMusculacao(){
   document.getElementById('screen-musculacao').classList.remove('ativo');
