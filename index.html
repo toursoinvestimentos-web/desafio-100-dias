@@ -2754,10 +2754,30 @@ function renderMusculacaoInicio(){
   }else{
     sem.style.display='none';com.style.display='block';
     const s=treino.series||'—';const r=treino.reps||'—';
+    const proximo=dados.proximoTreino||'A';
     document.getElementById('treino-a-qtd').textContent=treino.exerciciosA.length+' exercícios · '+s+' séries · '+r+' reps';
     document.getElementById('treino-b-qtd').textContent=treino.exerciciosB.length+' exercícios · '+s+' séries · '+r+' reps';
     document.getElementById('treino-ultima-atualizacao').textContent=treino.atualizadoEm?formatarData(treino.atualizadoEm):'—';
+    // Trava visual: próximo aceso, outro bloqueado
+    ['A','B'].forEach(letra=>{
+      const card=document.getElementById('treino-'+letra.toLowerCase()+'-card');
+      if(!card)return;
+      const ehProximo=letra===proximo;
+      card.style.opacity=ehProximo?'1':'0.38';
+      card.style.pointerEvents=ehProximo?'auto':'none';
+      card.onclick=ehProximo?()=>iniciarExecucaoPersonalizada(letra):null;
+    });
   }
+}
+function iniciarExecucaoPersonalizada(letra){
+  const treino=dados.treinoPersonalizado;
+  if(!treino)return;
+  const lista=letra==='A'?treino.exerciciosA:treino.exerciciosB;
+  if(!lista||!lista.length){showToast('Nenhum exercício no Treino '+letra);return;}
+  TREINOS[letra]=lista.map(ex=>({n:ex.n,g:ex.g,gif:ex.gif,s:treino.series,r:treino.reps}));
+  if(!dados.pesosExerciciosInicial)dados.pesosExerciciosInicial={};
+  curTreino=letra;curExIdx=0;loadEx();
+  mostrarMuscScreen('musc-ex');
 }
 function iniciarMontagem(atualizar){
   montagemAtual={};
