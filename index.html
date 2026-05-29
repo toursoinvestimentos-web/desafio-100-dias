@@ -591,31 +591,31 @@ body{
 .consent-check-label{font-size:0.78em;color:var(--branco);line-height:1.5;}
 
 .grupo-block{background:var(--card);border-radius:var(--radius);border:1px solid var(--card2);margin-bottom:10px;overflow:hidden;}
-.grupo-header{padding:10px 14px;background:var(--card2);border-bottom:1px solid var(--cinza2);display:flex;align-items:center;justify-content:space-between;}
-.grupo-nome{font-size:0.65em;font-weight:700;color:var(--cinza);text-transform:uppercase;letter-spacing:0.1em;}
-.grupo-count{font-size:0.62em;color:var(--cinza);}
+.grupo-header{padding:14px 16px;background:linear-gradient(90deg,rgba(59,130,246,0.18),rgba(59,130,246,0.06));border-bottom:1px solid rgba(59,130,246,0.25);display:flex;align-items:center;justify-content:space-between;}
+.grupo-nome{font-size:0.85em;font-weight:800;color:var(--azul);text-transform:uppercase;letter-spacing:0.12em;}
+.grupo-count{font-size:0.7em;color:var(--cinza);}
 
-.ex-item{padding:10px 14px;border-bottom:1px solid var(--cinza2);}
+.ex-item{padding:14px 16px;border-bottom:1px solid var(--cinza2);}
 .ex-item:last-child{border-bottom:none;}
-.ex-item-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;}
-.ex-item-nome{font-size:0.82em;font-weight:500;color:var(--branco);}
-.ex-ver-btn{display:flex;align-items:center;gap:4px;font-size:0.7em;color:var(--azul);background:none;border:none;cursor:pointer;flex-shrink:0;padding:0;}
+.ex-item-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;}
+.ex-item-nome{font-size:1em;font-weight:600;color:var(--branco);}
+.ex-ver-btn{display:flex;align-items:center;gap:4px;font-size:0.78em;color:var(--azul);background:none;border:none;cursor:pointer;flex-shrink:0;padding:0;}
 
-.ab-selector-row{display:flex;align-items:center;gap:6px;}
-.ab-selector-label{font-size:0.6em;color:var(--cinza);flex-shrink:0;margin-right:2px;}
-.ab-btn{display:flex;align-items:center;gap:4px;padding:5px 10px;border-radius:7px;border:1px solid var(--cinza2);background:var(--bg);cursor:pointer;transition:all 0.15s;}
+.ab-selector-row{display:flex;align-items:center;gap:8px;}
+.ab-selector-label{font-size:0.78em;font-weight:600;color:var(--cinza);flex-shrink:0;margin-right:4px;}
+.ab-btn{display:flex;align-items:center;gap:6px;padding:10px 18px;border-radius:10px;border:1.5px solid var(--cinza2);background:var(--bg);cursor:pointer;transition:all 0.15s;}
 .ab-btn:active{transform:scale(0.95);}
 .ab-btn.ativo-a{border-color:var(--azul);background:var(--azul-dim);}
 .ab-btn.ativo-b{border-color:var(--verde);background:rgba(52,211,153,0.1);}
-.ab-btn-cb{width:12px;height:12px;border-radius:3px;border:1.5px solid var(--cinza2);flex-shrink:0;display:flex;align-items:center;justify-content:center;}
+.ab-btn-cb{width:15px;height:15px;border-radius:4px;border:1.5px solid var(--cinza2);flex-shrink:0;display:flex;align-items:center;justify-content:center;}
 .ab-btn.ativo-a .ab-btn-cb{background:var(--azul);border-color:var(--azul);}
 .ab-btn.ativo-b .ab-btn-cb{background:var(--verde);border-color:var(--verde);}
-.ab-btn.ativo-a .ab-btn-cb::after,.ab-btn.ativo-b .ab-btn-cb::after{content:'✓';font-size:7px;color:var(--bg);}
-.ab-btn-txt-a{font-size:0.72em;font-weight:600;color:var(--cinza);}
+.ab-btn.ativo-a .ab-btn-cb::after,.ab-btn.ativo-b .ab-btn-cb::after{content:'✓';font-size:9px;color:var(--bg);}
+.ab-btn-txt-a{font-size:0.9em;font-weight:700;color:var(--cinza);}
 .ab-btn.ativo-a .ab-btn-txt-a{color:var(--azul);}
-.ab-btn-txt-b{font-size:0.72em;font-weight:600;color:var(--cinza);}
+.ab-btn-txt-b{font-size:0.9em;font-weight:700;color:var(--cinza);}
 .ab-btn.ativo-b .ab-btn-txt-b{color:var(--verde);}
-
+  
 .gif-modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.9);z-index:500;align-items:center;justify-content:center;padding:20px;}
 .gif-modal-overlay.ativo{display:flex;}
 .gif-modal-box{background:white;border-radius:16px;padding:12px;max-width:360px;width:100%;text-align:center;}
@@ -630,17 +630,17 @@ body{
 .meta-global-desc{font-size:0.68em;color:var(--cinza);line-height:1.6;margin-top:8px;}
 .meta-legal-note{background:var(--card2);border-radius:10px;padding:10px 14px;border-left:3px solid var(--azul);font-size:0.7em;color:var(--cinza);line-height:1.6;margin-bottom:14px;}
 
-.treino-montado-card{display:flex;align-items:center;gap:12px;padding:14px 16px;border-radius:var(--radius);border:1px solid var(--card2);background:var(--card);margin-bottom:10px;cursor:pointer;transition:border-color 0.15s;}
+.treino-montado-card{display:flex;align-items:center;gap:16px;padding:22px 20px;border-radius:var(--radius);border:1px solid var(--card2);background:var(--card);margin-bottom:14px;cursor:pointer;transition:border-color 0.15s;}
 .treino-montado-card:active{border-color:var(--azul);}
-.treino-montado-badge{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-family:var(--fonte-display);font-size:1.2em;flex-shrink:0;}
+.treino-montado-badge{width:52px;height:52px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-family:var(--fonte-display);font-size:1.8em;flex-shrink:0;}
 .badge-treino-a{background:var(--azul-dim);color:var(--azul);border:1px solid rgba(59,130,246,0.3);}
 .badge-treino-b{background:rgba(52,211,153,0.1);color:var(--verde);border:1px solid rgba(52,211,153,0.25);}
 .treino-montado-info{flex:1;}
-.treino-montado-nome{font-size:0.88em;font-weight:600;color:var(--branco);}
-.treino-montado-qtd{font-size:0.65em;color:var(--cinza);margin-top:2px;}
-.treino-update-box{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;border-radius:12px;border:1px solid var(--card2);background:var(--card);margin-top:4px;}
-.treino-update-info{font-size:0.65em;color:var(--cinza);line-height:1.6;}
-.treino-update-btn{font-size:0.72em;color:var(--azul);font-weight:600;background:none;border:none;cursor:pointer;}
+.treino-montado-nome{font-size:1.1em;font-weight:700;color:var(--branco);}
+.treino-montado-qtd{font-size:0.78em;color:var(--cinza);margin-top:4px;}
+.treino-update-box{display:flex;align-items:center;justify-content:space-between;padding:16px 18px;border-radius:14px;border:1px solid var(--card2);background:var(--card);margin-top:6px;}
+.treino-update-info{font-size:0.78em;color:var(--cinza);line-height:1.7;}
+.treino-update-btn{font-size:0.88em;color:var(--azul);font-weight:700;background:none;border:none;cursor:pointer;}
 
 .exec-ex-item{background:var(--card);border-radius:12px;padding:14px 16px;border:1px solid var(--card2);margin-bottom:8px;}
 .exec-ex-grupo{font-size:0.6em;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--azul);}
@@ -1267,7 +1267,7 @@ Sequência Pulse
       </div>
     </div>
     <div id="musc-com-treino" style="display:none">
-      <div id="treino-a-card" class="treino-montado-card" onclick="abrirExecucao('A')">
+     <div id="treino-a-card" class="treino-montado-card">
         <div class="treino-montado-badge badge-treino-a">A</div>
         <div class="treino-montado-info">
           <div class="treino-montado-nome">Treino A</div>
@@ -1275,7 +1275,7 @@ Sequência Pulse
         </div>
         <span style="font-size:1.2em;color:var(--cinza)">›</span>
       </div>
-      <div id="treino-b-card" class="treino-montado-card" onclick="abrirExecucao('B')">
+   <div id="treino-b-card" class="treino-montado-card">
         <div class="treino-montado-badge badge-treino-b">B</div>
         <div class="treino-montado-info">
           <div class="treino-montado-nome">Treino B</div>
@@ -1305,16 +1305,16 @@ Sequência Pulse
   </div>
 
   <!-- TELA C: Montagem -->
-  <div id="musc-montagem" class="musc-screen">
-    <div style="font-size:0.75em;color:var(--cinza);margin-bottom:14px;line-height:1.6">Escolha os exercícios e defina se vão para o <span style="color:var(--azul);font-weight:600">Treino A</span> ou <span style="color:var(--verde);font-weight:600">Treino B</span>.</div>
+ <div id="musc-montagem" class="musc-screen">
+    <div style="font-size:0.9em;color:var(--cinza);margin-bottom:18px;line-height:1.7;padding:14px 16px;background:var(--card);border-radius:12px;border-left:3px solid var(--azul)">Escolha os exercícios e defina se vão para o <span style="color:var(--azul);font-weight:700">Treino A</span> ou <span style="color:var(--verde);font-weight:700">Treino B</span>.</div>
     <div id="montagem-lista"></div>
     <button class="btn" onclick="avancarMontagem()">Próximo → Definir metas</button>
     <div style="font-size:0.68em;color:var(--cinza);text-align:center;margin-top:6px">Escolha o que quiser — sem obrigação de marcar todos</div>
   </div>
 
   <!-- TELA D: Séries e reps -->
-  <div id="musc-metas" class="musc-screen">
-    <div style="font-size:0.75em;color:var(--cinza);margin-bottom:16px;line-height:1.6">Você decide. O valor será aplicado a todos os exercícios que você escolheu.</div>
+ <div id="musc-metas" class="musc-screen">
+    <div style="font-size:0.9em;color:var(--cinza);margin-bottom:18px;line-height:1.7;padding:14px 16px;background:var(--card);border-radius:12px;border-left:3px solid var(--azul)">Você decide. O valor será aplicado a todos os exercícios que você escolheu.</div>
     <div class="meta-global-box">
       <div class="meta-global-label">Séries por exercício</div>
       <input class="meta-global-input" type="number" id="input-series" min="1" max="20" placeholder="">
@@ -1325,7 +1325,7 @@ Sequência Pulse
       <input class="meta-global-input" type="number" id="input-reps" min="1" max="100" placeholder="">
       <div class="meta-global-desc">Quantas vezes você repete o movimento dentro de cada série.</div>
     </div>
-    <div class="meta-legal-note">Seu professor de Educação Física pode te ajudar a definir os valores ideais para você.</div>
+  <div style="font-size:0.68em;color:var(--cinza);text-align:center;margin-bottom:14px;line-height:1.5;">💡 Seu professor de Ed. Física pode te orientar nos valores ideais.</div>
     <button class="btn" onclick="salvarTreino()">Salvar e ver meu treino →</button>
   </div>
 
@@ -2322,7 +2322,8 @@ function calcStreakSemanal(){
   let streak=0;
   for(let w=0;w<52;w++){
     const dias=getSemanaOffset(w);
-    if(getTotalTreinosSemana(dias)>=META_PONTOS_PADRAO)streak++;
+    const metaTreinos=(dados.perfil.metasPulse&&dados.perfil.metasPulse.treinos)||META_PONTOS_PADRAO;
+    if(getTotalTreinosSemana(dias)>=metaTreinos)streak++;
     else break;
   }
   return streak;
@@ -2987,7 +2988,11 @@ function abrirExecucao(letra){
   TREINOS[letra]=lista.map(ex=>({n:ex.n,g:ex.g,gif:ex.gif,s:treino.series,r:treino.reps}));
   startTreino(letra);
 }
-function startTreino(letra){curTreino=letra;curExIdx=0;loadEx();mostrarMuscScreen('musc-ex');}
+function startTreino(letra){
+  curTreino=letra;curExIdx=0;
+  sessionStorage.setItem('muscAtivo',JSON.stringify({treino:letra,exIdx:0}));
+  loadEx();mostrarMuscScreen('musc-ex');
+}
 let exSessionId=0;
 function loadEx(){
   clearTimerMusc();
@@ -3100,7 +3105,9 @@ function clickSerie(idx,totalSeries,session){
 function clearTimerMusc(){if(timerInterval){clearInterval(timerInterval);timerInterval=null;}}
 function nextEx(){
   curExIdx++;
+  sessionStorage.setItem('muscAtivo',JSON.stringify({treino:curTreino,exIdx:curExIdx}));
   if(curExIdx>=TREINOS[curTreino].length){
+    sessionStorage.removeItem('muscAtivo');
     const total=TREINOS[curTreino].length;let totalSeries=0;TREINOS[curTreino].forEach(e=>totalSeries+=e.s);
     document.getElementById('done-ex').textContent=total;document.getElementById('done-ser').textContent=totalSeries;
     document.getElementById('done-t').textContent='TREINO '+curTreino+' CONCLUÍDO!';
@@ -3109,6 +3116,7 @@ function nextEx(){
   }else{loadEx();}
 }
 function finalizarMusculacao(){
+  sessionStorage.removeItem('muscAtivo');
   const proximo=curTreino==='A'?'B':'A';
   dados.proximoTreino=proximo;
   registrarTreino('Musculação',{treinoLetra:curTreino});
@@ -3207,7 +3215,27 @@ function showToast(msg,dur=2800){
 // INIT
 // ═══════════════════════════════
 (function init(){
- renderMusculacaoInicio();
+  // Retoma treino interrompido por reload
+  const muscSessao=sessionStorage.getItem('muscAtivo');
+  if(muscSessao){
+    try{
+      const s=JSON.parse(muscSessao);
+      const treino=dados.treinoPersonalizado;
+      if(treino&&s.treino){
+        const letra=s.treino;
+        const lista=letra==='A'?treino.exerciciosA:treino.exerciciosB;
+        if(lista&&lista.length){
+          TREINOS[letra]=lista.map(ex=>({n:ex.n,g:ex.g,gif:ex.gif,s:treino.series,r:treino.reps}));
+          curTreino=letra;
+          curExIdx=Math.min(s.exIdx||0,TREINOS[letra].length-1);
+          document.getElementById('screen-musculacao').classList.add('ativo');
+          loadEx();
+          mostrarMuscScreen('musc-ex');
+        }
+      }
+    }catch(e){sessionStorage.removeItem('muscAtivo');}
+  }
+  renderMusculacaoInicio();
   renderTreinosTela();
   if(!dados.perfil.alturaCm||!dados.perfil.idade){
     setTimeout(()=>abrirModalConfigurar(),500);
