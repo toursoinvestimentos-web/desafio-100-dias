@@ -631,6 +631,17 @@ body{
 .meta-chip{padding:10px 18px;border-radius:20px;border:1.5px solid var(--card2);background:var(--card2);color:var(--cinza);font-size:0.85em;font-weight:700;cursor:pointer;transition:all 0.15s;}
 .meta-chip:active{transform:scale(0.94);}
 .meta-chip.selecionado{border-color:var(--azul);background:var(--azul-dim);color:var(--azul);}
+  .meta-pill{
+  width:58px;height:58px;border-radius:50%;
+  background:var(--card2);border:2px solid var(--cinza2);
+  color:var(--branco);font-family:var(--fonte-display);font-size:1.3em;
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;transition:all 0.18s;flex-shrink:0;letter-spacing:0.5px;
+}
+.meta-pill:active{transform:scale(0.92);}
+.meta-pill.ativo{background:var(--azul-dim);border-color:var(--azul);color:var(--azul);}
+.meta-pill-custom{background:var(--card2);border-style:dashed;color:var(--cinza);font-size:1.5em;}
+.meta-pill-custom.ativo{background:var(--azul-dim);border-color:var(--azul);color:var(--azul);border-style:solid;}
 .meta-chip-val{font-family:var(--fonte-display);font-size:2em;color:var(--azul);letter-spacing:1px;min-height:1.2em;display:block;}
 .meta-chip-placeholder{font-family:var(--fonte-display);font-size:2em;color:var(--cinza2);letter-spacing:1px;display:block;}
 .meta-global-desc{font-size:0.68em;color:var(--cinza);line-height:1.6;margin-top:8px;}
@@ -1323,34 +1334,64 @@ Sequência Pulse
   <div id="musc-metas" class="musc-screen">
     <div style="font-size:0.9em;color:var(--cinza);margin-bottom:18px;line-height:1.7;padding:14px 16px;background:var(--card);border-radius:12px;border-left:3px solid var(--azul)">Você decide. Os valores serão aplicados a todos os exercícios escolhidos.</div>
 
+    <!-- SÉRIES -->
     <div class="meta-global-box">
       <div class="meta-global-label">Séries por exercício</div>
-      <span class="meta-chip-val" id="display-series"><span class="meta-chip-placeholder">—</span></span>
-      <div class="meta-chips-row" id="chips-series"></div>
-      <div class="meta-global-desc">Quantas vezes você vai realizar o conjunto completo de repetições em cada exercício.</div>
+      <div id="display-series" style="font-family:var(--fonte-display);font-size:3em;color:var(--azul);letter-spacing:2px;text-align:center;margin:6px 0 14px;line-height:1;min-height:1.2em">0</div>
+      <div style="display:flex;gap:10px;justify-content:center">
+        <div class="meta-pill" onclick="selecionarValor('series',2,this)">2</div>
+        <div class="meta-pill" onclick="selecionarValor('series',3,this)">3</div>
+        <div class="meta-pill" onclick="selecionarValor('series',4,this)">4</div>
+        <div class="meta-pill meta-pill-custom" id="pill-series-custom" onclick="abrirCustom('series')">＋</div>
+      </div>
+      <div class="meta-global-desc" style="margin-top:12px">Quantas vezes você vai realizar o conjunto completo de repetições em cada exercício.</div>
     </div>
 
-    <div class="meta-global-box" style="margin-top:14px;">
+    <!-- REPETIÇÕES -->
+    <div class="meta-global-box" style="margin-top:14px">
       <div class="meta-global-label">Repetições por série</div>
-      <span class="meta-chip-val" id="display-reps"><span class="meta-chip-placeholder">—</span></span>
-      <div class="meta-chips-row" id="chips-reps"></div>
-      <div class="meta-global-desc">Quantas vezes você repete o movimento dentro de cada série.</div>
+      <div id="display-reps" style="font-family:var(--fonte-display);font-size:3em;color:var(--azul);letter-spacing:2px;text-align:center;margin:6px 0 14px;line-height:1;min-height:1.2em">0</div>
+      <div style="display:flex;gap:10px;justify-content:center">
+        <div class="meta-pill" onclick="selecionarValor('reps',8,this)">8</div>
+        <div class="meta-pill" onclick="selecionarValor('reps',10,this)">10</div>
+        <div class="meta-pill" onclick="selecionarValor('reps',12,this)">12</div>
+        <div class="meta-pill meta-pill-custom" id="pill-reps-custom" onclick="abrirCustom('reps')">＋</div>
+      </div>
+      <div class="meta-global-desc" style="margin-top:12px">Quantas vezes você repete o movimento dentro de cada série.</div>
     </div>
 
-    <div class="meta-global-box" style="margin-top:14px;">
+    <!-- DESCANSO -->
+    <div class="meta-global-box" style="margin-top:14px">
       <div class="meta-global-label">Descanso entre séries</div>
-      <span class="meta-chip-val" id="display-descanso"><span class="meta-chip-placeholder">—</span></span>
-      <div class="meta-chips-row" id="chips-descanso"></div>
-      <div class="meta-global-desc">Tempo de pausa em segundos entre cada série. Consulte seu professor para o valor ideal.</div>
+      <div id="display-descanso" style="font-family:var(--fonte-display);font-size:3em;color:var(--azul);letter-spacing:2px;text-align:center;margin:6px 0 14px;line-height:1;min-height:1.2em">0<span style="font-size:0.4em;color:var(--cinza);letter-spacing:0;vertical-align:middle;margin-left:4px" id="display-descanso-s"></span></div>
+      <div style="display:flex;gap:10px;justify-content:center">
+        <div class="meta-pill" onclick="selecionarValor('descanso',30,this)">30s</div>
+        <div class="meta-pill" onclick="selecionarValor('descanso',45,this)">45s</div>
+        <div class="meta-pill" onclick="selecionarValor('descanso',60,this)">60s</div>
+        <div class="meta-pill meta-pill-custom" id="pill-descanso-custom" onclick="abrirCustom('descanso')">＋</div>
+      </div>
+      <div class="meta-global-desc" style="margin-top:12px">Tempo de pausa em segundos entre cada série. Consulte seu professor para o valor ideal.</div>
     </div>
 
     <div style="font-size:0.68em;color:var(--cinza);text-align:center;margin:16px 0 14px;line-height:1.5;">💡 Seu professor de Ed. Física pode te orientar nos valores ideais.</div>
     <button class="btn" onclick="salvarTreino()">Salvar e ver meu treino →</button>
 
-    <!-- inputs hidden para compatibilidade com salvarTreino() -->
     <input type="hidden" id="input-series">
     <input type="hidden" id="input-reps">
     <input type="hidden" id="input-descanso">
+  </div>
+
+  <!-- MODAL CUSTOM VALUE -->
+  <div id="modal-meta-custom" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:600;align-items:flex-end;justify-content:center">
+    <div style="background:var(--card);border-radius:24px 24px 0 0;padding:28px 24px 36px;width:100%;border-top:3px solid var(--azul)">
+      <div id="modal-custom-titulo" style="font-family:var(--fonte-display);font-size:1.4em;color:var(--azul);letter-spacing:2px;margin-bottom:16px">VALOR PERSONALIZADO</div>
+      <input type="number" id="modal-custom-input" min="1" max="999" placeholder="Digite o número..."
+        style="background:var(--bg);border:1.5px solid var(--azul);border-radius:10px;color:var(--branco);padding:14px;width:100%;font-family:var(--fonte-display);font-size:2em;text-align:center;outline:none;-webkit-appearance:none;box-sizing:border-box">
+      <div style="display:flex;gap:10px;margin-top:16px">
+        <button onclick="fecharCustom()" style="flex:1;background:var(--card2);border:none;border-radius:12px;color:var(--cinza);font-family:var(--fonte);font-size:0.9em;font-weight:700;padding:14px;cursor:pointer">Cancelar</button>
+        <button onclick="confirmarCustom()" style="flex:1;background:var(--azul);border:none;border-radius:12px;color:white;font-family:var(--fonte);font-size:0.9em;font-weight:700;padding:14px;cursor:pointer">Confirmar</button>
+      </div>
+    </div>
   </div>
 <!-- TELA E: Execução -->
   <div id="musc-ex" class="musc-screen">
@@ -3006,53 +3047,87 @@ function selecionarAB(nomeEx,treino,idSeg){
   btns[0].className='ab-btn'+(alocado==='A'?' ativo-a':'');
   btns[1].className='ab-btn'+(alocado==='B'?' ativo-b':'');
 }
-function buildChips(){
-  const OPCOES={
-    series:[2,3,4,5,6],
-    reps:[8,10,12,15,16,17,18,20],
-    descanso:[10,20,30,45,60,70,80]
-  };
-  ['series','reps','descanso'].forEach(tipo=>{
-    const container=document.getElementById('chips-'+tipo);
-    container.innerHTML='';
-    const sel=document.createElement('select');
-    sel.id='sel-'+tipo;
-    sel.style.cssText='background:var(--bg);border:1.5px solid var(--card2);border-radius:10px;color:var(--branco);padding:10px 14px;width:100%;font-family:var(--fonte);font-size:1.1em;font-weight:700;outline:none;-webkit-appearance:none;appearance:none;cursor:pointer;transition:border-color 0.2s;';
-    const opt0=document.createElement('option');
-    opt0.value='';opt0.textContent='— selecionar —';opt0.disabled=true;opt0.selected=true;
-    sel.appendChild(opt0);
-    OPCOES[tipo].forEach(v=>{
-      const opt=document.createElement('option');
-      opt.value=v;
-      opt.textContent=tipo==='descanso'?v+'s':v;
-      sel.appendChild(opt);
-    });
-    sel.onchange=()=>{
-      const val=parseInt(sel.value);
-      document.getElementById('input-'+tipo).value=val;
-      const disp=document.getElementById('display-'+tipo);
-      disp.innerHTML=`<span class="meta-chip-val" style="color:var(--azul)">${val}${tipo==='descanso'?'s':''}</span>`;
-      sel.style.borderColor='var(--azul)';
-    };
-    container.appendChild(sel);
-  });
-  // Restaura valores salvos
-  const t=dados.treinoPersonalizado;
-  if(t){
-    if(t.series)selecionarChipPorValor('series',t.series);
-    if(t.reps)selecionarChipPorValor('reps',t.reps);
-    if(t.descanso)selecionarChipPorValor('descanso',t.descanso);
+let _customTipo=null;
+
+function selecionarValor(tipo,val,el){
+  document.getElementById('input-'+tipo).value=val;
+  // Atualiza display
+  const disp=document.getElementById('display-'+tipo);
+  if(tipo==='descanso'){
+    disp.innerHTML=val+'<span style="font-size:0.4em;color:var(--cinza);letter-spacing:0;vertical-align:middle;margin-left:4px">s</span>';
+  }else{
+    disp.textContent=val;
   }
+  disp.style.color='var(--azul)';
+  // Marca pill ativa
+  const pills=el.parentElement.querySelectorAll('.meta-pill');
+  pills.forEach(p=>p.classList.remove('ativo'));
+  el.classList.add('ativo');
 }
-function selecionarChip(tipo,val,el){}
-function selecionarChipPorValor(tipo,val){
-  const sel=document.getElementById('sel-'+tipo);
-  if(!sel)return;
-  sel.value=val;
+
+function abrirCustom(tipo){
+  _customTipo=tipo;
+  const titulos={series:'SÉRIES POR EXERCÍCIO',reps:'REPETIÇÕES POR SÉRIE',descanso:'DESCANSO (segundos)'};
+  document.getElementById('modal-custom-titulo').textContent=titulos[tipo]||'VALOR PERSONALIZADO';
+  document.getElementById('modal-custom-input').value='';
+  const modal=document.getElementById('modal-meta-custom');
+  modal.style.display='flex';
+  setTimeout(()=>document.getElementById('modal-custom-input').focus(),100);
+}
+
+function fecharCustom(){
+  document.getElementById('modal-meta-custom').style.display='none';
+  _customTipo=null;
+}
+
+function confirmarCustom(){
+  const val=parseInt(document.getElementById('modal-custom-input').value);
+  if(!val||val<1){showToast('Digite um número válido!');return;}
+  const tipo=_customTipo;
   document.getElementById('input-'+tipo).value=val;
   const disp=document.getElementById('display-'+tipo);
-  disp.innerHTML=`<span class="meta-chip-val" style="color:var(--azul)">${val}${tipo==='descanso'?'s':''}</span>`;
-  sel.style.borderColor='var(--azul)';
+  if(tipo==='descanso'){
+    disp.innerHTML=val+'<span style="font-size:0.4em;color:var(--cinza);letter-spacing:0;vertical-align:middle;margin-left:4px">s</span>';
+  }else{
+    disp.textContent=val;
+  }
+  disp.style.color='var(--azul)';
+  // Marca pill custom como ativa
+  const pillCustom=document.getElementById('pill-'+tipo+'-custom');
+  if(pillCustom){
+    pillCustom.textContent=tipo==='descanso'?val+'s':val;
+    const pills=pillCustom.parentElement.querySelectorAll('.meta-pill');
+    pills.forEach(p=>p.classList.remove('ativo'));
+    pillCustom.classList.add('ativo');
+  }
+  fecharCustom();
+}
+
+function buildChips(){
+  // Restaura valores salvos do treino anterior
+  const t=dados.treinoPersonalizado;
+  if(t){
+    if(t.series){
+      const pills=document.querySelectorAll('#musc-metas [onclick*="selecionarValor(\'series\'"]');
+      pills.forEach(p=>{
+        if(parseInt(p.dataset&&p.dataset.val||p.textContent)===t.series)p.classList.add('ativo');
+      });
+      document.getElementById('input-series').value=t.series;
+      document.getElementById('display-series').textContent=t.series;
+      document.getElementById('display-series').style.color='var(--azul)';
+    }
+    if(t.reps){
+      document.getElementById('input-reps').value=t.reps;
+      document.getElementById('display-reps').textContent=t.reps;
+      document.getElementById('display-reps').style.color='var(--azul)';
+    }
+    if(t.descanso){
+      document.getElementById('input-descanso').value=t.descanso;
+      const d=document.getElementById('display-descanso');
+      d.innerHTML=t.descanso+'<span style="font-size:0.4em;color:var(--cinza);letter-spacing:0;vertical-align:middle;margin-left:4px">s</span>';
+      d.style.color='var(--azul)';
+    }
+  }
 }
 function avancarMontagem(){
   if(Object.keys(montagemAtual).length===0){showToast('Escolha ao menos um exercício!');return;}
