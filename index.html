@@ -1351,7 +1351,7 @@ Sequência Pulse
       <div class="ex-carga-painel ex-carga-painel-dir">
         <div class="ex-peso-label">Nova carga</div>
         <div class="ex-carga-nova-row">
-          <input class="ex-peso-input" type="number" id="ex-peso-nova-input" placeholder="0" min="0" step="0.5" onchange="salvarPesoEx()">
+          <input class="ex-peso-input" type="number" id="ex-peso-nova-input" placeholder="0" min="0" step="0.5" oninput="debounceSalvarPeso()">
           <span class="ex-peso-unit">kg</span>
         </div>
       </div>
@@ -2979,8 +2979,11 @@ function abrirExecucao(letra){
   startTreino(letra);
 }
 function startTreino(letra){curTreino=letra;curExIdx=0;loadEx();mostrarMuscScreen('musc-ex');}
+let exSessionId=0;
 function loadEx(){
   clearTimerMusc();
+  exSessionId++;
+  const mySession=exSessionId;
   const ex=TREINOS[curTreino][curExIdx];
   seriesDone=new Array(ex.s).fill(false);
   const img=document.getElementById('exercise-gif');
@@ -2995,7 +2998,7 @@ function loadEx(){
   document.getElementById('ex-carga-atual-val').textContent=pesoSalvo?pesoSalvo+' kg':'—';
   document.getElementById('ex-peso-nova-input').value='';
   atualizarEvolucaoEx(chave);
-  buildProgress();buildSeries(ex.s,ex.r);
+  buildProgress();buildSeries(ex.s,ex.r,mySession);
   document.getElementById('btn-nxt').disabled=true;
 }
 function salvarPesoEx(){
@@ -3023,14 +3026,14 @@ function buildProgress(){
   const total=TREINOS[curTreino].length;el.innerHTML='';
   for(let i=0;i<total;i++){const d=document.createElement('div');d.className='pdot'+(i<curExIdx?' done':i===curExIdx?' cur':'');el.appendChild(d);}
 }
-function buildSeries(num,reps){
+function buildSeries(num,reps,session){
   const area=document.getElementById('series-row');area.innerHTML='';
   for(let i=0;i<num;i++){
     const item=document.createElement('div');item.className='s-item';
     const anilha=document.createElement('div');
     anilha.className='s-anilha'+(i===0?' clickable':'');
     anilha.id='sa-'+i;
-    anilha.onclick=()=>clickSerie(i,num);
+    anilha.onclick=()=>clickSerie(i,num,session);
     anilha.innerHTML=`<svg viewBox="0 0 68 46" xmlns="http://www.w3.org/2000/svg" width="68" height="46">
       <rect class="bar-centro" x="14" y="20" width="40" height="6" rx="2" fill="#1a2a4a" stroke="#3b82f6" stroke-width="1.2"/>
       <g class="lateral-pesos">
@@ -3049,30 +3052,39 @@ function buildSeries(num,reps){
     area.appendChild(item);
   }
 }
-function clickSerie(idx,totalSeries){
+let _pesoDebounce=null;
+function debounceSalvarPeso(){clearTimeout(_pesoDebounce);_pesoDebounce=setTimeout(salvarPesoEx,600);}
+function clickSerie(idx,totalSeries,session){
+  if(session!==exSessionId)return;
   const anilha=document.getElementById('sa-'+idx);
-  if(!anilha.classList.contains('clickable')||seriesDone[idx])return;
+  if(!anilha||!anilha.classList.contains('clickable')||seriesDone[idx])return;
   seriesDone[idx]=true;
   anilha.classList.remove('clickable');anilha.classList.add('done-s');
   if(navigator.vibrate)navigator.vibrate(40);
   const isLast=(idx===seriesDone.length-1);
   if(isLast){
     const timerEl=document.getElementById('st-'+idx);
-    timerEl.textContent='✓';timerEl.style.color='var(--azul)';
+    if(timerEl){timerEl.textContent='✓';timerEl.style.color='var(--azul)';}
     document.getElementById('btn-nxt').disabled=false;return;
   }
   let secs=60;
   const timerEl=document.getElementById('st-'+idx);
-  timerEl.textContent=secs+'s';timerEl.style.color='var(--verde)';
+  if(timerEl){timerEl.textContent=secs+'s';timerEl.style.color='var(--verde)';}
   clearTimerMusc();
   timerInterval=setInterval(()=>{
-    secs--;timerEl.textContent=secs+'s';
-    if(secs<=10)timerEl.style.color='var(--vermelho)';
+    if(session!==exSessionId){clearInterval(timerInterval);timerInterval=null;return;}
+    secs--;
+    const el=document.getElementById('st-'+idx);
+    if(el){el.textContent=secs+'s';}
+    if(secs<=10&&el)el.style.color='var(--vermelho)';
     if(secs<=0){
       clearInterval(timerInterval);timerInterval=null;
-      timerEl.textContent='✓';timerEl.style.color='var(--azul)';
+      if(session!==exSessionId)return;
+      const doneEl=document.getElementById('st-'+idx);
+      if(doneEl){doneEl.textContent='✓';doneEl.style.color='var(--azul)';}
       if(navigator.vibrate)navigator.vibrate([30,50,30]);
-      const next=document.getElementById('sa-'+(idx+1));if(next)next.classList.add('clickable');
+      const next=document.getElementById('sa-'+(idx+1));
+      if(next)next.classList.add('clickable');
     }
   },1000);
 }
