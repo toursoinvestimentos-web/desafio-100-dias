@@ -1371,12 +1371,12 @@ Sequência Pulse
         <div class="ex-peso-label">Última carga</div>
         <div class="ex-carga-val" id="ex-carga-atual-val">— kg</div>
       </div>
-   <div class="ex-carga-painel ex-carga-painel-dir">
+ <div class="ex-carga-painel ex-carga-painel-dir">
         <div class="ex-peso-label">Nova carga</div>
-        <div class="ex-carga-nova-row" style="display:flex;align-items:center;gap:6px;">
+        <div class="ex-carga-nova-row" style="display:flex;align-items:center;gap:4px;">
           <input class="ex-peso-input" type="number" id="ex-peso-nova-input" placeholder="0" min="0" step="0.5">
           <span class="ex-peso-unit">kg</span>
-          <button onclick="salvarPesoEx()" style="background:none;border:none;color:var(--branco);font-size:1.4em;cursor:pointer;padding:0 2px;line-height:1;opacity:0.75;" title="Confirmar carga">↻</button>
+          <button onclick="salvarPesoEx()" style="background:none;border:none;color:var(--branco);font-size:1.7em;cursor:pointer;padding:0 6px 0 4px;line-height:1;opacity:0.85;flex-shrink:0;" title="Confirmar carga">↻</button>
         </div>
       </div>
     </div>
@@ -3007,32 +3007,34 @@ function selecionarAB(nomeEx,treino,idSeg){
   btns[1].className='ab-btn'+(alocado==='B'?' ativo-b':'');
 }
 function buildChips(){
-  // Séries: 1 a 4
-  const cS=document.getElementById('chips-series');
-  cS.innerHTML='';
-  for(let v=1;v<=4;v++){
-    const c=document.createElement('button');
-    c.className='meta-chip';c.textContent=v;
-    c.onclick=()=>selecionarChip('series',v,c);
-    cS.appendChild(c);
-  }
-  // Reps: 5 a 20
-  const cR=document.getElementById('chips-reps');
-  cR.innerHTML='';
-  for(let v=5;v<=20;v++){
-    const c=document.createElement('button');
-    c.className='meta-chip';c.textContent=v;
-    c.onclick=()=>selecionarChip('reps',v,c);
-    cR.appendChild(c);
-  }
-  // Descanso: 30, 45, 60s
-  const cD=document.getElementById('chips-descanso');
-  cD.innerHTML='';
-  [30,45,60].forEach(v=>{
-    const c=document.createElement('button');
-    c.className='meta-chip';c.textContent=v+'s';
-    c.onclick=()=>selecionarChip('descanso',v,c);
-    cD.appendChild(c);
+  const OPCOES={
+    series:[2,3,4,5,6],
+    reps:[8,10,12,15,16,17,18,20],
+    descanso:[10,20,30,45,60,70,80]
+  };
+  ['series','reps','descanso'].forEach(tipo=>{
+    const container=document.getElementById('chips-'+tipo);
+    container.innerHTML='';
+    const sel=document.createElement('select');
+    sel.id='sel-'+tipo;
+    sel.style.cssText='background:var(--bg);border:1.5px solid var(--card2);border-radius:10px;color:var(--branco);padding:10px 14px;width:100%;font-family:var(--fonte);font-size:1.1em;font-weight:700;outline:none;-webkit-appearance:none;appearance:none;cursor:pointer;transition:border-color 0.2s;';
+    const opt0=document.createElement('option');
+    opt0.value='';opt0.textContent='— selecionar —';opt0.disabled=true;opt0.selected=true;
+    sel.appendChild(opt0);
+    OPCOES[tipo].forEach(v=>{
+      const opt=document.createElement('option');
+      opt.value=v;
+      opt.textContent=tipo==='descanso'?v+'s':v;
+      sel.appendChild(opt);
+    });
+    sel.onchange=()=>{
+      const val=parseInt(sel.value);
+      document.getElementById('input-'+tipo).value=val;
+      const disp=document.getElementById('display-'+tipo);
+      disp.innerHTML=`<span class="meta-chip-val" style="color:var(--azul)">${val}${tipo==='descanso'?'s':''}</span>`;
+      sel.style.borderColor='var(--azul)';
+    };
+    container.appendChild(sel);
   });
   // Restaura valores salvos
   const t=dados.treinoPersonalizado;
@@ -3042,21 +3044,15 @@ function buildChips(){
     if(t.descanso)selecionarChipPorValor('descanso',t.descanso);
   }
 }
-function selecionarChip(tipo,val,el){
-  const container=el.parentElement;
-  container.querySelectorAll('.meta-chip').forEach(c=>c.classList.remove('selecionado'));
-  el.classList.add('selecionado');
+function selecionarChip(tipo,val,el){}
+function selecionarChipPorValor(tipo,val){
+  const sel=document.getElementById('sel-'+tipo);
+  if(!sel)return;
+  sel.value=val;
   document.getElementById('input-'+tipo).value=val;
   const disp=document.getElementById('display-'+tipo);
   disp.innerHTML=`<span class="meta-chip-val" style="color:var(--azul)">${val}${tipo==='descanso'?'s':''}</span>`;
-}
-function selecionarChipPorValor(tipo,val){
-  const container=document.getElementById('chips-'+tipo);
-  if(!container)return;
-  container.querySelectorAll('.meta-chip').forEach(c=>{
-    const chipVal=tipo==='descanso'?parseInt(c.textContent):parseInt(c.textContent);
-    if(chipVal===val){selecionarChip(tipo,val,c);}
-  });
+  sel.style.borderColor='var(--azul)';
 }
 function avancarMontagem(){
   if(Object.keys(montagemAtual).length===0){showToast('Escolha ao menos um exercício!');return;}
