@@ -1233,11 +1233,49 @@ Sequência Pulse
     <button class="btn" onclick="salvarTreino()">Salvar e ver meu treino →</button>
   </div>
 
-  <!-- TELA E: Execução -->
-  <div id="musc-execucao" class="musc-screen">
-    <div id="execucao-lista"></div>
-    <button class="btn" style="margin-top:8px" onclick="finalizarTreinoExec()">✅ Registrar treino</button>
-    <button class="btn btn-ghost" style="margin-top:8px" onclick="voltarInicio()">← Voltar</button>
+<!-- TELA E: Execução -->
+  <div id="musc-ex" class="musc-screen">
+    <div class="ex-header">
+      <div class="ex-grupo" id="ex-grp">—</div>
+      <div class="ex-nome" id="ex-nm">—</div>
+      <div class="ex-reps" id="ex-reps">—</div>
+    </div>
+    <div class="progress-dots" id="ex-progress"></div>
+    <div class="gif-wrap">
+      <div class="gif-loading" id="gif-loading">⏳ Carregando...</div>
+      <img id="exercise-gif" style="display:none"
+        onload="document.getElementById('gif-loading').style.display='none';this.style.display='block'"
+        onerror="document.getElementById('gif-loading').style.display='flex';document.getElementById('gif-loading').textContent='⚠ GIF não disponível';this.style.display='none'">
+    </div>
+    <div class="ex-carga-row">
+      <div class="ex-carga-painel">
+        <div class="ex-peso-label">Última carga</div>
+        <div class="ex-carga-val" id="ex-carga-atual-val">— kg</div>
+      </div>
+      <div class="ex-carga-painel ex-carga-painel-dir">
+        <div class="ex-peso-label">Nova carga</div>
+        <div class="ex-carga-nova-row">
+          <input class="ex-peso-input" type="number" id="ex-peso-nova-input" placeholder="0" min="0" step="0.5" onchange="salvarPesoEx()">
+          <span class="ex-peso-unit">kg</span>
+        </div>
+      </div>
+    </div>
+    <div class="ex-carga-evolucao" id="ex-carga-evolucao"></div>
+    <div class="series-row" id="series-row"></div>
+    <button class="btn" id="btn-nxt" onclick="nextEx()" disabled>Próximo exercício →</button>
+  </div>
+  <div id="musc-done" class="musc-screen">
+    <div class="done-screen">
+      <div class="done-icon">🏆</div>
+      <div class="done-titulo" id="done-t">CONCLUÍDO</div>
+      <div class="done-sub" id="done-s"></div>
+      <div class="done-stats">
+        <div class="stat-item"><div class="stat-val" id="done-ex">—</div><div class="stat-label">exercícios</div></div>
+        <div class="stat-item"><div class="stat-val" id="done-ser">—</div><div class="stat-label">séries</div></div>
+      </div>
+      <button class="btn" style="margin-bottom:12px" onclick="finalizarMusculacao()">✅ Registrar treino</button>
+      <button class="btn btn-ghost" onclick="fecharMusculacao()">← Voltar</button>
+    </div>
   </div>
 </div>
 
@@ -2688,23 +2726,17 @@ function salvarAlimento(){
 // MUSCULAÇÃO v1.6
 // ═══════════════════════════════
 let montagemAtual={};
-let curTreino='A',curExIdx=0,seriesDone=[],timerInterval=null;
+let execTreinoLetra='A';
 
 function abrirMusculacao(){
   document.getElementById('screen-musculacao').classList.add('ativo');
-  document.getElementById('musc-header-title').textContent='MUSCULAÇÃO';
-  document.getElementById('musc-header-sub').textContent='Escolha o treino do dia';
   renderMusculacaoInicio();
   mostrarMuscScreen('musc-inicio');
 }
 function fecharMusculacao(){
-  clearTimerMusc();
   document.getElementById('screen-musculacao').classList.remove('ativo');
 }
 function voltarInicio(){
-  clearTimerMusc();
-  document.getElementById('musc-header-title').textContent='MUSCULAÇÃO';
-  document.getElementById('musc-header-sub').textContent='Escolha o treino do dia';
   mostrarMuscScreen('musc-inicio');
   renderMusculacaoInicio();
 }
@@ -2713,7 +2745,6 @@ function mostrarMuscScreen(id){
   document.getElementById(id).classList.add('ativo');
   window.scrollTo(0,0);
 }
-
 function renderMusculacaoInicio(){
   const treino=dados.treinoPersonalizado;
   const sem=document.getElementById('musc-sem-treino');
@@ -2722,181 +2753,12 @@ function renderMusculacaoInicio(){
     sem.style.display='block';com.style.display='none';
   }else{
     sem.style.display='none';com.style.display='block';
+    const s=treino.series||'—';const r=treino.reps||'—';
+    document.getElementById('treino-a-qtd').textContent=treino.exerciciosA.length+' exercícios · '+s+' séries · '+r+' reps';
+    document.getElementById('treino-b-qtd').textContent=treino.exerciciosB.length+' exercícios · '+s+' séries · '+r+' reps';
     document.getElementById('treino-ultima-atualizacao').textContent=treino.atualizadoEm?formatarData(treino.atualizadoEm):'—';
-    // Renderiza cards A e B com sistema de próximo/bloqueado
-    const proximo=dados.proximoTreino||'A';
-    const listaA=treino.exerciciosA||[];
-    const listaB=treino.exerciciosB||[];
-    const gruposA=[...new Set(listaA.map(e=>e.g))].join(' · ');
-    const gruposB=[...new Set(listaB.map(e=>e.g))].join(' · ');
-    document.getElementById('ab-grid-novo').innerHTML=['A','B'].map(letra=>{
-      const ehProximo=letra===proximo;
-      const lista=letra==='A'?listaA:listaB;
-      const grupos=letra==='A'?gruposA:gruposB;
-      const s=treino.series||'—';const r=treino.reps||'—';
-      return`<div class="ab-card ${ehProximo?'proximo':''} ${!ehProximo?'bloqueado':''}" onclick="${ehProximo?'startTreinoPersonalizado(\''+letra+'\')':''}">
-        <div class="ab-card-titulo">TREINO ${letra}</div>
-        <div class="ab-card-sub">${grupos||'—'}</div>
-        <div style="font-size:0.7em;color:var(--cinza);margin-top:4px">${lista.length} exercícios · ${s} séries · ${r} reps</div>
-        <div class="ab-card-badge ${ehProximo?'badge-proximo':'badge-bloq'}">${ehProximo?'▶ Próximo':'🔒 Aguardando'}</div>
-      </div>`;
-    }).join('');
   }
 }
-
-function startTreinoPersonalizado(letra){
-  curTreino=letra;curExIdx=0;
-  loadExPersonalizado();
-  document.getElementById('musc-header-title').textContent='TREINO '+letra;
-  document.getElementById('musc-header-sub').textContent=(dados.treinoPersonalizado?dados.treinoPersonalizado.exerciciosA.length+dados.treinoPersonalizado.exerciciosB.length:0)+' exercícios';
-  mostrarMuscScreen('musc-ex');
-}
-
-function getTreinoAtual(){
-  const treino=dados.treinoPersonalizado;
-  if(!treino)return[];
-  return curTreino==='A'?treino.exerciciosA:treino.exerciciosB;
-}
-
-function loadExPersonalizado(){
-  clearTimerMusc();
-  const lista=getTreinoAtual();
-  if(!lista.length)return;
-  const treino=dados.treinoPersonalizado;
-  const ex=lista[curExIdx];
-  const s=treino.series||3;
-  const r=treino.reps||10;
-  seriesDone=new Array(s).fill(false);
-  const img=document.getElementById('exercise-gif');
-  const loading=document.getElementById('gif-loading');
-  img.style.display='none';loading.style.display='flex';loading.textContent='⏳ Carregando...';img.src='';
-  setTimeout(()=>{img.src=ex.gif+'?t='+Date.now();},50);
-  document.getElementById('ex-grp').textContent=ex.g;
-  document.getElementById('ex-nm').textContent=ex.n;
-  document.getElementById('ex-reps').textContent=s+' séries · '+r+' repetições';
-  const chave=curTreino+'_'+ex.n;
-  const pesoSalvo=dados.pesosExercicios?dados.pesosExercicios[chave]:null;
-  document.getElementById('ex-carga-atual-val').textContent=pesoSalvo?pesoSalvo+' kg':'—';
-  document.getElementById('ex-peso-nova-input').value='';
-  atualizarEvolucaoEx(chave);
-  buildProgressPersonalizado();
-  buildSeries(s,r);
-  document.getElementById('btn-nxt').disabled=true;
-}
-
-function salvarPesoEx(){
-  const lista=getTreinoAtual();
-  if(!lista.length)return;
-  const ex=lista[curExIdx];
-  const chave=curTreino+'_'+ex.n;
-  const val=parseFloat(document.getElementById('ex-peso-nova-input').value)||0;
-  if(val>0){
-    if(!dados.pesosExercicios)dados.pesosExercicios={};
-    if(!dados.pesosExerciciosInicial)dados.pesosExerciciosInicial={};
-    if(!dados.pesosExerciciosInicial[chave])dados.pesosExerciciosInicial[chave]=val;
-    dados.pesosExercicios[chave]=val;
-    document.getElementById('ex-carga-atual-val').textContent=val+' kg';
-    salvarDados();atualizarEvolucaoEx(chave);
-  }
-}
-
-function atualizarEvolucaoEx(chave){
-  const el=document.getElementById('ex-carga-evolucao');
-  if(!dados.pesosExercicios||!dados.pesosExerciciosInicial){el.innerHTML='';return;}
-  const atual=dados.pesosExercicios[chave];const inicial=dados.pesosExerciciosInicial[chave];
-  if(!atual||!inicial){el.innerHTML='';return;}
-  const delta=Math.round((atual-inicial)/inicial*100);
-  if(delta===0){el.innerHTML=`<span style="font-size:0.75em;color:var(--cinza)">Carga inicial: ${inicial}kg</span>`;return;}
-  const seta=delta>0?'↑':'↓';const cor=delta>0?'var(--verde)':'var(--vermelho)';
-  el.innerHTML=`<span style="color:${cor};font-weight:700">${seta} ${Math.abs(delta)}%</span> <span style="font-size:0.72em;color:var(--cinza)">vs inicial (${inicial}kg)</span>`;
-}
-
-function buildProgressPersonalizado(){
-  const el=document.getElementById('ex-progress');
-  const lista=getTreinoAtual();
-  const total=lista.length;el.innerHTML='';
-  for(let i=0;i<total;i++){const d=document.createElement('div');d.className='pdot'+(i<curExIdx?' done':i===curExIdx?' cur':'');el.appendChild(d);}
-}
-
-function buildSeries(num,reps){
-  const area=document.getElementById('series-row');area.innerHTML='';
-  for(let i=0;i<num;i++){
-    const item=document.createElement('div');item.className='s-item';
-    const anilha=document.createElement('div');
-    anilha.className='s-anilha'+(i===0?' clickable':'');
-    anilha.id='sa-'+i;
-    anilha.onclick=()=>clickSerie(i,num);
-    anilha.innerHTML=`<svg viewBox="0 0 68 46" xmlns="http://www.w3.org/2000/svg" width="68" height="46">
-      <rect class="bar-centro" x="14" y="20" width="40" height="6" rx="2" fill="#1a2a4a" stroke="#3b82f6" stroke-width="1.2"/>
-      <g class="lateral-pesos">
-        <rect x="2" y="11" width="7" height="24" rx="3" fill="#1e3050" stroke="#60a5fa" stroke-width="1.4"/>
-        <rect x="8" y="8" width="6" height="30" rx="2.5" fill="#1a2844" stroke="#60a5fa" stroke-width="1.3"/>
-        <rect x="59" y="11" width="7" height="24" rx="3" fill="#1e3050" stroke="#60a5fa" stroke-width="1.4"/>
-        <rect x="54" y="8" width="6" height="30" rx="2.5" fill="#1a2844" stroke="#60a5fa" stroke-width="1.3"/>
-        <rect x="10" y="18" width="4" height="10" rx="2" fill="#1a3060" stroke="#3b82f6" stroke-width="1.2"/>
-        <rect x="54" y="18" width="4" height="10" rx="2" fill="#1a3060" stroke="#3b82f6" stroke-width="1.2"/>
-      </g>
-    </svg>
-    <div style="font-size:0.75em;color:var(--cinza);margin-top:1px">${reps}×</div>`;
-    const timer=document.createElement('div');timer.className='s-timer';timer.id='st-'+i;
-    const label=document.createElement('div');label.className='s-label';label.textContent='Série '+(i+1);
-    item.appendChild(anilha);item.appendChild(timer);item.appendChild(label);
-    area.appendChild(item);
-  }
-}
-
-function clickSerie(idx,totalSeries){
-  const anilha=document.getElementById('sa-'+idx);
-  if(!anilha.classList.contains('clickable')||seriesDone[idx])return;
-  seriesDone[idx]=true;
-  anilha.classList.remove('clickable');anilha.classList.add('done-s');
-  if(navigator.vibrate)navigator.vibrate(40);
-  const isLast=(idx===seriesDone.length-1);
-  if(isLast){
-    const timerEl=document.getElementById('st-'+idx);
-    timerEl.textContent='✓';timerEl.style.color='var(--azul)';
-    document.getElementById('btn-nxt').disabled=false;return;
-  }
-  let secs=60;
-  const timerEl=document.getElementById('st-'+idx);
-  timerEl.textContent=secs+'s';timerEl.style.color='var(--verde)';
-  clearTimerMusc();
-  timerInterval=setInterval(()=>{
-    secs--;timerEl.textContent=secs+'s';
-    if(secs<=10)timerEl.style.color='var(--vermelho)';
-    if(secs<=0){
-      clearInterval(timerInterval);timerInterval=null;
-      timerEl.textContent='✓';timerEl.style.color='var(--azul)';
-      if(navigator.vibrate)navigator.vibrate([30,50,30]);
-      const next=document.getElementById('sa-'+(idx+1));if(next)next.classList.add('clickable');
-    }
-  },1000);
-}
-
-function clearTimerMusc(){if(timerInterval){clearInterval(timerInterval);timerInterval=null;}}
-
-function nextEx(){
-  const lista=getTreinoAtual();
-  curExIdx++;
-  if(curExIdx>=lista.length){
-    const treino=dados.treinoPersonalizado;
-    const totalSeries=(treino?treino.series:3)*lista.length;
-    document.getElementById('done-ex').textContent=lista.length;
-    document.getElementById('done-ser').textContent=totalSeries;
-    document.getElementById('done-t').textContent='TREINO '+curTreino+' CONCLUÍDO!';
-    document.getElementById('done-s').textContent='Ótimo trabalho! Clique abaixo para registrar.';
-    mostrarMuscScreen('musc-done');
-  }else{loadExPersonalizado();}
-}
-
-function finalizarMusculacao(){
-  const proximo=curTreino==='A'?'B':'A';
-  dados.proximoTreino=proximo;
-  registrarTreino('Musculação',{treinoLetra:curTreino});
-  fecharMusculacao();
-  showToast(`Treino ${curTreino} registrado! Próximo: ${proximo}`);
-}
-
 function iniciarMontagem(atualizar){
   montagemAtual={};
   if(atualizar&&dados.treinoPersonalizado){
@@ -2910,7 +2772,6 @@ function iniciarMontagem(atualizar){
     btn.disabled=true;btn.style.opacity='0.32';btn.style.cursor='not-allowed';
   }else{irParaMontagem();}
 }
-
 function toggleConsent(){
   const cb=document.getElementById('consent-cb');
   const btn=document.getElementById('btn-avancar-consent');
@@ -2918,15 +2779,12 @@ function toggleConsent(){
   const m=cb.classList.contains('marcado');
   btn.disabled=!m;btn.style.opacity=m?'1':'0.32';btn.style.cursor=m?'pointer':'not-allowed';
 }
-
 function avancarConsent(){
   dados.consentimentoMusc=true;salvarDados();irParaMontagem();
 }
-
 function irParaMontagem(){
   renderMontagem();mostrarMuscScreen('musc-montagem');
 }
-
 function renderMontagem(){
   const container=document.getElementById('montagem-lista');
   let html='';
@@ -2959,7 +2817,6 @@ function renderMontagem(){
   });
   container.innerHTML=html;
 }
-
 function selecionarAB(nomeEx,treino,idSeg){
   const jaEra=montagemAtual[nomeEx]===treino;
   if(jaEra){delete montagemAtual[nomeEx];}else{montagemAtual[nomeEx]=treino;}
@@ -2970,7 +2827,6 @@ function selecionarAB(nomeEx,treino,idSeg){
   btns[0].className='ab-btn'+(alocado==='A'?' ativo-a':'');
   btns[1].className='ab-btn'+(alocado==='B'?' ativo-b':'');
 }
-
 function avancarMontagem(){
   if(Object.keys(montagemAtual).length===0){showToast('Escolha ao menos um exercício!');return;}
   document.getElementById('input-series').value='';
@@ -2981,7 +2837,6 @@ function avancarMontagem(){
   }
   mostrarMuscScreen('musc-metas');
 }
-
 function salvarTreino(){
   const series=parseInt(document.getElementById('input-series').value)||0;
   const reps=parseInt(document.getElementById('input-reps').value)||0;
@@ -2996,20 +2851,131 @@ function salvarTreino(){
   });
   dados.treinoPersonalizado={exerciciosA,exerciciosB,series,reps,atualizadoEm:hoje()};
   salvarDados();showToast('Treino salvo! 💪');
-  document.getElementById('musc-header-title').textContent='MUSCULAÇÃO';
-  document.getElementById('musc-header-sub').textContent='Escolha o treino do dia';
-  mostrarMuscScreen('musc-inicio');
-  renderMusculacaoInicio();
+  mostrarMuscScreen('musc-inicio');renderMusculacaoInicio();
 }
-
-function abrirGif(nome,gif){
-  document.getElementById('gif-modal-nome').textContent=nome;
-  document.getElementById('gif-modal-img').src=gif;
-  document.getElementById('gif-modal').classList.add('ativo');
+function abrirExecucao(letra){
+  const treino=dados.treinoPersonalizado;
+  if(!treino)return;
+  const lista=letra==='A'?treino.exerciciosA:treino.exerciciosB;
+  if(!lista||!lista.length){showToast('Nenhum exercício no Treino '+letra);return;}
+  // Monta TREINOS dinâmico no formato que o motor original espera
+  TREINOS[letra]=lista.map(ex=>({n:ex.n,g:ex.g,gif:ex.gif,s:treino.series,r:treino.reps}));
+  startTreino(letra);
 }
-function fecharGifModal(){
-  document.getElementById('gif-modal').classList.remove('ativo');
-  document.getElementById('gif-modal-img').src='';
+function startTreino(letra){curTreino=letra;curExIdx=0;loadEx();mostrarMuscScreen('musc-ex');}
+function loadEx(){
+  clearTimerMusc();
+  const ex=TREINOS[curTreino][curExIdx];
+  seriesDone=new Array(ex.s).fill(false);
+  const img=document.getElementById('exercise-gif');
+  const loading=document.getElementById('gif-loading');
+  img.style.display='none';loading.style.display='flex';loading.textContent='⏳ Carregando...';img.src='';
+  setTimeout(()=>{img.src=ex.gif+'?t='+Date.now();},50);
+  document.getElementById('ex-grp').textContent=ex.g;
+  document.getElementById('ex-nm').textContent=ex.n;
+  document.getElementById('ex-reps').textContent=ex.s+' séries · '+ex.r+' repetições';
+  const chave=curTreino+'_'+ex.n;
+  const pesoSalvo=dados.pesosExercicios[chave]||null;
+  document.getElementById('ex-carga-atual-val').textContent=pesoSalvo?pesoSalvo+' kg':'—';
+  document.getElementById('ex-peso-nova-input').value='';
+  atualizarEvolucaoEx(chave);
+  buildProgress();buildSeries(ex.s,ex.r);
+  document.getElementById('btn-nxt').disabled=true;
+}
+function salvarPesoEx(){
+  const ex=TREINOS[curTreino][curExIdx];
+  const chave=curTreino+'_'+ex.n;
+  const val=parseFloat(document.getElementById('ex-peso-nova-input').value)||0;
+  if(val>0){
+    if(!dados.pesosExerciciosInicial[chave])dados.pesosExerciciosInicial[chave]=val;
+    dados.pesosExercicios[chave]=val;
+    document.getElementById('ex-carga-atual-val').textContent=val+' kg';
+    salvarDados();atualizarEvolucaoEx(chave);
+  }
+}
+function atualizarEvolucaoEx(chave){
+  const el=document.getElementById('ex-carga-evolucao');
+  const atual=dados.pesosExercicios[chave];const inicial=dados.pesosExerciciosInicial[chave];
+  if(!atual||!inicial){el.innerHTML='';return;}
+  const delta=Math.round((atual-inicial)/inicial*100);
+  if(delta===0){el.innerHTML=`<span style="font-size:0.75em;color:var(--cinza)">Carga inicial: ${inicial}kg</span>`;return;}
+  const seta=delta>0?'↑':'↓';const cor=delta>0?'var(--verde)':'var(--vermelho)';
+  el.innerHTML=`<span style="color:${cor};font-weight:700">${seta} ${Math.abs(delta)}%</span> <span style="font-size:0.72em;color:var(--cinza)">vs inicial (${inicial}kg)</span>`;
+}
+function buildProgress(){
+  const el=document.getElementById('ex-progress');
+  const total=TREINOS[curTreino].length;el.innerHTML='';
+  for(let i=0;i<total;i++){const d=document.createElement('div');d.className='pdot'+(i<curExIdx?' done':i===curExIdx?' cur':'');el.appendChild(d);}
+}
+function buildSeries(num,reps){
+  const area=document.getElementById('series-row');area.innerHTML='';
+  for(let i=0;i<num;i++){
+    const item=document.createElement('div');item.className='s-item';
+    const anilha=document.createElement('div');
+    anilha.className='s-anilha'+(i===0?' clickable':'');
+    anilha.id='sa-'+i;
+    anilha.onclick=()=>clickSerie(i,num);
+    anilha.innerHTML=`<svg viewBox="0 0 68 46" xmlns="http://www.w3.org/2000/svg" width="68" height="46">
+      <rect class="bar-centro" x="14" y="20" width="40" height="6" rx="2" fill="#1a2a4a" stroke="#3b82f6" stroke-width="1.2"/>
+      <g class="lateral-pesos">
+        <rect x="2" y="11" width="7" height="24" rx="3" fill="#1e3050" stroke="#60a5fa" stroke-width="1.4"/>
+        <rect x="8" y="8" width="6" height="30" rx="2.5" fill="#1a2844" stroke="#60a5fa" stroke-width="1.3"/>
+        <rect x="59" y="11" width="7" height="24" rx="3" fill="#1e3050" stroke="#60a5fa" stroke-width="1.4"/>
+        <rect x="54" y="8" width="6" height="30" rx="2.5" fill="#1a2844" stroke="#60a5fa" stroke-width="1.3"/>
+        <rect x="10" y="18" width="4" height="10" rx="2" fill="#1a3060" stroke="#3b82f6" stroke-width="1.2"/>
+        <rect x="54" y="18" width="4" height="10" rx="2" fill="#1a3060" stroke="#3b82f6" stroke-width="1.2"/>
+      </g>
+    </svg>
+    <div style="font-size:0.75em;color:var(--cinza);margin-top:1px">${reps}×</div>`;
+    const timer=document.createElement('div');timer.className='s-timer';timer.id='st-'+i;
+    const label=document.createElement('div');label.className='s-label';label.textContent='Série '+(i+1);
+    item.appendChild(anilha);item.appendChild(timer);item.appendChild(label);
+    area.appendChild(item);
+  }
+}
+function clickSerie(idx,totalSeries){
+  const anilha=document.getElementById('sa-'+idx);
+  if(!anilha.classList.contains('clickable')||seriesDone[idx])return;
+  seriesDone[idx]=true;
+  anilha.classList.remove('clickable');anilha.classList.add('done-s');
+  if(navigator.vibrate)navigator.vibrate(40);
+  const isLast=(idx===seriesDone.length-1);
+  if(isLast){
+    const timerEl=document.getElementById('st-'+idx);
+    timerEl.textContent='✓';timerEl.style.color='var(--azul)';
+    document.getElementById('btn-nxt').disabled=false;return;
+  }
+  let secs=60;
+  const timerEl=document.getElementById('st-'+idx);
+  timerEl.textContent=secs+'s';timerEl.style.color='var(--verde)';
+  clearTimerMusc();
+  timerInterval=setInterval(()=>{
+    secs--;timerEl.textContent=secs+'s';
+    if(secs<=10)timerEl.style.color='var(--vermelho)';
+    if(secs<=0){
+      clearInterval(timerInterval);timerInterval=null;
+      timerEl.textContent='✓';timerEl.style.color='var(--azul)';
+      if(navigator.vibrate)navigator.vibrate([30,50,30]);
+      const next=document.getElementById('sa-'+(idx+1));if(next)next.classList.add('clickable');
+    }
+  },1000);
+}
+function clearTimerMusc(){if(timerInterval){clearInterval(timerInterval);timerInterval=null;}}
+function nextEx(){
+  curExIdx++;
+  if(curExIdx>=TREINOS[curTreino].length){
+    const total=TREINOS[curTreino].length;let totalSeries=0;TREINOS[curTreino].forEach(e=>totalSeries+=e.s);
+    document.getElementById('done-ex').textContent=total;document.getElementById('done-ser').textContent=totalSeries;
+    document.getElementById('done-t').textContent='TREINO '+curTreino+' CONCLUÍDO!';
+    document.getElementById('done-s').textContent='Ótimo trabalho! Clique abaixo para registrar.';
+    mostrarMuscScreen('musc-done');
+  }else{loadEx();}
+}
+function finalizarMusculacao(){
+  const proximo=curTreino==='A'?'B':'A';
+  dados.proximoTreino=proximo;
+  registrarTreino('Musculação',{treinoLetra:curTreino});
+  fecharMusculacao();showToast(`Treino ${curTreino} registrado! Próximo: ${proximo}`);
 }
 
 // ═══════════════════════════════
