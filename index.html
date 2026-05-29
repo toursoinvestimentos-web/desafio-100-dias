@@ -627,6 +627,12 @@ body{
 .meta-global-label{font-size:0.65em;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--cinza);margin-bottom:8px;}
 .meta-global-input{background:var(--bg);border:1.5px solid var(--card2);border-radius:10px;color:var(--branco);padding:12px 14px;width:100%;font-family:var(--fonte-display);font-size:1.8em;letter-spacing:1px;outline:none;transition:border-color 0.2s;-webkit-appearance:none;box-sizing:border-box;}
 .meta-global-input:focus{border-color:var(--azul);}
+.meta-chips-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px;}
+.meta-chip{padding:10px 18px;border-radius:20px;border:1.5px solid var(--card2);background:var(--card2);color:var(--cinza);font-size:0.85em;font-weight:700;cursor:pointer;transition:all 0.15s;}
+.meta-chip:active{transform:scale(0.94);}
+.meta-chip.selecionado{border-color:var(--azul);background:var(--azul-dim);color:var(--azul);}
+.meta-chip-val{font-family:var(--fonte-display);font-size:2em;color:var(--azul);letter-spacing:1px;min-height:1.2em;display:block;}
+.meta-chip-placeholder{font-family:var(--fonte-display);font-size:2em;color:var(--cinza2);letter-spacing:1px;display:block;}
 .meta-global-desc{font-size:0.68em;color:var(--cinza);line-height:1.6;margin-top:8px;}
 .meta-legal-note{background:var(--card2);border-radius:10px;padding:10px 14px;border-left:3px solid var(--azul);font-size:0.7em;color:var(--cinza);line-height:1.6;margin-bottom:14px;}
 
@@ -1267,7 +1273,7 @@ Sequência Pulse
       </div>
     </div>
     <div id="musc-com-treino" style="display:none">
-     <div id="treino-a-card" class="treino-montado-card">
+   <div id="treino-a-card" class="treino-montado-card">
         <div class="treino-montado-badge badge-treino-a">A</div>
         <div class="treino-montado-info">
           <div class="treino-montado-nome">Treino A</div>
@@ -1275,7 +1281,7 @@ Sequência Pulse
         </div>
         <span style="font-size:1.2em;color:var(--cinza)">›</span>
       </div>
-   <div id="treino-b-card" class="treino-montado-card">
+      <div id="treino-b-card" class="treino-montado-card">
         <div class="treino-montado-badge badge-treino-b">B</div>
         <div class="treino-montado-info">
           <div class="treino-montado-nome">Treino B</div>
@@ -1312,23 +1318,40 @@ Sequência Pulse
     <div style="font-size:0.68em;color:var(--cinza);text-align:center;margin-top:6px">Escolha o que quiser — sem obrigação de marcar todos</div>
   </div>
 
-  <!-- TELA D: Séries e reps -->
- <div id="musc-metas" class="musc-screen">
-    <div style="font-size:0.9em;color:var(--cinza);margin-bottom:18px;line-height:1.7;padding:14px 16px;background:var(--card);border-radius:12px;border-left:3px solid var(--azul)">Você decide. O valor será aplicado a todos os exercícios que você escolheu.</div>
+
+<!-- TELA D: Séries, reps e descanso -->
+  <div id="musc-metas" class="musc-screen">
+    <div style="font-size:0.9em;color:var(--cinza);margin-bottom:18px;line-height:1.7;padding:14px 16px;background:var(--card);border-radius:12px;border-left:3px solid var(--azul)">Você decide. Os valores serão aplicados a todos os exercícios escolhidos.</div>
+
     <div class="meta-global-box">
       <div class="meta-global-label">Séries por exercício</div>
-      <input class="meta-global-input" type="number" id="input-series" min="1" max="20" placeholder="">
+      <span class="meta-chip-val" id="display-series"><span class="meta-chip-placeholder">—</span></span>
+      <div class="meta-chips-row" id="chips-series"></div>
       <div class="meta-global-desc">Quantas vezes você vai realizar o conjunto completo de repetições em cada exercício.</div>
     </div>
-    <div class="meta-global-box">
+
+    <div class="meta-global-box" style="margin-top:14px;">
       <div class="meta-global-label">Repetições por série</div>
-      <input class="meta-global-input" type="number" id="input-reps" min="1" max="100" placeholder="">
+      <span class="meta-chip-val" id="display-reps"><span class="meta-chip-placeholder">—</span></span>
+      <div class="meta-chips-row" id="chips-reps"></div>
       <div class="meta-global-desc">Quantas vezes você repete o movimento dentro de cada série.</div>
     </div>
-  <div style="font-size:0.68em;color:var(--cinza);text-align:center;margin-bottom:14px;line-height:1.5;">💡 Seu professor de Ed. Física pode te orientar nos valores ideais.</div>
-    <button class="btn" onclick="salvarTreino()">Salvar e ver meu treino →</button>
-  </div>
 
+    <div class="meta-global-box" style="margin-top:14px;">
+      <div class="meta-global-label">Descanso entre séries</div>
+      <span class="meta-chip-val" id="display-descanso"><span class="meta-chip-placeholder">—</span></span>
+      <div class="meta-chips-row" id="chips-descanso"></div>
+      <div class="meta-global-desc">Tempo de pausa em segundos entre cada série. Consulte seu professor para o valor ideal.</div>
+    </div>
+
+    <div style="font-size:0.68em;color:var(--cinza);text-align:center;margin:16px 0 14px;line-height:1.5;">💡 Seu professor de Ed. Física pode te orientar nos valores ideais.</div>
+    <button class="btn" onclick="salvarTreino()">Salvar e ver meu treino →</button>
+
+    <!-- inputs hidden para compatibilidade com salvarTreino() -->
+    <input type="hidden" id="input-series">
+    <input type="hidden" id="input-reps">
+    <input type="hidden" id="input-descanso">
+  </div>
 <!-- TELA E: Execução -->
   <div id="musc-ex" class="musc-screen">
     <div class="ex-header">
@@ -1348,11 +1371,12 @@ Sequência Pulse
         <div class="ex-peso-label">Última carga</div>
         <div class="ex-carga-val" id="ex-carga-atual-val">— kg</div>
       </div>
-      <div class="ex-carga-painel ex-carga-painel-dir">
+   <div class="ex-carga-painel ex-carga-painel-dir">
         <div class="ex-peso-label">Nova carga</div>
-        <div class="ex-carga-nova-row">
-          <input class="ex-peso-input" type="number" id="ex-peso-nova-input" placeholder="0" min="0" step="0.5" oninput="debounceSalvarPeso()">
+        <div class="ex-carga-nova-row" style="display:flex;align-items:center;gap:6px;">
+          <input class="ex-peso-input" type="number" id="ex-peso-nova-input" placeholder="0" min="0" step="0.5">
           <span class="ex-peso-unit">kg</span>
+          <button onclick="salvarPesoEx()" style="background:none;border:none;color:var(--branco);font-size:1.4em;cursor:pointer;padding:0 2px;line-height:1;opacity:0.75;" title="Confirmar carga">↻</button>
         </div>
       </div>
     </div>
@@ -1587,7 +1611,36 @@ Sequência Pulse
     </div>
   </div>
 </div>
-
+<div class="modal-overlay" id="modal-apagar">
+  <div class="modal-box">
+    <div class="modal-titulo" style="color:var(--vermelho)">⚠ APAGAR DADOS</div>
+    <div style="background:rgba(248,113,113,0.08);border:1px solid rgba(248,113,113,0.2);border-radius:12px;padding:16px;margin-bottom:18px;">
+      <div style="font-size:0.82em;color:var(--branco);font-weight:600;margin-bottom:10px;">O que será apagado:</div>
+      <div style="font-size:0.78em;color:var(--cinza);line-height:1.9;">
+        🗑 Histórico de treinos<br>
+        🗑 Diário alimentar<br>
+        🗑 Registros de sono e água<br>
+        🗑 Histórico de peso<br>
+        🗑 Cargas dos exercícios<br>
+        🗑 Treino montado (A/B)
+      </div>
+    </div>
+    <div style="background:rgba(52,211,153,0.08);border:1px solid rgba(52,211,153,0.2);border-radius:12px;padding:14px;margin-bottom:20px;">
+      <div style="font-size:0.82em;color:var(--verde);font-weight:600;margin-bottom:6px;">✅ O que será mantido:</div>
+      <div style="font-size:0.78em;color:var(--cinza);line-height:1.9;">
+        ✓ Seu perfil (idade, altura, peso inicial)<br>
+        ✓ Biblioteca de alimentos<br>
+        ✓ Metas PULSE configuradas
+      </div>
+    </div>
+    <div style="font-size:0.72em;color:var(--cinza);text-align:center;margin-bottom:16px;">Esta ação não pode ser desfeita.</div>
+    <div class="modal-btns">
+      <button class="btn btn-ghost" onclick="fecharModal('modal-apagar')">Cancelar</button>
+      <button class="btn btn-danger" style="background:rgba(248,113,113,0.18);color:var(--vermelho);border:1px solid rgba(248,113,113,0.35);" onclick="executarApagarHistorico()">Apagar tudo</button>
+    </div>
+  </div>
+</div>
+  
 <div class="toast" id="toast"></div>
 <div id="banner-install"><span>📲 Instalar app</span><button onclick="instalarPWA()">Instalar</button></div>
 
@@ -2953,20 +3006,68 @@ function selecionarAB(nomeEx,treino,idSeg){
   btns[0].className='ab-btn'+(alocado==='A'?' ativo-a':'');
   btns[1].className='ab-btn'+(alocado==='B'?' ativo-b':'');
 }
+function buildChips(){
+  // Séries: 1 a 4
+  const cS=document.getElementById('chips-series');
+  cS.innerHTML='';
+  for(let v=1;v<=4;v++){
+    const c=document.createElement('button');
+    c.className='meta-chip';c.textContent=v;
+    c.onclick=()=>selecionarChip('series',v,c);
+    cS.appendChild(c);
+  }
+  // Reps: 5 a 20
+  const cR=document.getElementById('chips-reps');
+  cR.innerHTML='';
+  for(let v=5;v<=20;v++){
+    const c=document.createElement('button');
+    c.className='meta-chip';c.textContent=v;
+    c.onclick=()=>selecionarChip('reps',v,c);
+    cR.appendChild(c);
+  }
+  // Descanso: 30, 45, 60s
+  const cD=document.getElementById('chips-descanso');
+  cD.innerHTML='';
+  [30,45,60].forEach(v=>{
+    const c=document.createElement('button');
+    c.className='meta-chip';c.textContent=v+'s';
+    c.onclick=()=>selecionarChip('descanso',v,c);
+    cD.appendChild(c);
+  });
+  // Restaura valores salvos
+  const t=dados.treinoPersonalizado;
+  if(t){
+    if(t.series)selecionarChipPorValor('series',t.series);
+    if(t.reps)selecionarChipPorValor('reps',t.reps);
+    if(t.descanso)selecionarChipPorValor('descanso',t.descanso);
+  }
+}
+function selecionarChip(tipo,val,el){
+  const container=el.parentElement;
+  container.querySelectorAll('.meta-chip').forEach(c=>c.classList.remove('selecionado'));
+  el.classList.add('selecionado');
+  document.getElementById('input-'+tipo).value=val;
+  const disp=document.getElementById('display-'+tipo);
+  disp.innerHTML=`<span class="meta-chip-val" style="color:var(--azul)">${val}${tipo==='descanso'?'s':''}</span>`;
+}
+function selecionarChipPorValor(tipo,val){
+  const container=document.getElementById('chips-'+tipo);
+  if(!container)return;
+  container.querySelectorAll('.meta-chip').forEach(c=>{
+    const chipVal=tipo==='descanso'?parseInt(c.textContent):parseInt(c.textContent);
+    if(chipVal===val){selecionarChip(tipo,val,c);}
+  });
+}
 function avancarMontagem(){
   if(Object.keys(montagemAtual).length===0){showToast('Escolha ao menos um exercício!');return;}
-  document.getElementById('input-series').value='';
-  document.getElementById('input-reps').value='';
-  if(dados.treinoPersonalizado){
-    if(dados.treinoPersonalizado.series)document.getElementById('input-series').value=dados.treinoPersonalizado.series;
-    if(dados.treinoPersonalizado.reps)document.getElementById('input-reps').value=dados.treinoPersonalizado.reps;
-  }
+  buildChips();
   mostrarMuscScreen('musc-metas');
 }
 function salvarTreino(){
   const series=parseInt(document.getElementById('input-series').value)||0;
   const reps=parseInt(document.getElementById('input-reps').value)||0;
-  if(!series||!reps){showToast('Defina séries e repetições!');return;}
+  const descanso=parseInt(document.getElementById('input-descanso').value)||60;
+  if(!series||!reps){showToast('Escolha séries e repetições!');return;}
   const exerciciosA=[];const exerciciosB=[];
   Object.entries(BIBLIOTECA_MUSCULACAO).forEach(([grupo,lista])=>{
     lista.forEach(ex=>{
@@ -2975,10 +3076,11 @@ function salvarTreino(){
       if(alocado==='B')exerciciosB.push({n:ex.n,g:grupo,gif:ex.gif});
     });
   });
-  dados.treinoPersonalizado={exerciciosA,exerciciosB,series,reps,atualizadoEm:hoje()};
+  dados.treinoPersonalizado={exerciciosA,exerciciosB,series,reps,descanso,atualizadoEm:hoje()};
   salvarDados();showToast('Treino salvo! 💪');
   mostrarMuscScreen('musc-inicio');renderMusculacaoInicio();
 }
+  
 function abrirExecucao(letra){
   const treino=dados.treinoPersonalizado;
   if(!treino)return;
@@ -2999,7 +3101,13 @@ function loadEx(){
   exSessionId++;
   const mySession=exSessionId;
   const ex=TREINOS[curTreino][curExIdx];
-  seriesDone=new Array(ex.s).fill(false);
+  // Restaura seriesDone do sessionStorage se disponível
+  const sessaoAtual=JSON.parse(sessionStorage.getItem('muscAtivo')||'{}');
+  if(sessaoAtual.seriesDone&&sessaoAtual.exIdx===curExIdx&&sessaoAtual.treino===curTreino){
+    seriesDone=[...sessaoAtual.seriesDone];
+  }else{
+    seriesDone=new Array(ex.s).fill(false);
+  }
   const img=document.getElementById('exercise-gif');
   const loading=document.getElementById('gif-loading');
   img.style.display='none';loading.style.display='flex';loading.textContent='⏳ Carregando...';img.src='';
@@ -3012,9 +3120,27 @@ function loadEx(){
   document.getElementById('ex-carga-atual-val').textContent=pesoSalvo?pesoSalvo+' kg':'—';
   document.getElementById('ex-peso-nova-input').value='';
   atualizarEvolucaoEx(chave);
-  buildProgress();buildSeries(ex.s,ex.r,mySession);
-  document.getElementById('btn-nxt').disabled=true;
+  buildProgress();
+  buildSeries(ex.s,ex.r,mySession);
+  // Restaura visual das séries já concluídas
+  seriesDone.forEach((feita,i)=>{
+    if(feita){
+      const anilha=document.getElementById('sa-'+i);
+      if(anilha){anilha.classList.remove('clickable');anilha.classList.add('done-s');}
+      const timerEl=document.getElementById('st-'+i);
+      if(timerEl){timerEl.textContent='✓';timerEl.style.color='var(--azul)';}
+    }
+  });
+  // Ativa próxima série disponível
+  const proxima=seriesDone.findIndex(f=>!f);
+  if(proxima>=0){
+    const anilha=document.getElementById('sa-'+proxima);
+    if(anilha)anilha.classList.add('clickable');
+  }
+  const todasFeitas=seriesDone.every(Boolean);
+  document.getElementById('btn-nxt').disabled=!todasFeitas;
 }
+  
 function salvarPesoEx(){
   const ex=TREINOS[curTreino][curExIdx];
   const chave=curTreino+'_'+ex.n;
@@ -3072,16 +3198,19 @@ function clickSerie(idx,totalSeries,session){
   if(session!==exSessionId)return;
   const anilha=document.getElementById('sa-'+idx);
   if(!anilha||!anilha.classList.contains('clickable')||seriesDone[idx])return;
-  seriesDone[idx]=true;
+ seriesDone[idx]=true;
   anilha.classList.remove('clickable');anilha.classList.add('done-s');
   if(navigator.vibrate)navigator.vibrate(40);
+  // Persiste progresso das séries
+  sessionStorage.setItem('muscAtivo',JSON.stringify({treino:curTreino,exIdx:curExIdx,seriesDone:[...seriesDone]}));
   const isLast=(idx===seriesDone.length-1);
   if(isLast){
     const timerEl=document.getElementById('st-'+idx);
     if(timerEl){timerEl.textContent='✓';timerEl.style.color='var(--azul)';}
     document.getElementById('btn-nxt').disabled=false;return;
   }
-  let secs=60;
+  const descansoSalvo=(dados.treinoPersonalizado&&dados.treinoPersonalizado.descanso)||60;
+  let secs=descansoSalvo;
   const timerEl=document.getElementById('st-'+idx);
   if(timerEl){timerEl.textContent=secs+'s';timerEl.style.color='var(--verde)';}
   clearTimerMusc();
@@ -3184,26 +3313,27 @@ function processarImport(e){
 
 
 function confirmarApagarHistorico(){
-  if(confirm('Apagar todo o histórico e reiniciar o desafio? Perfil, biblioteca e exercícios serão mantidos.')){
-    dados.desafioDias={};
-    dados.diarioAlimentar={};
-    dados.registrosSono={};
-    dados.registrosAgua={};
-    dados.medicoesPeso=[];
-    dados.conquistas={};
-    dados.pesosExercicios={};
-    dados.pesosExerciciosInicial={};
-    dados.proximoTreino='A';
-    dados.desafioBarras=dadosPadrao().desafioBarras;
-    dados.sequencia={diasAtivos:0,recorde:0,inicio:null};
-    dados.treinoPersonalizado=null;
-    dados.consentimentoMusc=false;
-    dados.pesosExercicios={};
-    salvarDados();
-    showToast('Histórico apagado e desafio reiniciado! ✅');
-    renderHoje();
-    renderPerfil();
-  }
+  document.getElementById('modal-apagar').classList.add('ativo');
+}
+function executarApagarHistorico(){
+  dados.desafioDias={};
+  dados.diarioAlimentar={};
+  dados.registrosSono={};
+  dados.registrosAgua={};
+  dados.medicoesPeso=[];
+  dados.conquistas={};
+  dados.pesosExercicios={};
+  dados.pesosExerciciosInicial={};
+  dados.proximoTreino='A';
+  dados.desafioBarras=dadosPadrao().desafioBarras;
+  dados.sequencia={diasAtivos:0,recorde:0,inicio:null};
+  dados.treinoPersonalizado=null;
+  dados.consentimentoMusc=false;
+  salvarDados();
+  fecharModal('modal-apagar');
+  showToast('Dados apagados. Perfil e biblioteca mantidos. ✅');
+  renderHoje();
+  renderPerfil();
 }
 
 function showToast(msg,dur=2800){
