@@ -1332,45 +1332,42 @@ Sequência Pulse
 
 <!-- TELA D: Séries, reps e descanso -->
   <div id="musc-metas" class="musc-screen">
-    <div style="font-size:0.9em;color:var(--cinza);margin-bottom:18px;line-height:1.7;padding:14px 16px;background:var(--card);border-radius:12px;border-left:3px solid var(--azul)">Você decide. Os valores serão aplicados a todos os exercícios escolhidos.</div>
+    <div style="font-size:0.9em;color:var(--cinza);margin-bottom:18px;line-height:1.7;padding:14px 16px;background:var(--card);border-radius:12px;border-left:3px solid var(--azul)">Defina as séries, repetições e o descanso para os exercícios selecionados.</div>
 
     <!-- SÉRIES -->
     <div class="meta-global-box">
-      <div class="meta-global-label">Séries por exercício</div>
-      <div id="display-series" style="font-family:var(--fonte-display);font-size:3em;color:var(--azul);letter-spacing:2px;text-align:center;margin:6px 0 14px;line-height:1;min-height:1.2em">0</div>
-      <div style="display:flex;gap:10px;justify-content:center">
+      <div class="meta-global-label">Séries por Exercício</div>
+      <div style="display:flex;gap:10px;justify-content:center;margin-bottom:4px">
         <div class="meta-pill" onclick="selecionarValor('series',2,this)">2</div>
         <div class="meta-pill" onclick="selecionarValor('series',3,this)">3</div>
         <div class="meta-pill" onclick="selecionarValor('series',4,this)">4</div>
         <div class="meta-pill meta-pill-custom" id="pill-series-custom" onclick="abrirCustom('series')">＋</div>
       </div>
-      <div class="meta-global-desc" style="margin-top:12px">Quantas vezes você vai realizar o conjunto completo de repetições em cada exercício.</div>
+      <div class="meta-global-desc" style="margin-top:12px">Defina o número de séries para cada exercício do treino.</div>
     </div>
 
     <!-- REPETIÇÕES -->
     <div class="meta-global-box" style="margin-top:14px">
-      <div class="meta-global-label">Repetições por série</div>
-      <div id="display-reps" style="font-family:var(--fonte-display);font-size:3em;color:var(--azul);letter-spacing:2px;text-align:center;margin:6px 0 14px;line-height:1;min-height:1.2em">0</div>
-      <div style="display:flex;gap:10px;justify-content:center">
+      <div class="meta-global-label">Repetições por Série</div>
+      <div style="display:flex;gap:10px;justify-content:center;margin-bottom:4px">
         <div class="meta-pill" onclick="selecionarValor('reps',8,this)">8</div>
         <div class="meta-pill" onclick="selecionarValor('reps',10,this)">10</div>
         <div class="meta-pill" onclick="selecionarValor('reps',12,this)">12</div>
         <div class="meta-pill meta-pill-custom" id="pill-reps-custom" onclick="abrirCustom('reps')">＋</div>
       </div>
-      <div class="meta-global-desc" style="margin-top:12px">Quantas vezes você repete o movimento dentro de cada série.</div>
+      <div class="meta-global-desc" style="margin-top:12px">Defina o número de repetições de cada série.</div>
     </div>
 
     <!-- DESCANSO -->
     <div class="meta-global-box" style="margin-top:14px">
-      <div class="meta-global-label">Descanso entre séries</div>
-      <div id="display-descanso" style="font-family:var(--fonte-display);font-size:3em;color:var(--azul);letter-spacing:2px;text-align:center;margin:6px 0 14px;line-height:1;min-height:1.2em">0<span style="font-size:0.4em;color:var(--cinza);letter-spacing:0;vertical-align:middle;margin-left:4px" id="display-descanso-s"></span></div>
-      <div style="display:flex;gap:10px;justify-content:center">
+      <div class="meta-global-label">Tempo de Descanso</div>
+      <div style="display:flex;gap:10px;justify-content:center;margin-bottom:4px">
         <div class="meta-pill" onclick="selecionarValor('descanso',30,this)">30s</div>
         <div class="meta-pill" onclick="selecionarValor('descanso',45,this)">45s</div>
         <div class="meta-pill" onclick="selecionarValor('descanso',60,this)">60s</div>
         <div class="meta-pill meta-pill-custom" id="pill-descanso-custom" onclick="abrirCustom('descanso')">＋</div>
       </div>
-      <div class="meta-global-desc" style="margin-top:12px">Tempo de pausa em segundos entre cada série. Consulte seu professor para o valor ideal.</div>
+      <div class="meta-global-desc" style="margin-top:12px">Defina o tempo de recuperação entre as séries.</div>
     </div>
 
     <div style="font-size:0.68em;color:var(--cinza);text-align:center;margin:16px 0 14px;line-height:1.5;">💡 Seu professor de Ed. Física pode te orientar nos valores ideais.</div>
