@@ -3048,15 +3048,6 @@ let _customTipo=null;
 
 function selecionarValor(tipo,val,el){
   document.getElementById('input-'+tipo).value=val;
-  // Atualiza display
-  const disp=document.getElementById('display-'+tipo);
-  if(tipo==='descanso'){
-    disp.innerHTML=val+'<span style="font-size:0.4em;color:var(--cinza);letter-spacing:0;vertical-align:middle;margin-left:4px">s</span>';
-  }else{
-    disp.textContent=val;
-  }
-  disp.style.color='var(--azul)';
-  // Marca pill ativa
   const pills=el.parentElement.querySelectorAll('.meta-pill');
   pills.forEach(p=>p.classList.remove('ativo'));
   el.classList.add('ativo');
@@ -3082,14 +3073,6 @@ function confirmarCustom(){
   if(!val||val<1){showToast('Digite um número válido!');return;}
   const tipo=_customTipo;
   document.getElementById('input-'+tipo).value=val;
-  const disp=document.getElementById('display-'+tipo);
-  if(tipo==='descanso'){
-    disp.innerHTML=val+'<span style="font-size:0.4em;color:var(--cinza);letter-spacing:0;vertical-align:middle;margin-left:4px">s</span>';
-  }else{
-    disp.textContent=val;
-  }
-  disp.style.color='var(--azul)';
-  // Marca pill custom como ativa
   const pillCustom=document.getElementById('pill-'+tipo+'-custom');
   if(pillCustom){
     pillCustom.textContent=tipo==='descanso'?val+'s':val;
@@ -3101,29 +3084,25 @@ function confirmarCustom(){
 }
 
 function buildChips(){
-  // Restaura valores salvos do treino anterior
   const t=dados.treinoPersonalizado;
-  if(t){
-    if(t.series){
-      const pills=document.querySelectorAll('#musc-metas [onclick*="selecionarValor(\'series\'"]');
-      pills.forEach(p=>{
-        if(parseInt(p.dataset&&p.dataset.val||p.textContent)===t.series)p.classList.add('ativo');
-      });
-      document.getElementById('input-series').value=t.series;
-      document.getElementById('display-series').textContent=t.series;
-      document.getElementById('display-series').style.color='var(--azul)';
-    }
-    if(t.reps){
-      document.getElementById('input-reps').value=t.reps;
-      document.getElementById('display-reps').textContent=t.reps;
-      document.getElementById('display-reps').style.color='var(--azul)';
-    }
-    if(t.descanso){
-      document.getElementById('input-descanso').value=t.descanso;
-      const d=document.getElementById('display-descanso');
-      d.innerHTML=t.descanso+'<span style="font-size:0.4em;color:var(--cinza);letter-spacing:0;vertical-align:middle;margin-left:4px">s</span>';
-      d.style.color='var(--azul)';
-    }
+  if(!t)return;
+  if(t.series){
+    document.getElementById('input-series').value=t.series;
+    document.querySelectorAll('#musc-metas .meta-pill').forEach(p=>{
+      if(p.textContent.trim()===String(t.series))p.classList.add('ativo');
+    });
+  }
+  if(t.reps){
+    document.getElementById('input-reps').value=t.reps;
+    document.querySelectorAll('#musc-metas .meta-pill').forEach(p=>{
+      if(p.textContent.trim()===String(t.reps))p.classList.add('ativo');
+    });
+  }
+  if(t.descanso){
+    document.getElementById('input-descanso').value=t.descanso;
+    document.querySelectorAll('#musc-metas .meta-pill').forEach(p=>{
+      if(p.textContent.trim()===String(t.descanso)+'s')p.classList.add('ativo');
+    });
   }
 }
 function avancarMontagem(){
